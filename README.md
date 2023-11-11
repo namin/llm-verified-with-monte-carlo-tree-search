@@ -6,6 +6,28 @@ This prototype uses Dafny.
 
 Logs for example runs can be found in the [log](log) directory. Scroll to the very end of a log to see the chosen solution.
 
+## Running
+
+This project has been tested on [the HAL machine](https://cselab.github.io/harvard_servers/). It relies on GPU access.
+
+### Setup
+
+Using `mamba` or equivalently `conda`:
+
+```
+mamba create --name llm-verified python=3.10
+mamba activate llm-verified
+pip install -r requirements.txt
+```
+
+### Execution
+
+Pick an LLM in [llm.py](llm.py) and a prompt in [prompts.py](prompts.py), then:
+
+```
+python run.py
+```
+
 ## TODOs
 
 - [ ] Support other verifiers in addition to Dafny:

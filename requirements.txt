@@ -1,0 +1,11 @@
+accelerate
+bitsandbytes
+huggingface_hub
+peft
+protobuf
+requests
+sentencepiece
+scipy
+torch
+transformers
+
