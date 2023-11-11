@@ -4,6 +4,8 @@ Synthesize verified code with an LLM, using Monte Carlo Tree Search (MCTS) to ex
 
 This prototype uses Dafny.
 
+Logs for example runs can be found in the [log](log) directory. Scroll to the very end of a log to see the chosen solution.
+
 ## TODOs
 
 - [ ] Support other verifiers in addition to Dafny:
