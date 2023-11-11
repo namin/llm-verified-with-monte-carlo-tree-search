@@ -4,6 +4,7 @@ import random
 class MonteCarlo:
     def __init__(self, root_node):
         self.root_node = root_node
+        self.solution = None
         self.child_finder = None
         self.node_evaluator = lambda child, montecarlo: None
 
@@ -35,7 +36,13 @@ class MonteCarlo:
             probabilities_already_counted += probability
 
     def simulate(self, expansion_count=1):
-        for i in range(expansion_count):
+        i = 0
+        while expansion_count is None or i < expansion_count:
+            i += 1
+
+            if self.solution is not None:
+                return
+            
             current_node = self.root_node
 
             while current_node.expanded:
