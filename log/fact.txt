@@ -1,0 +1,1039 @@
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+}
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+}
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+{
+    assert factorial(n) > 0;
+}
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+
+SCORE
+0.6
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+```
+
+SCORE
+0.6
+CHOSEN SOLUTION
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Sure, here is a Dafny program that defines a factorial function and proves that the factorial of a number is always strictly positive.
+
+```dafny
+function factorial(n: int) : int
+    requires n >= 0
+    decreases n
+{
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialIsPositive(n: int)
+    requires n >= 0
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialIsPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+```
+
