@@ -1,5 +1,7 @@
-problem_fact = ("### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.\n### Dafny:",
-                500, 100, 5, lambda v: True)
+problem_fact = ("""### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:""",
+                500, None, 5, lambda v: True)
 problem_opt0 = ("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 ### Hint: Recall that in Dafny, pattern match takes the form
 match e
