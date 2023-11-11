@@ -4,6 +4,12 @@ Synthesize verified code with an LLM, using Monte Carlo Tree Search (MCTS) to ex
 
 This prototype uses Dafny.
 
+## TODOs
+
+- [ ] Support other verifiers in addition to Dafny:
+  - [ ] Coq
+- [ ] Design a steerable interaction to give human or tool feedback to the LLM.
+
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
