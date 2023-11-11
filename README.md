@@ -6,5 +6,5 @@ This prototype uses Dafny.
 
 ## Credits
 
-- The [montecarlo](montecarlo) library is adapted from [https://github.com/ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
+- The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
 - The inspirations comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://github.com/shunzh/mcts-for-llm).
