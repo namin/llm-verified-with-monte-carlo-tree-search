@@ -38,6 +38,8 @@ python run.py
 
 - [ ] Support other verifiers in addition to Dafny:
   - [ ] Coq
+- [ ] Support other LLM infrastructures in addition to Hugging Face:
+  - [ ] [Ollama](https://ollama.ai)
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
 - [ ] Design a reinforcement learning scheme, whereas the LLM learns from trial.
 
