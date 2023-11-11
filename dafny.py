@@ -1,8 +1,6 @@
 import re
 import requests
 
-sep = "----------"
-
 def can_be_solution(msg, min_lines, check_fun=None):
     v = filterDafny(msg)
     r = v.count('\n') >= min_lines
