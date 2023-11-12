@@ -48,6 +48,7 @@ python run_ppo.py
 
 - [x] Support other verifiers in addition to Dafny:
   - [x] Coq
+    - [ ] The current system struggles with Coq proofs. 
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
 - [ ] Support test cases.
