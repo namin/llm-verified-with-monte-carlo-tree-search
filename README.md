@@ -54,7 +54,7 @@ python run_ppo.py
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
   - [ ] Evaluate whether the model after PPO suffers degradation for some tasks, even unrelated.
   - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
-  - [ ] Get wandb to work.
+- [ ] Get wandb to work.
 
 ## Credits
 
