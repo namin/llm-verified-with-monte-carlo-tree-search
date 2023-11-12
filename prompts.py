@@ -11,6 +11,6 @@ case _ => 3
 ### Hint: In the optimizer, recursively optimize the sub-expressions.
 ### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ### Dafny:""",
-                1000, None, 22, lambda v: v.index('ensures') > 0)
+                1000, None, 22, lambda v: 'ensures' in v)
 (prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_opt0
 
