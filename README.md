@@ -38,6 +38,12 @@ Pick a language in [lang.py](lang.py), an LLM in [model.py](model.py), and a pro
 python run.py
 ```
 
+For the run that interacts with the user, do:
+
+```
+python run_user.py
+```
+
 For the PPO trainer (slow!), do:
 
 ```
@@ -53,6 +59,10 @@ python run_ppo.py
   - [ ] [Ollama](https://ollama.ai)
 - [ ] Support test cases.
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
+  - [x] Confirm completion at each step, and add a comment to steer.
+  - [ ] Edit entire text, e.g. to add imports.
+- [ ] Design higher level steerable schemes:
+  - [ ] Synthesize Coq proofs.
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
   - [ ] Evaluate whether the model after PPO suffers degradation for some tasks, even unrelated.
   - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
