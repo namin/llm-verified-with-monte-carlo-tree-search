@@ -27,4 +27,5 @@ case _ => 3
 }### {lang}:""",
                 1000, None, 22, check_proof)
 
+# Set the right-hand side to the selected problem.
 (prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_fact
