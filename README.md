@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ### Execution
 
-Pick an LLM in [model.py](model.py) and a prompt in [prompts.py](prompts.py), then:
+Pick a language in [lang.py](lang.py), an LLM in [model.py](model.py), and a prompt in [prompts.py](prompts.py), then:
 
 ```
 python run.py
