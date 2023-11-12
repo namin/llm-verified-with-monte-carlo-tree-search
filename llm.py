@@ -1,9 +1,7 @@
 import torch
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, TextStreamer
 from peft import PeftModel
-
-base_model_name = "Phind/Phind-CodeLlama-34B-v2"
-peft_model_path = None
+from model import base_model_name, peft_model_path
 
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,

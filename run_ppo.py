@@ -1,4 +1,4 @@
-import llm
+import ppo
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -7,10 +7,16 @@ from dafny import score_func, can_be_solution
 
 from prompts import prompt, expansion_count, min_lines, check_fun
 
-montecarlo = MonteCarlo(Node(prompt))
+class GenNode:
+    def __init__(self, text, gens):
+        self.text = text
+        self.gens = gens
 
-def generate_complete(text, montecarlo):
-    text = llm.generate(text, 1)[0]
+montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
+
+def generate_complete(text, montecarlo, gens):
+    (text, gen) = ppo.generate(text)
+    gens.append(gen)
     score = score_func(text)
     if score is not None:
         if score < 0:
@@ -18,16 +24,16 @@ def generate_complete(text, montecarlo):
         else:
             if can_be_solution(text, min_lines, check_fun):
                 montecarlo.solution = text
-            return text
+            return GenNode(text, gens)
     else:
-        return generate_complete(text, montecarlo)
+        return generate_complete(text, montecarlo, gens)
 
 def child_finder(node, montecarlo):
-    text = generate_complete(node.state, montecarlo)
-    if text is None:
+    state = generate_complete(node.state.text, montecarlo, [])
+    if state is None:
         node.update_win_value(-1)
     else:
-        child = Node(text)
+        child = Node(state)
         node.add_child(child)
         child.update_win_value(1)
         child.update_policy_value(1)
@@ -42,4 +48,3 @@ montecarlo.simulate(expansion_count)
 
 print('CHOSEN SOLUTION')
 print(montecarlo.solution)
-
