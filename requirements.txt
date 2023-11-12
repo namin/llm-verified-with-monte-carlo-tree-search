@@ -9,4 +9,4 @@ scipy
 torch
 transformers
 trl
-
+wandb
