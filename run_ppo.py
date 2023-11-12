@@ -39,7 +39,7 @@ def child_finder(node, montecarlo):
         child.update_win_value(1)
         child.update_policy_value(1)
 
-        child = Node(GenNode(node.state.text, [])))
+        child = Node(GenNode(node.state.text, []))
         node.add_child(child)
         child.update_policy_value(0.2)
 
