@@ -15,14 +15,21 @@ class GenNode:
 
 montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
 
+def reinforce(gens, reward):
+    rewards = [torch.tensor(reward)]
+    for (query_tensors, response_tensors) in gens:
+        ppo.trainer_step(query_tensors, response_tensors, rewards)
+
 def generate_complete(text, montecarlo, gens):
     (text, gen) = ppo.generate(text)
     gens.append(gen)
     score = score_func(text)
     if score is not None:
         if score < 0:
+            reinforce(gens, -1.0)
             return None
         else:
+            reinforce(gens, 1.0)
             if can_be_solution(text, min_lines, check_fun):
                 montecarlo.solution = text
             return GenNode(text, gens)
@@ -50,27 +57,11 @@ montecarlo.simulate(expansion_count)
 print('CHOSEN SOLUTION')
 print(montecarlo.solution)
 
-root_node = montecarlo.root_node
-
-def reinforce(node, reward = None):
-    if reward is None:
-        reward = node.get_score(root_node)
-    print("Reward is", reward)
-    rewards = [torch.tensor(reward)]
-    for (query_tensors, response_tensors) in node.state.gens:
-        ppo.trainer_step(query_tensors, response_tensors, rewards)
-
-def reinforce_all():
-    queue = [root_node]
-    while queue:
-        node = queue.pop()
-        reinforce(node)
-        queue = node.children + queue
-
 while montecarlo.root_node.children:
     montecarlo.root_node = montecarlo.make_choice()
-    reinforce(montecarlo.root_node, 10.0)
+    reinforce(montecarlo.root_node.state.gens, 10.0)
 
 ppo.save()
+
 
 assert montecarlo.solution == montecarlo.root_node.state.text
