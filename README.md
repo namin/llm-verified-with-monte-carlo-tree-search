@@ -4,7 +4,7 @@ This prototype synthesizes verified code with an LLM.
 
 Using Monte Carlo Tree Search (MCTS), it explores the space of possible generation of a verified program, and it checks at every step that it's on the right track by calling the verifier.
 
-This prototype uses Dafny.
+This prototype uses Dafny or Coq.
 
 Logs for example runs can be found in the [log](log) directory.
 Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
@@ -46,8 +46,8 @@ python run_ppo.py
 
 ## TODOs
 
-- [ ] Support other verifiers in addition to Dafny:
-  - [ ] Coq
+- [x] Support other verifiers in addition to Dafny:
+  - [x] Coq
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
 - [ ] Support test cases.
