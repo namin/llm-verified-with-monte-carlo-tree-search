@@ -17,7 +17,7 @@ The model after PPO can solve the prompts without backtracking!
 
 ## Running
 
-This project has been tested on [the HAL machine](https://cselab.github.io/harvard_servers/). It relies on GPU access.
+This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
 ### Setup
 
