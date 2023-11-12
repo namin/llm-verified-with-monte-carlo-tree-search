@@ -29,38 +29,37 @@ def generate_complete(text, montecarlo, gens):
         if score < 0:
             return None
         else:
+            node = Node(GenNode(text, gens))
             if can_be_solution(text, min_lines, check_fun):
-                montecarlo.solution = text
-            return GenNode(text, gens)
+                montecarlo.solution = node
+            return node
     else:
         return generate_complete(text, montecarlo, gens)
 
 def child_finder(node, montecarlo):
-    state = generate_complete(node.state.text, montecarlo, [])
-    if state is None:
+    child = generate_complete(node.state.text, montecarlo, [])
+    if child is None:
         node.update_win_value(-1)
     else:
-        child = Node(state)
         node.add_child(child)
         child.update_win_value(1)
         child.update_policy_value(1)
 
-        child = Node(GenNode(node.state.text, []))
-        node.add_child(child)
-        child.update_policy_value(0.2)
+        retry_child = Node(GenNode(node.state.text, []))
+        node.add_child(retry_child)
+        retry_child.update_policy_value(0.2)
 
 montecarlo.child_finder = child_finder
 
 montecarlo.simulate(expansion_count)
 
-print('CHOSEN SOLUTION')
-print(montecarlo.solution)
+if montecarlo.solution:
+    print('CHOSEN SOLUTION')
+    print(montecarlo.solution.state.text)
 
-while montecarlo.root_node.children:
-    montecarlo.root_node = montecarlo.make_choice()
-    reinforce(montecarlo.root_node.state.gens, 10.0)
+    node = montecarlo.solution
+    while node:
+        reinforce(node.state.gens, 10.0)
+        node = node.parent
 
 ppo.save()
-
-
-assert montecarlo.solution == montecarlo.root_node.state.text
