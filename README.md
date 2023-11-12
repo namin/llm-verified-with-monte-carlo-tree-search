@@ -14,6 +14,7 @@ By using this technique, weaker models that might not even know the generated la
 
 We can also reinforce the snippets that succeed positively and that fail negatively through [PPO training](https://huggingface.co/docs/trl/main/en/ppo_trainer).
 The model after PPO can solve the prompts without backtracking!
+For example, the [log](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/fact_run_after_ppo_opt0.txt) for solving the problem `fact` after PPO training on another problem, `opt0`.
 
 ## Running
 
