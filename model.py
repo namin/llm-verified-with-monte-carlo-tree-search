@@ -1,6 +1,6 @@
 base_model_name = "Phind/Phind-CodeLlama-34B-v2"
-base_model_name = "codellama/CodeLlama-34b-hf"
-base_model_name = "deepseek-ai/deepseek-coder-33b-instruct"
+#base_model_name = "codellama/CodeLlama-34b-hf"
+#base_model_name = "deepseek-ai/deepseek-coder-33b-instruct"
 # optional checkpoint
 peft_model_path = None
 # PPO model -- overrides the above

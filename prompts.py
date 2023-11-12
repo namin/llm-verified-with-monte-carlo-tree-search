@@ -27,4 +27,4 @@ case _ => 3
 }### {lang}:""",
                 1000, None, 22, check_proof)
 
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_opt0
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_fact
