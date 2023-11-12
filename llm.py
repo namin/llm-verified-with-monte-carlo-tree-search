@@ -1,25 +1,31 @@
 import torch
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, TextStreamer
+from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
-
-base_model_name = "Phind/Phind-CodeLlama-34B-v2"
-peft_model_path = None
+from model import base_model_name, peft_model_path, ppo_model_path
 
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
     bnb_4bit_compute_dtype=torch.float16,
 )
-base_model = AutoModelForCausalLM.from_pretrained(
-    base_model_name,
-    quantization_config=bnb_config,
-    device_map="auto",
-    trust_remote_code=True,
-    use_auth_token=True
-)
-tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
+if ppo_model_path is None:
+    base_model = AutoModelForCausalLM.from_pretrained(
+        base_model_name,
+        quantization_config=bnb_config,
+        device_map="auto",
+        trust_remote_code=True,
+        use_auth_token=True
+    )
+    tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
+else:
+    base_model = AutoModelForCausalLMWithValueHead.from_pretrained(ppo_model_path, quantization_config=bnb_config)
+    tokenizer = AutoTokenizer.from_pretrained(ppo_model_path)
 tokenizer.pad_token = tokenizer.eos_token
-model = PeftModel.from_pretrained(base_model, peft_model_path) if peft_model_path else base_model
+if ppo_model_path is None:
+    model = PeftModel.from_pretrained(base_model, peft_model_path) if peft_model_path else base_model
+else:
+    model = base_model
 streamer = TextStreamer(tokenizer)
 
 stop_words_ids = [tokenizer(stop_word, return_tensors='pt')['input_ids'].squeeze().to('cuda') for stop_word in ["\n"]]

@@ -28,10 +28,16 @@ pip install -r requirements.txt
 
 ### Execution
 
-Pick an LLM in [llm.py](llm.py) and a prompt in [prompts.py](prompts.py), then:
+Pick an LLM in [model.py](model.py) and a prompt in [prompts.py](prompts.py), then:
 
 ```
 python run.py
+```
+
+For the PPO trainer (slow!), do:
+
+```
+python run_ppo.py
 ```
 
 ## TODOs
@@ -41,7 +47,7 @@ python run.py
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
-- [ ] Design a reinforcement learning scheme, whereas the LLM learns from trial.
+- [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
 
 ## Credits
 
