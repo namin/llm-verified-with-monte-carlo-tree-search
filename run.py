@@ -3,7 +3,7 @@ import llm
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
-from lang import score_func, can_be_solution
+from lang import score_func, can_be_solution, comment
 
 from prompts import prompt, expansion_count, min_lines, check_fun
 
@@ -39,7 +39,7 @@ def child_finder(node, montecarlo):
         if inp is not None:
             if inp == "":
                 return
-            text = node.state + "\n// " + inp + "\n"
+            text = node.state + comment(inp)
         
         child = Node(text)
         node.add_child(child)
