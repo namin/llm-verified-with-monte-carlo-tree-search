@@ -1,0 +1,453 @@
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function factorial(n: int) returns (res: int)
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function factorial(n: int) returns (res: int)
+    requires n >= 
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+ 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+ 
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+ 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+ 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+ 
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+  }
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+  }
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+  }
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Dafny:Here is a Dafny specification for a factorial function, proving that the factorial is always strictly positive.
+
+```dafny
+function Factorial(n: nat): nat {
+  if n == 0 then 1 else n * Factorial(n - 1)
+}
+
+lemma {:induction} FactorialPositive(n: nat) 
+  ensures Factorial(n) > 0 
+{
+  if n == 0 {
+  } else {
+    FactorialPositive(n - 1);
+  }
+}
+```
+
