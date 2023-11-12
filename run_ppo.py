@@ -25,11 +25,10 @@ def generate_complete(text, montecarlo, gens):
     gens.append(gen)
     score = score_func(text)
     if score is not None:
+        reinforce(gens, score)
         if score < 0:
-            reinforce(gens, -1.0)
             return None
         else:
-            reinforce(gens, 1.0)
             if can_be_solution(text, min_lines, check_fun):
                 montecarlo.solution = text
             return GenNode(text, gens)

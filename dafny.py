@@ -14,7 +14,7 @@ def calculateScore(msg):
         return None
     r = checkDafny(v)
     if r['status'] == 0:
-        return 0.6
+        return 1.0
     log = r['out']
     first = log[log.index('ex.dfy(')+7:]
     num_line_first = int(first[0:first.index(',')])
