@@ -8,7 +8,7 @@ from model import base_model_name, peft_model_path
 config = PPOConfig(
     model_name=base_model_name,
     learning_rate=1.41e-5,
-    #log_with='wandb',
+    log_with='wandb',
     mini_batch_size=1,
     batch_size=1,
     gradient_accumulation_steps=1,
@@ -85,4 +85,9 @@ def generate(prompt):
     text = rs[0]
     return (text, (qs, ts))
 
-# ppo_trainer.save_pretrained("my_ppo_model")
+def trainer_step(query_tensors, response_tensors, rewards):
+    stats = ppo_trainer.step(query_tensors, response_tensors, rewards)
+    ppo_trainer.log_stats(stats, {}, rewards)
+
+def save(fn="my_ppo_model"):
+    ppo_trainer.save_pretrained(fn)
