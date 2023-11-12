@@ -12,5 +12,5 @@ case _ => 3
 ### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ### Dafny:""",
                 1000, None, 22, lambda v: 'ensures' in v)
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_opt0
 
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_opt0

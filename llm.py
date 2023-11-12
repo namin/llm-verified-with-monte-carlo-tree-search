@@ -55,6 +55,14 @@ def gen(prompt, model_generation_args, num=1):
     return rs
 
 if __name__ == '__main__':
+    num = 5
     from prompts import prompt, max_new_tokens
-    rs = gen(prompt, {'max_new_tokens': max_new_tokens})
-    print(rs[0])
+    args = model_generation_args.copy()
+    args['min_length'] = max_new_tokens // 2
+    args['max_new_tokens'] = max_new_tokens
+    del args['eos_token_id']
+    del args['pad_token_id']
+    rs = gen(prompt, args, num)
+    for r in rs:
+        print('SOLUTION')
+        print(r)
