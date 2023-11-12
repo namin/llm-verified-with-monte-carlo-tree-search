@@ -12,9 +12,12 @@ Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
 
+We can also reinforce the snippets that succeed positively and that fail negatively through [PPO training](https://huggingface.co/docs/trl/main/en/ppo_trainer).
+The model after PPO can solve the prompts without backtracking!
+
 ## Running
 
-This project has been tested on [the HAL machine](https://cselab.github.io/harvard_servers/). It relies on GPU access.
+This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
 ### Setup
 
@@ -49,6 +52,9 @@ python run_ppo.py
 - [ ] Support test cases.
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
+  - [ ] Evaluate whether the model after PPO suffers degradation for some tasks, even unrelated.
+  - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
+  - [ ] Get wandb to work.
 
 ## Credits
 
