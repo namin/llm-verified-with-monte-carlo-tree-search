@@ -46,6 +46,7 @@ python run_ppo.py
   - [ ] Coq
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
+- [ ] Support test cases.
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
 
