@@ -16,6 +16,7 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 {'''### Hint: Use a plain function, NOT a function method.
 ''' if lang=='Dafny' else ''
 }{'''### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in base case of proof.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
                 500, None, 5, check_proof)
