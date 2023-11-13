@@ -31,6 +31,7 @@ streamer = TextStreamer(tokenizer)
 
 # Hack: we want the stop word as it is encoded glued to another word.
 stop_word_id = tokenizer.encode("hello"+stop_word, add_special_tokens=False)[-1]
+quote_word_id = tokenizer.encode("```", add_special_tokens=False)[-1]
 
 model_generation_args = dict(
     top_k = 7,
@@ -39,7 +40,7 @@ model_generation_args = dict(
     temperature = 0.8,
     #streamer=streamer,
     max_new_tokens=100,
-    eos_token_id=stop_word_id, pad_token_id=tokenizer.eos_token_id
+    eos_token_id=[stop_word_id, quote_word_id], pad_token_id=tokenizer.eos_token_id
 )
 
 def generate(prompt, num):
