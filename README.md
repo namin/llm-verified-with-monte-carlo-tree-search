@@ -70,6 +70,9 @@ python run_ppo.py
 - [x] Get wandb to work.
 - [ ] Maybe add a per language blacklist, so that we can rule out uses of `Admitted` in Coq.
 - [ ] Maybe refactor the shared arguments between llm.py and ppo.py.
+- [ ] Why Coq is much harder than Dafny:
+  - [ ] Dafny has more automation.
+  - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
 
 ## Credits
 
