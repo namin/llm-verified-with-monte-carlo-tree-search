@@ -32,6 +32,7 @@ case _ => 3
 {'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if lang=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
