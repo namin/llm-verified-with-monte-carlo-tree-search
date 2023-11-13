@@ -19,7 +19,8 @@ def calculateScore(msg):
     print(log)
     if log.startswith('Error: There are pending proofs'):
         return 1.0
-    # TODO: make this clearer
+    # Find the code left after the faulty line/character.
+    # TODO: make this clearer.
     first = log[log.index('line ')+len('line '):]
     num_line_first = int(first[0:first.index(',')])
     char = first[first.index('-')+1:]
@@ -30,7 +31,7 @@ def calculateScore(msg):
         n -= 1
         left = left[left.index('\n')+1:]
     left = left[char_index+1:]
-    if  '.' in left:
+    if  '.' in left or '\n' in left:
         return -1.0
     else:
         return None
