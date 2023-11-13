@@ -19,12 +19,8 @@ def calculateScore(msg):
     print(log)
     if log.startswith('Error: There are pending proofs'):
         return 1.0
-    first = log[log.index('line ')+len('line '):]
-    num_line_first = int(first[0:first.index(',')])
-    if num_line_first > 1+v.strip().count('\n'):
-        return None
-    else:
-        return -1.0
+    # assuming we end on a .
+    return -1.0
 
 def score_func(sentence):
     print('TEXT')
