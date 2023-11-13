@@ -29,7 +29,10 @@ case Bar(x) => 2
 case _ => 3
 ''' if lang=='Dafny' else ''
 }### Hint: In the optimizer, recursively optimize the sub-expressions.
-{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.''' if lang=='Dafny' else ''
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if lang=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+''' if lang=='Coq' else ''
 }### {lang}:""",
                 1000, None, 22, check_proof)
 
