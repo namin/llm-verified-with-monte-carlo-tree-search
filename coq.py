@@ -19,8 +19,21 @@ def calculateScore(msg):
     print(log)
     if log.startswith('Error: There are pending proofs'):
         return 1.0
-    # assuming we end on a .
-    return -1.0
+    # TODO: make this clearer
+    first = log[log.index('line ')+len('line '):]
+    num_line_first = int(first[0:first.index(',')])
+    char = first[first.index('-')+1:]
+    char_index = int(char[0:char.index(':')])
+    left = v
+    n = num_line_first-1
+    while n > 0:
+        n -= 1
+        left = left[left.index('\n')+1:]
+    left = left[char_index+1:]
+    if  '.' in left:
+        return -1.0
+    else:
+        return None
 
 def score_func(sentence):
     print('TEXT')
