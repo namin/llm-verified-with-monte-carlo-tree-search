@@ -25,8 +25,9 @@ def calculateScore(msg):
     # TODO: make this clearer.
     first = log[log.index('line ')+len('line '):]
     num_line_first = int(first[0:first.index(',')])
-    char = first[first.index('-')+1:]
-    char_index = int(char[0:char.index(':')])
+    end_char = first[0:first.index(':')]
+    char = end_char[end_char.rindex('-')+1:]
+    char_index = int(char)
     left = v
     n = num_line_first-1
     while n > 0:
