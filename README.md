@@ -67,7 +67,9 @@ python run_ppo.py
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
   - [ ] Evaluate whether the model after PPO suffers degradation for some tasks, even unrelated.
   - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
-- [ ] Get wandb to work.
+- [x] Get wandb to work.
+- [ ] Maybe add a per language blacklist, so that we can rule out uses of `Admitted` in Coq.
+- [ ] Maybe refactor the shared arguments between llm.py and ppo.py.
 
 ## Credits
 
