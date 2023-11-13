@@ -19,6 +19,8 @@ def calculateScore(msg):
     print(log)
     if log.startswith('Error: There are pending proofs'):
         return 1.0
+    if filterCoq(msg) == v:
+        return -1.0
     # Find the code left after the faulty line/character.
     # TODO: make this clearer.
     first = log[log.index('line ')+len('line '):]
