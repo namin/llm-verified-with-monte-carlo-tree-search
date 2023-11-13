@@ -10,17 +10,25 @@ def can_be_solution(msg, min_lines, check_fun=None):
 
 def verifier_feedback(ok, not_ok):
     not_ok_first = not_ok[0:not_ok.index('.', len(ok))]
-    details = hint_details(not_ok_first)
+    r = checkDetails(not_ok_first)
+    details = r['details']
     if details and details not in ok:
         print('DETAILS')
         print(details)
-        return ok+'\n(* '+details+' *)\n'
+        text = ok
+        text += '\n(* '+details+' *)\n'
+        r = checkDetails(not_ok)
+        log = r['log']
+        err = log[log.index(':'):]
+        rest = not_ok[len(ok):]
+        text += f"(* DO NOT DO \n{rest}\nbecause of\n{err} *)"
+        return text
     return None
 
-def hint_details(msg):
+def checkDetails(msg):
     v = filterCoq(msg+"```")
     r = checkCoq(v, details=True)
-    return r['details']
+    return r
 
 def leftAfterError(v, log):
     start_line = log[log.index('line ')+len('line '):]
@@ -45,6 +53,8 @@ def calculateScore(msg):
     log = r['log']
     print(log)
     if 'There are pending proofs' in log:
+        return 1.0
+    if 'Syntax Error: Lexer: Unterminated comment' in log:
         return 1.0
     if filterCoq(msg) == v:
         return -1.0
