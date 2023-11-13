@@ -2,6 +2,7 @@ import torch
 from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, TextStreamer
 from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
+from lang import stop_word
 from model import base_model_name, peft_model_path, ppo_model_path
 
 bnb_config = BitsAndBytesConfig(
@@ -28,7 +29,8 @@ else:
     model = base_model
 streamer = TextStreamer(tokenizer)
 
-stop_words_ids = [tokenizer(stop_word, return_tensors='pt')['input_ids'].squeeze().to('cuda') for stop_word in ["\n"]]
+# Hack: we want the stop word as it is encoded glued to another word.
+stop_word_id = tokenizer.encode("hello"+stop_word, add_special_tokens=False)[-1]
 
 model_generation_args = dict(
     top_k = 7,
@@ -37,7 +39,7 @@ model_generation_args = dict(
     temperature = 0.8,
     #streamer=streamer,
     max_new_tokens=100,
-    eos_token_id=stop_words_ids[0], pad_token_id=tokenizer.eos_token_id
+    eos_token_id=stop_word_id, pad_token_id=tokenizer.eos_token_id
 )
 
 def generate(prompt, num):
