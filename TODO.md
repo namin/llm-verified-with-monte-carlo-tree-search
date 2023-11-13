@@ -9,6 +9,7 @@
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
   - [x] Confirm completion at each step, and add a comment to steer.
   - [ ] Edit entire text, e.g. to add imports.
+  - [ ] Give the verifier feedback.
 - [ ] Design higher level steerable schemes:
   - [ ] Synthesize Coq proofs.
 - [ ] The LLM can get stuck repeating the same completion over and over again, if it doesn't have a diverse set of outputs.
