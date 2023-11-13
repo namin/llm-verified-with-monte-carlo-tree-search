@@ -19,7 +19,7 @@
   - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
 - [x] Get wandb to work.
 - [ ] Maybe add a per language blacklist, so that we can rule out uses of `Admitted` in Coq.
-- [ ] Maybe refactor the shared arguments between llm.py and ppo.py.
+- [x] Refactor the shared arguments between llm.py and ppo.py.
 - [ ] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.

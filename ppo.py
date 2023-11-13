@@ -1,9 +1,7 @@
-from peft import LoraConfig, PeftModel
-import torch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, TrainingArguments
+from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
-from lang import stop_word
-from model import base_model_name, peft_model_path
+from model import base_model_name
+import llm_config
 
 config = PPOConfig(
     model_name=base_model_name,
@@ -29,28 +27,10 @@ peft_config = LoraConfig(
     task_type="CAUSAL_LM",
 )
 
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_quant_type="nf4",
-    bnb_4bit_compute_dtype=torch.float16,
-)
-
-base_model = AutoModelForCausalLM.from_pretrained(
-    base_model_name,
-    quantization_config=bnb_config,
-    device_map="auto",
-    trust_remote_code=True,
-    use_auth_token=True,
-)
+base_model, model, tokenizer = llm_config.load_model()
 base_model.config.use_cache = False
-
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
-
-tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
-tokenizer.pad_token = tokenizer.eos_token
-
-model = PeftModel.from_pretrained(base_model, peft_model_path) if peft_model_path else base_model
 
 model = AutoModelForCausalLMWithValueHead.from_pretrained(
     model,
@@ -64,20 +44,7 @@ ppo_trainer = PPOTrainer(
     tokenizer=tokenizer,
 )
 
-# Hack: we want the stop word as it is encoded glued to another word.
-stop_word_id = tokenizer.encode("hello"+stop_word, add_special_tokens=False)[-1]
-quote_word_id = tokenizer.encode("```", add_special_tokens=False)[-1]
-
-model_generation_args = dict(
-    min_length = 5,
-    top_k = 7,
-    top_p = 0.9,
-    do_sample = True,
-    temperature = 0.8,
-    #streamer=streamer,
-    max_new_tokens=100,
-    eos_token_id=[stop_word_id, quote_word_id], pad_token_id=tokenizer.eos_token_id
-)
+model_generation_args = llm_config.get_model_generation_args(tokenizer)
 
 def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
