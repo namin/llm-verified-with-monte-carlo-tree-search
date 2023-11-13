@@ -9,7 +9,10 @@ def can_be_solution(msg, min_lines, check_fun=None):
     return r
 
 def verifier_feedback(ok, not_ok):
-    not_ok_first = not_ok[0:not_ok.index('.', len(ok))]
+    try:
+        not_ok_first = not_ok[0:not_ok.index('.', len(ok))]
+    except ValueError:
+        return None
     r = checkDetails(not_ok_first)
     details = r['details']
     if details and details not in ok:
