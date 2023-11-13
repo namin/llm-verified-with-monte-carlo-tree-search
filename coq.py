@@ -17,10 +17,12 @@ def verifier_feedback(ok, not_ok):
         print(details)
         text = ok
         text += '\n(* '+details+' *)\n'
-        r = checkDetails(not_ok)
+        v = filterCoq(not_ok+"```")
+        r = checkCoq(v)
         log = r['log']
         err = log[log.index(':'):]
-        rest = not_ok[len(ok):]
+        left = leftAfterError(v, log)
+        rest = not_ok[len(ok):-len(left)]
         text += f"(* DO NOT DO \n{rest}\nbecause of\n{err} *)"
         return text
     return None
