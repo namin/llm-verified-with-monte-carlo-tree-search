@@ -8,6 +8,19 @@ def can_be_solution(msg, min_lines, check_fun=None):
         r = check_fun(v)
     return r
 
+def verifier_feedback(ok, not_ok):
+    details = hint_details(not_ok)
+    if details and details not in ok:
+        print('DETAILS')
+        print(details)
+        return ok+'\n(* '+details+' *)\n'
+    return None
+
+def hint_details(msg):
+    v = filterCoq(msg+"```")
+    r = checkCoq(v, details=True)
+    return r['details']
+
 def calculateScore(msg):
     v = filterCoq(msg+"```")
     if v == "":
@@ -51,7 +64,7 @@ def filterCoq(msg):
     r = "\n".join([x[1] for x in m])
     return r
 
-def checkCoq(v):
-    r = requests.post("https://coq.livecode.ch/check", data = { 'v': v })
+def checkCoq(v, details=False):
+    r = requests.post(f"https://coq{'c' if details else ''}.livecode.ch/check", data = { 'v': v })
     r.raise_for_status()
     return r.json()

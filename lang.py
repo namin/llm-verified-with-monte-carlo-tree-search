@@ -10,7 +10,7 @@ if lang=='Dafny':
     comment = lambda inp: "\n// " + inp + "\n"
     stop_word = '\n'
 elif lang=='Coq':
-    from coq import score_func, can_be_solution
+    from coq import score_func, can_be_solution, verifier_feedback
     comment = lambda inp: " (* " + inp + " *) "
     stop_word = '.'
 else:
