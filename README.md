@@ -63,6 +63,7 @@ python run_ppo.py
   - [ ] Edit entire text, e.g. to add imports.
 - [ ] Design higher level steerable schemes:
   - [ ] Synthesize Coq proofs.
+- [ ] The LLM can get stuck repeating the same completion over and over again, if it doesn't have a diverse set of outputs.
 - [x] Design a reinforcement learning scheme, whereas the LLM learns from trial.
   - [ ] Evaluate whether the model after PPO suffers degradation for some tasks, even unrelated.
   - [ ] Force the PPO solution to converge to an optimal known one, using it entirely for training rather than discovery.
