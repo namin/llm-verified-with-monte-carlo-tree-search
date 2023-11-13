@@ -35,6 +35,7 @@ case _ => 3
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
 ### Hint: For the inductive case of the proof, `eauto using PeanoNat.Nat.add_0_r` might be useful (`Require Arith` in the imports).
+### Hint: You can also rewrite backwards: `rewrite <- H`.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
                 1000, None, 22, check_proof)
