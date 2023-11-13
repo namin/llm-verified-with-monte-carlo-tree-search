@@ -17,7 +17,7 @@ def calculateScore(msg):
         return 1.0
     log = r['log']
     print(log)
-    if log.startswith('Error: There are pending proofs'):
+    if 'There are pending proofs' in log:
         return 1.0
     if filterCoq(msg) == v:
         return -1.0
