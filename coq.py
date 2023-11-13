@@ -9,7 +9,8 @@ def can_be_solution(msg, min_lines, check_fun=None):
     return r
 
 def verifier_feedback(ok, not_ok):
-    details = hint_details(not_ok)
+    not_ok_first = not_ok[0:not_ok.index('.', len(ok))]
+    details = hint_details(not_ok_first)
     if details and details not in ok:
         print('DETAILS')
         print(details)
