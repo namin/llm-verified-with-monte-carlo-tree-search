@@ -22,6 +22,7 @@ def gen(prompt, model_generation_args, num=1):
 if __name__ == '__main__':
     num = 5
     from prompts import prompt, max_new_tokens
+    from lang import score_func, can_be_solution
     args = model_generation_args.copy()
     args['min_length'] = max_new_tokens // 2
     args['max_new_tokens'] = max_new_tokens
@@ -29,5 +30,8 @@ if __name__ == '__main__':
     del args['pad_token_id']
     rs = gen(prompt, args, num)
     for r in rs:
-        print('SOLUTION')
-        print(r)
+        print('\n\nGENERATED PROPOSAL')
+        #print(r) # printed by score_func
+        s = score_func(r)
+        if s > 0 and can_be_solution(r):
+            print('ACCEPTABLE SOLUTION!')
