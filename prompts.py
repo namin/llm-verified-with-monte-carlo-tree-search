@@ -13,7 +13,9 @@ else:
     check_proof = lambda v: True
 
 problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove that the factorial is always strictly positive.
-### {lang}:""",
+{'''### Hint: Use a plain function, NOT a function method.
+''' if lang=='Dafny' else ''
+}### {lang}:""",
                 500, None, 5, check_proof)
 problem_opt0 = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
