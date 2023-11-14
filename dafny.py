@@ -9,11 +9,20 @@ def can_be_solution(msg, min_lines, check_fun=None):
     return r
 
 def verifier_feedback(ok, not_ok):
-    _, err = calculateScoreHelper(not_ok)
-    if err:
-        rest = not_ok[len(ok):]
+    _, error_case = calculateScoreHelper(not_ok)
+    if error_case:
+        err, num_line_first = error_case
+        rest = not_ok
+        n = num_line_first-1
+        while n > 0:
+            n -= 1
+            rest = rest[rest.index('\n'):]
+        try:
+            rest = rest[:rest.index('\n')]
+        except ValueError:
+            pass
         text = ok
-        text += f"\n/* DO NOT DO\n{rest}\nbecause of\n{err}\n*/"
+        text += f"\n/* {rest}\navoid\n{err}\n*/"
         return text
     return None
 
@@ -35,8 +44,12 @@ def calculateScoreHelper(msg):
     if num_line_first > 1+v.strip().count('\n'):
         return None, None
     else:
-        err = first[first.index(':')+1:first.index('\n')]
-        return -1.0, err
+        err = first[first.index(':'):]
+        try:
+            err = err[:err.index('ex.dfy')]
+        except ValueError:
+            pass
+        return -1.0, (err, num_line_first)
 
 def score_func(sentence):
     print('TEXT')
