@@ -40,5 +40,40 @@ case _ => 3
 }### {lang}:""",
                 1000, None, 22, check_proof)
 
+# HumanEvalX, Problem 3
+relates_to = "==>" # can do <==> for harder problem
+problem_below0_dafny = ("""
+### Hint: In Dafny, the result is assigned `result := true` and `return` takes no arguments.
+### Hint: Remember to have an invariant related running balance and the sum.
+### Hint: Call the lemma sum_plus after you add one ops element to maintain the invariant.
+```Dafny
+function sum(s: seq<int>, n: nat): int
+    requires n <= |s|
+{
+    if |s| == 0 || n == 0 then
+        0
+    else
+        s[0] + sum(s[1..], n-1)
+}
+
+lemma sum_plus(s: seq<int>, i: nat)
+    requires i < |s|
+    ensures sum(s, i) + s[i] == sum(s, i+1)
+{
+}
+
+method below_zero(ops: seq<int>) returns (result: bool)
+/*
+You're given a list of deposit and withdrawal operations on a bank account that starts with
+zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+at that point function should return true. Otherwise it should return false.
+- assert !below_zero([1, 2, 3])
+- assert below_zero([1, 2, -4, 5])
+*/
+    ensures result """+relates_to+""" exists n: nat :: n <= |ops| && sum(ops, n) < 0
+{
+""", 1000, None, 5, check_proof)
+
+
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_opt0
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_below0_dafny

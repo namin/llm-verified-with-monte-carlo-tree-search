@@ -1,12 +1,12 @@
 # Pick a language...
 
 lang = 'Dafny'
-lang = 'Coq'
+#lang = 'Coq'
 
 # Detail features per language...
 
 if lang=='Dafny':
-    from dafny import score_func, can_be_solution
+    from dafny import score_func, can_be_solution, verifier_feedback
     comment = lambda inp: "\n// " + inp + "\n"
     stop_word = '\n'
 elif lang=='Coq':
