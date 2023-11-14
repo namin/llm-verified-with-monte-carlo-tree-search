@@ -1,4 +1,4 @@
-from lang import lang
+from lang import lang, all_langs
 
 if lang == 'Dafny':
     proof_marker = 'ensures'
@@ -20,7 +20,7 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 ### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
-                500, None, 5, check_proof)
+                500, None, 5, check_proof, all_langs)
 problem_opt0 = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
 match e
@@ -38,10 +38,10 @@ case _ => 3
 ### Hint: You can also rewrite backwards: `rewrite <- H`.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
-                1000, None, 22, check_proof)
+                1000, None, 22, check_proof, all_langs)
 
+relates_to = "<==>"
 # HumanEvalX, Problem 3
-relates_to = "==>" # can do <==> for harder problem
 problem_below0_dafny = ("""
 ### Hint: In Dafny, the result is assigned `result := true` and `return` takes no arguments.
 ### Hint: Remember to have an invariant related running balance and the sum.
@@ -72,8 +72,25 @@ at that point function should return true. Otherwise it should return false.
 */
     ensures result """+relates_to+""" exists n: nat :: n <= |ops| && sum(ops, n) < 0
 {
-""", 1000, None, 5, check_proof)
+""", 1000, None, 5, check_proof, ['Dafny'])
 
+# HumanEvalX, Problem 3
+problem_intersperse_dafny = ("""
+```Dafny
+method intersperse(numbers: seq<int>, delimiter: int) returns (interspersed: seq<int>)
+/*
+Insert a number 'delimeter' between every two consecutive elements of input list `numbers'
+- assert intersperse([], 4) == []
+- assert intersperse([1, 2, 3], 4) == [1, 4, 2, 4, 3]
+*/
+    ensures |interspersed| == if |numbers| > 0 then 2 * |numbers| - 1 else 0
+    ensures forall i :: 0 <= i < |interspersed| ==> i % 2 == 0 ==>
+                interspersed[i] == numbers[i / 2]
+    ensures forall i :: 0 <= i < |interspersed| ==> i % 2 == 1 ==>
+                interspersed[i] == delimiter
+{
+""", 1000, None, 5, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_fact
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_intersperse_dafny
+assert lang in supported_langs

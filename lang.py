@@ -1,7 +1,9 @@
 # Pick a language...
 
 lang = 'Dafny'
-lang = 'Coq'
+#lang = 'Coq'
+
+all_langs = ['Dafny', 'Coq']
 
 # Detail features per language...
 
