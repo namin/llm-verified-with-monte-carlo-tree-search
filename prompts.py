@@ -76,4 +76,4 @@ at that point function should return true. Otherwise it should return false.
 
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_below0_dafny
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun) = problem_fact

@@ -1,7 +1,7 @@
 # Pick a language...
 
 lang = 'Dafny'
-#lang = 'Coq'
+lang = 'Coq'
 
 # Detail features per language...
 
