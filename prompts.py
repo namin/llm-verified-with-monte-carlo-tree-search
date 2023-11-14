@@ -5,7 +5,7 @@ if lang == 'Dafny':
 elif lang == 'Coq':
     proof_marker = 'Qed'
 elif lang == 'Lean':
-    proof_marker = 'qed'
+    proof_marker = None
 else:
     proof_marker = None
 
