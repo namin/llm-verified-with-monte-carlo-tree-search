@@ -12,7 +12,7 @@ def verifier_feedback(ok, not_ok):
     _, err = calculateScoreHelper(not_ok)
     if err:
         text = ok
-        text += f"\n/* Consider previous issue: {err} */\n"
+        text += f"\n/* Consider previous issue: {err.strip()} */\n"
         return text
     return None
 

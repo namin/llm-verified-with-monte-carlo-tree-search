@@ -45,7 +45,7 @@ relates_to = "==>" # can do <==> for harder problem
 problem_below0_dafny = ("""
 ### Hint: In Dafny, the result is assigned `result := true` and `return` takes no arguments.
 ### Hint: Remember to have an invariant related running balance and the sum.
-### Hint: Call the lemma sum_plus after you add one ops element to maintain the invariant.
+### Hint: Call the lemma sum_plus immediately after you add to the balance to maintain the invariant, before any if statement.
 ```Dafny
 function sum(s: seq<int>, n: nat): int
     requires n <= |s|
