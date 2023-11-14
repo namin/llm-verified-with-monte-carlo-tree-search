@@ -1,0 +1,3 @@
+{"cmd": "theorem my_theorem (x : Nat) : x = x := by sorry"}
+
+{"tactic": "exact my_fake_premise", "proofState": 0}

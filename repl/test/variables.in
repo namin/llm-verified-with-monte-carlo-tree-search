@@ -1,0 +1,5 @@
+{"cmd": "variable (x y : Nat)"}
+
+{"cmd": "variable (f : Nat → Nat)", "env": 0}
+
+{"cmd": "theorem problem (h0 : f 5 = 3) (h1 : f (4 * x * y) = 2 * y * (f (x + y) + f (x - y))) :\n    ∃ (k : Nat), f 2015 = k := by\n  sorry", "env": 1}

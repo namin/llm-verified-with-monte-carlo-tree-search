@@ -1,0 +1,14 @@
+{"sorries":
+ [{"proofState": 0,
+   "pos": {"line": 1, "column": 18},
+   "goal": "⊢ Nat",
+   "endPos": {"line": 1, "column": 23}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 4},
+   "endPos": {"line": 1, "column": 5},
+   "data": "declaration uses 'sorry'"}],
+ "env": 0}
+
+{"message": "Unknown proof state."}
+

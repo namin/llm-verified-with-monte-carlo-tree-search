@@ -1,0 +1,26 @@
+{"env": 0}
+
+{"sorries":
+ [{"proofState": 0,
+   "pos": {"line": 1, "column": 18},
+   "goal": "⊢ Nat",
+   "endPos": {"line": 1, "column": 23}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 4},
+   "endPos": {"line": 1, "column": 5},
+   "data": "declaration uses 'sorry'"}],
+ "env": 1}
+
+{"proofState": 1, "goals": ["⊢ Nat"]}
+
+{"proofState": 2, "goals": ["⊢ Nat"]}
+
+{"proofState": 3, "goals": ["t : Nat\n⊢ Nat"]}
+
+{"proofState": 4, "goals": ["t : Nat\n⊢ Nat"]}
+
+{"proofState": 5, "goals": ["t : Nat\n⊢ Nat"]}
+
+{"proofState": 6, "goals": []}
+

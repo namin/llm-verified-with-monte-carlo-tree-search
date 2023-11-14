@@ -1,0 +1,9 @@
+{"env": 0}
+
+{"messages":
+ [{"severity": "info",
+   "pos": {"line": 1, "column": 0},
+   "endPos": {"line": 1, "column": 6},
+   "data": "rfl : f = f"}],
+ "env": 1}
+

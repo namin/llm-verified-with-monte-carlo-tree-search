@@ -4,6 +4,8 @@ if lang == 'Dafny':
     proof_marker = 'ensures'
 elif lang == 'Coq':
     proof_marker = 'Qed'
+elif lang == 'Lean':
+    proof_marker = 'qed'
 else:
     proof_marker = None
 

@@ -1,0 +1,8 @@
+{"cmd": "import Mathlib.Algebra.BigOperators.Basic\nimport Mathlib.Data.Real.Basic\nimport Mathlib.Data.Complex.Basic\nimport Mathlib.Data.Nat.Log\nimport Mathlib.Data.Complex.Exponential\nimport Mathlib.NumberTheory.Divisors\nimport Mathlib.Data.ZMod.Defs\nimport Mathlib.Data.ZMod.Basic\nimport Mathlib.Topology.Basic\nimport Mathlib.Data.Nat.Digits\nopen BigOperators\nopen Real\nopen Nat\nopen Topology"}
+
+{"cmd": "theorem mathd_numbertheory_188 : Nat.gcd 180 168 = 12 := by norm_num", "env": 0}
+
+{"cmd": "theorem mathd_numbertheory_403 : ∑ k in (Nat.properDivisors 198), k = 270 := by simp", "env": 0}
+
+{"cmd": "theorem mathd_numbertheory_109 (v : ℕ → ℕ) (h₀ : ∀ n, v n = 2 * n - 1) : (∑ k in Finset.Icc 1 100, v k) % 7 = 4 := by simp_rw [h₀]", "env": 0}
+

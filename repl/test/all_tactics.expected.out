@@ -1,0 +1,13 @@
+{"tactics":
+ [{"tactic": "have t := 37",
+   "proofState": 0,
+   "pos": {"line": 1, "column": 18},
+   "goals": "⊢ Nat",
+   "endPos": {"line": 1, "column": 30}},
+  {"tactic": "exact t",
+   "proofState": 1,
+   "pos": {"line": 1, "column": 32},
+   "goals": "t : Nat ⊢ Nat",
+   "endPos": {"line": 1, "column": 39}}],
+ "env": 0}
+

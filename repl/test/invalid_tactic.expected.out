@@ -1,0 +1,20 @@
+{"sorries":
+ [{"proofState": 0,
+   "pos": {"line": 1, "column": 43},
+   "goal": "x : Nat ⊢ x = x",
+   "endPos": {"line": 1, "column": 48}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 8},
+   "endPos": {"line": 1, "column": 18},
+   "data": "declaration uses 'sorry'"}],
+ "env": 0}
+
+{"proofState": 1,
+ "messages":
+ [{"severity": "error",
+   "pos": {"line": 0, "column": 0},
+   "endPos": {"line": 0, "column": 0},
+   "data": "unknown identifier 'my_fake_premise'"}],
+ "goals": []}
+

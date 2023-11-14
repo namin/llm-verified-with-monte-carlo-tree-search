@@ -1,0 +1,32 @@
+{"tactics":
+ [{"tactic": "calc\n  3 = 4 := by sorry\n  4 = 5 := by sorry",
+   "proofState": 2,
+   "pos": {"line": 1, "column": 22},
+   "goals": "⊢ 3 = 5",
+   "endPos": {"line": 3, "column": 19}},
+  {"tactic": "sorry",
+   "proofState": 3,
+   "pos": {"line": 2, "column": 14},
+   "goals": "⊢ 3 = 4",
+   "endPos": {"line": 2, "column": 19}},
+  {"tactic": "sorry",
+   "proofState": 4,
+   "pos": {"line": 3, "column": 14},
+   "goals": "⊢ 4 = 5",
+   "endPos": {"line": 3, "column": 19}}],
+ "sorries":
+ [{"proofState": 0,
+   "pos": {"line": 2, "column": 14},
+   "goal": "⊢ 3 = 4",
+   "endPos": {"line": 2, "column": 19}},
+  {"proofState": 1,
+   "pos": {"line": 3, "column": 14},
+   "goal": "⊢ 4 = 5",
+   "endPos": {"line": 3, "column": 19}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 0},
+   "endPos": {"line": 1, "column": 7},
+   "data": "declaration uses 'sorry'"}],
+ "env": 0}
+

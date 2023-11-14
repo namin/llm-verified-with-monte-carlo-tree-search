@@ -1,0 +1,6 @@
+{"cmd": "#print List.cons"}
+
+{"cmd": "set_option pp.universes true"}
+
+{"cmd": "#print List.cons", "env": 1}
+
