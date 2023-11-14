@@ -5,6 +5,7 @@ This prototype synthesizes verified code with an LLM.
 Using Monte Carlo Tree Search (MCTS), it explores the space of possible generation of a verified program, and it checks at every step that it's on the right track by calling the verifier.
 
 This prototype uses Dafny, Coq, or Lean.
+To select the language, uncomment the corresponding line in [lang.py](lang.py).
 
 Logs for example runs can be found in the [log](log) directory.
 Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
@@ -32,7 +33,7 @@ mamba activate llm-verified
 pip install -r requirements.txt
 ```
 
-Install Lean: Detailed instructions [here](https://leanprover-community.github.io/install/debian.html)
+(If you want to use Lean) Install Lean: Detailed instructions [here](https://leanprover-community.github.io/get_started.html)
 
 ### Execution
 
