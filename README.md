@@ -46,7 +46,7 @@ For the run that interacts with the user, do:
 python run_user.py
 ```
 
-For the run that feeds back verifier info (Coq only), do:
+For the run that feeds back verifier info, do:
 
 ```
 python run_verifier_feedback.py
