@@ -20,6 +20,7 @@
 - [x] Get wandb to work.
 - [ ] Maybe add a per language blacklist, so that we can rule out uses of `Admitted` in Coq.
 - [x] Refactor the shared arguments between llm.py and ppo.py.
+- [ ] Support progressive proofs: proving with weaker consequences, and strengthening them after succeeding in steps.
 - [ ] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
