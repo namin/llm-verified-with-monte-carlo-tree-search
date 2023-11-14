@@ -9,10 +9,14 @@ def can_be_solution(msg, min_lines, check_fun=None):
     return r
 
 def verifier_feedback(ok, not_ok):
+    msg = "Consider previous issue"
+    if msg in ok:
+        return None
     _, err = calculateScoreHelper(not_ok)
     if err:
-        text = ok
-        text += f"\n/* Consider previous issue: {err.strip()} */\n"
+        err = err.strip()
+        hint = f"\n/* {msg}: {err} */\n"
+        text = ok+hint
         return text
     return None
 
