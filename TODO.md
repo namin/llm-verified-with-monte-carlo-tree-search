@@ -10,7 +10,8 @@
   - [x] Confirm completion at each step, and add a comment to steer.
   - [ ] Edit entire text, e.g. to add imports.
   - [ ] Give the verifier feedback.
-    - [x] Rudimentary display of goal context in case of error (Coq only).
+    - [x] Rudimentary display of goal context in case of error:
+      - [x] Coq works better than Dafny.
 - [ ] Design higher level steerable schemes:
   - [ ] Synthesize Coq proofs.
 - [ ] The LLM can get stuck repeating the same completion over and over again, if it doesn't have a diverse set of outputs.
