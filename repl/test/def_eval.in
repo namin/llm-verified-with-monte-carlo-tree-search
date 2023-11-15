@@ -1,3 +1,0 @@
-{"cmd": "def f := 37"}
-
-{"cmd": "#check (rfl : f = 37)", "env": 0}

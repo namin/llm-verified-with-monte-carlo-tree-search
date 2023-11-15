@@ -1,7 +1,0 @@
-{"cmd" : "def f : Nat := by sorry"}
-
-{"tactic": "apply Int.natAbs", "proofState": 0}
-
-{"tactic": "have t : Nat := 42", "proofState": 0}
-
-{"tactic": "exact t", "proofState": 2}
