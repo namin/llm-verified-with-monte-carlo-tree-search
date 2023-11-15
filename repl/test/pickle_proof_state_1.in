@@ -1,0 +1,15 @@
+{"cmd" : "import Lean"}
+
+{"cmd" : "def f : Nat := by sorry", "env": 0}
+
+{"pickleTo": "test/c.olean", "proofState": 0}
+
+{"unpickleProofStateFrom": "test/c.olean"}
+
+{"tactic": "have t : Nat := 42", "proofState": 2}
+
+{"pickleTo": "test/d.olean", "proofState": 3}
+
+{"unpickleProofStateFrom": "test/d.olean"}
+
+{"tactic": "exact t", "proofState": 5}

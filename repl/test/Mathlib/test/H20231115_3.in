@@ -1,0 +1,4 @@
+{"cmd": "import Mathlib.Tactic.Cases"}
+
+{"cmd": "example {x : Nat} : x + 1 > x := by\n  induction' x with x hx", "env": 0}
+

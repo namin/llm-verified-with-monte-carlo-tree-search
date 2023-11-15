@@ -1,0 +1,17 @@
+{"messages":
+ [{"severity": "info",
+   "pos": {"line": 1, "column": 0},
+   "endPos": {"line": 1, "column": 6},
+   "data": "constructor List.cons.{u} : {α : Type u} → α → List α → List α"}],
+ "env": 0}
+
+{"env": 1}
+
+{"messages":
+ [{"severity": "info",
+   "pos": {"line": 1, "column": 0},
+   "endPos": {"line": 1, "column": 6},
+   "data":
+   "constructor List.cons.{u} : {α : Type u} → α → List.{u} α → List.{u} α"}],
+ "env": 2}
+

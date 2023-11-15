@@ -1,0 +1,19 @@
+{"env": 0}
+
+{"sorries":
+ [{"proofState": 0,
+   "pos": {"line": 1, "column": 36},
+   "goal": "x : Nat ⊢ x + 1 > x",
+   "endPos": {"line": 1, "column": 41}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 0},
+   "endPos": {"line": 1, "column": 7},
+   "data": "declaration uses 'sorry'"}],
+ "env": 1}
+
+{"proofState": 1,
+ "goals":
+ ["case zero\n⊢ Nat.zero + 1 > Nat.zero",
+  "case succ\nx : Nat\nhx : x + 1 > x\n⊢ Nat.succ x + 1 > Nat.succ x"]}
+

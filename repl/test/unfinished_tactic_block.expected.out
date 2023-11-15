@@ -1,0 +1,11 @@
+{"messages":
+ [{"severity": "error",
+   "pos": {"line": 1, "column": 17},
+   "endPos": null,
+   "data": "unexpected end of input; expected '{'"},
+  {"severity": "error",
+   "pos": {"line": 1, "column": 15},
+   "endPos": {"line": 1, "column": 17},
+   "data": "unsolved goals\n⊢ Nat"}],
+ "env": 0}
+

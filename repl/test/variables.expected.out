@@ -1,0 +1,26 @@
+{"env": 0}
+
+{"messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 12},
+   "endPos": {"line": 1, "column": 13},
+   "data": "unused variable `y` [linter.unusedVariables]"}],
+ "env": 1}
+
+{"sorries":
+ [{"proofState": 0,
+   "pos": {"line": 3, "column": 2},
+   "goal":
+   "x y : Nat f : Nat → Nat h0 : f 5 = 3 h1 : f (4 * x * y) = 2 * y * (f (x + y) + f (x - y)) ⊢ ∃ k, f 2015 = k",
+   "endPos": {"line": 3, "column": 7}}],
+ "messages":
+ [{"severity": "warning",
+   "pos": {"line": 1, "column": 12},
+   "endPos": {"line": 1, "column": 13},
+   "data": "unused variable `y` [linter.unusedVariables]"},
+  {"severity": "warning",
+   "pos": {"line": 1, "column": 8},
+   "endPos": {"line": 1, "column": 15},
+   "data": "declaration uses 'sorry'"}],
+ "env": 2}
+

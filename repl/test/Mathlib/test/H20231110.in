@@ -1,0 +1,4 @@
+{"cmd": "import Mathlib\nopen Real\nlocal macro_rules | `($x ^ $y) => `(HPow.hPow $x $y)"}
+
+{"cmd": "example {n} {x a b : ℝ} (m : ℕ) (e₁ : n + 1 = m) (rm : ℝ) (er : ↑m = rm) (h : |x| ≤ 1) (e : |1 - a| ≤ b - |x| / rm * ((rm + 1) / rm)) : |exp x - expNear n x a| ≤ |x| ^ n / n.factorial * b := by apply Real.exp_approx_end' m e₁ rm er h e", "env": 0}
+

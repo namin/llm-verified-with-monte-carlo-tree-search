@@ -1,0 +1,9 @@
+{"cmd": "import Lean"}
+
+{"cmd": "def f := 42", "env": 0}
+
+{"pickleTo": "test/b.olean", "env": 1}
+
+{"unpickleEnvFrom": "test/b.olean"}
+
+{"cmd": "example : f = 42 := by rfl", "env": 2}

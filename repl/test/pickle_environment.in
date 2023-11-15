@@ -1,0 +1,7 @@
+{"cmd": "def f := 42"}
+
+{"pickleTo": "test/a.olean", "env": 0}
+
+{"unpickleEnvFrom": "test/a.olean"}
+
+{"cmd": "example : f = 42 := by rfl", "env": 1}

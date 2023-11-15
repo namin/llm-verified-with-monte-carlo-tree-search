@@ -1,0 +1,3 @@
+{"cmd" : "def f : Nat := by sorry"}
+
+{"tactic": "exat 42", "proofState": 0}
