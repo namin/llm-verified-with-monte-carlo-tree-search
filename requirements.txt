@@ -1,6 +1,7 @@
 accelerate
 bitsandbytes
 huggingface_hub
+openai
 peft
 protobuf
 requests

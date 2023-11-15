@@ -40,7 +40,7 @@ def child_finder(node, montecarlo):
             if inp == "":
                 return
             text = node.state + comment(inp)
-        
+
         child = Node(text)
         node.add_child(child)
         child.update_win_value(1)
@@ -56,4 +56,3 @@ montecarlo.simulate(expansion_count)
 
 print('CHOSEN SOLUTION')
 print(montecarlo.solution)
-

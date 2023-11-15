@@ -44,4 +44,3 @@ montecarlo.simulate(expansion_count)
 
 print('CHOSEN SOLUTION')
 print(montecarlo.solution)
-

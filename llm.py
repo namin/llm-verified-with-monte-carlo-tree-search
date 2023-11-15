@@ -1,5 +1,6 @@
 import llm_config
 import torch
+from openai import OpenAI
 
 _, model, tokenizer = llm_config.load_model()
 
@@ -18,6 +19,23 @@ def gen(prompt, model_generation_args, num=1):
                             **model_generation_args)
         rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
     return rs
+
+def gpt4(prompt, num=1):
+    client = OpenAI()
+    prompt = prompt.replace("### ", "")
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="gpt-4",
+        top_p=0.9,
+        temperature=0.8,
+        max_tokens=1000,
+    )
+    return [prompt + "\n" + chat_completion.choices[0].message.content]
 
 if __name__ == '__main__':
     num = 5
