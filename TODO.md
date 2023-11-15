@@ -10,6 +10,8 @@
         In Coq, we can use . as a separator, but in Dafny and Lean we effectively separate at method boundaries.
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
+  - [x] OpenAI GPT-4
+  - [ ] Have an option to replicate the non-custom tokenizer with open models
 - [ ] Support test cases.
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
   - [x] Confirm completion at each step, and add a comment to steer.
