@@ -48,6 +48,8 @@ opam install "coq-serapi>=8.10.0+0.7.0"
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
+Note: For both Dafny and Coq, the executables `dafny` and `coqc` need to be in your `PYTHONPATH`. Perhaps do `export PYTHONPATH=$PATH`.
+
 ### Execution
 
 Pick a language in [lang.py](lang.py), an LLM in [model.py](model.py), and a prompt in [prompts.py](prompts.py), then:
