@@ -32,7 +32,7 @@ def calculateScoreHelper(msg):
     v = filterLean(msg+"```")
     if v == "":
         return None, None
-    # hack around the tokenizer not tokenizing on '\n\n'
+    # hack around the tokenizer not tokenizing '\n\n' as one id
     if v.endswith('\n') and not v.endswith('\n\n'):
         if msg.count('```') % 2 == 1:
             return None, None
