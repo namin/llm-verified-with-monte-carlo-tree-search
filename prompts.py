@@ -95,7 +95,9 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 """, 1000, None, 5, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_fact
+(prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_opt0
+
+
 assert lang in supported_langs
 if lang != 'Lean4':
     prompt = '''
