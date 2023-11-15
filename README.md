@@ -4,7 +4,8 @@ This prototype synthesizes verified code with an LLM.
 
 Using Monte Carlo Tree Search (MCTS), it explores the space of possible generation of a verified program, and it checks at every step that it's on the right track by calling the verifier.
 
-This prototype uses Dafny or Coq.
+This prototype uses Dafny, Coq, or Lean.
+To select the language, uncomment the corresponding line in [lang.py](lang.py).
 
 Logs for example runs can be found in the [log](log) directory.
 Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
@@ -22,6 +23,8 @@ For example, the [log](https://github.com/namin/llm-verified-with-monte-carlo-tr
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
+If you don't have access to a GPU, you can still run the project using GPT-4, but you will need to use `llm.gpt4` instead of `llm.generate` in `run.py`, `run_user.py`, and `run_verifier_feedback.py`.
+
 ### Setup
 
 Using `mamba` or equivalently `conda`:
@@ -31,6 +34,10 @@ mamba create --name llm-verified python=3.10
 mamba activate llm-verified
 pip install -r requirements.txt
 ```
+
+(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then, run `lake build` in the `repl` directory.
+
+(If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
 ### Execution
 
@@ -61,4 +68,6 @@ python run_ppo.py
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
+- The [pySagredo](pySagredo) library is adapted from [zhangir-azerbayev/pySagredo](https://github.com/zhangir-azerbayev/pySagredo).
+- The [leanprover-community/repl](https://github.com/leanprover-community/repl) library is used as a submodule.
 - The inspiration comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://codeaimcts.github.io/).

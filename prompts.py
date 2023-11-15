@@ -4,6 +4,8 @@ if lang == 'Dafny':
     proof_marker = 'ensures'
 elif lang == 'Coq':
     proof_marker = 'Qed'
+elif lang == 'Lean4':
+    proof_marker = None
 else:
     proof_marker = None
 
@@ -19,6 +21,9 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 ### Hint: use `Nat.lt_0_1` in the base case of the proof.
 ### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
 ''' if lang=='Coq' else ''
+}{'''
+### Important: Do not import any external packages. You may only use the Lean 4 standard library.
+''' if lang=='Lean4' else ''
 }### {lang}:""",
                 500, None, 5, check_proof, all_langs)
 problem_opt0 = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
@@ -37,7 +42,10 @@ case _ => 3
 ### Hint: For the inductive case of the proof, `eauto using PeanoNat.Nat.add_0_r` might be useful (`Require Arith` in the imports).
 ### Hint: You can also rewrite backwards: `rewrite <- H`.
 ''' if lang=='Coq' else ''
-}### {lang}:""",
+}{'''
+### Important: Do not import any external packages. You may only use the Lean 4 standard library.
+''' if lang=='Lean4' else ''
+}### {lang}:""",### {lang}:""",
                 1000, None, 22, check_proof, all_langs)
 
 relates_to = "<==>"
