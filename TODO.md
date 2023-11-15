@@ -8,7 +8,9 @@
     - [ ] Maybe support custom stopping criteria for '\n\n'?
   - [ ] The granularity is too coarse for proving in Lean and Dafny.
         In Coq, we can use . as a separator, but in Dafny and Lean we effectively separate at method boundaries.
+- [x] Make Dafny and Coq usable locally, and that be the default.
   - [x] Add a sanity check for when a verifier is not available.
+  - [ ] Still provide option to use livecode.ch for occasional use.
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
 - [ ] Support test cases.
