@@ -1,4 +1,5 @@
-from execute import execute
+from execute import execute, livecode
+import requests
 
 from contextlib import redirect_stderr
 import io
@@ -88,6 +89,11 @@ def filterCoq(msg):
     return r
 
 def checkCoq(v, giveDetails=False):
+    if livecode:
+        r = requests.post(f"https://coq{'c' if giveDetails else ''}.livecode.ch/check", data = { 'v': v })
+        r.raise_for_status()
+        return r.json()
+
     r = execute('coqc', 'v', v)
     status = r['status']
     log = r['log']

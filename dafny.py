@@ -1,4 +1,6 @@
-from execute import execute
+from execute import execute, livecode
+import requests
+
 import re
 
 def can_be_solution(msg, min_lines, check_fun=None):
@@ -59,4 +61,8 @@ def filterDafny(msg):
     return r
 
 def checkDafny(v):
+    if livecode:
+        r = requests.post("https://dafny.livecode.ch/check", data = { 'v': v })
+        r.raise_for_status()
+        return r.json()
     return execute('dafny verify', 'dfy', v)

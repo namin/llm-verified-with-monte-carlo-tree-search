@@ -1,6 +1,12 @@
 import hashlib
 import os
 
+# Only set to True for lightweight testing.
+livecode = False
+
+if livecode:
+    print('WARNING: livecode is True. Be gentle!')
+
 def execute(cmd, ext, v):
     TMP_DIR = f'/tmp/{ext}/'
     key = hashlib.md5(v.encode('utf-8')).hexdigest()
@@ -31,7 +37,7 @@ def execute(cmd, ext, v):
 
         sys_error_prefix = "sh: line 1:"
         if log.startswith(sys_error_prefix):
-            raise RuntimeError(log[len(sys_error_prefix):])
+            raise RuntimeError(log[len(sys_error_prefix):]+' -- install tool locally or set livecode to True for lightweight testing')
     finally:
         os.chdir(old_dir)
 
