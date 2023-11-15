@@ -35,7 +35,7 @@ mamba activate llm-verified
 pip install -r requirements.txt
 ```
 
-(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then, run `lake build` in the `repl` directory.
+(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html) or download a binary [here](https://github.com/leanprover/lean4/releases/latest). Then, run `lake build` in the `repl` directory.
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
