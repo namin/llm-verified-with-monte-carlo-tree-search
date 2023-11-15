@@ -32,7 +32,7 @@ def verifier_feedback(ok, not_ok):
 
 def checkDetails(msg):
     v = filterCoq(msg+"```")
-    r = checkCoq(v, details=True)
+    r = checkCoq(v, giveDetails=True)
     return r
 
 def leftAfterError(v, log):
