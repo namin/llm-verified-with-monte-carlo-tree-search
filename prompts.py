@@ -98,7 +98,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 (prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_fact
 assert lang in supported_langs
 if lang == 'Lean4':
-    prompt += '''
+    prompt = '''
 ### Lean4 example: ```lean
 open Nat (add_assoc add_comm)
 
@@ -113,4 +113,4 @@ theorem hello_world (a b c : Nat)
 theorem foo (a : Nat) : a + 1 = Nat.succ a := by rfl
 ```
 ### Important: Do not import any external packages. You may only use the Lean 4 standard library.
-'''
+''' + prompt
