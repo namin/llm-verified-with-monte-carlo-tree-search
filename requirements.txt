@@ -3,6 +3,7 @@ bitsandbytes
 huggingface_hub
 openai
 peft
+pexpect
 protobuf
 requests
 sentencepiece
