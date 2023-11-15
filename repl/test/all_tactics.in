@@ -1,1 +1,0 @@
-{"cmd": "def f : Nat := by have t := 37; exact t", "allTactics": true}

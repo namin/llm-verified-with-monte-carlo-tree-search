@@ -35,7 +35,7 @@ mamba activate llm-verified
 pip install -r requirements.txt
 ```
 
-(If you want to use Lean) Install Lean: Detailed instructions [here](https://leanprover-community.github.io/get_started.html)
+(If you want to use Lean) Install Lean: Detailed instructions [here](https://leanprover-community.github.io/get_started.html).
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
@@ -68,4 +68,6 @@ python run_ppo.py
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
+- The [pySagredo](pySagredo) library is adapted from [zhangir-azerbayev/pySagredo](https://github.com/zhangir-azerbayev/pySagredo).
+- The [repl](repl) library is adapted from [leanprover-community/repl](https://github.com/leanprover-community/repl).
 - The inspiration comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://codeaimcts.github.io/).
