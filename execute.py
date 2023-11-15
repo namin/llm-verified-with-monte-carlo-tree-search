@@ -28,6 +28,10 @@ def execute(cmd, ext, v):
         f = open(errfn, 'r')
         log = f.read()
         f.close()
+
+        sys_error_prefix = "sh: line 1:"
+        if log.startswith(sys_error_prefix):
+            raise RuntimeError(log[len(sys_error_prefix):])
     finally:
         os.chdir(old_dir)
 
