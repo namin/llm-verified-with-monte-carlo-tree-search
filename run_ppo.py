@@ -7,6 +7,7 @@ from montecarlo.montecarlo import MonteCarlo
 from lang import score_func, can_be_solution
 
 from prompts import prompt, expansion_count, min_lines, check_fun
+from common import limit_depth
 
 class GenNode:
     def __init__(self, text, gens):
@@ -37,6 +38,9 @@ def generate_complete(text, montecarlo, gens):
         return generate_complete(text, montecarlo, gens)
 
 def child_finder(node, montecarlo):
+    if limit_depth(node, lambda state: state.text):
+        return
+
     child = generate_complete(node.state.text, montecarlo, [])
     if child is None:
         node.update_win_value(-1)
