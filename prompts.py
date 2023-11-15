@@ -97,6 +97,12 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 # Set the right-hand side to the selected problem.
 (prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_fact
 assert lang in supported_langs
+if lang != 'Lean4':
+    prompt = '''
+Put your code in triple quotes:
+```
+```
+''' + prompt
 if lang == 'Lean4':
     prompt = '''
 ### Lean4 example: ```lean
