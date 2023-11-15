@@ -35,6 +35,15 @@ mamba activate llm-verified
 pip install -r requirements.txt
 ```
 
+(If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
+
+(If you want to use Coq) Install Coq: Install opam, then:
+```
+opam init
+opam install coq
+opam install "coq-serapi>=8.10.0+0.7.0"
+```
+
 (If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html) or download a binary [here](https://github.com/leanprover/lean4/releases/latest). Then, run `lake build` in the `repl` directory.
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.

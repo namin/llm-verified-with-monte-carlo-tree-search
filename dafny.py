@@ -1,5 +1,6 @@
+import hashlib
+import os
 import re
-import requests
 
 def can_be_solution(msg, min_lines, check_fun=None):
     v = filterDafny(msg)
@@ -59,6 +60,33 @@ def filterDafny(msg):
     return r
 
 def checkDafny(v):
-    r = requests.post("https://dafny.livecode.ch/check", data = { 'v': v })
-    r.raise_for_status()
-    return r.json()
+    TMP_DIR = '/tmp/dafny/'
+    key = hashlib.md5(v.encode('utf-8')).hexdigest()
+    dir = "%s%s/" % (TMP_DIR, key)
+    old_dir = os.getcwd()
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    os.chdir(dir)
+
+    try:
+        fn = 'ex.dfy'
+        outfn = 'out.txt'
+        errfn = 'err.txt'
+
+        f = open(fn, 'w')
+        f.write(v)
+        f.close()
+
+        status = os.system("dafny verify %s >%s 2>%s" % (fn, outfn, errfn))
+
+        f = open(outfn, 'r')
+        outlog = f.read()
+        f.close()
+
+        f = open(errfn, 'r')
+        log = f.read()
+        f.close()
+    finally:
+        os.chdir(old_dir)
+
+    return {'status': status, 'log': log, 'out': outlog}

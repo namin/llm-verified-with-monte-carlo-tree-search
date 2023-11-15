@@ -1,4 +1,5 @@
 accelerate
+alectryon
 bitsandbytes
 huggingface_hub
 openai
