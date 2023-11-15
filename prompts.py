@@ -23,7 +23,7 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 ### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
 ''' if lang=='Coq' else ''
 }### {lang}:""",
-                500, None, 5, check_proof, all_langs)
+                500, None, 5, 15, check_proof, all_langs)
 problem_opt0 = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
 match e
@@ -41,7 +41,7 @@ case _ => 3
 ### Hint: You can also rewrite backwards: `rewrite <- H`.
 ''' if lang=='Coq' else ''
 }### {lang}:""",### {lang}:""",
-                1000, None, 22, check_proof, all_langs)
+                1000, None, 22, 40, check_proof, all_langs)
 
 relates_to = "<==>"
 # HumanEvalX, Problem 3
@@ -75,7 +75,7 @@ at that point function should return true. Otherwise it should return false.
 */
     ensures result """+relates_to+""" exists n: nat :: n <= |ops| && sum(ops, n) < 0
 {
-""", 1000, None, 5, check_proof, ['Dafny'])
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
 
 # HumanEvalX, Problem 3
 problem_intersperse_dafny = ("""
@@ -92,10 +92,10 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     ensures forall i :: 0 <= i < |interspersed| ==> i % 2 == 1 ==>
                 interspersed[i] == delimiter
 {
-""", 1000, None, 5, check_proof, ['Dafny'])
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, check_fun, supported_langs) = problem_fact
+(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_fact
 assert lang in supported_langs
 if lang != 'Lean4':
     prompt = '''
