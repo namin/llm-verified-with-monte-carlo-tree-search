@@ -23,6 +23,8 @@ For example, the [log](https://github.com/namin/llm-verified-with-monte-carlo-tr
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
+If you don't have access to a GPU, you can still run the project using GPT-4, but you will need to use `llm.gpt4` instead of `llm.generate` in `run.py`, `run_user.py`, and `run_verifier_feedback.py`.
+
 ### Setup
 
 Using `mamba` or equivalently `conda`:
@@ -34,6 +36,8 @@ pip install -r requirements.txt
 ```
 
 (If you want to use Lean) Install Lean: Detailed instructions [here](https://leanprover-community.github.io/get_started.html)
+
+(If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
 ### Execution
 
