@@ -1,5 +1,6 @@
+import hashlib
+import os
 import re
-import requests
 
 def can_be_solution(msg, min_lines, check_fun=None):
     v = filterCoq(msg)
@@ -82,7 +83,57 @@ def filterCoq(msg):
     r = "\n".join([x[1] for x in m])
     return r
 
-def checkCoq(v, details=False):
-    r = requests.post(f"https://coq{'c' if details else ''}.livecode.ch/check", data = { 'v': v })
-    r.raise_for_status()
-    return r.json()
+def checkCoq(v, giveDetails=False):
+    TMP_DIR = '/tmp/coq/'
+    key = hashlib.md5(v.encode('utf-8')).hexdigest()
+    dir = "%s%s/" % (TMP_DIR, key)
+    old_dir = os.getcwd()
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    os.chdir(dir)
+
+    try:
+        fn = 'ex.v'
+        outfn = 'out.txt'
+        errfn = 'err.txt'
+
+        f = open(fn, 'w')
+        f.write(v)
+        f.close()
+
+        status = os.system("coqc %s >%s 2>%s" % (fn, outfn, errfn))
+
+        f = open(outfn, 'r')
+        outlog = f.read()
+        f.close()
+
+        f = open(errfn, 'r')
+        log = f.read()
+        f.close()
+    finally:
+        os.chdir(old_dir)
+
+    details = ""
+    context = ""
+    if giveDetails and log != "":
+        f = io.StringIO()
+        with redirect_stderr(f):
+            r = annotate([v])
+        context = f.getvalue()
+        gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
+        if gs != []:
+            details = pretty_goals(gs[-1].goals)
+
+    return {'status': status, 'log': log, 'out': outlog, 'details': details, 'context': context}
+
+def pretty_goals(goals):
+    return "\n".join([pretty_goal(goal) for goal in goals])
+
+def pretty_goal(goal):
+    assumptions = ', '.join([pretty_hypothesis(h) for h in goal.hypotheses])
+    if assumptions == '':
+        assumptions = 'no assumptions'
+    return f"Need to show {goal.conclusion} given {assumptions}."
+
+def pretty_hypothesis(h):
+    return f"{','.join(h.names)}:{h.type}"

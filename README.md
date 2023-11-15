@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
 
-(If you want to use Coq) Install Coq: Install opam, then:
+(If you want to use Coq) Install Coq: [Install opam](https://opam.ocaml.org/doc/Install.html), then:
 ```
 opam init
 opam install coq
