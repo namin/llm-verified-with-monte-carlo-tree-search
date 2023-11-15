@@ -21,15 +21,7 @@ problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove th
 ### Hint: use `Nat.lt_0_1` in the base case of the proof.
 ### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
 ''' if lang=='Coq' else ''
-}{'''### Lean4 example: ```lean
-open Nat (add_assoc add_comm)
-
-theorem hello_world (a b c : Nat)
-  : a + b + c = a + c + b := by
-  rw [add_assoc, add_comm b, ←add_assoc]
-
-theorem foo (a : Nat) : a + 1 = Nat.succ a := by rfl
-```
+}{'''
 ### Important: Do not import any external packages. You may only use the Lean 4 standard library.
 ''' if lang=='Lean4' else ''
 }### {lang}:""",
@@ -50,15 +42,7 @@ case _ => 3
 ### Hint: For the inductive case of the proof, `eauto using PeanoNat.Nat.add_0_r` might be useful (`Require Arith` in the imports).
 ### Hint: You can also rewrite backwards: `rewrite <- H`.
 ''' if lang=='Coq' else ''
-}{'''### Lean4 example: ```lean
-open Nat (add_assoc add_comm)
-
-theorem hello_world (a b c : Nat)
-  : a + b + c = a + c + b := by
-  rw [add_assoc, add_comm b, ←add_assoc]
-
-theorem foo (a : Nat) : a + 1 = Nat.succ a := by rfl
-```
+}{'''
 ### Important: Do not import any external packages. You may only use the Lean 4 standard library.
 ''' if lang=='Lean4' else ''
 }### {lang}:""",### {lang}:""",
