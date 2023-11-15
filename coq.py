@@ -1,4 +1,9 @@
 from execute import execute
+
+from contextlib import redirect_stderr
+import io
+from alectryon.serapi import annotate
+
 import re
 
 def can_be_solution(msg, min_lines, check_fun=None):
@@ -87,7 +92,7 @@ def checkCoq(v, giveDetails=False):
     status = r['status']
     log = r['log']
     outlog = r['out']
-
+    
     details = ""
     context = ""
     if giveDetails and log != "":
@@ -98,7 +103,7 @@ def checkCoq(v, giveDetails=False):
         gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
         if gs != []:
             details = pretty_goals(gs[-1].goals)
-
+    
     return {'status': status, 'log': log, 'out': outlog, 'details': details, 'context': context}
 
 def pretty_goals(goals):
