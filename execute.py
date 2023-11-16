@@ -13,7 +13,7 @@ def execute(cmd, ext, v):
     dir = "%s%s/" % (TMP_DIR, key)
     old_dir = os.getcwd()
     if not os.path.exists(dir):
-        os.makedirs(dir, mode=0o777))
+        os.makedirs(dir, mode=0o777)
     os.chdir(dir)
 
     try:
