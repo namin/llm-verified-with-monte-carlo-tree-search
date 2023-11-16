@@ -6,4 +6,4 @@ A probabilistic program for theorem proving and autoformalization in Lean 4, pow
 
 Note: if the executing Lean code is failing, it's almost certainly something wrong with your `leanprover-community/repl`
 
-The following [slides](https://github.com/zhangir-azerbayev/math-lm/blob/cmu_talk/talk/main.pdf) provide additional context for
+The following [slides](https://github.com/zhangir-azerbayev/math-lm/blob/cmu_talk/talk/main.pdf) provide additional context for pySagredo.
