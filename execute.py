@@ -8,12 +8,13 @@ if livecode:
     print('WARNING: livecode is True. Be gentle!')
 
 def execute(cmd, ext, v):
-    TMP_DIR = f'/tmp/llm-verified/{ext}/'
+    HOME = os.environ['HOME']
+    TMP_DIR = f'{HOME}/tmp/llm-verified/{ext}/'
     key = hashlib.md5(v.encode('utf-8')).hexdigest()
     dir = "%s%s/" % (TMP_DIR, key)
     old_dir = os.getcwd()
     if not os.path.exists(dir):
-        os.makedirs(dir, mode=0o777)
+        os.makedirs(dir)
     os.chdir(dir)
 
     try:
