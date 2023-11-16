@@ -7,7 +7,7 @@ from montecarlo.montecarlo import MonteCarlo
 from lang import score_func, can_be_solution
 
 from prompts import prompt, expansion_count, min_lines, check_fun
-from common import limit_depth
+from common import limit_depth, max_completion_depth
 
 class GenNode:
     def __init__(self, text, gens):
@@ -21,7 +21,9 @@ def reinforce(gens, reward):
     for (query_tensors, response_tensors) in gens:
         ppo.trainer_step(query_tensors, response_tensors, rewards)
 
-def generate_complete(text, montecarlo, gens):
+def generate_complete(text, montecarlo, gens, current_completion_depth=1):
+    if current_completion_depth >= max_completion_depth:
+        return None
     (text, gen) = ppo.generate(text)
     gens.append(gen)
     score = score_func(text)
@@ -35,7 +37,7 @@ def generate_complete(text, montecarlo, gens):
                 montecarlo.solution = node
             return node
     else:
-        return generate_complete(text, montecarlo, gens)
+        return generate_complete(text, montecarlo, gens, current_completion_depth + 1)
 
 def child_finder(node, montecarlo):
     if limit_depth(node, lambda state: state.text):
