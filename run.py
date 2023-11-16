@@ -10,7 +10,11 @@ from common import limit_depth
 
 montecarlo = MonteCarlo(Node(prompt))
 
-def generate_complete(text, montecarlo):
+max_completion_depth = 30
+
+def generate_complete(text, montecarlo, current_completion_depth=1):
+    if current_completion_depth >= max_completion_depth:
+        return None
     text = llm.generate(text, 1)[0]
     score = score_func(text)
     if score is not None:
@@ -21,7 +25,7 @@ def generate_complete(text, montecarlo):
                 montecarlo.solution = text
             return text
     else:
-        return generate_complete(text, montecarlo)
+        return generate_complete(text, montecarlo, current_completion_depth + 1)
 
 
 def child_finder(node, montecarlo):
