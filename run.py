@@ -6,11 +6,9 @@ from montecarlo.montecarlo import MonteCarlo
 from lang import score_func, can_be_solution
 
 from prompts import prompt, expansion_count, min_lines, check_fun
-from common import limit_depth
+from common import limit_depth, max_completion_depth
 
 montecarlo = MonteCarlo(Node(prompt))
-
-max_completion_depth = 30
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:

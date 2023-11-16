@@ -1,5 +1,7 @@
 from prompts import max_depth
 
+max_completion_depth = 30
+
 def count_depth(node, f=lambda x: x):
     depth = 1
     curr = node
