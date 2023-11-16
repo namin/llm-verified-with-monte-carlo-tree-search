@@ -1,5 +1,11 @@
-import re
+from execute import execute, livecode
 import requests
+
+from contextlib import redirect_stderr
+import io
+from alectryon.serapi import annotate
+
+import re
 
 def can_be_solution(msg, min_lines, check_fun=None):
     v = filterCoq(msg)
@@ -32,7 +38,7 @@ def verifier_feedback(ok, not_ok):
 
 def checkDetails(msg):
     v = filterCoq(msg+"```")
-    r = checkCoq(v, details=True)
+    r = checkCoq(v, giveDetails=True)
     return r
 
 def leftAfterError(v, log):
@@ -82,7 +88,38 @@ def filterCoq(msg):
     r = "\n".join([x[1] for x in m])
     return r
 
-def checkCoq(v, details=False):
-    r = requests.post(f"https://coq{'c' if details else ''}.livecode.ch/check", data = { 'v': v })
-    r.raise_for_status()
-    return r.json()
+def checkCoq(v, giveDetails=False):
+    if livecode:
+        r = requests.post(f"https://coq{'c' if giveDetails else ''}.livecode.ch/check", data = { 'v': v })
+        r.raise_for_status()
+        return r.json()
+
+    r = execute('coqc', 'v', v)
+    status = r['status']
+    log = r['log']
+    outlog = r['out']
+    
+    details = ""
+    context = ""
+    if giveDetails and log != "":
+        f = io.StringIO()
+        with redirect_stderr(f):
+            r = annotate([v])
+        context = f.getvalue()
+        gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
+        if gs != []:
+            details = pretty_goals(gs[-1].goals)
+    
+    return {'status': status, 'log': log, 'out': outlog, 'details': details, 'context': context}
+
+def pretty_goals(goals):
+    return "\n".join([pretty_goal(goal) for goal in goals])
+
+def pretty_goal(goal):
+    assumptions = ', '.join([pretty_hypothesis(h) for h in goal.hypotheses])
+    if assumptions == '':
+        assumptions = 'no assumptions'
+    return f"Need to show {goal.conclusion} given {assumptions}."
+
+def pretty_hypothesis(h):
+    return f"{','.join(h.names)}:{h.type}"
