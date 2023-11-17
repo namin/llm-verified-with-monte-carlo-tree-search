@@ -22,6 +22,14 @@ def verifier_feedback(ok, not_ok):
         return text
     return None
 
+def verifier_hint(not_ok):
+    _, err = calculateScoreHelper(not_ok)
+    if err:
+        err = err.strip()
+        return err
+    return None
+
+
 def calculateScore(msg):
     score, _ = calculateScoreHelper(msg)
     return score
