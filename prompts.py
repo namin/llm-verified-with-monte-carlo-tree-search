@@ -95,7 +95,14 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 """, 1000, None, 5, 20, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_fact
+(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_intersperse_dafny
+
+def remove_hints(prompt):
+    lines = prompt.split('\n')
+    lines = [line for line in lines if not line.startswith('### Hint: ')]
+    return '\n'.join(lines)
+
+#prompt = remove_hints(prompt)
 
 assert lang in supported_langs
 if lang != 'Lean4':

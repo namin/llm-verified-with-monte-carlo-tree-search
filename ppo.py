@@ -5,7 +5,7 @@ import llm_config
 
 config = PPOConfig(
     model_name=base_model_name,
-    learning_rate=1.41e-5,
+    learning_rate=1e-5,
     log_with='wandb',
     mini_batch_size=1,
     batch_size=1,
