@@ -2,7 +2,9 @@
 
 - Next steps:
   - [ ] Have a flag to support vanilla tokenization, and ensure everything still works when the flag is on.
-  - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.  
+  - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.
+    - [ ] Or enable loading PPO from PPO.
+  - [ ] Challenge: verifier feedback should enable running the prompts without hints. 
 - [x] Support verifiers:
   - [x] Dafny
   - [x] Coq
