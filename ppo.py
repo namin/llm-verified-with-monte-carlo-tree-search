@@ -44,7 +44,14 @@ ppo_trainer = PPOTrainer(
     tokenizer=tokenizer,
 )
 
-model_generation_args = llm_config.get_model_generation_args(tokenizer)
+model_generation_args = {
+    "min_length": -1,
+    "top_k": 0.0,
+    "top_p": 1.0,
+    "do_sample": True,
+    "pad_token_id": tokenizer.eos_token_id,
+    "max_new_tokens": 200
+}
 
 def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
