@@ -44,7 +44,17 @@ opam install coq
 opam install "coq-serapi>=8.10.0+0.7.0"
 ```
 
-(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html) or download a binary [here](https://github.com/leanprover/lean4/releases/latest). Then, run `lake build` in the `repl` directory.
+(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then,
+```
+git clone https://github.com/leanprover-community/repl.git
+```
+and add `require mathlib from git "https://github.com/leanprover-community/mathlib4"` to the file `repl/lakefile.lean` and run 
+```
+curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
+lake update
+lake build
+```
+in the `repl` directory.
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
 
@@ -80,5 +90,5 @@ python run_ppo.py
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
 - The [pySagredo](pySagredo) library is adapted from [zhangir-azerbayev/pySagredo](https://github.com/zhangir-azerbayev/pySagredo).
-- The [leanprover-community/repl](https://github.com/leanprover-community/repl) library is used as a submodule.
+- The [leanprover-community/repl](https://github.com/leanprover-community/repl) library is used as a clone.
 - The inspiration comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://codeaimcts.github.io/).

@@ -43,6 +43,40 @@ case _ => 3
 }### {lang}:""",### {lang}:""",
                 1000, None, 22, 40, check_proof, all_langs)
 
+problem_max_dafny = ("""
+```dafny
+function isMax(m: int, numbers: seq<int>): bool
+{
+    m in numbers &&
+    forall i :: 0 <= i < |numbers| ==> numbers[i] <= m
+
+}
+
+// Calculate the max of a sequence of numbers.
+method max(numbers: seq<int>) returns (result: int)
+requires numbers != []
+ensures isMax(result, numbers)
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
+
+# HumanEvalX, Problem 9
+problem_rolling_max_dafny = ("""
+```dafny
+function isMax(m: int, numbers: seq<int>): bool
+{
+    m in numbers &&
+    forall i :: 0 <= i < |numbers| ==> numbers[i] <= m
+
+}
+
+// From a given list of integers,
+// generate a list of rolling maximum element found
+// until given moment in the sequence.
+method rolling_max(numbers: seq<int>) returns (result: seq<int>)
+requires numbers != []
+ensures |result| == |numbers|
+ensures forall i :: 0 < i < |result| ==> isMax(result[i], numbers[0..(i+1)])
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
+
 relates_to = "<==>"
 # HumanEvalX, Problem 3
 problem_below0_dafny = ("""
@@ -95,7 +129,14 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 """, 1000, None, 5, 20, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_intersperse_dafny
+(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_opt0
+
+def remove_hints(prompt):
+    lines = prompt.split('\n')
+    lines = [line for line in lines if not line.startswith('### Hint: ')]
+    return '\n'.join(lines)
+
+#prompt = remove_hints(prompt)
 
 assert lang in supported_langs
 if lang != 'Lean4':

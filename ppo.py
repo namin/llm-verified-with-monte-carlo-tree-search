@@ -5,7 +5,7 @@ import llm_config
 
 config = PPOConfig(
     model_name=base_model_name,
-    learning_rate=1.41e-5,
+    learning_rate=1e-5,
     log_with='wandb',
     mini_batch_size=1,
     batch_size=1,
@@ -44,7 +44,14 @@ ppo_trainer = PPOTrainer(
     tokenizer=tokenizer,
 )
 
-model_generation_args = llm_config.get_model_generation_args(tokenizer)
+model_generation_args = {
+    "min_length": -1,
+    "top_k": 0.0,
+    "top_p": 1.0,
+    "do_sample": True,
+    "pad_token_id": tokenizer.eos_token_id,
+    "max_new_tokens": 200
+}
 
 def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
