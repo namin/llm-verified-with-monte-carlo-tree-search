@@ -44,7 +44,7 @@ opam install coq
 opam install "coq-serapi>=8.10.0+0.7.0"
 ```
 
-(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html) or download a binary [here](https://github.com/leanprover/lean4/releases/latest). Then, add `require mathlib from git "https://github.com/leanprover-community/mathlib4"` to the file `repl/lakefile.lean` and run 
+(If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then, add `require mathlib from git "https://github.com/leanprover-community/mathlib4"` to the file `repl/lakefile.lean` and run 
 ```
 curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 lake update
