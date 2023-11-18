@@ -58,6 +58,25 @@ requires numbers != []
 ensures isMax(result, numbers)
 """, 1000, None, 5, 20, check_proof, ['Dafny'])
 
+# HumanEvalX, Problem 9
+problem_rolling_max_dafny = ("""
+```dafny
+function isMax(m: int, numbers: seq<int>): bool
+{
+    m in numbers &&
+    forall i :: 0 <= i < |numbers| ==> numbers[i] <= m
+
+}
+
+// From a given list of integers,
+// generate a list of rolling maximum element found
+// until given moment in the sequence.
+method rolling_max(numbers: seq<int>) returns (result: seq<int>)
+requires numbers != []
+ensures |result| == |numbers|
+ensures forall i :: 0 < i < |result| ==> isMax(result[i], numbers[0..(i+1)])
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
+
 relates_to = "<==>"
 # HumanEvalX, Problem 3
 problem_below0_dafny = ("""
