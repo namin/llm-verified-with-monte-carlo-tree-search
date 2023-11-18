@@ -7,7 +7,7 @@ if lang == 'Dafny':
 elif lang == 'Coq':
     proof_marker = 'Qed'
 elif lang == 'Lean4':
-    check_proof = lambda v: v.count('theorem') > 2 # because of example
+    proof_marker = 'theorem'
 
 if check_proof is None:
     if proof_marker:
@@ -146,19 +146,7 @@ Put your code in triple quotes:
 ```
 ''' + prompt
 if lang == 'Lean4':
-    prompt = '''
-### Lean4 example: ```lean
-open Nat (add_assoc add_comm)
-
-def even (n : Nat) : Bool :=
-  match n with
-  | Nat.zero => true
-  | Nat.succ k => not (even k)
-
-theorem hello_world (a b c : Nat)
-  : a + b + c = a + c + b := by
-  rw [add_assoc, add_comm b, ←add_assoc]
-theorem foo (a : Nat) : a + 1 = Nat.succ a := by rfl
-```
-### Important: Do not import any external packages. You may only use the Lean 4 standard library.
-''' + prompt
+    prompt += '''
+```lean
+import Mathlib
+'''
