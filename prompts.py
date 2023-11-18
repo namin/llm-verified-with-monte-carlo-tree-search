@@ -43,6 +43,21 @@ case _ => 3
 }### {lang}:""",### {lang}:""",
                 1000, None, 22, 40, check_proof, all_langs)
 
+problem_max_dafny = ("""
+```dafny
+function isMax(m: int, numbers: seq<int>): bool
+{
+    m in numbers &&
+    forall i :: 0 <= i < |numbers| ==> numbers[i] <= m
+
+}
+
+// Calculate the max of a sequence of numbers.
+method max(numbers: seq<int>) returns (result: int)
+requires numbers != []
+ensures isMax(result, numbers)
+""", 1000, None, 5, 20, check_proof, ['Dafny'])
+
 relates_to = "<==>"
 # HumanEvalX, Problem 3
 problem_below0_dafny = ("""
