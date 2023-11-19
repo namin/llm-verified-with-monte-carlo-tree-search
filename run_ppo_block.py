@@ -4,7 +4,7 @@ import torch
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
-from lang import score_func, can_be_solution
+from lang import score_func, can_be_solution, find_largest_new_block
 
 from prompts import prompt, expansion_count, min_lines, check_fun
 from common import limit_depth, max_completion_depth
@@ -21,23 +21,29 @@ def reinforce(gens, reward):
     for (query_tensors, response_tensors) in gens:
         ppo.trainer_step(query_tensors, response_tensors, rewards)
 
-def generate_complete(text, montecarlo, gens, current_completion_depth=1):
+def generate_complete(old_text, montecarlo, gens, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
-    (text, gen) = ppo.generate(text)
-    gens.append(gen)
+    (text, gen) = ppo.generate(old_text)
     score = score_func(text)
-    if score is not None:
-        reinforce(gens, score)
-        if score < 0:
-            return None
+    if score is None:
+        code = find_largest_new_block(old_text, text)
+        if code is not None:
+            text = '```\n'+code
+            score = 1.0
         else:
-            node = Node(GenNode(text, gens))
-            if can_be_solution(text, min_lines, check_fun):
-                montecarlo.solution = node
-            return node
+            gens.append(gen)
+            return generate_complete(text, montecarlo, gens, current_completion_depth + 1)
     else:
-        return generate_complete(text, montecarlo, gens, current_completion_depth + 1)
+        gens.append(gen)
+        reinforce(gens, score)
+    if score is None or score < 0:
+        return None
+    else:
+        node = Node(GenNode(text, gens))
+        if can_be_solution(text, min_lines, check_fun):
+            montecarlo.solution = node
+        return node
 
 def child_finder(node, montecarlo):
     if limit_depth(node, lambda state: state.text):

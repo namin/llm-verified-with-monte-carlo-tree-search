@@ -9,7 +9,7 @@ from lang import score_func, can_be_solution
 from prompts import prompt, expansion_count, min_lines, check_fun
 from common import limit_depth, max_completion_depth
 
-n_iter = 3
+n_iter = 10
 
 class GenNode:
     def __init__(self, text, gens):

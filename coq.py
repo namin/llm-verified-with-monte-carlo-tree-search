@@ -123,3 +123,6 @@ def pretty_goal(goal):
 
 def pretty_hypothesis(h):
     return f"{','.join(h.names)}:{h.type}"
+
+filter_code = filterCoq
+check_code = checkCoq

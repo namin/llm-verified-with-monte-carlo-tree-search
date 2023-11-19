@@ -88,6 +88,9 @@ def checkLean(lean_code_block):
     else:
         return {"status": 0}
 
+filter_code = filterLean
+check_code = checkLean
+
 if __name__=="__main__":
     lean = f"""```lean
 open Nat (add_assoc add_comm)

@@ -66,3 +66,6 @@ def checkDafny(v):
         r.raise_for_status()
         return r.json()
     return execute('dafny verify', 'dfy', v)
+
+filter_code = filterDafny
+check_code = checkDafny
