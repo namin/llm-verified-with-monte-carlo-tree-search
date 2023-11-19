@@ -2,6 +2,7 @@
 
 - Next steps:
   - [x] Have a flag to support vanilla tokenization, and ensure everything still works when the flag is on.
+  - [ ] Support finer granularity in PPO, since tokenizer needs to be vanilla?
   - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.
     - [ ] Or enable loading PPO from PPO.
     - [ ] Just enable multiple examples? Avoids reloading the model.
@@ -15,6 +16,7 @@
     - [ ] The current system struggles with Coq proofs.
   - [x] Lean
     - [ ] Maybe support custom stopping criteria for '\n\n'?
+    - [ ] Learn about Tactic mode and support more fine-grained feedback?
   - [ ] Idris?
   - [ ] The granularity is too coarse for proving in Lean and Dafny.
         In Coq, we can use . as a separator, but in Dafny and Lean we effectively separate at method boundaries.
@@ -24,7 +26,7 @@
 - [ ] Support other LLM infrastructures in addition to Hugging Face:
   - [ ] [Ollama](https://ollama.ai)
   - [x] OpenAI GPT-4
-  - [ ] Have an option to replicate the non-custom tokenizer with open models
+  - [x] Have an option to replicate the non-custom tokenizer with open models
 - [ ] Support test cases.
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
   - [x] Confirm completion at each step, and add a comment to steer.
@@ -43,7 +45,8 @@
 - [x] Refactor the shared arguments between llm.py and ppo.py.
 - [ ] Support progressive proofs: proving with weaker consequences, and strengthening them after succeeding in steps.
 - [ ] Improve the syntax guidance.
-- [ ] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
+- [x] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
+  - [x] Fixed by depth control.
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
