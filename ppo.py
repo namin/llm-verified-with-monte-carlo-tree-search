@@ -1,6 +1,6 @@
 from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
-from model import base_model_name
+from model import base_model_name, ppo_model_path
 import llm_config
 
 config = PPOConfig(
@@ -32,11 +32,12 @@ base_model.config.use_cache = False
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
 
-model = AutoModelForCausalLMWithValueHead.from_pretrained(
-    model,
-    trust_remote_code=True,
-    device_map="auto",
-    peft_config=peft_config)
+if ppo_model_path is None:
+    model = AutoModelForCausalLMWithValueHead.from_pretrained(
+        model,
+        trust_remote_code=True,
+        device_map="auto",
+        peft_config=peft_config)
 
 ppo_trainer = PPOTrainer(
     model=model,

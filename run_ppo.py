@@ -9,12 +9,12 @@ from lang import score_func, can_be_solution
 from prompts import prompt, expansion_count, min_lines, check_fun
 from common import limit_depth, max_completion_depth
 
+n_iter = 3
+
 class GenNode:
     def __init__(self, text, gens):
         self.text = text
         self.gens = gens
-
-montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
 
 def reinforce(gens, reward):
     rewards = [torch.tensor(reward)]
@@ -55,17 +55,27 @@ def child_finder(node, montecarlo):
         node.add_child(retry_child)
         retry_child.update_policy_value(0.2)
 
-montecarlo.child_finder = child_finder
+def main_iter():
+    montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
+    montecarlo.child_finder = child_finder
 
-montecarlo.simulate(expansion_count)
+    montecarlo.simulate(expansion_count)
 
-if montecarlo.solution:
-    print('CHOSEN SOLUTION')
-    print(montecarlo.solution.state.text)
+    if montecarlo.solution:
+        print('CHOSEN SOLUTION')
+        print(montecarlo.solution.state.text)
 
-    node = montecarlo.solution
-    while node:
-        reinforce(node.state.gens, 10.0)
-        node = node.parent
+        node = montecarlo.solution
+        while node:
+            reinforce(node.state.gens, 10.0)
+            node = node.parent
 
-ppo.save()
+    ppo.save()
+
+def main():
+    for i in range(0, n_iter):
+        print('ITERATION', i)
+        main_iter()
+
+if __name__ == '__main__':
+    main()
