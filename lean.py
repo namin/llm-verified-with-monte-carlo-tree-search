@@ -43,6 +43,8 @@ def calculateScoreHelper(msg):
     tmp_error = None, None
     if "unknown constant" in r["error"]:
         return critical_error
+    elif "tactic 'rewrite' failed" in r["error"]:
+        return critical_error
     if filterLean(msg).strip() != v:
         if r["num_line_first"] >= v.count('\n'):
             return tmp_error
