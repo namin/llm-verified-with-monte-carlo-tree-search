@@ -65,6 +65,7 @@ def score_func(sentence):
 def filterLean(msg):
     m = re.findall('```([Ll]ean)?(.*?)```', msg, re.MULTILINE|re.DOTALL)
     r = "\n".join([x[1] for x in m])
+    r.replace('\n#eval', '\n--#eval') # skip evaluations
     return r
 
 def getErrorMessage(out):
