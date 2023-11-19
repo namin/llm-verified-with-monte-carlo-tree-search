@@ -37,7 +37,7 @@ def calculateScoreHelper(msg):
     print(log)
     first = log[log.index('ex.dfy(')+7:]
     num_line_first = int(first[0:first.index(',')])
-    if filterDafny(msg) != v and num_line_first >= v.count('\n'):
+    if filterDafny(msg).strip() != v and num_line_first >= v.count('\n'):
         return None, None
     else:
         err = first[first.index(':'):]

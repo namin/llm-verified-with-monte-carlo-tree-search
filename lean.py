@@ -39,7 +39,7 @@ def calculateScoreHelper(msg):
     r = checkLean(v)
     if r['status'] == 0:
         return 1.0, None
-    if filterLean(msg) != v:
+    if filterLean(msg).strip() != v:
         if r["num_line_first"] >= v.count('\n'):
             return None, None
         if "missing cases" in r["error"]:
