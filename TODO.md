@@ -16,6 +16,7 @@
     - [ ] The current system struggles with Coq proofs.
   - [x] Lean
     - [ ] Maybe support custom stopping criteria for '\n\n'?
+    - [ ] Learn about Tactic mode and support more fine-grained feedback?
   - [ ] Idris?
   - [ ] The granularity is too coarse for proving in Lean and Dafny.
         In Coq, we can use . as a separator, but in Dafny and Lean we effectively separate at method boundaries.
