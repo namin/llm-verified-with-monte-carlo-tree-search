@@ -27,7 +27,7 @@ def find_largest_new_block(old_text, text):
     return find_largest_new_block_code(filter_code(old_text+'```').strip(), filter_code(text+'```').strip())
 
 def find_largest_new_block_code(old_code, code):
-    while len(old_code) > len(code):
+    while len(old_code) < len(code):
         r = check_code(code)
         if r['status'] == 0:
             return code

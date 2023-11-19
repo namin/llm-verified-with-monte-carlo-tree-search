@@ -26,24 +26,27 @@ def generate_complete(old_text, montecarlo, gens, current_completion_depth=1):
         return None
     (text, gen) = ppo.generate(old_text)
     score = score_func(text)
-    if score is None:
+    if score is None or score < 0:
         code = find_largest_new_block(old_text, text)
+        print('Found code block:', code)
         if code is not None:
-            text = '```\n'+code
+            text = text[0:text.index('```')]+'```\n'+code # hack
             score = 1.0
+            # fallthrough
         else:
-            gens.append(gen)
-            return generate_complete(text, montecarlo, gens, current_completion_depth + 1)
+            if score is None:
+                gens.append(gen)
+                return generate_complete(text, montecarlo, gens, current_completion_depth + 1)
+            else:
+                reinforce([gen], score)
+                return None
     else:
         gens.append(gen)
-        reinforce(gens, score)
-    if score is None or score < 0:
-        return None
-    else:
-        node = Node(GenNode(text, gens))
-        if can_be_solution(text, min_lines, check_fun):
-            montecarlo.solution = node
-        return node
+    reinforce(gens, score)
+    node = Node(GenNode(text, gens))
+    if can_be_solution(text, min_lines, check_fun):
+        montecarlo.solution = node
+    return node
 
 def child_finder(node, montecarlo):
     if limit_depth(node, lambda state: state.text):
