@@ -39,12 +39,16 @@ def calculateScoreHelper(msg):
     r = checkLean(v)
     if r['status'] == 0:
         return 1.0, None
+    critical_error =  -1.0, r["error"]
+    tmp_error = None, None
+    if "unknown constant" in r["error"]:
+        return critical_error
     if filterLean(msg).strip() != v:
         if r["num_line_first"] >= v.count('\n'):
-            return None, None
+            return tmp_error
         if "missing cases" in r["error"]:
-            return None, None
-    return -1.0, r["error"]
+            return tmp_error
+    return critical_error
 
 
 def score_func(sentence):
@@ -61,20 +65,25 @@ def filterLean(msg):
     r = "\n".join([x[1] for x in m])
     return r
 
+def getErrorMessage(out):
+    if "messages" in out:
+        for m in out["messages"]:
+            if m["severity"] == "error":
+                return m
+    return None
 
 def checkLean(lean_code_block):
     proofsearch = ProofSearch(path_to_repl="repl")
     out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
-    if list(out.keys()) == ["env"]:
+    error_message = getErrorMessage(out)
+    if error_message:
+        return {
+            "status": 1,
+            "num_line_first": error_message["pos"]["line"],
+            "error": error_message["data"]
+        }
+    else:
         return {"status": 0}
-    elif list(out.keys()) == ["messages", "env"]:
-        if len(out["messages"]) == 0:
-            return {"status": 0}
-        elif all(m["severity"]!="error" for m in out["messages"]):
-            return {"status": 0}
-        else:
-            return {"status": 1, "num_line_first": out["messages"][0]["pos"]["line"], "error": out["messages"][0]["data"]}
-
 
 if __name__=="__main__":
     lean = f"""```lean
