@@ -1,19 +1,25 @@
 from lang import lang, all_langs
 
 proof_marker = None
+cheat_marker = None
 check_proof = None
 if lang == 'Dafny':
     proof_marker = 'ensures'
 elif lang == 'Coq':
     proof_marker = 'Qed'
+    cheat_marker = 'Admitted'
 elif lang == 'Lean4':
     proof_marker = 'theorem'
+    cheat_marker = 'sorry'
 
 if check_proof is None:
     if proof_marker:
         check_proof = lambda v: proof_marker in v
     else:
         check_proof = lambda v: True
+    if cheat_marker:
+        old_check_proof = check_proof
+        check_proof = lambda v: old_check_proof(v) and cheat_marker not in v
 
 problem_fact = (f"""### Spec: In {lang}, write a factorial function and prove that the factorial is always strictly positive.
 {'''### Hint: Use a plain function, NOT a function method.
