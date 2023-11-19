@@ -27,7 +27,6 @@ def calculateScore(msg):
     score, _ = calculateScoreHelper(msg)
     return score
 
-
 def calculateScoreHelper(msg):
     v = filterLean(msg+"```").strip()
     if v == "":
