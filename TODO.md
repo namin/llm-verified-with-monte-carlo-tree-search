@@ -1,7 +1,7 @@
 # TODOs
 
 - Next steps:
-  - [ ] Have a flag to support vanilla tokenization, and ensure everything still works when the flag is on.
+  - [x] Have a flag to support vanilla tokenization, and ensure everything still works when the flag is on.
   - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.
     - [ ] Or enable loading PPO from PPO.
     - [ ] Just enable multiple examples? Avoids reloading the model.

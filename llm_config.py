@@ -5,6 +5,8 @@ from peft import PeftModel
 from lang import stop_word
 from model import base_model_name, peft_model_path, ppo_model_path
 
+custom_stop = True
+
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
@@ -43,7 +45,7 @@ def get_model_generation_args(tokenizer):
         temperature = 0.8,
         #streamer=streamer,
         max_new_tokens=100,
-        eos_token_id=stop_words_ids(tokenizer),
+        eos_token_id=stop_words_ids(tokenizer) if custom_stop else tokenizer.eos_token_id,
         pad_token_id=tokenizer.eos_token_id
     )
 
