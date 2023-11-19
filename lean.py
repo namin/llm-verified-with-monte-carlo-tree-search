@@ -1,6 +1,6 @@
 import re
 from pySagredo.proofsearch import ProofSearch
-
+import pexpect
 
 def can_be_solution(msg, min_lines, check_fun=None):
     v = filterLean(msg)
@@ -77,7 +77,14 @@ def getErrorMessage(out):
 
 def checkLean(lean_code_block):
     proofsearch = ProofSearch(path_to_repl="repl")
-    out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
+    try:    
+        out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
+    except pexpect.exceptions.EOF:
+        return {
+            "status": 1,
+            "num_first_line": 0,
+            "error": ""
+        }
     error_message = getErrorMessage(out)
     if error_message:
         return {
