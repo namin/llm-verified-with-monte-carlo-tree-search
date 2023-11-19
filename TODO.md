@@ -45,7 +45,8 @@
 - [x] Refactor the shared arguments between llm.py and ppo.py.
 - [ ] Support progressive proofs: proving with weaker consequences, and strengthening them after succeeding in steps.
 - [ ] Improve the syntax guidance.
-- [ ] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
+- [x] Glitch: sometimes, the code is not in triple quotes, causing long running completion generations.
+  - [x] Fixed by depth control.
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
