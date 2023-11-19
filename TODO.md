@@ -5,6 +5,7 @@
   - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.
     - [ ] Or enable loading PPO from PPO.
     - [ ] Just enable multiple examples? Avoids reloading the model.
+    - [x] Support for iterations.
   - [ ] Challenge: verifier feedback should enable running the prompts without hints.
     - [x] Works for factorial `function method` issue.
   - [ ] Try running with completion depth always 1, and minimally supporting the score of `None`.
