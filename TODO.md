@@ -29,6 +29,7 @@
   - [x] OpenAI GPT-4
   - [x] Have an option to replicate the non-custom tokenizer with open models
 - [ ] Support test cases.
+  - [ ] Consider when the test cases fail, because of bad definition. How do we not give credit for the bad definition in PPO?
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
   - [x] Confirm completion at each step, and add a comment to steer.
   - [ ] Edit entire text, e.g. to add imports.
@@ -51,3 +52,4 @@
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
+ 
