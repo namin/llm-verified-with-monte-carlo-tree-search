@@ -6,7 +6,8 @@
     - [ ] Or enable loading PPO from PPO.
     - [ ] Just enable multiple examples? Avoids reloading the model.
   - [ ] Challenge: verifier feedback should enable running the prompts without hints.
-    - [x] Works for factorial `function method` issue. 
+    - [x] Works for factorial `function method` issue.
+  - [ ] Try running with completion depth always 1, and minimally supporting the score of `None`.
 - [x] Support verifiers:
   - [x] Dafny
   - [x] Coq
