@@ -29,20 +29,22 @@ def calculateScore(msg):
 
 
 def calculateScoreHelper(msg):
-    v = filterLean(msg+"```")
+    v = filterLean(msg+"```").strip()
     if v == "":
         return None, None
     # hack around the tokenizer not tokenizing '\n\n' as one id
-    if v.endswith('\n') and not v.endswith('\n\n'):
-        if msg.count('```') % 2 == 1:
-            return None, None
+    # if v.endswith('\n') and not v.endswith('\n\n'):
+    #     if msg.count('```') % 2 == 1:
+    #         return None, None
     r = checkLean(v)
     if r['status'] == 0:
         return 1.0, None
-    if r["num_line_first"] > 1+v.strip().count('\n'):
-        return None, None
-    else:
-        return -1.0, r["error"]
+    if filterLean(msg) != v:
+        if r["num_line_first"] >= v.count('\n'):
+            return None, None
+        if "missing cases" in r["error"]:
+            return None, None
+    return -1.0, r["error"]
 
 
 def score_func(sentence):

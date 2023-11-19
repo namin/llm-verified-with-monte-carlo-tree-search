@@ -27,7 +27,7 @@ def calculateScore(msg):
     return score
 
 def calculateScoreHelper(msg):
-    v = filterDafny(msg+"```")
+    v = filterDafny(msg+"```").strip()
     if v == "":
         return None, None
     r = checkDafny(v)
@@ -37,7 +37,7 @@ def calculateScoreHelper(msg):
     print(log)
     first = log[log.index('ex.dfy(')+7:]
     num_line_first = int(first[0:first.index(',')])
-    if filterDafny(msg) != v and num_line_first > v.strip().count('\n'):
+    if filterDafny(msg) != v and num_line_first >= v.count('\n'):
         return None, None
     else:
         err = first[first.index(':'):]
