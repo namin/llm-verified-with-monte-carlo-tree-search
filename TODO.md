@@ -2,7 +2,8 @@
 
 - Next steps:
   - [x] Have a flag to support vanilla tokenization, and ensure everything still works when the flag is on.
-  - [ ] Support finer granularity in PPO, since tokenizer needs to be vanilla?
+  - [x] Support finer granularity in PPO, since tokenizer needs to be vanilla?
+    - [x] [run_ppo_block.py](run_ppo_block.py) tried to commit back to working block of code.
   - [ ] Refactor poor man's flags to support running PPO with multiple examples, in a curriculum.
     - [ ] Or enable loading PPO from PPO.
     - [ ] Just enable multiple examples? Avoids reloading the model.
@@ -28,6 +29,7 @@
   - [x] OpenAI GPT-4
   - [x] Have an option to replicate the non-custom tokenizer with open models
 - [ ] Support test cases.
+  - [ ] Consider when the test cases fail, because of bad definition. How do we not give credit for the bad definition in PPO?
 - [ ] Design a steerable interaction to give human or tool feedback to the LLM.
   - [x] Confirm completion at each step, and add a comment to steer.
   - [ ] Edit entire text, e.g. to add imports.
@@ -50,3 +52,4 @@
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
+ 
