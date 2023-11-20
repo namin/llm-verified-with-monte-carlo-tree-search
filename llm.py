@@ -1,18 +1,19 @@
 from model_config import MODEL_HOST
+from typing import List
 
 if MODEL_HOST == "openai":
     import openai_generate
 
-    def generate(prompt, num):
+    def generate(promptL: str, num: str) -> List[str]:
         return openai_generate.generate(prompt, num)
 
 elif MODEL_HOST == "huggingface":
     import hugginface_generate
 
-    _, model, tokenizer = load_model()
-    model_generation_args = get_model_generation_args(tokenizer)
+    _, model, tokenizer = hugginface_generate.load_model()
+    model_generation_args = hugginface_generate.get_model_generation_args(tokenizer)  # todo: types
 
-    def gen(prompt, model_generation_args, num=1):
+    def gen(prompt, model_generation_args, num=1) -> List[str]:
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
         model.eval()
@@ -23,7 +24,7 @@ elif MODEL_HOST == "huggingface":
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         return rs
 
-    def generate(prompt, num):
+    def generate(prompt: str, num: str) -> List[str]:
         return gen(prompt, model_generation_args, num)
 
 else:

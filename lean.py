@@ -1,17 +1,20 @@
 import re
 from pySagredo.proofsearch import ProofSearch
 import pexpect
+from typing import Optional
+
+# todo: variable names and types
 
 
-def can_be_solution(msg, min_lines, check_fun=None):
+def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     v = filterLean(msg)
     r = v.count("\n") >= min_lines
-    if r and check_fun:
-        r = check_fun(v)
+    if r and check_func:
+        r = check_func(v)
     return r
 
 
-def verifier_feedback(ok, not_ok):
+def verifier_feedback(ok: bool, not_ok: bool) -> bool:
     msg = "Consider previous issue"
     if msg in ok:
         return None
@@ -24,12 +27,12 @@ def verifier_feedback(ok, not_ok):
     return None
 
 
-def calculateScore(msg):
+def calculateScore(msg: str) -> Optional[float]:
     score, _ = calculateScoreHelper(msg)
     return score
 
 
-def calculateScoreHelper(msg):
+def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filterLean(msg + "```").strip()
     if v == "":
         return None, None
@@ -54,7 +57,7 @@ def calculateScoreHelper(msg):
     return critical_error
 
 
-def score_func(sentence):
+def score_func(sentence: str) -> Optional[float]:
     print("TEXT")
     print(sentence)
     score = calculateScore(sentence)
@@ -63,14 +66,14 @@ def score_func(sentence):
     return score
 
 
-def filterLean(msg):
+def filterLean(msg: str) -> str:
     m = re.findall("```([Ll]ean4?)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
     r = "\n".join([x[1] for x in m])
     # r = r.replace('\n#eval', '\n--#eval') # skip evaluations
     return r
 
 
-def getErrorMessage(out):
+def getErrorMessage(out: str):
     if "messages" in out:
         for m in out["messages"]:
             if m["severity"] == "error":
@@ -78,7 +81,7 @@ def getErrorMessage(out):
     return None
 
 
-def checkLean(lean_code_block):
+def checkLean(lean_code_block: str) -> dict:
     proofsearch = ProofSearch(path_to_repl="repl")
     try:
         out = proofsearch.run_code(lean_code_block.strip(), verbose=True)

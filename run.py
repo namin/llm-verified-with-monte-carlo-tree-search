@@ -5,7 +5,7 @@ from montecarlo.montecarlo import MonteCarlo
 
 from lang import score_func, can_be_solution
 
-from prompts import prompt, expansion_count, min_lines, check_fun
+from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
 montecarlo = MonteCarlo(Node(prompt))
@@ -20,7 +20,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
         if score < 0:
             return None
         else:
-            if can_be_solution(text, min_lines, check_fun):
+            if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = text
             return text
     else:

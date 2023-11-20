@@ -4,6 +4,7 @@ from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
 from lang_config import STOP_WORD
 from model_config import BASE_MODEL_NAME, PEFT_MODEL_PATH, PPO_MODEL_PATH, CUSTOM_STOP
+from typing import List
 
 
 def load_model(
@@ -41,7 +42,7 @@ def load_model(
     return (base_model, model, tokenizer)
 
 
-def stop_words_ids(tokenizer: AutoTokenizer):
+def stop_words_ids(tokenizer: AutoTokenizer) -> List[int]:
     # Hack: we want the stop word as it is encoded glued to another word.
     stop_word_id = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)[-1]
     quote_word_id = tokenizer.encode("```", add_special_tokens=False)[-1]

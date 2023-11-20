@@ -1,5 +1,5 @@
-# MODEL_HOST = "huggingface"
-MODEL_HOST = "openai"
+MODEL_HOST = "huggingface"
+# MODEL_HOST = "openai"
 
 # Pick an OpenAI model:
 OPENAI_MODEL = "gpt-4"

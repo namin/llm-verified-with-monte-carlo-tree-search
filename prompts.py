@@ -194,7 +194,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     expansion_count,
     min_lines,
     max_depth,
-    check_fun,
+    check_func,
     supported_langs,
 ) = problem_fact
 

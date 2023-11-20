@@ -6,7 +6,7 @@ from montecarlo.montecarlo import MonteCarlo
 
 from lang import score_func, can_be_solution, find_largest_new_block
 
-from prompts import prompt, expansion_count, min_lines, check_fun
+from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
 n_iter = 10
@@ -49,7 +49,7 @@ def generate_complete(old_text, montecarlo, gens, current_completion_depth=1):
         gens.append(gen)
     reinforce(gens, score)
     node = Node(GenNode(text, gens))
-    if can_be_solution(text, min_lines, check_fun):
+    if can_be_solution(text, min_lines, check_func):
         montecarlo.solution = node
     return node
 

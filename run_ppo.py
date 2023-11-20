@@ -6,7 +6,7 @@ from montecarlo.montecarlo import MonteCarlo
 
 from lang import score_func, can_be_solution
 
-from prompts import prompt, expansion_count, min_lines, check_fun
+from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
 n_iter = 10
@@ -36,7 +36,7 @@ def generate_complete(text, montecarlo, gens, current_completion_depth=1):
             return None
         else:
             node = Node(GenNode(text, gens))
-            if can_be_solution(text, min_lines, check_fun):
+            if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = node
             return node
     else:
