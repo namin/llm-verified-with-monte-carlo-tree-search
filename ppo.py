@@ -1,12 +1,12 @@
 from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
-from model import base_model_name, ppo_model_path
-import hugginface_config
+from model_config import BASE_MODEL_NAME, PPO_MODEL_PATH
+import hugginface_generate
 
 config = PPOConfig(
-    model_name=base_model_name,
+    model_name=BASE_MODEL_NAME,
     learning_rate=1.41e-5,
-    log_with='wandb',
+    log_with="wandb",
     mini_batch_size=1,
     batch_size=1,
     gradient_accumulation_steps=1,
@@ -32,7 +32,7 @@ base_model.config.use_cache = False
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
 
-if ppo_model_path is None:
+if PPO_MODEL_PATH is None:
     model = AutoModelForCausalLMWithValueHead.from_pretrained(
         model, trust_remote_code=True, device_map="auto", peft_config=peft_config
     )
