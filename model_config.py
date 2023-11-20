@@ -10,13 +10,13 @@ BASE_MODEL_NAME = "Phind/Phind-CodeLlama-34B-v2"
 # BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-instruct"
 
 # Provide an optional checkpoint on top of the base model:
-PEFT_MODEL_NAME = None
+PEFT_MODEL_PATH = None
 
 # Or pick an entire PPO model -- overrides all the above:
 PPO_MODEL_PATH = "./my_ppo_model"
 
 # Set to None for run.py to instead use base model (and optional peft):
-PEFT_MODEL_PATH = None
+PPO_MODEL_PATH = None
 
 # Set to True to use custom stop words:
 CUSTOM_STOP = True
