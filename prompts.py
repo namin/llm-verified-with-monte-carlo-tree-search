@@ -59,7 +59,7 @@ case _ => 3
     None,
     22,
     40,
-    CHECK_PROOF,
+    (lambda v: check_proof(v) and "requires" not in v and "==>" not in v),
     ALL_LANGS,
 )
 
