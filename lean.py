@@ -86,14 +86,16 @@ def checkLean(lean_code_block):
         }
     if out:  # failed due to timeout
         error_message = getErrorMessage(out)
-    if error_message:
-        return {
-            "status": 1,
-            "num_line_first": error_message["pos"]["line"],
-            "error": error_message["data"]
-        }
+        if error_message:
+            return {
+                "status": 1,
+                "num_line_first": error_message["pos"]["line"],
+                "error": error_message["data"]
+            }
+        else:
+            return {"status": 0}
     else:
-        return {"status": 0}
+        return {"status": 1, "num_line_first": 0, "error": "Failed due to timeout after 20 seconds"}
 
 filter_code = filterLean
 check_code = checkLean
