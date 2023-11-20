@@ -8,6 +8,7 @@ if MODEL_HOST == "openai":
         return openai_generate.generate(prompt, num)
 
 elif MODEL_HOST == "huggingface":
+    import torch
     import hugginface_generate
 
     _, model, tokenizer = hugginface_generate.load_model()
