@@ -1,12 +1,12 @@
 from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
 from model import base_model_name, ppo_model_path
-import llm_config
+import hugginface_config
 
 config = PPOConfig(
     model_name=base_model_name,
     learning_rate=2e-5,
-    log_with='wandb',
+    log_with="wandb",
     mini_batch_size=1,
     batch_size=1,
     gradient_accumulation_steps=1,
@@ -21,23 +21,21 @@ config = PPOConfig(
 
 peft_config = LoraConfig(
     lora_alpha=16,
-    #lora_dropout=0.1,
+    # lora_dropout=0.1,
     r=16,
     bias="none",
     task_type="CAUSAL_LM",
 )
 
-base_model, model, tokenizer = llm_config.load_model()
+base_model, model, tokenizer = hugginface_config.load_model()
 base_model.config.use_cache = False
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
 
 if ppo_model_path is None:
     model = AutoModelForCausalLMWithValueHead.from_pretrained(
-        model,
-        trust_remote_code=True,
-        device_map="auto",
-        peft_config=peft_config)
+        model, trust_remote_code=True, device_map="auto", peft_config=peft_config
+    )
 
 ppo_trainer = PPOTrainer(
     model=model,
@@ -51,8 +49,9 @@ model_generation_args = {
     "top_p": 1.0,
     "do_sample": True,
     "pad_token_id": tokenizer.eos_token_id,
-    "max_new_tokens": 32
+    "max_new_tokens": 32,
 }
+
 
 def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
@@ -62,9 +61,11 @@ def generate(prompt):
     text = rs[0]
     return (text, (qs, ts))
 
+
 def trainer_step(query_tensors, response_tensors, rewards):
     stats = ppo_trainer.step(query_tensors, response_tensors, rewards)
     ppo_trainer.log_stats(stats, {}, rewards)
+
 
 def save(fn="my_ppo_model"):
     ppo_trainer.save_pretrained(fn)

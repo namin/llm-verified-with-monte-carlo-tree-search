@@ -10,6 +10,7 @@ from common import limit_depth, max_completion_depth
 
 montecarlo = MonteCarlo(Node(prompt))
 
+
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
@@ -21,6 +22,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
         return (text, score)
     else:
         return generate_complete(text, montecarlo, current_completion_depth + 1)
+
 
 def child_finder(node, montecarlo):
     if limit_depth(node):
@@ -44,9 +46,10 @@ def child_finder(node, montecarlo):
     node.add_child(child)
     child.update_policy_value(0.2)
 
+
 montecarlo.child_finder = child_finder
 
 montecarlo.simulate(expansion_count)
 
-print('CHOSEN SOLUTION')
+print("CHOSEN SOLUTION")
 print(montecarlo.solution)

@@ -5,7 +5,7 @@ This prototype synthesizes verified code with an LLM.
 Using Monte Carlo Tree Search (MCTS), it explores the space of possible generation of a verified program, and it checks at every step that it's on the right track by calling the verifier.
 
 This prototype uses Dafny, Coq, or Lean.
-To select the language, uncomment the corresponding line in [lang.py](lang.py).
+To select the language, uncomment the corresponding line in [lang_config.py](lang_config.py).
 
 Logs for example runs can be found in the [log](log) directory.
 Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
@@ -23,7 +23,7 @@ For example, the [log](https://github.com/namin/llm-verified-with-monte-carlo-tr
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
-If you don't have access to a GPU, you can still run the project using GPT-4, but you will need to use `llm.gpt4` instead of `llm.generate` in `run.py`, `run_user.py`, and `run_verifier_feedback.py`.
+If you don't have access to a GPU, you can run the project using an OpenAI model. Set `MODEL_HOST` to "openai" in [model_config.py](model_config.py).
 
 ### Setup
 
@@ -38,6 +38,7 @@ pip install -r requirements.txt
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
 
 (If you want to use Coq) Install Coq: [Install opam](https://opam.ocaml.org/doc/Install.html), then:
+
 ```
 opam init
 opam install coq
@@ -45,15 +46,19 @@ opam install "coq-serapi>=8.10.0+0.7.0"
 ```
 
 (If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then,
+
 ```
 git clone https://github.com/leanprover-community/repl.git
 ```
-and add `require mathlib from git "https://github.com/leanprover-community/mathlib4"` to the file `repl/lakefile.lean` and run 
+
+and add `require mathlib from git "https://github.com/leanprover-community/mathlib4"` to the file `repl/lakefile.lean` and run
+
 ```
 curl https://raw.githubusercontent.com/leanprover-community/mathlib4/master/lean-toolchain -o lean-toolchain
 lake update
 lake build
 ```
+
 in the `repl` directory.
 
 (If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
@@ -62,7 +67,7 @@ Note: For both Dafny and Coq, the executables `dafny` and `coqc` need to be in y
 
 ### Execution
 
-Pick a language in [lang.py](lang.py), an LLM in [model.py](model.py), and a prompt in [prompts.py](prompts.py), then:
+Pick a language in [lang_config.py](lang_config.py), an LLM in [model_config.py](model_config.py), and a prompt in [prompts.py](prompts.py), then:
 
 ```
 python run.py
