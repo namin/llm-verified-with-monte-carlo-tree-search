@@ -49,6 +49,23 @@ case _ => 3
 }""",
                 1000, None, 22, 40, check_proof, all_langs)
 
+problem_opt0_opt = (f"""### Spec: In {lang}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then define a predicate holding of optimized expressions. Then prove that the optimizer takes an arbitrary expression (on which the predicate may not hold -- DO NOT USE a requires clause) and returns an expression satisfying that predicate.
+{'''### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+''' if lang=='Dafny' else ''
+}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if lang=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+''' if lang=='Coq' else ''
+}""",
+                1000, None, 22, 40, (lambda v: check_proof(v) and "requires" not in v and "==>" not in v), all_langs)
+
 problem_max_dafny = ("""
 ```dafny
 function isMax(m: int, numbers: seq<int>): bool
@@ -135,7 +152,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 """, 1000, None, 5, 20, check_proof, ['Dafny'])
 
 # Set the right-hand side to the selected problem.
-(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_fact
+(prompt, max_new_tokens, expansion_count, min_lines, max_depth, check_fun, supported_langs) = problem_opt0
 
 def remove_hints(prompt):
     lines = prompt.split('\n')

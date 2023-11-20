@@ -1,8 +1,8 @@
 # Pick a language...
 
-#lang = 'Dafny'
+lang = 'Dafny'
 #lang = 'Coq'
-lang = 'Lean4'
+#lang = 'Lean4'
 
 all_langs = ['Dafny', 'Coq', 'Lean4']
 
