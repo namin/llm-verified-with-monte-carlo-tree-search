@@ -62,9 +62,9 @@ def score_func(sentence):
 
 
 def filterLean(msg):
-    m = re.findall('```([Ll]ean)?(.*?)```', msg, re.MULTILINE|re.DOTALL)
+    m = re.findall('```([Ll]ean4?)?(.*?)```', msg, re.MULTILINE|re.DOTALL)
     r = "\n".join([x[1] for x in m])
-    r = r.replace('\n#eval', '\n--#eval') # skip evaluations
+    # r = r.replace('\n#eval', '\n--#eval') # skip evaluations
     return r
 
 def getErrorMessage(out):
@@ -76,7 +76,7 @@ def getErrorMessage(out):
 
 def checkLean(lean_code_block):
     proofsearch = ProofSearch(path_to_repl="repl")
-    try:    
+    try:
         out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
     except pexpect.exceptions.EOF:
         return {
@@ -84,7 +84,8 @@ def checkLean(lean_code_block):
             "num_first_line": 0,
             "error": ""
         }
-    error_message = getErrorMessage(out)
+    if out:  # failed due to timeout
+        error_message = getErrorMessage(out)
     if error_message:
         return {
             "status": 1,
@@ -99,13 +100,17 @@ check_code = checkLean
 
 if __name__=="__main__":
     lean = f"""```lean
-open Nat (add_assoc add_comm)
+import Mathlib
 
-theorem hello_world (a b c : Nat)
-  : a + b + c = a + c + b := by
-  rw [add_assoc, add_comm b, ←add_assoc]
+def factorial : Nat → Nat
+| 0 => 1
+| n+1 => (n+1) * factorial n
 
-theorem foo (a : Nat) : a + 1 = Nat.succ a := by rfl
+theorem factorial_pos : ∀ n : Nat, 0 < factorial n
+| 0 => Nat.zero_lt_one
+| n+1 => Nat.mul_pos (Nat.succ_pos n) (factorial_pos n)
+
+#eval factorial 5
 ```
 """
     print(calculateScoreHelper(lean))
