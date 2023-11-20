@@ -16,7 +16,8 @@ else:
     CHECK_PROOF = lambda v: True
 
 if cheat_marker:
-    CHECK_PROOF = lambda v: CHECK_PROOF(v) and cheat_marker not in v
+    old_check_proof = CHECK_PROOF
+    CHECK_PROOF = lambda v: old_check_proof(v) and cheat_marker not in v
 
 
 problem_fact = (
