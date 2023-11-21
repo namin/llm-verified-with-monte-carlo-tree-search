@@ -9,10 +9,10 @@ if MODEL_HOST == "openai":
 
 elif MODEL_HOST == "huggingface":
     import torch
-    import hugginface_generate
+    import huggingface_generate
 
-    _, model, tokenizer = hugginface_generate.load_model()
-    model_generation_args = hugginface_generate.get_model_generation_args(tokenizer)  # todo: types
+    _, model, tokenizer = huggingface_generate.load_model()
+    model_generation_args = huggingface_generate.get_model_generation_args(tokenizer)  # todo: types
 
     def gen(prompt, model_generation_args, num=1) -> List[str]:
         num = num or 1

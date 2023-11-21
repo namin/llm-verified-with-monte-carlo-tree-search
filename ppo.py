@@ -1,7 +1,7 @@
 from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
 from model_config import BASE_MODEL_NAME, PPO_MODEL_PATH
-import hugginface_generate
+import huggingface_generate
 
 config = PPOConfig(
     model_name=BASE_MODEL_NAME,
@@ -27,7 +27,7 @@ peft_config = LoraConfig(
     task_type="CAUSAL_LM",
 )
 
-base_model, model, tokenizer = hugginface_config.load_model()
+base_model, model, tokenizer = huggingface_generate.load_model()
 base_model.config.use_cache = False
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
