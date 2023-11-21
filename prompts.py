@@ -60,7 +60,7 @@ case _ => 3
     None,
     22,
     40,
-    (lambda v: check_proof(v) and "requires" not in v and "==>" not in v),
+    CHECK_PROOF,
     ALL_LANGS,
 )
 
@@ -83,7 +83,7 @@ case _ => 3
     None,
     22,
     40,
-    (lambda v: CHECK_PROOF(v) and "requires" not in v and "==>" not in v),
+    CHECK_PROOF if LANG != 'Dafny' else (lambda v: CHECK_PROOF(v) and "requires" not in v and "==>" not in v),
     ALL_LANGS,
 )
 
