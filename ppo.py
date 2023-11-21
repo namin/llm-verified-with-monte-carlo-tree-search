@@ -50,7 +50,7 @@ model_generation_args["top_k"] = 0.0
 model_generation_args["top_p"] = 1.0
 
 
-def generate(prompt: str) -> (str, (List[str], List[str]):
+def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
     qs = [model_input["input_ids"].squeeze(0)]
     ts = ppo_trainer.generate(qs, batch_size=1, **model_generation_args)
