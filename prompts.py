@@ -122,6 +122,21 @@ function isMax(m: int, numbers: seq<int>): bool
 
 }
 
+// Calculate the max of a sequence of numbers.
+method max(numbers: seq<int>) returns (result: int)
+requires numbers != []
+ensures isMax(result, numbers)
+{
+    result := numbers[0];
+    for i := 1 to |numbers|
+    invariant isMax(result, numbers[0..i])
+    {
+        if numbers[i] > result {
+            result := numbers[i];
+        }
+    }
+}
+
 // From a given list of integers,
 // generate a list of rolling maximum element found
 // until given moment in the sequence.
