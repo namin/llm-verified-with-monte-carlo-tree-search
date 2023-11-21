@@ -1,16 +1,20 @@
 import re
 from pySagredo.proofsearch import ProofSearch
 import pexpect
+from typing import Optional
 
-def can_be_solution(msg, min_lines, check_fun=None):
+# todo: variable names and types
+
+
+def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     v = filterLean(msg)
-    r = v.count('\n') >= min_lines
-    if r and check_fun:
-        r = check_fun(v)
+    r = v.count("\n") >= min_lines
+    if r and check_func:
+        r = check_func(v)
     return r
 
 
-def verifier_feedback(ok, not_ok):
+def verifier_feedback(ok: bool, not_ok: bool) -> bool:
     msg = "Consider previous issue"
     if msg in ok:
         return None
@@ -18,17 +22,18 @@ def verifier_feedback(ok, not_ok):
     if err:
         err = err.strip()
         hint = f"\n/- {msg}: {err} -/\n"
-        text = ok+hint
+        text = ok + hint
         return text
     return None
 
 
-def calculateScore(msg):
+def calculateScore(msg: str) -> Optional[float]:
     score, _ = calculateScoreHelper(msg)
     return score
 
-def calculateScoreHelper(msg):
-    v = filterLean(msg+"```").strip()
+
+def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
+    v = filterLean(msg + "```").strip()
     if v == "":
         return None, None
     # hack around the tokenizer not tokenizing '\n\n' as one id
@@ -36,71 +41,74 @@ def calculateScoreHelper(msg):
     #     if msg.count('```') % 2 == 1:
     #         return None, None
     r = checkLean(v)
-    if r['status'] == 0:
+    if r["status"] == 0:
         return 1.0, None
-    critical_error =  -1.0, r["error"]
+    critical_error = -1.0, r["error"]
     tmp_error = None, None
     if "unknown constant" in r["error"]:
         return critical_error
     elif "tactic 'rewrite' failed" in r["error"]:
         return critical_error
     if filterLean(msg).strip() != v:
-        if r["num_line_first"] >= v.count('\n'):
+        if r["num_line_first"] >= v.count("\n"):
             return tmp_error
         if "missing cases" in r["error"]:
             return tmp_error
     return critical_error
 
 
-def score_func(sentence):
-    print('TEXT')
+def score_func(sentence: str) -> Optional[float]:
+    print("TEXT")
     print(sentence)
     score = calculateScore(sentence)
-    print('SCORE')
+    print("SCORE")
     print(score)
     return score
 
 
-def filterLean(msg):
-    m = re.findall('```([Ll]ean4?)?(.*?)```', msg, re.MULTILINE|re.DOTALL)
+def filterLean(msg: str) -> str:
+    m = re.findall("```([Ll]ean4?)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
     r = "\n".join([x[1] for x in m])
     # r = r.replace('\n#eval', '\n--#eval') # skip evaluations
     return r
 
-def getErrorMessage(out):
+
+def getErrorMessage(out: str):
     if "messages" in out:
         for m in out["messages"]:
             if m["severity"] == "error":
                 return m
     return None
 
-def checkLean(lean_code_block):
+
+def checkLean(lean_code_block: str) -> dict:
     proofsearch = ProofSearch(path_to_repl="repl")
     try:
         out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
     except pexpect.exceptions.EOF:
-        return {
-            "status": 1,
-            "num_first_line": 0,
-            "error": ""
-        }
+        return {"status": 1, "num_first_line": 0, "error": ""}
     if out:  # failed due to timeout
         error_message = getErrorMessage(out)
         if error_message:
             return {
                 "status": 1,
                 "num_line_first": error_message["pos"]["line"],
-                "error": error_message["data"]
+                "error": error_message["data"],
             }
         else:
             return {"status": 0}
     else:
-        return {"status": 1, "num_line_first": 0, "error": "Failed due to timeout after 20 seconds"}
+        return {
+            "status": 1,
+            "num_line_first": 0,
+            "error": "Failed due to timeout after 20 seconds",
+        }
+
 
 filter_code = filterLean
 check_code = checkLean
 
-if __name__=="__main__":
+if __name__ == "__main__":
     lean = f"""```lean
 import Mathlib
 

@@ -1,12 +1,12 @@
 from peft import LoraConfig
 from trl import AutoModelForCausalLMWithValueHead, PPOConfig, PPOTrainer
-from model import base_model_name, ppo_model_path
-import llm_config
+from model_config import BASE_MODEL_NAME, PPO_MODEL_PATH
+import hugginface_generate
 
 config = PPOConfig(
-    model_name=base_model_name,
+    model_name=BASE_MODEL_NAME,
     learning_rate=1.41e-5,
-    log_with='wandb',
+    log_with="wandb",
     mini_batch_size=1,
     batch_size=1,
     gradient_accumulation_steps=1,
@@ -21,23 +21,21 @@ config = PPOConfig(
 
 peft_config = LoraConfig(
     lora_alpha=16,
-    #lora_dropout=0.1,
+    # lora_dropout=0.1,
     r=16,
     bias="none",
     task_type="CAUSAL_LM",
 )
 
-base_model, model, tokenizer = llm_config.load_model()
+base_model, model, tokenizer = hugginface_config.load_model()
 base_model.config.use_cache = False
 # More info: https://github.com/huggingface/transformers/pull/24906
 base_model.config.pretraining_tp = 1
 
-if ppo_model_path is None:
+if PPO_MODEL_PATH is None:
     model = AutoModelForCausalLMWithValueHead.from_pretrained(
-        model,
-        trust_remote_code=True,
-        device_map="auto",
-        peft_config=peft_config)
+        model, trust_remote_code=True, device_map="auto", peft_config=peft_config
+    )
 
 ppo_trainer = PPOTrainer(
     model=model,
@@ -45,10 +43,12 @@ ppo_trainer = PPOTrainer(
     tokenizer=tokenizer,
 )
 
-model_generation_args = llm_config.get_model_generation_args(tokenizer)
+
+model_generation_args = huggingface_generate.get_model_generation_args(tokenizer)
 model_generation_args["min_length"] = -1
 model_generation_args["top_k"] = 0.0
 model_generation_args["top_p"] = 1.0
+
 
 def generate(prompt):
     model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
@@ -58,9 +58,11 @@ def generate(prompt):
     text = rs[0]
     return (text, (qs, ts))
 
+
 def trainer_step(query_tensors, response_tensors, rewards):
     stats = ppo_trainer.step(query_tensors, response_tensors, rewards)
     ppo_trainer.log_stats(stats, {}, rewards)
+
 
 def save(fn="my_ppo_model"):
     ppo_trainer.save_pretrained(fn)
