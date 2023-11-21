@@ -64,6 +64,28 @@ case _ => 3
     ALL_LANGS,
 )
 
+problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then define a predicate holding of optimized expressions. Then prove that the optimizer takes an arbitrary expression (on which the predicate may not hold -- DO NOT USE a requires clause) and returns an expression satisfying that predicate.
+{'''### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+''' if LANG=='Dafny' else ''
+}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+''' if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    (lambda v: CHECK_PROOF(v) and "requires" not in v and "==>" not in v),
+    ALL_LANGS,
+)
 
 problem_max_dafny = (
     """
