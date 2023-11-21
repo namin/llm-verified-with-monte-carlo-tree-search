@@ -137,6 +137,19 @@ ensures isMax(result, numbers)
     }
 }
 
+method check_rolling_even(numbers: seq<int>) returns (result: seq<bool>)
+ensures |result| == |numbers|
+ensures forall i :: 0 < i < |result| ==> result[i] == (numbers[i] % 2 == 0)
+{
+    result := [];
+    for i := 0 to |numbers|
+    invariant |result| == i
+    invariant forall j :: 0 <= j < i ==> result[j] == (numbers[j] % 2 == 0)
+    {
+        result := result + [numbers[i] % 2 == 0];
+    }
+}
+
 // From a given list of integers,
 // generate a list of rolling maximum element found
 // until given moment in the sequence.
