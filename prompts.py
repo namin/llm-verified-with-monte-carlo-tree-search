@@ -209,11 +209,11 @@ def remove_hints(prompt):
 
 
 if LANG != "Lean4":
-    prompt += f"""
+    prompt = f"""
 Put your {LANG} code in triple quotes:
 ```{LANG.lower()}
 ```
-"""
+""" + prompt
 
 elif LANG == "Lean4":
     prompt += """

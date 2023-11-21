@@ -2,8 +2,8 @@ ALL_LANGS = ["Dafny", "Coq", "Lean4"]
 
 # Pick a language:
 # LANG = "Dafny"
-# LANG = 'Coq'
-LANG = "Lean4"
+LANG = 'Coq'
+# LANG = "Lean4"
 
 # Set features for the language:
 if LANG == "Dafny":
