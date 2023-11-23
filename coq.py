@@ -35,7 +35,8 @@ def verifier_feedback(ok: bool, not_ok: bool) -> Optional[str]:
         err = log[log.index(":")+1 :].strip()
         left = leftAfterError(v, log)
         rest = not_ok[len(ok) : -len(left)].strip()
-        text += f"(* DO NOT DO {rest}\nbecause of\n{err} *)"
+        if rest:
+            text += f"(* DO NOT DO {rest}\nbecause of\n{err} *)"
         return text
     return None
 
