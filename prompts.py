@@ -211,6 +211,48 @@ at that point function should return true. Otherwise it should return false.
 )
 
 
+problem_intersperse_invariants_dafny = (
+    """
+Here is the method interperse without verification.
+method intersperse_without_verification(numbers: seq<int>, delimiter: int) returns (interspersed: seq<int>)
+// TODO: missing ensures here
+{
+    interspersed := [];
+    for i := 0 to |numbers|
+    // TODO: missing invariants here
+    {
+        if i > 0 {
+            interspersed := interspersed + [delimiter];
+        }
+        interspersed := interspersed + [numbers[i]];
+    }
+}
+
+Now, here is the same method with `ensures` clauses.
+Make sure the body verifies by defining `invariant` clauses.
+```Dafny
+method intersperse(numbers: seq<int>, delimiter: int) returns (interspersed: seq<int>)
+/*
+Insert a number 'delimeter' between every two consecutive elements of input list `numbers'
+- assert intersperse([], 4) == []
+- assert intersperse([1, 2, 3], 4) == [1, 4, 2, 4, 3]
+*/
+    ensures |interspersed| == if |numbers| > 0 then 2 * |numbers| - 1 else 0
+    ensures forall i :: 0 <= i < |interspersed| ==> i % 2 == 0 ==>
+                interspersed[i] == numbers[i / 2]
+    ensures forall i :: 0 <= i < |interspersed| ==> i % 2 == 1 ==>
+                interspersed[i] == delimiter
+{
+""",
+    1000,
+    None,
+    5,
+    20,
+    CHECK_PROOF,
+    ["Dafny"],
+)
+
+
 # HumanEvalX, Problem 3
 problem_intersperse_dafny = (
     """
