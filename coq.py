@@ -32,10 +32,10 @@ def verifier_feedback(ok: bool, not_ok: bool) -> Optional[str]:
         v = filterCoq(not_ok + "```")
         r = checkCoq(v)
         log = r["log"]
-        err = log[log.index(":") :]
+        err = log[log.index(":")+1 :].strip()
         left = leftAfterError(v, log)
-        rest = not_ok[len(ok) : -len(left)]
-        text += f"(* DO NOT DO \n{rest}\nbecause of\n{err} *)"
+        rest = not_ok[len(ok) : -len(left)].strip()
+        text += f"(* DO NOT DO {rest}\nbecause of\n{err} *)"
         return text
     return None
 
@@ -69,17 +69,22 @@ def calculateScore(msg: str) -> Optional[float]:
         return 1.0
     log = r["log"]
     print(log)
+    if filterCoq(msg) == v:
+        return -1.0
     if "There are pending proofs" in log:
         return 1.0
     if "Syntax Error: Lexer: Unterminated comment" in log:
         return 1.0
-    if filterCoq(msg) == v:
-        return -1.0
+    if "Syntax error" in log:
+        return 1.0
     left = leftAfterError(v, log)
-    if "." in left or "\n" in left:
-        return -1.0
+    if "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
+        if "." in left:
+            return -1.0
+        else:
+            return None
     else:
-        return None
+        return -1.0
 
 
 def score_func(sentence: str) -> Optional[float]:

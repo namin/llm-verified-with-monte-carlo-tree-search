@@ -51,9 +51,9 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
-### Hint: For the inductive case of the proof, `eauto using PeanoNat.Nat.add_0_r` might be useful (`Require Arith` in the imports).
-### Hint: You can also rewrite backwards: `rewrite <- H`.
+### Hint: For the proof, do `induction e.`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
 ''' if LANG=='Coq' else ''
 }""",
     1000,
