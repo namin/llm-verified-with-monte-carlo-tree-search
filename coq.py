@@ -78,8 +78,8 @@ def calculateScore(msg: str) -> Optional[float]:
         return 1.0
     # if "Syntax error: [ltac_use_default] expected after [tactic] (in [tactic_command])." in log:
     #     return -1.0
-    # if "Syntax error" in log:
-    #     return 1.0
+    if "Syntax error" in log and "'end'" in log:
+        return 1.0
     left = leftAfterError(v, log)
     if "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
         if "." in left:
