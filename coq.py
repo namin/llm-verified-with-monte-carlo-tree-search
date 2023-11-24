@@ -36,7 +36,7 @@ def verifier_feedback(ok: bool, not_ok: bool) -> Optional[str]:
         left = leftAfterError(v, log)
         rest = not_ok[len(ok) : -len(left)].strip()
         if rest:
-            text += f"(* DO NOT DO {rest}\nbecause of\n{err} *)"
+            text += f"(* The following does NOT work:\n{rest}\nbecause of:\n{err} *)"
         return text
     return None
 
@@ -76,8 +76,10 @@ def calculateScore(msg: str) -> Optional[float]:
         return 1.0
     if "Syntax Error: Lexer: Unterminated comment" in log:
         return 1.0
-    if "Syntax error" in log:
-        return 1.0
+    # if "Syntax error: [ltac_use_default] expected after [tactic] (in [tactic_command])." in log:
+    #     return -1.0
+    # if "Syntax error" in log:
+    #     return 1.0
     left = leftAfterError(v, log)
     if "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
         if "." in left:

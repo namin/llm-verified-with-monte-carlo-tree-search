@@ -16,9 +16,9 @@ else:
     CHECK_PROOF = lambda v: True
 
 if cheat_marker:
-    old_check_proof = CHECK_PROOF
-    CHECK_PROOF = lambda v: old_check_proof(v) and cheat_marker not in v
-
+    CHECK_CHEAT = lambda v: cheat_marker in v
+else:
+    CHECK_CHEAT = lambda v: False
 
 problem_fact = (
     f"""### Spec: In {LANG}, write a factorial function and prove that the factorial is always strictly positive.
@@ -33,10 +33,16 @@ problem_fact = (
     None,
     5,
     15,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
 )
 
+
+problem_opt0_coq_proof_hints = '''
+### Hint: For the proof, do `induction e.`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+'''
 
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
@@ -51,16 +57,15 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: For the proof, do `induction e.`.
-### Hint: The simple cases are by `simpl. reflexivity.`.
-### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
 ''' if LANG=='Coq' else ''
 }""",
     1000,
     None,
     22,
     40,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
 )
 
@@ -83,7 +88,7 @@ case _ => 3
     None,
     22,
     40,
-    CHECK_PROOF if LANG != 'Dafny' else (lambda v: CHECK_PROOF(v) and "requires" not in v and "==>" not in v),
+    CHECK_PROOF, CHECK_CHEAT if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ALL_LANGS,
 )
 
@@ -106,7 +111,7 @@ ensures isMax(result, numbers)
     None,
     5,
     20,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
 )
 
@@ -162,7 +167,7 @@ ensures forall i :: 0 < i < |result| ==> isMax(result[i], numbers[0..(i+1)])
     None,
     5,
     20,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
 )
 
@@ -206,7 +211,7 @@ at that point function should return true. Otherwise it should return false.
     None,
     5,
     20,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
 )
 
@@ -248,7 +253,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     None,
     5,
     20,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
 )
 
@@ -274,7 +279,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     None,
     5,
     20,
-    CHECK_PROOF,
+    CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
 )
 
@@ -287,6 +292,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     min_lines,
     max_depth,
     check_func,
+    check_cheat_func,
     supported_langs,
 ) = problem_fact
 
