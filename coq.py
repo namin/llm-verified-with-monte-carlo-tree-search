@@ -137,6 +137,13 @@ def checkCoq(v: str, giveDetails: bool = False) -> dict:
         "context": context,
     }
 
+def give_context(v):
+    details = None
+    r = annotate([v])
+    gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
+    if gs != []:
+        details = pretty_goals(gs[-1].goals)
+    return details
 
 def pretty_goals(goals):
     return "\n".join([pretty_goal(goal) for goal in goals])

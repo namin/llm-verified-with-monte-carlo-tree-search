@@ -57,6 +57,7 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: For the proof, do `induction e.`. Do NOT do `induction e as ...`.
 ### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
 ### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
 ''' if LANG=='Coq' else ''
@@ -307,11 +308,9 @@ def remove_hints(prompt):
 
 
 if LANG != "Lean4":
-    prompt = f"""
-Put your {LANG} code in triple quotes:
+    prompt = prompt + f"""
 ```{LANG.lower()}
-```
-""" + prompt
+"""
 
 elif LANG == "Lean4":
     prompt += """
