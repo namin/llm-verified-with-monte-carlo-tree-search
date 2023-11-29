@@ -93,6 +93,19 @@ case _ => 3
     ALL_LANGS,
 )
 
+problem_mult = (
+    f"""### Spec: In {LANG}, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+{'''### Hint: Define the lemma only once and prove it right there, don't leave a TODO, don't explain the proof beforehand, just prove it.
+''' if LANG=='Dafny' else ''
+}""",
+    1000,
+    None,
+    8,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+)
+
 problem_max_dafny = (
     """
 ```dafny

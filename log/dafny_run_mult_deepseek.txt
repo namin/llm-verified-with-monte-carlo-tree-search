@@ -1,0 +1,910 @@
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/trl/trainer/ppo_config.py:141: UserWarning: The `optimize_cuda_cache` arguement will be deprecated soon, please use `optimize_device_cache` instead.
+  warnings.warn(
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py:472: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Downloading shards:   0%|          | 0/7 [00:00<?, ?it/s]Downloading shards:  29%|██▊       | 2/7 [00:00<00:00, 15.29it/s]Downloading shards:  57%|█████▋    | 4/7 [00:00<00:00, 15.51it/s]Downloading shards: 100%|██████████| 7/7 [00:00<00:00, 19.42it/s]Downloading shards: 100%|██████████| 7/7 [00:00<00:00, 18.32it/s]
+Loading checkpoint shards:   0%|          | 0/7 [00:00<?, ?it/s]Loading checkpoint shards:  14%|█▍        | 1/7 [00:05<00:35,  5.85s/it]Loading checkpoint shards:  29%|██▊       | 2/7 [00:09<00:24,  4.83s/it]Loading checkpoint shards:  43%|████▎     | 3/7 [00:14<00:18,  4.53s/it]Loading checkpoint shards:  57%|█████▋    | 4/7 [00:18<00:13,  4.55s/it]Loading checkpoint shards:  71%|███████▏  | 5/7 [00:22<00:08,  4.32s/it]Loading checkpoint shards:  86%|████████▌ | 6/7 [00:26<00:04,  4.18s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:30<00:00,  4.11s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:30<00:00,  4.36s/it]
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Downloading tokenizer_config.json:   0%|          | 0.00/1.73k [00:00<?, ?B/s]Downloading tokenizer_config.json: 100%|██████████| 1.73k/1.73k [00:00<00:00, 10.6MB/s]
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+
+  |
+4 | {
+  |  ^
+
+ex.dfy(4,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+
+  |
+5 |   // TODO
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+function MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | function MultiplyCancellation(a: nat, b: nat, n: nat)
+  |                                                      ^
+
+ex.dfy(9,53): Error: colon expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+function MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+   |
+10 |   requires n != 0
+   |   ^
+
+ex.dfy(10,2): Error: colon expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+function MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+   |
+10 |   requires n != 0
+   |   ^
+
+ex.dfy(10,2): Error: colon expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+function MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+
+   |
+10 |   requires n != 0
+   |   ^
+
+ex.dfy(10,2): Error: colon expected
+   |
+12 | {
+   |  ^
+
+ex.dfy(12,1): Error: invalid UnaryExpression
+2 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```dafny
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it immediately.
+
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  requires n != 0
+  ensures a == b <==> n*a == n*b
+{
+  // TODO
+}
+```
+
+### Solution
+```dafny
+lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+
+  |
+9 | lemma MultiplyCancellation(a: nat, b: nat, n: nat)
+  |       ^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,6): Error: Duplicate member name: MultiplyCancellation
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/trl/trainer/ppo_config.py:141: UserWarning: The `optimize_cuda_cache` arguement will be deprecated soon, please use `optimize_device_cache` instead.
+  warnings.warn(
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py:472: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/7 [00:00<?, ?it/s]Loading checkpoint shards:  14%|█▍        | 1/7 [00:03<00:23,  3.98s/it]Loading checkpoint shards:  29%|██▊       | 2/7 [00:08<00:20,  4.04s/it]Loading checkpoint shards:  43%|████▎     | 3/7 [00:12<00:16,  4.08s/it]Loading checkpoint shards:  57%|█████▋    | 4/7 [00:16<00:11,  3.99s/it]Loading checkpoint shards:  71%|███████▏  | 5/7 [00:19<00:07,  3.95s/it]Loading checkpoint shards:  86%|████████▌ | 6/7 [00:23<00:03,  3.93s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:26<00:00,  3.60s/it]Loading checkpoint shards: 100%|██████████| 7/7 [00:26<00:00,  3.82s/it]
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+
+  |
+4 | {
+  |  ^
+
+ex.dfy(4,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+
+  |
+5 |     if a == b {
+  |                ^
+
+ex.dfy(5,15): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+
+  |
+6 |         assert n*a == n*b;
+  |                           ^
+
+ex.dfy(6,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+
+  |
+7 |     } else {
+  |             ^
+
+ex.dfy(7,12): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+        assert n*a != n*b;
+
+  |
+8 |         assert n*a != n*b;
+  |                           ^
+
+ex.dfy(8,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+        assert n*a != n*b;
+    }
+
+  |
+9 |     }
+  |      ^
+
+ex.dfy(9,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+        assert n*a != n*b;
+    }
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+        assert n*a != n*b;
+    }
+}
+```
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+### Hint: Define the lemma only once and prove it right there, don't leave a TODO.
+
+```dafny
+lemma MultDistinct(a: nat, b: nat, n: nat)
+    requires n != 0
+    ensures a == b <==> n*a == n*b
+{
+    if a == b {
+        assert n*a == n*b;
+    } else {
+        assert n*a != n*b;
+    }
+}
+```
