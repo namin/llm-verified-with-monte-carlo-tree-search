@@ -52,4 +52,5 @@
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
+  - [ ] Coq should also be easier in some way -- should be able to provide guided search by providing the context.
  
