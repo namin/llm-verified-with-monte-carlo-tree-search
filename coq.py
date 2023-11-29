@@ -14,6 +14,9 @@ def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
         r = check_func(v)
     return r
 
+def give_context(v: str) -> str:
+    r = checkCoq(v, giveDetails=True)
+    return r["details"] or ""
 
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     try:

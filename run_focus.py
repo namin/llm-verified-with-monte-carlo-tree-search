@@ -2,7 +2,9 @@ from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
 from lang_config import LANG
+assert LANG=='Coq'
 from lang import score_func, can_be_solution, filter_code
+from coq import give_context
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
@@ -16,7 +18,9 @@ class FocusNode:
         self.code = code
 
     def update(self, text):
-        return FocusNode(self.instructions, self.context, filter_code(text+"```").lstrip())
+        v = filter_code(text+"```").lstrip()
+        context = give_context(v)
+        return FocusNode(self.instructions, context, v)
     
     def text(self):
         return f"""
