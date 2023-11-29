@@ -46,8 +46,13 @@ def checkDetails(msg: str) -> dict:
     r = checkCoq(v, giveDetails=True)
     return r
 
-
 def leftAfterError(v: str, log: str) -> str:
+    try:
+        return leftAfterErrorHelper(v, log)
+    except ValueError:
+        return ''
+
+def leftAfterErrorHelper(v: str, log: str) -> str:
     start_line = log[log.index("line ") + len("line ") :]
     num_line = int(start_line[0 : start_line.index(",")])
     end_char = start_line[0 : start_line.index(":")]
