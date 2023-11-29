@@ -14,7 +14,7 @@ def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     return r
 
 
-def verifier_feedback(ok: bool, not_ok: bool) -> bool:
+def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     msg = "Consider previous issue"
     if msg in ok:
         return None

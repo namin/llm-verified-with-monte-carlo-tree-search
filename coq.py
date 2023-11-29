@@ -17,7 +17,7 @@ def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     return r
 
 
-def verifier_feedback(ok: bool, not_ok: bool) -> Optional[str]:
+def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     try:
         not_ok_first = not_ok[0 : not_ok.index(".", len(ok))]
     except ValueError:
