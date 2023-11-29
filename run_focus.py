@@ -31,7 +31,7 @@ class FocusNode:
 {self.code}"""
 
 prompt_code_index = prompt.index("```")
-prompt_instructions = prompt[0:prompt_code_index]
+prompt_instructions = prompt[0:prompt_code_index].strip()
 prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
 montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code)))
 
