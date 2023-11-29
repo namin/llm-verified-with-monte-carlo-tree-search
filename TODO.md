@@ -52,4 +52,13 @@
 - [ ] Why Coq is much harder than Dafny:
   - [ ] Dafny has more automation.
   - [ ] Coq can have idempotent tactics (like `simpl`) which can be repeated uselessly indefinitely.
+  - [ ] Coq should also be easier in some way -- should be able to provide guided search by providing the context.
+- [ ] Better control the search:
+  - [ ] guided search -- provide the context, don't let the LLM guess
+  - [ ] learn from failures
+  - [ ] systematic search (backtracking with info on what has been tried)
+  - [ ] top-down control
+  - [ ] lemma generation
+  - [ ] tactic mode
+  - [ ] focus on one subgoal at a time  
  
