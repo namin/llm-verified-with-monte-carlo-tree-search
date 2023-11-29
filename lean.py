@@ -3,8 +3,6 @@ from pySagredo.proofsearch import ProofSearch
 import pexpect
 from typing import Optional
 
-# todo: variable names and types
-
 
 def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     v = filterLean(msg)

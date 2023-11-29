@@ -6,8 +6,6 @@ from alectryon.serapi import annotate
 import re
 from typing import Optional
 
-# todo: variable names and types
-
 
 def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     v = filterCoq(msg)
