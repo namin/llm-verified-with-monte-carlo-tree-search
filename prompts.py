@@ -298,14 +298,13 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 ) = problem_fact
 
 assert LANG in supported_langs
-# prompt = remove_hints(prompt)
-
 
 def remove_hints(prompt):
     lines = prompt.split("\n")
     lines = [line for line in lines if not line.startswith("### Hint: ")]
     return "\n".join(lines)
 
+#prompt = remove_hints(prompt)
 
 if LANG != "Lean4":
     prompt = prompt + f"""
@@ -314,8 +313,6 @@ if LANG != "Lean4":
 
 elif LANG == "Lean4":
     prompt += """
-Import mathlib4 whenever necessary:
 ```lean4
 import Mathlib
-```
 """
