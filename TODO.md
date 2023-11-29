@@ -15,6 +15,7 @@
   - [x] Dafny
   - [x] Coq
     - [ ] The current system struggles with Coq proofs.
+    - [ ] Be more discriminate about which Syntax Errors score well still.
   - [x] Lean
     - [ ] Maybe support custom stopping criteria for '\n\n'?
     - [ ] Learn about Tactic mode and support more fine-grained feedback?
