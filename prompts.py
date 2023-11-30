@@ -44,6 +44,12 @@ problem_opt0_coq_proof_hints = '''
 ### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
 '''
 
+problem_opt0_coq_proof_hints_basic = '''
+### Hint: For the proof, do `induction e.`. Do NOT do `induction e as ...`.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
+'''
+
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returns the number resulting from evaluation. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
@@ -57,9 +63,8 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: For the proof, do `induction e.`. Do NOT do `induction e as ...`.
-### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
-### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
+### Hint: For the recursive case, rewrite <- using the induction hypotheses before destructuring.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
 ''' if LANG=='Coq' else ''
 }""",
     1000,

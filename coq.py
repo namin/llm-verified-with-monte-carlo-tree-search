@@ -156,14 +156,14 @@ def pretty_goals(goals):
 
 
 def pretty_goal(goal):
-    assumptions = ", ".join([pretty_hypothesis(h) for h in goal.hypotheses])
+    assumptions = "\n".join([pretty_hypothesis(h) for h in goal.hypotheses])
     if assumptions == "":
-        assumptions = "no assumptions"
-    return f"Need to show {goal.conclusion} given {assumptions}."
+        assumptions = "(none)"
+    return f"Need to show\n{goal.conclusion}\n\ngiven assumptions\n\n{assumptions}."
 
 
 def pretty_hypothesis(h):
-    return f"{','.join(h.names)}:{h.type}"
+    return f"{', '.join(h.names)} : {h.type}"
 
 
 filter_code = filterCoq
