@@ -63,7 +63,7 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: For the recursive case, rewrite <- using the induction hypotheses before destructuring.
+### Hint: For the recursive case, rewrite <- using the induction hypotheses before destructuring on the optimized expressions.
 ### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
 ''' if LANG=='Coq' else ''
 }""",
