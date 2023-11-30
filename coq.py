@@ -159,7 +159,7 @@ def pretty_goal(goal):
     assumptions = "\n".join([pretty_hypothesis(h) for h in goal.hypotheses])
     if assumptions == "":
         assumptions = "(none)"
-    return f"Need to show\n{goal.conclusion}\n\ngiven assumptions\n\n{assumptions}."
+    return f"### Need to show\n\n{goal.conclusion}\n\n### given assumptions\n\n{assumptions}."
 
 
 def pretty_hypothesis(h):
