@@ -24,9 +24,9 @@ def short_verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     except ValueError:
         return None
     r = checkDetails(not_ok_first)
-    details = r["details"]
-    if not details:
-        return None
+    #details = r["details"]
+    #if not details:
+    #    return None
     v = filterCoq(not_ok + "```")
     r = checkCoq(v)
     log = r["log"]
@@ -34,7 +34,7 @@ def short_verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     left = leftAfterError(v, log)
     rest = not_ok[len(ok.strip()) : len(not_ok)-len(left)].strip()
     if rest:
-        return f"DO NOT:\n{rest}\nbecause of:\n{err}"
+        return (rest, err)
     return None
 
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
