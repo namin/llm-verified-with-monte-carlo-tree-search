@@ -61,5 +61,7 @@
   - [ ] top-down control
   - [ ] lemma generation
   - [ ] tactic mode
-  - [ ] focus on one subgoal at a time  
+  - [ ] focus on one subgoal at a time
+- [ ] Llama-derivatives don't listen to the context very well. :(
+  - [ ] Find ways, maybe oblique, to instruct.
  
