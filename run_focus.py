@@ -11,6 +11,8 @@ from common import limit_depth, max_completion_depth
 
 import llm
 
+SHOW_MISTAKES = False
+
 mistakes = []
 
 class FocusNode:
@@ -28,7 +30,7 @@ class FocusNode:
         return FocusNode(self.instructions, context, v, outlog, self.hint)
 
     def prev_mistakes(self):
-        if mistakes:
+        if SHOW_MISTAKES and mistakes:
             mistakes_text = "\n\n".join([f"Do NOT reproduce this snippet:\n{snippet}\nIt is wrong:\n{err}" for snippet,err in mistakes])
             return f"""## Previous Mistakes (NOT TO DO AGAIN)
 
