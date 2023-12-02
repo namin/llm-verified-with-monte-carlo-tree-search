@@ -80,14 +80,10 @@ def calculateScore(msg: str) -> Optional[float]:
         return -1.0
     if "There are pending proofs" in log:
         return 1.0
-    if "Syntax Error: Lexer: Unterminated comment" in log:
-        return 1.0
     if "Syntax error: [ltac_use_default] expected after [tactic] (in [tactic_command])." in log:
         return -1.0
-    if "Syntax error" in log and "expected" in log:
-        return 1.0
-    left = leftAfterError(v, log)
-    if "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
+    if "Syntax" in log or "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
+        left = leftAfterError(v, log)
         if "." in left:
             return -1.0
         else:
