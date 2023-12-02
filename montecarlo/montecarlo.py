@@ -8,8 +8,6 @@ class MonteCarlo:
         self.child_finder = None
         self.node_evaluator = lambda child, montecarlo: None
 
-        self.global_features = None
-
     def make_choice(self):
         best_children = []
         most_visits = float("-inf")

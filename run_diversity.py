@@ -10,7 +10,7 @@ from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
 montecarlo = MonteCarlo(Node(prompt))
-
+montecarlo.global_features = None
 
 def add_features(features, montecarlo):
     assert len(features.shape) == 1
