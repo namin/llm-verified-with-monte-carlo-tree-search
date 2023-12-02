@@ -14,9 +14,9 @@ def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
         r = check_func(v)
     return r
 
-def give_context(v: str) -> str:
+def give_context(v: str) -> (str, str):
     r = checkCoq(v, giveDetails=True)
-    return r["details"] or ""
+    return ((r["details"] or ""), r["out"])
 
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     try:
@@ -143,13 +143,13 @@ def checkCoq(v: str, giveDetails: bool = False) -> dict:
         "context": context,
     }
 
-def give_context(v):
-    details = None
-    r = annotate([v])
-    gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
-    if gs != []:
-        details = pretty_goals(gs[-1].goals)
-    return details
+# def give_context(v):
+#     details = None
+#     r = annotate([v])
+#     gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
+#     if gs != []:
+#         details = pretty_goals(gs[-1].goals)
+#     return details
 
 def pretty_goals(goals):
     return "\n".join([pretty_goal(goal) for goal in goals])

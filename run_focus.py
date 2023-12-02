@@ -12,20 +12,25 @@ from common import limit_depth, max_completion_depth
 import llm
 
 class FocusNode:
-    def __init__(self, instructions, context, code):
+    def __init__(self, instructions, context, code, outlog):
         self.instructions = instructions
         self.context = context
         self.code = code
+        self.outlog = outlog
 
     def update(self, text):
         v = filter_code(text+"```").lstrip()
-        context = give_context(v)
-        return FocusNode(self.instructions, context, v)
+        r = give_context(v)
+        (context, outlog) = r
+        return FocusNode(self.instructions, context, v, outlog)
     
     def text(self):
         return f"""
 ## Instructions
 {self.instructions}
+
+## Out
+{self.outlog}
 
 ## Context
 {self.context}
@@ -37,7 +42,7 @@ class FocusNode:
 prompt_code_index = prompt.index("```")
 prompt_instructions = prompt[0:prompt_code_index].strip()
 prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
-montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code)))
+montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code, "")))
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
