@@ -1,5 +1,5 @@
-SHOW_MISTAKES = True
-DIVERSITY = False
+SHOW_MISTAKES = False
+DIVERSITY = True
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -21,7 +21,9 @@ import llm
 mistakes = []
 
 class FocusNode:
-    def __init__(self, instructions, context, code, outlog, hint):
+    def __init__(self, instructions, code, hint):
+        (context, outlog) = give_context(code)
+
         self.instructions = instructions
         self.context = context
         self.code = code
@@ -29,10 +31,8 @@ class FocusNode:
         self.hint = hint
 
     def update(self, text):
-        v = filter_code(text+"```").lstrip()
-        r = give_context(v)
-        (context, outlog) = r
-        return FocusNode(self.instructions, context, v, outlog, self.hint)
+        code = filter_code(text+"```").lstrip()
+        return FocusNode(self.instructions, code, self.hint)
 
     def prev_mistakes(self):
         if SHOW_MISTAKES and mistakes:
@@ -73,7 +73,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 prompt_code_index = prompt.index("```")
 prompt_instructions = prompt[0:prompt_code_index].strip()
 prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
-montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code, "", "")))
+montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
 montecarlo.global_features = None
 
 # from https://huggingface.co/docs/transformers/internal/generation_utils#transformers.NoBadWordsLogitsProcessor.example

@@ -331,9 +331,13 @@ if 'factorial' in prompt and LANG == "Coq":
 ```{LANG.lower()}
 
 Require Import Arith.
-Search (0 < _) inside Nat.
-Search (_ < _ + _) inside Nat.
+Search (0 < 1) inside Nat.
+Search (_ < _ -> _ < _ + _) inside Nat.
+
+Fixpoint factorial
 """
+#Check Nat.lt_0_1.
+#Check Nat.lt_lt_add_r.
 
 elif LANG != "Lean4":
     prompt += f"""
