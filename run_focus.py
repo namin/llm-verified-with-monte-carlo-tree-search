@@ -32,7 +32,7 @@ class FocusNode:
 
     def prev_mistakes(self):
         if SHOW_MISTAKES and mistakes:
-            mistakes_text = "\n\n".join([f"Do NOT reproduce this snippet:\n{snippet}\nIt is wrong:\n{err}" for snippet,err in mistakes])
+            mistakes_text = "\n\n".join([f"Do NOT reproduce this snippet:\n{snippet.replace('```', '')}\nIt is wrong:\n{err}" for snippet,err in mistakes])
             return f"""## Previous Mistakes (NOT TO DO AGAIN)
 
 {mistakes_text}
