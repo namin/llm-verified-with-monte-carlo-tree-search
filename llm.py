@@ -14,9 +14,10 @@ elif MODEL_HOST == "huggingface":
     _, model, tokenizer = huggingface_generate.load_model()
     model_generation_args = huggingface_generate.get_model_generation_args(
         tokenizer
-    )  # todo: types
+    )
 
-    def gen(prompt, model_generation_args, num=1, return_hiddens=False) -> List[str]:
+    def gen(prompt, model_generation_args, num=1, return_hiddens=False, **kwargs) -> List[str]:
+        args = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
         model.eval()
@@ -26,7 +27,7 @@ elif MODEL_HOST == "huggingface":
                 num_return_sequences=num,
                 output_hidden_states=return_hiddens,
                 return_dict_in_generate=True,
-                **model_generation_args
+                **args
             )
             ts = generate_dict.sequences
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
@@ -35,8 +36,8 @@ elif MODEL_HOST == "huggingface":
             return rs, last_layer.reshape(num, -1)
         return rs
 
-    def generate(prompt: str, num: str, return_hiddens=False) -> List[str]:
-        return gen(prompt, model_generation_args, num, return_hiddens)
+    def generate(prompt: str, num: str, return_hiddens=False, **kwargs) -> List[str]:
+        return gen(prompt, model_generation_args, num, return_hiddens, **kwargs)
 
 else:
     assert False

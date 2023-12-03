@@ -6,13 +6,16 @@ assert LANG=='Coq'
 from lang import score_func, can_be_solution, filter_code
 from coq import give_context, short_verifier_feedback
 
-from prompts import prompt, expansion_count, min_lines, check_func
+from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
 from common import limit_depth, max_completion_depth
 from common_diversity import select_diversely
 
+from transformers import AutoTokenizer
+from model_config import BASE_MODEL_NAME
+
 import llm
 
-SHOW_MISTAKES = False
+SHOW_MISTAKES = True
 
 mistakes = []
 
@@ -70,10 +73,27 @@ prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
 montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code, "", "")))
 montecarlo.global_features = None
 
+# from https://huggingface.co/docs/transformers/internal/generation_utils#transformers.NoBadWordsLogitsProcessor.example
+
+tokenizer_with_prefix_space = AutoTokenizer.from_pretrained(BASE_MODEL_NAME, add_prefix_space=True)
+
+def get_tokens_as_list(word_list):
+    "Converts a sequence of words into a list of tokens"
+    tokens_list = []
+    for word in word_list:
+        tokenized_word = tokenizer_with_prefix_space([word], add_special_tokens=False).input_ids[0]
+        tokens_list.append(tokenized_word)
+    return tokens_list
+
+def get_bad_words_ids():
+    return get_tokens_as_list([cheat_marker])
+
+bad_words_ids = get_bad_words_ids()
+
 def generate_complete(focus, montecarlo):
     text = focus.text()
     prev = text
-    text, features = llm.generate(text, 5, return_hiddens=True)
+    text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
     print([t[len(prev):] for t in text])
     text = select_diversely(text, features, montecarlo)
     score = score_func(text)
