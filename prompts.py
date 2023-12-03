@@ -324,15 +324,15 @@ def remove_hints(prompt):
 
 #prompt = remove_hints(prompt)
 
-if False and LANG == "Coq":
+if 'factorial' in prompt and LANG == "Coq":
     prompt += f"""
 ### Hint: Use some lemmas provided in Out. You cannot solve the base case by `reflexivity` since `<` is not reflexive. You also need a lemma in the inductive case. Use `apply` to use a lemma.
 
 ```{LANG.lower()}
 
 Require Import Arith.
-Search (0 < _).
-Search (_ < _ + _).
+Search (0 < _) inside Nat.
+Search (_ < _ + _) inside Nat.
 """
 
 elif LANG != "Lean4":

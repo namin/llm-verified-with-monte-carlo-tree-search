@@ -1,3 +1,6 @@
+SHOW_MISTAKES = True
+DIVERSITY = False
+
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
@@ -14,8 +17,6 @@ from transformers import AutoTokenizer
 from model_config import BASE_MODEL_NAME
 
 import llm
-
-SHOW_MISTAKES = True
 
 mistakes = []
 
@@ -48,6 +49,8 @@ Don't do the above mistakes, but DO use`Search` to find lemmas, for example: `Se
         return f"""
 <s>[INST] <<SYS>>
 You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
 <</SYS>>
 
 ## Instructions
@@ -92,10 +95,13 @@ bad_words_ids = get_bad_words_ids()
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
-    prev = text
-    text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
-    print([t[len(prev):] for t in text])
-    text = select_diversely(text, features, montecarlo)
+    if DIVERSITY:
+        prev = text
+        text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
+        print([t[len(prev):] for t in text])
+        text = select_diversely(text, features, montecarlo)
+    else:
+        text = llm.generate(text, 1, bad_words_ids=bad_words_ids)[0]
     score = score_func(text)
     if score is not None:
         if score < 0:
