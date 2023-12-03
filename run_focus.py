@@ -8,6 +8,7 @@ from coq import give_context, short_verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
+from common_diversity import select_diversely
 
 import llm
 
@@ -67,10 +68,14 @@ prompt_code_index = prompt.index("```")
 prompt_instructions = prompt[0:prompt_code_index].strip()
 prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
 montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, "", prompt_code, "", "")))
+montecarlo.global_features = None
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
-    text = llm.generate(text, 1)[0]
+    prev = text
+    text, features = llm.generate(text, 5, return_hiddens=True)
+    print([t[len(prev):] for t in text])
+    text = select_diversely(text, features, montecarlo)
     score = score_func(text)
     if score is not None:
         if score < 0:

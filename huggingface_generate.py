@@ -54,10 +54,10 @@ def get_model_generation_args(
 ):
     return dict(
         min_length=5,
-        top_k=7,
+        #top_k=7,
         top_p=0.9,
         do_sample=True,
-        temperature=0.8,
+        temperature=0.9,
         # streamer=streamer,
         max_new_tokens=100,
         eos_token_id=stop_words_ids(tokenizer)
