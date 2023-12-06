@@ -18,8 +18,6 @@ from model_config import BASE_MODEL_NAME
 
 import llm
 
-mistakes = []
-
 class FocusNode:
     def __init__(self, instructions, code, hint):
         (context, outlog) = give_context(code)
@@ -69,12 +67,6 @@ You take a single step and will be given feedback -- listen to the feedback in t
 
 ```{LANG}
 {self.code}"""
-
-prompt_code_index = prompt.index("```")
-prompt_instructions = prompt[0:prompt_code_index].strip()
-prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
-montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
-montecarlo.global_features = None
 
 # from https://huggingface.co/docs/transformers/internal/generation_utils#transformers.NoBadWordsLogitsProcessor.example
 
@@ -134,9 +126,22 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
-montecarlo.child_finder = child_finder
+def run(prompt = prompt):
+    global mistakes
+    mistakes = []
+    prompt_code_index = prompt.index("```")
+    prompt_instructions = prompt[0:prompt_code_index].strip()
+    prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
+    montecarlo.global_features = None
+    montecarlo.child_finder = child_finder
 
-montecarlo.simulate(expansion_count)
+    montecarlo.simulate(expansion_count)
 
-print('CHOSEN SOLUTION')
-print(montecarlo.solution)
+    print('CHOSEN SOLUTION')
+    print(montecarlo.solution)
+
+    return filter_code(montecarlo.solution)
+
+if __name__ == '__main__':
+    run()
