@@ -61,9 +61,11 @@ case _ => 3
 }### Hint: In the optimizer, recursively optimize the sub-expressions.
 {'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if LANG=='Dafny' else ''
-}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: For the recursive case, rewrite <- using the induction hypotheses before destructuring on the optimized expressions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
 ### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
 ''' if LANG=='Coq' else ''
 }""",
