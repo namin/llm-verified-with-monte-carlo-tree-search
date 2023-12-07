@@ -7,6 +7,7 @@ from lang import score_func, can_be_solution, verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
+from common_stats import stats
 
 montecarlo = MonteCarlo(Node(prompt))
 
@@ -36,6 +37,7 @@ def child_finder(node, montecarlo):
             return
         else:
             text = hint
+            montecarlo.stats_failed_expansion_count += 1
 
     child = Node(text)
     node.add_child(child)
@@ -53,3 +55,5 @@ montecarlo.simulate(expansion_count)
 
 print("CHOSEN SOLUTION")
 print(montecarlo.solution)
+
+stats(montecarlo)

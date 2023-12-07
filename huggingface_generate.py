@@ -69,7 +69,7 @@ def get_model_generation_search_args(
         return dict(
             num_beams=num,
             num_beam_groups=num,
-            diversity_penalty=0.5,
+            diversity_penalty=0.9,
         )
     else:
         return dict(
