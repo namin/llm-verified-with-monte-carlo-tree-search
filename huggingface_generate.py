@@ -73,7 +73,7 @@ def get_model_generation_search_args(
         )
     else:
         return dict(
-            top_k=None if num>1 else 7,
+            top_k=50 if num>1 else 7,
             top_p=0.9,
             do_sample=True,
             temperature=0.9 if num>1 else 0.8,
