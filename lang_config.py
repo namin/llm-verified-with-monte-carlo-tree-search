@@ -1,8 +1,8 @@
 ALL_LANGS = ["Dafny", "Coq", "Lean4"]
 
 # Pick a language:
-LANG = "Dafny"
-# LANG = 'Coq'
+LANG = 'Coq'
+# LANG = "Dafny"
 # LANG = "Lean4"
 
 # Set features for the language:
