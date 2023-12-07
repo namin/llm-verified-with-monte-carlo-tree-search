@@ -1,0 +1,3116 @@
+[2023-12-06 22:24:36,100] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/trl/trainer/ppo_config.py:141: UserWarning: The `optimize_cuda_cache` arguement will be deprecated soon, please use `optimize_device_cache` instead.
+  warnings.warn(
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py:472: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:02,  1.45s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:02<00:01,  1.37s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.15s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.22s/it]
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/utils/hub.py:374: FutureWarning: The `use_auth_token` argument is deprecated and will be removed in v5 of Transformers. Please use `token` instead.
+  warnings.warn(
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+/home/namin/mambaforge/envs/trl/lib/python3.10/site-packages/transformers/generation/utils.py:1473: UserWarning: You have modified the pretrained model configuration to control generation. This is a deprecated strategy to control generation and will be removed soon, in a future version. Please use and modify the model generation configuration (see https://huggingface.co/docs/transformers/generation_strategies#default-text-generation-configuration )
+  warnings.warn(
+[' Fact(n: nat): nat\n', ' Factorial(n:nat):nat\n', ' fact(n: nat): nat\n', ' fact(n: nat): nat\n', ' fact(n:nat):nat\n', ' Fact(n: nat): nat\n', ' Fact(n:nat):nat\n', ' Factorial(n:nat):nat\n', ' fact(n: nat): nat\n', ' Factorial(n:nat):nat\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+
+  |
+3 | {
+  |  ^
+
+ex.dfy(3,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n*Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n*Fact(n-1)\n', '  if n == 0 then 1 else n*Fact(n-1)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+
+  |
+4 |   if n == 0 then 1 else n*Fact(n-1)
+  |                                    ^
+
+ex.dfy(4,35): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+
+SCORE
+1.0
+['lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma ProveFactPos(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction auto} FactPositive(n: nat)\n', 'lemma ProveFactPos(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+
+SCORE
+1.0
+['  ensures 0 < Fact(n)\n', '  ensures 1 <= Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 1 <= Fact(n)\n', '  ensures 1 <= Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+
+  |
+9 | {
+  |  ^
+
+ex.dfy(9,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if n != 0 {\n', '  if n != 0 {\n', '  if 0 < n { ProveFactPos(n-1); }\n', '  if n != 0 {\n', '  if n != 0 {\n', '  if n > 0 {\n', '  if 0 < n {\n', '  if 0 < n { ProveFactPos(n-1); }\n', '  if n == 0 {\n', '  if 0 < n { ProveFactPos(n-1); }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+
+   |
+10 |   if n == 0 {
+   |              ^
+
+ex.dfy(10,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+
+   |
+11 |   } else {
+   |           ^
+
+ex.dfy(11,10): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n', '    ProveFactPos(n-1);\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+
+   |
+12 |     ProveFactPos(n-1);
+   |                       ^
+
+ex.dfy(12,22): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+
+   |
+13 |   }
+   |    ^
+
+ex.dfy(13,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+
+SCORE
+1.0
+['// A simple Fibonacci function and a proof that it is always positive.  The proof\n', 'method ComputeFact(n: nat)\n', '// Average temperature converter\n', '// A Fibonacci function and a proof that the Fibonacci numbers are always positive.\n', '// A palindrome test.\n', '// -----\n', '// A palindrome check function and a proof that the function works.\n', '// A natural number n for which a proof exists that 1 <= Fact(n).  Such a n\n', "// An infinite loop that, if uncommented, would violate Dafny's verification timeout\n", '// A simple Fibonacci function and a lemma stating that Fibonacci is always strictly positive.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+
+SCORE
+1.0
+['// limitations.\n', '// limits.\n', '// limits.\n', '// limit.\n', '// limits.\n', '// limits.\n', '// limit.\n', '// limits.\n', '// magics.\n', '// limitations.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+
+SCORE
+1.0
+['method Loop()\n', '//\n', 'method Looper()\n', 'method LoopNeverEnds()\n', 'method Loop()\n', 'method LoopNeverEnds()\n', 'method Loop()\n', '//\n', 'method Loop()\n', '//\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+
+SCORE
+1.0
+['// In a previous version of Dafny, this would not time out, which would make it\n', '// The loop below is especially suspicious because it violates several good style\n', '// This code was contributed by Chris Slott.\n', '// In a previous version of Dafny, this would verify. In the current development\n', '// Sample output:\n', '// The loop below is similar to the C function:\n', '// The loop below is not verifiable because Dafny has no way of knowing that the\n', "// We're not sure how aggressive we want to make the timeout limits, but we think\n", '// The loop below is similar to the C program:\n', '// The loop below is similar to the C program:\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+
+SCORE
+1.0
+['// version (trunk as of this writing), this fails verification.\n', '// version (trunk as of this writing), this fails verification.\n', '// branch, it does not verify.\n', '// branch, it does not verify (but should).\n', '// version (trunk as of this writing), this fails verification.\n', '// version (8\\.22\\.0), the verification times out.\n', '// branch, this verification fails.\n', '// branch, this verifies with the :verifyfalse flag.\n', '// version (trunk as of this writing), this fails verification.\n', '// branch, this fails verification.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+
+SCORE
+1.0
+['lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'method Looper()\n', 'lemma BadLemma(n: nat)\n', 'method Loop()\n', 'lemma BadLoop()\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma()\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+
+   |
+22 | {
+   |  ^
+
+ex.dfy(22,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var n := 0;\n', '  var x := 0;\n', '  var n := 0;\n', '  var x := 0;\n', '  var x: nat := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var x := 0;\n', '  var n := 0;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+
+   |
+23 |   var n := 0;
+   |              ^
+
+ex.dfy(23,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+
+   |
+24 |   while true
+   |             ^
+
+ex.dfy(24,12): Error: invalid WhileStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    invariant true\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '  {\n', '  {\n', '    invariant true\n', '    invariant true\n', '  {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+
+   |
+25 |     invariant true
+   |                   ^
+
+ex.dfy(25,18): Error: invalid WhileStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n', '  {\n', '  {\n', '  {\n', '  {\n', '  {\n', '  {\n', '  {\n', '  {\n', '  {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+
+   |
+26 |   {
+   |    ^
+
+ex.dfy(26,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if n % 1000000 == 0 {\n', '    // Uncomment the following line to prevent verification timeout.\n', '    if n % 10000000 == 0 {\n', '    if n % 10000000 == 0 {\n', '    if n % 1000000 == 0 {\n', '    n := (n + 1) % 1000000000;\n', '    n := (n + 1) % 100000000;\n', '    if 1 <= Fact(n) {\n', '    // Uncomment the following line to trigger a timeout during verification.\n', '    ProveFactPos(n);\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+
+   |
+27 |     // Uncomment the following line to prevent verification timeout.
+   |                                                                     ^
+
+ex.dfy(27,68): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    //\n', '    //\n', '    //\n', '    //\n', '    // ProveFactPos(n);\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+
+   |
+28 |     //
+   |       ^
+
+ex.dfy(28,6): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // if n % 1000000 == 0 {\n', '    // if n % 1000000 == 0 {\n', '    // Commenting out this line, or otherwise changing the loop invariant to\n', '    // ProveFactPos(n);\n', '    // Commenting this line out (or reducing the verbosity of the warning) will\n', '    // if n % 1000000 == 0 {\n', '    // if n % 1000000 == 0 {\n', '    // if n % 1000000 == 0 {\n', '    // if n % 1000000 == 0 {\n', '    // if n % 1000000 == 0 {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+
+   |
+29 |     // Commenting this line out (or reducing the verbosity of the warning) will
+   |                                                                                ^
+
+ex.dfy(29,79): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n', '    // cause verification to fail.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+    // cause verification to fail.
+
+   |
+30 |     // cause verification to fail.
+   |                                   ^
+
+ex.dfy(30,34): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    //\n', '    // assume 1 + 1 == 2;\n', '    // assume 1 + 1 == 2;\n', '    //\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+    // cause verification to fail.
+    // assume 1 + 1 == 2;
+
+   |
+31 |     // assume 1 + 1 == 2;
+   |                          ^
+
+ex.dfy(31,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '    n := n + 1;\n', '  }\n', '    n := n + 1;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+    // cause verification to fail.
+    // assume 1 + 1 == 2;
+    n := n + 1;
+
+   |
+32 |     n := n + 1;
+   |                ^
+
+ex.dfy(32,15): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+    // cause verification to fail.
+    // assume 1 + 1 == 2;
+    n := n + 1;
+  }
+
+   |
+33 |   }
+   |    ^
+
+ex.dfy(33,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var n := 0;
+  while true
+    invariant true
+  {
+    // Uncomment the following line to prevent verification timeout.
+    //
+    // Commenting this line out (or reducing the verbosity of the warning) will
+    // cause verification to fail.
+    // assume 1 + 1 == 2;
+    n := n + 1;
+  }
+}
+
+ex.dfy(24,2): Error: cannot prove termination; try supplying a decreases clause for the loop
+   |
+24 |   while true
+   |   ^^^^^
+
+
+Dafny program verifier finished with 2 verified, 1 error
+
+SCORE
+-1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+
+   |
+22 | {
+   |  ^
+
+ex.dfy(22,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var n := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var x := 0;\n', '  var n := 0;\n', '  var n := 0;\n', '  var x := 0;\n', '  var x: int := 0;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+
+   |
+23 |   var x := 0;
+   |              ^
+
+ex.dfy(23,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n', '  while true\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+
+   |
+24 |   while true
+   |             ^
+
+ex.dfy(24,12): Error: invalid WhileStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '    invariant true\n', '  {\n', '    invariant true\n', '    invariant true\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+
+   |
+25 |   {
+   |    ^
+
+ex.dfy(25,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n', '    x := x + 1;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+
+   |
+26 |     x := x + 1;
+   |                ^
+
+ex.dfy(26,15): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Uncomment the following line to avoid verification timeout.\n', '    // Commenting out the following line makes the loop go away and the method verified.\n', '    // Uncomment the following line to silence the "loop invariant may not be\n', '    // Uncomment the following line to avoid verification timeout.\n', '    // The following instruction, if uncommented, would cause verification to\n', '    // Uncomment the following line to avoid verification timeout.\n', '    // Commented out forcibly breaks this method into a finite number of iterations.\n', '  // Uncomment the following line to avoid verification timeout.\n', '    // Commented out the following line restores the example to its previous,\n', '    // Uncomment the following line to prevent verification timeout.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+
+   |
+27 |     // Uncomment the following line to silence the "loop invariant may not be
+   |                                                                              ^
+
+ex.dfy(27,77): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // maintained" warning.\n', '    // maintained" warning.\n', '    // maintained" warning.\n', '    // maintained" warning. (Commenting out the assertion below the line also\n', '    // maintained" warning.\n', '    // maintained" error message.\n', '    // maintained" error message. (Commenting out the assertion below the line\n', '    // maintained" warning.\n', '    // maintained" error message. (The error message had been misleading in the\n', '    // maintained" warning.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+
+   |
+28 |     // maintained" error message. (Commenting out the assertion below the line
+   |                                                                               ^
+
+ex.dfy(28,78): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // also suppresses the error message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n', '    // also silences the "loop invariant may not be maintained" message.)\n', '    // also silences the error message.)\n', '    // also silences the error message.)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+
+   |
+29 |     // also silences the "loop invariant may not be maintained" message.)
+   |                                                                          ^
+
+ex.dfy(29,73): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    //\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n', '    //\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+
+   |
+30 |     //
+   |       ^
+
+ex.dfy(30,6): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // if x == 0 { break; }\n', '    // x := x - 1;\n', '    // var y := x;\n', '    // var y := x;\n', '    // if x == 0 { break; }\n', "    // NOTE: The problem with this approach is that you don't get to know whether\n", '    // x := x - 1;\n', '    // var y := x;\n', '    // x := x - 1;\n', '    // if x == 0 { break; }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+
+   |
+31 |     // NOTE: The problem with this approach is that you don't get to know whether
+   |                                                                                  ^
+
+ex.dfy(31,81): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // or not the "proved" postcondition holds, which is a shame, because the\n', '    // or not the "real" problem is that the loop index is not being maintained as\n', '    // or not the loop invariant (that is, the fact that x is non-negative) is\n', '    // or not the original code was indeed verifiable.\n', '    // or not the original code was actually verifiable.\n', '    // the "assert 1 <= 1;" inside ProveFactPos is actually being verified. If\n', '    // or not the original loop invariant (that is, the assertion just above\n', '    // the "true" in the while condition is actually true or not.\n', '    // or not the "original" error (that the loop invariant cannot be maintained)\n', '    // or not the original postcondition holds, which is to verify that this\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+
+   |
+32 |     // or not the "proved" postcondition holds, which is a shame, because the
+   |                                                                              ^
+
+ex.dfy(32,77): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // postcondition is extremely simple to satisfy.\n', '    // postcondition does say something useful. In any case, this is only a\n', '    // postcondition does say something useful. Also, if the loop is changed to\n', '    // postcondition does say something useful. Also, if the loop is changed from\n', '    // postcondition does say something useful. Also, notice that the loop\n', '    // postcondition does say something useful. Also, notice that the loop\n', '    // user would probably expect that the postcondition does hold (at least\n', '    // postcondition does say something useful (that verifies!).\n', '    // postcondition does say something useful. Also, if the loop is changed to\n', '    // postcondition is simple enough.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+
+   |
+33 |     // user would probably expect that the postcondition does hold (at least
+   |                                                                             ^
+
+ex.dfy(33,76): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // conceptually).\n', '    // conceptually).\n', '    // conceptually).\n', '    // on the first iteration of the loop, if not everywhere).\n', '    // conceptually).\n', '    // conceptually).\n', '    // conceptually).\n', '    // conceptually).\n', '    // conceptually).\n', '    // provided there are no other errors in the program).\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+
+   |
+34 |     // conceptually).
+   |                      ^
+
+ex.dfy(34,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // if x == 42 { x := x + 100; }\n', '    // if x == 42 { x := x + 100; }\n', '    // if x == 42 { x := x + 1; }\n', '    // if x == 47 { x := x + 100; }\n', '    // if x == 47 { x := x + 100; }\n', '    // if x % 10000000 == 0 {\n', '    // if x % 10000000 == 0 {\n', '    // if x == 47 { x := x + 100; }\n', '    // if x == 42 { x := x + 100; }\n', '    // if x == 42 { x := x + 1; }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+    // if x % 10000000 == 0 {
+
+   |
+35 |     // if x % 10000000 == 0 {
+   |                              ^
+
+ex.dfy(35,29): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n', '    //   assert true;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+    // if x % 10000000 == 0 {
+    //   assert true;
+
+   |
+36 |     //   assert true;
+   |                      ^
+
+ex.dfy(36,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n', '    // }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+    // if x % 10000000 == 0 {
+    //   assert true;
+    // }
+
+   |
+37 |     // }
+   |         ^
+
+ex.dfy(37,8): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+    // if x % 10000000 == 0 {
+    //   assert true;
+    // }
+  }
+
+   |
+38 |   }
+   |    ^
+
+ex.dfy(38,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+method Looper()
+{
+  var x := 0;
+  while true
+  {
+    x := x + 1;
+    // Uncomment the following line to silence the "loop invariant may not be
+    // maintained" error message. (Commenting out the assertion below the line
+    // also silences the "loop invariant may not be maintained" message.)
+    //
+    // NOTE: The problem with this approach is that you don't get to know whether
+    // or not the "proved" postcondition holds, which is a shame, because the
+    // user would probably expect that the postcondition does hold (at least
+    // conceptually).
+    // if x % 10000000 == 0 {
+    //   assert true;
+    // }
+  }
+}
+
+ex.dfy(24,2): Error: cannot prove termination; try supplying a decreases clause for the loop
+   |
+24 |   while true
+   |   ^^^^^
+
+
+Dafny program verifier finished with 2 verified, 1 error
+
+SCORE
+-1.0
+['lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'lemma BadLemma(n: nat)\n', 'method Loop()\n', 'lemma BadLemma()\n', 'lemma BadLemma(n: nat)\n', 'method CallsItselfForever(x: int) {\n', 'lemma BadLemma()\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+lemma BadLemma(n: nat)
+
+SCORE
+1.0
+['  ensures false\n', '  ensures false\n', '  ensures false\n', '  ensures false\n', '  ensures false\n', '  ensures false\n', '  ensures false\n', '  ensures 1 <= Fact(n)\n', '  ensures false\n', '  ensures false\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma ProveFactPos(n: nat)
+  ensures 1 <= Fact(n)
+{
+  if n == 0 {
+  } else {
+    ProveFactPos(n-1);
+  }
+}
+
+// An infinite loop that, if uncommented, would violate Dafny's verification timeout
+// limits.
+//
+// In a previous version of Dafny, this would verify. In the current development
+// version (trunk as of this writing), this fails verification.
+lemma BadLemma(n: nat)
+  ensures false
+
+SCORE
+1.0
+[' Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }\n', ' fact(n:nat):nat\n', ' Fact(n: nat): nat\n', ' fact(n: nat): nat\n', ' Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }\n', ' fact(n: nat): nat\n', ' Factorial(n:nat):nat\n', ' fact(n:nat):nat\n', ' Fact(n: nat): nat\n', ' Fact(n: nat): nat\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+
+SCORE
+1.0
+['lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 1 <= Factorial(n) { if n != 0 { FactorialPositive(n-1); } }\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 1 <= Factorial(n) { if n != 0 { FactorialPositive(n-1); } }\n', '\n', '\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n', 'lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+
+SCORE
+1.0
+['```', '```', '```', '```', '\n', '\n', '```', '```', '```', '```']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+SCORE
+1.0
+['dafny\n', 'dafny\n', '// RUN: %dafny /compile:0 /print:"%t.print" /dprint:"%t.dprint" "%s" > "%t"\n', 'dafny\n', '\n', '\n', '\n', 'dafny\n', 'dafny\n', "# **Warning: The abstract type 'T' is referred to in a potentially negative way**\n"]
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+
+SCORE
+1.0
+['```', '```', '---\n', '# 枚举\n', '+++\n', '\n', '<!-- %check-verify -->\n', '/*\n', '```', '```']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+
+SCORE
+1.0
+['```', '```', '```', '```', '```', '```', '```', '```', '```', '```']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```
+SCORE
+1.0
+['dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n', 'dafny\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+
+SCORE
+1.0
+['// A function that computes the nth Fibonacci number.\n', '// A recursive definition of Fibonacci numbers, whose values are defined by\n', '// A recursive definition of Fibonacci numbers, and a lemma stating that the\n', '// Average calculates the average of two numbers.\n', '// A positive number raised to a positive number.\n', '// A Fibonacci function and a proof that the Fibonacci numbers are always positive.\n', '// A postcondition that the factorial is always strictly positive.\n', '// A recursive Fibonacci function and a proof that it satisfies the recurrence relation\n', '// A fact method that uses the lemma to verify that its input is positive.\n', '// A function that computes the nth Fibonacci number.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+
+SCORE
+1.0
+['// Fibonacci(0) = 0, Fibonacci(1) = 1, and\n', '// Fib(0) = 0, Fib(1) = 1, and Fib(n) = Fib(n-1) + Fib(n-2) for n >= 2.\n', '// Fibonacci(0) == 0, Fibonacci(1) == 1, and\n', '// Fib(0) == 0, Fib(1) == 1, and for n >= 2, Fib(n) == Fib(n-1) + Fib(n-2).\n', '// Fib(0) = 0, Fib(1) = 1, and Fib(n) = Fib(n-1) + Fib(n-2) for n >= 2.\n', '// Fibonacci(0) = 0, Fibonacci(1) = 1, and\n', '// Fibonacci(0) = 0, Fibonacci(1) = 1, and\n', '// Fibonacci(0) = 0, Fibonacci(1) = 1, and\n', '// Fib(0) = 0, Fib(1) = 1, and Fib(n) = Fib(n-1) + Fib(n-2) for n >= 2.\n', '// Fib(0) = 0, Fib(1) = 1, and Fib(n) = Fib(n-1) + Fib(n-2) for n >= 2.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+
+SCORE
+1.0
+['// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n', '// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.
+
+SCORE
+1.0
+['function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: int): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: int): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: int): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n', 'function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.
+function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }
+
+SCORE
+1.0
+['\n', '\n', '\n', '```', '\n', '\n', '\n', '```', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.
+function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }
+
+
+SCORE
+1.0
+['// A proof that the Fibonacci numbers are always positive.  The {:induction n}\n', '// A proof that the Fibonacci numbers are always positive.\n', '// A proof that the Fibonacci numbers are always positive.  The proof is a\n', '// A simple lemma about Fibonacci numbers that states that each successive Fibonacci\n', '// A simple lemma about Fibonacci numbers that holds for all n >= 2.\n', '// A proof that the Fibonacci numbers are always positive.  The {:induction n}\n', '// A proof that the Fibonacci numbers are always positive.  The proof is done\n', '// A proof that the Fibonacci numbers are always positive.  The proof is a\n', '// A proof that the Fibonacci numbers are always positive.  The proof is a\n', '// A simple lemma about Fibonacci numbers that states that each number is\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.
+function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }
+
+// A proof that the Fibonacci numbers are always positive.  The proof is a
+
+SCORE
+1.0
+['// straightforward induction.\n', '// straightforward inductive proof, and the {:induction n} attribute is enough\n', '// straightforward induction.\n', '// straightforward induction.\n', '// straightforward induction.\n', '// straightforward induction.\n', '// straightforward induction.\n', '// straightforward induction.\n', '// simple induction over the n argument to the lemma.\n', '// straightforward induction.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }
+lemma {:induction n} FactorialPositive(n: nat)  ensures 0 < Factorial(n) {}
+```
+<!-- %check-verify -->
+```dafny
+// A recursive definition of Fibonacci numbers, whose values are defined by
+// Fibonacci(0) == 0, Fibonacci(1) == 1, and
+// Fibonacci(n) == Fibonacci(n-1) + Fibonacci(n-2) for n >= 2.
+function  Fibonacci(n: nat): nat { if n < 2 then n else Fibonacci(n-1) + Fibonacci(n-2) }
+
+// A proof that the Fibonacci numbers are always positive.  The proof is a
+// straightforward inductive proof, and the {:induction n} attribute is enough
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+
+  |
+3 | {
+  |  ^
+
+ex.dfy(3,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if n == 0 then 1 else n*Fact(n-1)\n', '    if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '    if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '    if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '  if n == 0 then 1 else n * Fact(n-1)\n', '    if n == 0 then 1 else n * Fact(n-1)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+
+  |
+4 |     if n == 0 then 1 else n * Fact(n-1)
+  |                                        ^
+
+ex.dfy(4,39): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+
+SCORE
+1.0
+['lemma ProveFactPos(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction false} FactPositive(n: nat)\n', 'lemma LFactPositive(n: nat)\n', 'lemma FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma FactLemma(n: nat)\n', 'lemma ProveFactPos(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma  Lemma_FactPos(n: nat)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+
+SCORE
+1.0
+['    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n', '    ensures 1 <= Fact(n)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+
+  |
+9 | {
+  |  ^
+
+ex.dfy(9,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if 0 < n {\n', '    if n == 0 {\n', '    if n == 0 {\n', '    if 0 < n {\n', '    if n == 0 {\n', '    if n != 0 {\n', '    if 0 < n {\n', '    if 0 < n {\n', '    if n == 0 {\n', '    if 0 < n {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+
+   |
+10 |     if 0 < n {
+   |               ^
+
+ex.dfy(10,14): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n', '        FactPositive(n-1);\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+
+   |
+11 |         FactPositive(n-1);
+   |                           ^
+
+ex.dfy(11,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    }\n', '    }\n', '    }\n', '    }\n', '    }\n', '    }\n', '    }\n', '    }\n', '    }\n', '    }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+
+   |
+12 |     }
+   |      ^
+
+ex.dfy(12,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '```', '```', '\n', '\n', '\n', '```', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+
+SCORE
+1.0
+['// A simple Fibonacci function and a proof that it is always positive.\n', '// A naive Fibonacci function and a proof that it is always positive.  Note that\n', '// A simple Fibonacci function and a proof that it is always positive.  Note that\n', '// A strong enough invarint is defined (and used) to prove the loop invariant.\n', '// A naïve Fibonacci function and a proof that it is always positive.\n', '\n', '// A simple specification of a fibonacci function and a proof that it satisfies that specification.\n', '// A simple Fibonacci function and a proof that it is always positive.\n', '// A simple Fibonacci function and a lemma stating that it always is strictly positive.\n', '// A simple Fibonacci function and a proof that it is always positive.  Note that\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+
+SCORE
+1.0
+['// Dafny is able to prove the positivity only with the induction axiom (and not\n', '// the postcondition uses an aggregate assert, which is a convenient way to say\n', '// Dafny has no evidence that the Fib function is monotonic, so the induction\n', '// Dafny is able to prove the second postcondition (that Fib is always positive)\n', '// the postcondition can be proved even without a lemma.\n', '// Dafny is able to prove the positivity only on the second day, because it had\n', '// Dafny has a hard time proving the inductive property of this function, even\n', '// the postcondition says "forall i :: 0 <= i", that is, the property is true\n', '// Dafny does not know that Fib(n) is always positive.\n', '// Dafny does not know that Fib(n) is always positive.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+
+SCORE
+1.0
+['// for all indices, not just those up to a given number.  The proof uses a\n', '// for all indices, not just those up to a given number.  This is typical of\n', '// for all values of "i" that satisfy the precondition.  A similar postcondition\n', '// for all values of "i" that satisfy the "<=" relation.  Dafny includes a\n', '// for all indices, not just those less than a given value.  This is because\n', '// for all indices, not just some subset as in the inductive version of this lemma.\n', '// for all indices, not just those up to a given number.  This is consistent with\n', '// for all values of the index "i" that might be passed to the function.  Since\n', '// for all indices, not just those up to a given index.  Also note that the\n', '// for all values of the index, not just those for which the function is defined.\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+
+SCORE
+1.0
+['// could have been written as "ensures forall i {:trigger Fib(i)} :: 0 <= i && i <= 20 ==> Fib(i) >= 0".\n', '// could have been written as "0 <= i && i < n ==> Fib(i) >= 0".\n', '// could have been written as "0 <= 1 && 0 <= 2 && ...".\n', '// could have been written as "ensures 0 <= Fib(n)" to state the property only\n', '// could have been written as "ensures 0 <= 1 && 0 <= 2 && ... && 0 <= i".\n', '// could have been written as "ensures 0 <= 1 && 0 <= 100", which would say that\n', '// could have been written as "ensures forall i :: 0 <= i < n ==> 0 <= Fib(i)"\n', '// could have been written as "0 <= i && i <= n ==> 0 <= Fib(n)" -- the part that\n', '// could have been written as "ensures 0 <= 1 && 0 <= 2 && 0 <= 3 && ...".\n', '// could have been written as "ensures forall i :: 0 <= i && i < 5 ==> Fib(i) >= 0".\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+
+SCORE
+1.0
+['function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+function  Fib(n: nat): nat
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+function  Fib(n: nat): nat
+{
+
+   |
+20 | {
+   |  ^
+
+ex.dfy(20,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '    if n < 2 then n else Fib(n-2) + Fib(n-1)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+function  Fib(n: nat): nat
+{
+    if n < 2 then n else Fib(n-2) + Fib(n-1)
+
+   |
+21 |     if n < 2 then n else Fib(n-2) + Fib(n-1)
+   |                                             ^
+
+ex.dfy(21,44): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+function  Fib(n: nat): nat
+{
+    if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+    if n == 0 then 1 else n * Fact(n-1)
+}
+
+lemma {:induction n} FactPositive(n: nat)
+    ensures 1 <= Fact(n)
+{
+    if 0 < n {
+        FactPositive(n-1);
+    }
+}
+
+// A naive Fibonacci function and a proof that it is always positive.  Note that
+// the postcondition says "forall i :: 0 <= i", that is, the property is true
+// for all values of "i" that satisfy the precondition.  A similar postcondition
+// could have been written as "0 <= 1 && 0 <= 2 && ...".
+function  Fib(n: nat): nat
+{
+    if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+
+SCORE
+1.0
+['lemma {:induction false} FactPositive(n: nat)\n', 'lemma ProveFactPos(n: nat)\n', 'lemma {:induction false} FactPositive(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n', 'lemma {:induction false} FactPositive(n: nat)\n', 'lemma ProveFactPos(n: nat)\n', 'lemma {:induction} FactLemma(n: nat)\n', 'lemma {:induction auto} FactPositive(n: nat)\n', 'lemma FactLemma(n: nat)\n', 'lemma {:induction n} FactPositive(n: nat)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+
+SCORE
+1.0
+['  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n', '  ensures 0 < Fact(n)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+
+  |
+9 | {
+  |  ^
+
+ex.dfy(9,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n', '  if n == 0 {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+
+   |
+10 |   if n == 0 {
+   |              ^
+
+ex.dfy(10,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n', '  } else {\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+
+   |
+11 |   } else {
+   |           ^
+
+ex.dfy(11,10): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n', '    FactLemma(n-1);\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+
+   |
+12 |     FactLemma(n-1);
+   |                    ^
+
+ex.dfy(12,19): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n', '  }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+
+   |
+13 |   }
+   |    ^
+
+ex.dfy(13,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+
+SCORE
+1.0
+['method Test()\n', 'method TestFact() {\n', '// A naïve Fibonacci function and a proof that it is always positive.\n', '// A simple fibonacci function and a proof that it is always positive.\n', '// A recursive definition of a Fibonacci number\n', '// A Fibonacci function and a proof that the Fibonacci numbers are always positive.\n', '// A Fibonacci function and a proof that Fibonacci is always positive.\n', '// A Fibonacci function and a proof that the Fibonacci numbers are always positive.\n', '// A strong enough spec for the following iterative FactTail program.\n', '// A strongened form of the Fibonacci function\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+
+SCORE
+1.0
+['function Fib(n: nat): nat\n', 'function  Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n', 'function Fib(n: nat): nat\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+
+   |
+18 | {
+   |  ^
+
+ex.dfy(18,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n', '  if n < 2 then n else Fib(n-2) + Fib(n-1)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+
+   |
+19 |   if n < 2 then n else Fib(n-2) + Fib(n-1)
+   |                                           ^
+
+ex.dfy(19,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+
+SCORE
+1.0
+['// A lemma stating the connection between Fib and Fact\n', '// A proof by induction of the Fibonacci inequality\n', '// A proof by induction of the Fibonacci property.\n', '// A lemma that proves that Fib(n) is always less than or equal to 2*Fib(n)\n', '// A proof by induction that Fib(n) is always strictly positive.  To use this\n', '// A proof by induction that Fib(n) >= n for all n.  The proof is not strong\n', '// A lemma expressing the Fibonacci relation\n', '// A proof by induction that Fib(n) is always strictly positive.  To keep the\n', '// A proof by induction of the Fibonacci inequality\n', '// A proof by induction that Fib(n) is always strictly positive.  To cover all\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+// A proof by induction that Fib(n) is always strictly positive.  To cover all
+
+SCORE
+1.0
+['// the cases, the lemma has to be specified over all natural numbers.\n', '// the cases, the lemma has to be stated and proved as a recursive function.\n', '// lines of code, the postcondition should read:  ensures 0 <= Fib(n)\n', '// the cases, the lemma has to say things about Fib(n+2) and Fib(n+1), even though\n', "// lines of code, the postcondition should read 'ensures 0 <= Fib(n)'.  However,\n", '// the cases, the induction is performed for all natural numbers, but only the\n', '// lines of code, the postcondition should be weakened to:\n', '// lines in the program, the weak induction condition is specified manually\n', '// the cases, the induction is done both for even and for odd values of n.\n', '// lines of code, the postcondition should read:  ensures 0 <= Fib(n)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+// A proof by induction that Fib(n) is always strictly positive.  To cover all
+// lines of code, the postcondition should be weakened to:
+
+SCORE
+1.0
+['//     ensures 0 <= Fib(n)\n', '//     ensures 0 <= Fib(n)\n', '//     ensures 0 <= Fib(n)\n', '//   ensures 0 <= Fib(n)\n', '//     ensures 0 <= Fib(n)\n', '//     ensures 0 <= Fib(n)\n', '//   ensures 0 <= Fib(n)\n', '//   ensures 0 <= Fib(n)\n', '//   ensures 0 <= Fib(n)\n', '//     ensures 0 <= Fib(n)\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  Fact(n: nat): nat
+{
+  if n == 0 then 1 else n*Fact(n-1)
+}
+
+lemma {:induction} FactLemma(n: nat)
+  ensures 0 < Fact(n)
+{
+  if n == 0 {
+  } else {
+    FactLemma(n-1);
+  }
+}
+
+// A strongened form of the Fibonacci function
+function Fib(n: nat): nat
+{
+  if n < 2 then n else Fib(n-2) + Fib(n-1)
+}
+
+// A proof by induction that Fib(n) is always strictly positive.  To cover all
+// lines of code, the postcondition should be weakened to:
+//   ensures 0 <= Fib(n)
+
+SCORE
+1.0
+[' fact(n: nat): nat\n', ' Fact(n: nat): nat\n', ' Factorial(n:nat):nat\n', ' Factorial(n:nat):nat\n', ' Fact(n: nat): nat\n', ' Factorial(n:nat):nat\n', ' fact(n: nat): nat\n', ' Factorial(n: nat): nat { if n == 0 then 1 else n * Factorial(n-1) }\n', ' fact(n: nat): nat\n', ' fact(n:nat):nat\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+
+SCORE
+1.0
+['{if n == 0 then 1 else n*fact(n-1)}\n', '{ if n == 0 then 1 else n*fact(n-1) }\n', '{if n == 0 then 1 else n*fact(n-1)}\n', '{if n == 0 then 1 else n*fact(n-1)}\n', '{ if n == 0 then 1 else n*fact(n-1) }\n', '{if n == 0 then 1 else n*fact(n-1)}\n', '    ensures fact(n) >= 1\n', '{if n == 0 then 1 else n*fact(n-1)}\n', '    ensures fact(n) >= 1\n', '{ if n == 0 then 1 else n*fact(n-1) }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+
+SCORE
+1.0
+['{\n', '{\n', '{ if n == 0 then 1 else n*fact(n-1) }\n', '{\n', '{ if n == 0 then 1 else n * fact(n-1) }\n', '{\n', '{\n', '{\n', '{\n', '{ if n == 0 then 1 else n*fact(n-1) }\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+SCORE
+1.0
+['\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n', '\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+
+SCORE
+1.0
+['method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n', 'method test()\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+
+SCORE
+1.0
+['{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n', '{\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+
+  |
+7 | {
+  |  ^
+
+ex.dfy(7,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var f := fact(5);\n', '    var v: nat := 5;\n', '    var x:int := 5;\n', '    var x:int := 5;\n', '    assert fact(5) == 5*4*3*2*1;\n', '    assert fact(4) == 24;\n', '    assert fact(5) == 120;\n', '    var f := fact(5);\n', '    assert fact(5) == 5*4*3*2*1;\n', '    var v: nat := 5;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+
+  |
+8 |     var v: nat := 5;
+  |                     ^
+
+ex.dfy(8,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert v == fact(5);\n', '    assert v ==5;\n', '    assert fact(v) >= 1;\n', '    // A static assertion that "v" is strictly positive.\n', '    assume fact(v) > 0;\n', '    assume fact(v) > 0;\n', '    assert v ==5;\n', '    // Aita kai kanena ektelesa ginomeno se katallilos fact?\n', '    assert v == fact(5);\n', '    assert v == fact(5);\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+
+  |
+9 |     // Aita kai kanena ektelesa ginomeno se katallilos fact?
+  |                                                             ^
+
+ex.dfy(9,60): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1; // True\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n', '    assert fact(v) >= 1;\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+
+   |
+10 |     assert fact(v) >= 1; // True
+   |                                 ^
+
+ex.dfy(10,32): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert fact(v+1) > 1; // True\n', '    assert fact(v+1) >= 1; // True\n', '    assert fact(v) == 120; // False\n', '    assert fact(v+1) >= 1; // True\n', '    assert fact(v+1) >= 1; // True\n', '    assert fact(v) == 120; // False\n', '    assert fact(v+1) >= 1; // True\n', '    assert fact(v+1) >= 1; // True\n', '    assert fact(v) == 120; // False\n', '    assert fact(v+1) >= 1; // True\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+    assert fact(v+1) >= 1; // True
+
+   |
+11 |     assert fact(v+1) >= 1; // True
+   |                                   ^
+
+ex.dfy(11,34): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert fact(v) + 1 >= 1; // True\n', '    assert fact(v) + 1 >= 1; // True\n', '    assert fact(v) + 1 >= 1; // True\n', '    assert fact(v) + 1 >= 1; // False\n', '    assert fact(v) + 1 >= 1; // True\n', '    assert fact(v) + 1 >= 1; // True\n', '    assert fact(v) >= 1 && fact(v+1) >= 1; // True\n', '    assert fact(v) < fact(v+1); // True\n', '    assert fact(v) + 1 >= 1; // False\n', '    assert fact(v) + 1 >= 1; // True\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+    assert fact(v+1) >= 1; // True
+    assert fact(v) + 1 >= 1; // False
+
+   |
+12 |     assert fact(v) + 1 >= 1; // False
+   |                                      ^
+
+ex.dfy(12,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n', '}\n']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+    assert fact(v+1) >= 1; // True
+    assert fact(v) + 1 >= 1; // False
+}
+
+SCORE
+1.0
+['```', '```', '```', '```', '```', '```', '```', '```', '```', '```']
+TEXT
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+    assert fact(v+1) >= 1; // True
+    assert fact(v) + 1 >= 1; // False
+}
+```
+SCORE
+1.0
+CHOSEN SOLUTION
+```dafny
+// A factorial function and a proof that the factorial is always strictly positive.
+function  fact(n:nat):nat
+    ensures fact(n) >= 1
+{ if n == 0 then 1 else n * fact(n-1) }
+
+method test()
+{
+    var v: nat := 5;
+    // Aita kai kanena ektelesa ginomeno se katallilos fact?
+    assert fact(v) >= 1; // True
+    assert fact(v+1) >= 1; // True
+    assert fact(v) + 1 >= 1; // False
+}
+```
+
+STATS
+
+number of nodes: 123
+number of gen nodes: 62 (including leaves: 6)
+number of back nodes: 61 (including leaves: 56)
+
+expansion count: 67 (including failed: 6)
+
