@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer
 from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
 from lang_config import STOP_WORD
-from model_config import BASE_MODEL_NAME, PEFT_MODEL_PATH, PPO_MODEL_PATH, CUSTOM_STOP
+from model_config import BASE_MODEL_NAME, PEFT_MODEL_PATH, PPO_MODEL_PATH, CUSTOM_STOP, BEAM_SEARCH
 from typing import List
 
 
@@ -49,19 +49,32 @@ def stop_words_ids(tokenizer: AutoTokenizer) -> List[int]:
     return [stop_word_id, quote_word_id]
 
 
-def get_model_generation_args(
-    tokenizer: AutoTokenizer, custom_stop: bool = CUSTOM_STOP
+def get_model_generation_token_args(
+        tokenizer: AutoTokenizer, custom_stop: bool = CUSTOM_STOP
 ):
     return dict(
         min_length=5,
-        #top_k=7,
-        top_p=0.9,
-        do_sample=True,
-        temperature=0.9,
-        # streamer=streamer,
         max_new_tokens=100,
         eos_token_id=stop_words_ids(tokenizer)
         if custom_stop
         else tokenizer.eos_token_id,
         pad_token_id=tokenizer.eos_token_id,
     )
+
+def get_model_generation_search_args(
+        num: int,
+        beam_search: bool = BEAM_SEARCH
+):
+    if beam_search:
+        return dict(
+        num_beams=num,
+        num_beam_groups=num,
+        diversity_penalty=0.5,
+        )
+    else:
+        return dict(
+            #top_k=7,
+            top_p=0.9,
+            do_sample=True,
+            temperature=0.9,
+        )

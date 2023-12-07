@@ -21,3 +21,6 @@ PPO_MODEL_PATH = None
 
 # Set to True to use custom stop words:
 CUSTOM_STOP = True
+
+# Set to True to use beam search instead of sampling
+BEAM_SEARCH = False

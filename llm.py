@@ -4,7 +4,7 @@ from typing import List
 if MODEL_HOST == "openai":
     import openai_generate
 
-    def generate(prompt: str, num: str) -> List[str]:
+    def generate(prompt: str, num: int) -> List[str]:
         return openai_generate.generate(prompt, num)
 
 elif MODEL_HOST == "huggingface":
@@ -12,7 +12,7 @@ elif MODEL_HOST == "huggingface":
     import huggingface_generate
 
     _, model, tokenizer = huggingface_generate.load_model()
-    model_generation_args = huggingface_generate.get_model_generation_args(tokenizer)
+    model_generation_token_args = huggingface_generate.get_model_generation_token_args(tokenizer)
 
     def gen(
         prompt, model_generation_args, num=1, return_hiddens=False, **kwargs
@@ -50,7 +50,9 @@ elif MODEL_HOST == "huggingface":
             return rs, layer
         return rs
 
-    def generate(prompt: str, num: str, return_hiddens=False, **kwargs) -> List[str]:
+    def generate(prompt: str, num: int, return_hiddens=False, **kwargs) -> List[str]:
+        model_generation_search_args = huggingface_generate.get_model_generation_search_args(num)
+        model_generation_args = {**model_generation_token_args, **model_generation_search_args}
         return gen(prompt, model_generation_args, num, return_hiddens, **kwargs)
 
 else:
