@@ -7,6 +7,7 @@ from lang import score_func, can_be_solution
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
+from common_stats import stats
 
 montecarlo = MonteCarlo(Node(prompt))
 
@@ -51,3 +52,5 @@ montecarlo.simulate(expansion_count)
 
 print("CHOSEN SOLUTION")
 print(montecarlo.solution)
+
+stats(montecarlo)
