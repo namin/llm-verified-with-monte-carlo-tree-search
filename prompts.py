@@ -23,6 +23,7 @@ else:
 problem_fact = (
     f"""### Spec: In {LANG}, write a factorial function and prove that the factorial is always strictly positive.
 {'''### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: Don't forget to import the Arith module.
 ### Hint: use `Nat.lt_0_1` in the base case of the proof.
