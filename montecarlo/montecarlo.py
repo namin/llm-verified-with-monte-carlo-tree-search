@@ -7,6 +7,8 @@ class MonteCarlo:
         self.solution = None
         self.child_finder = None
         self.node_evaluator = lambda child, montecarlo: None
+        self.stats_expansion_count = 0
+        self.stats_failed_expansion_count = 0
 
     def make_choice(self):
         best_children = []
@@ -51,6 +53,7 @@ class MonteCarlo:
             self.expand(current_node)
 
     def expand(self, node):
+        self.stats_expansion_count += 1
         self.child_finder(node, self)
 
         for child in node.children:
@@ -65,6 +68,8 @@ class MonteCarlo:
 
         if len(node.children):
             node.expanded = True
+        else:
+            self.stats_failed_expansion_count += 1
 
     def random_rollout(self, node):
         self.child_finder(node, self)

@@ -12,6 +12,7 @@ from coq import give_context, short_verifier_feedback
 from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
 from common import limit_depth, max_completion_depth
 from common_diversity import select_diversely
+from common_stats import stats
 
 from transformers import AutoTokenizer
 from model_config import BASE_MODEL_NAME
@@ -140,6 +141,8 @@ def run(prompt = prompt):
 
     print('CHOSEN SOLUTION')
     print(montecarlo.solution)
+
+    stats(montecarlo)
 
     return filter_code(montecarlo.solution)
 
