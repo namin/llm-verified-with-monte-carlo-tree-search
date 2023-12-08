@@ -78,8 +78,14 @@ case _ => 3
     ALL_LANGS,
 )
 
-problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer tha takes an expression and returns an expression with all additions by 0 removed. Then define a predicate holding of optimized expressions. Then prove that the optimizer takes an arbitrary expression (on which the predicate may not hold -- DO NOT USE a requires clause) and returns an expression satisfying that predicate.
-{'''### Hint: Recall that in Dafny, pattern match takes the form
+problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes addition by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+{'''### Hint: Do NOT use `requires` anywhere.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Recall that in Dafny, pattern match takes the form
 match e
 case Foo(x, y) => 1
 case Bar(x) => 2
@@ -97,7 +103,7 @@ case _ => 3
     None,
     22,
     40,
-    CHECK_PROOF, CHECK_CHEAT if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
+    CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ALL_LANGS,
 )
 
