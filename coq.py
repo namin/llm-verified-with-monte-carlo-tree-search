@@ -171,15 +171,24 @@ def pretty_goals(goals):
 
 
 def pretty_goal(goal):
+    name_lst = all_names(goal.hypotheses)
+    names = ", ".join(name_lst)
+    if names != "":
+        names = "\n\n" + names + " as follows."
     assumptions = "\n".join([pretty_hypothesis(h) for h in goal.hypotheses])
     if assumptions == "":
         assumptions = "(none)"
-    return f"### Need to show\n\n{goal.conclusion}\n\n### given assumptions\n\n{assumptions}."
+    return f"### Need to show\n\n{goal.conclusion}\n\n### given assumptions{names}\n\n{assumptions}."
 
 
 def pretty_hypothesis(h):
     return f"{', '.join(h.names)} : {h.type}"
 
+def all_names(hs):
+    r = []
+    for h in hs:
+        r += h.names
+    return r
 
 filter_code = filterCoq
 check_code = checkCoq
