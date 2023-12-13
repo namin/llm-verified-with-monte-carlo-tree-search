@@ -8,6 +8,7 @@ OPENAI_MODEL = "gpt-4"
 BASE_MODEL_NAME = "Phind/Phind-CodeLlama-34B-v2"
 # BASE_MODEL_NAME = "codellama/CodeLlama-34b-hf"
 # BASE_MODEL_NAME = "codellama/CodeLlama-34b-Instruct-hf"
+# BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-base"
 # BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-instruct"
 
 # Provide an optional checkpoint on top of the base model:
