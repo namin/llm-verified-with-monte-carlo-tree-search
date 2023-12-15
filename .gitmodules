@@ -1,0 +1,3 @@
+[submodule "funsearch"]
+	path = funsearch
+	url = https://github.com/namin/funsearch.git
