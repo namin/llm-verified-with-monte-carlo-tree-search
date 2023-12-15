@@ -6,6 +6,7 @@ OPENAI_MODEL = "gpt-4"
 
 # Pick a base model hosted on HuggingFace:
 BASE_MODEL_NAME = "Phind/Phind-CodeLlama-34B-v2"
+BASE_MODEL_NAME = "Phind/Phind-CodeLlama-34B-Python-v1"
 # BASE_MODEL_NAME = "codellama/CodeLlama-34b-hf"
 # BASE_MODEL_NAME = "codellama/CodeLlama-34b-Instruct-hf"
 # BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-base"
@@ -22,7 +23,7 @@ PPO_MODEL_PATH = "./my_ppo_model"
 PPO_MODEL_PATH = None
 
 # Set to True to use custom stop words:
-CUSTOM_STOP = True
+CUSTOM_STOP = False
 
 # Set to True to use beam search instead of sampling
 BEAM_SEARCH = False

@@ -54,7 +54,7 @@ def get_model_generation_token_args(
 ):
     return dict(
         min_length=5,
-        max_new_tokens=100,
+        max_new_tokens=200,
         eos_token_id=stop_words_ids(tokenizer)
         if custom_stop
         else tokenizer.eos_token_id,
