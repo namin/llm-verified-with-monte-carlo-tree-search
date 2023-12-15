@@ -1,5 +1,6 @@
 SHOW_MISTAKES = False
 DIVERSITY = True
+INTERACTIVE = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -12,6 +13,7 @@ from coq import give_context, short_verifier_feedback
 from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
 from common import limit_depth, max_completion_depth
 from common_diversity import select_diversely
+from common_interactive import ask_keep
 from common_stats import stats
 
 from transformers import AutoTokenizer
@@ -32,6 +34,14 @@ class FocusNode:
     def update(self, text):
         code = filter_code(text+"```").lstrip()
         return FocusNode(self.instructions, code, self.hint)
+
+    def update_hint(self, hint):
+        return FocusNode(self.instructions, self.code, self.hint+"\n"+hint)
+
+    def prev_hint(self):
+        if self.hint:
+            return f"## Hints\n{self.hint}\n"
+        return ""
 
     def prev_mistakes(self):
         if SHOW_MISTAKES and mistakes:
@@ -62,6 +72,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 {self.context}
 
 {self.prev_mistakes()}
+{self.prev_hint()}
 
 [/INST]
 ## Code
@@ -88,7 +99,14 @@ bad_words_ids = get_bad_words_ids()
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
-    if DIVERSITY:
+    if INTERACTIVE:
+        texts = llm.generate(text, 10, bad_words_ids=bad_words_ids)
+        inp = ask_keep(text, texts)
+        if isinstance(inp, int):
+            text = texts[inp]
+        else:
+            return (None, 0.9, inp)
+    elif DIVERSITY:
         prev = text
         text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
         print([t[len(prev):] for t in text])
@@ -98,27 +116,28 @@ def generate_complete(focus, montecarlo):
     score = score_func(text)
     if score is not None:
         if score < 0:
-            return (text, score)
+            return (text, score, None)
         else:
             if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = text
-            return (text, score)
+            return (text, score, None)
     else:
-        return (text, 0.3)
+        return (text, 0.3, None)
 
 
 def child_finder(node, montecarlo):
     if limit_depth(node):
         return
 
-    (text, score) = generate_complete(node.state, montecarlo)
+    (text, score, hint) = generate_complete(node.state, montecarlo)
     if score < 0:
         hint = short_verifier_feedback(node.state.text(), text)
         if hint and hint not in mistakes:
             mistakes.append(hint)
         node.update_win_value(-1)
     else:
-        child = Node(node.state.update(text))
+        state = node.state.update(text) if hint is None else node.state.update_hint(hint)
+        child = Node(state)
         node.add_child(child)
         child.update_win_value(score)
         child.update_policy_value(score)
