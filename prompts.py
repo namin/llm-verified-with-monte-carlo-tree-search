@@ -67,7 +67,10 @@ case _ => 3
 ### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
 ### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
 ### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
 ### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
 ''' if LANG=='Coq' else ''
 }""",
     1000,
