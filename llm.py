@@ -7,9 +7,13 @@ if MODEL_HOST == "openai":
     def generate(prompt: str, num: int) -> List[str]:
         return openai_generate.generate(prompt, num)
 
+    def generate_full(prompt: str) -> str:
+        return generate(prompt, 1)[0]
+    
 elif MODEL_HOST == "huggingface":
     import torch
     import huggingface_generate
+    from transformers import TextStreamer
 
     _, model, tokenizer = huggingface_generate.load_model()
     model_generation_token_args = huggingface_generate.get_model_generation_token_args(tokenizer)
@@ -55,5 +59,19 @@ elif MODEL_HOST == "huggingface":
         model_generation_args = {**model_generation_token_args, **model_generation_search_args}
         return gen(prompt, model_generation_args, num, return_hiddens, **kwargs)
 
+    def generate_full(prompt: str, **kwargs) -> str:
+        streamer = TextStreamer(tokenizer)
+        model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
+        model.eval()
+        r = None
+        with torch.no_grad():
+            r = tokenizer.decode(model.generate(**model_input,
+                                                streamer=streamer,
+                                                max_new_tokens=1000,
+                                                **kwargs
+                                                )[0],
+                                 skip_special_tokens=True)
+        return r
+    
 else:
     assert False
