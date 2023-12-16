@@ -43,6 +43,8 @@ pip install -r requirements.txt
 opam init
 opam install coq
 opam install "coq-serapi>=8.10.0+0.7.0"
+opam repo add coq-released https://coq.inria.fr/opam/released
+opam install coq-hammer
 ```
 
 (If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then,
