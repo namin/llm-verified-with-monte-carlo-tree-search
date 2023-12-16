@@ -12,7 +12,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -55,7 +55,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -98,7 +98,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -149,7 +149,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -216,7 +216,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -282,7 +282,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -355,7 +355,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -436,7 +436,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -518,7 +518,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -604,7 +604,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -690,7 +690,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -777,7 +777,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -865,7 +865,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -953,7 +953,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1041,7 +1041,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1129,7 +1129,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1217,7 +1217,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1304,7 +1304,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1391,7 +1391,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1479,7 +1479,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 
@@ -1577,7 +1577,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 Replace the hammer tactic with: sauto 
@@ -1676,7 +1676,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 Replace the hammer tactic with: sauto 
@@ -1763,7 +1763,7 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destrcut e2; hammer.`
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 
 ## Out
 Replace the hammer tactic with: sauto 
