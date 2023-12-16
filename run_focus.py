@@ -1,6 +1,6 @@
 USE_HAMMER = True
 SHOW_MISTAKES = False
-DIVERSITY = True
+DIVERSITY = False
 INTERACTIVE = False
 
 from montecarlo.node import Node
