@@ -1,3 +1,4 @@
+USE_HAMMER = True
 SHOW_MISTAKES = False
 DIVERSITY = True
 INTERACTIVE = False
@@ -58,6 +59,8 @@ Don't do the above mistakes, but DO use`Search` to find lemmas, for example: `Se
         return f"""
 <s>[INST] <<SYS>>
 You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+{'You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.' if USE_HAMMER else ''}
 
 You take a single step and will be given feedback -- listen to the feedback in the instructions.
 <</SYS>>
@@ -152,6 +155,10 @@ def run(prompt = prompt):
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
+    if USE_HAMMER:
+        prompt_code = """From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+""" + prompt_code
     montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
