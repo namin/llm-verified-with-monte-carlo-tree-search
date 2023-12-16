@@ -93,6 +93,20 @@ For the PPO trainer (slow!), do:
 python run_ppo.py
 ```
 
+For a run that selects the next completion diversely, do:
+
+```
+python run_diverse.py
+```
+
+For a more extensive prompt populated with the goal to prove (Coq only) -- do:
+
+```
+python run_focus.py
+```
+
+`run_focus.py` has some configuration option at the top.
+
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
