@@ -87,29 +87,32 @@ def leftAfterErrorHelper(v: str, log: str) -> str:
 
 
 def calculateScore(msg: str) -> Optional[float]:
+    return calculateScoreHelper(msg)
+
+def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filterCoq(msg + "```")
     if v == "":
-        return None
+        return None, v
     r = checkCoq(v)
     if r["status"] == 0:
-        return 1.0
+        return 1.0, v
     log = r["log"]
     print(log)
+    left = leftAfterError(v, log)
+    v0 = v[:len(v)-len(left)]
     if filterCoq(msg) == v:
-        return -1.0
+        return -1.0, v0
     if "There are pending proofs" in log:
-        return 1.0
+        return 1.0, v
     if "Syntax error: [ltac_use_default] expected after [tactic] (in [tactic_command])." in log:
-        return -1.0
+        return -1.0, v0
     if "Syntax" in log or "not found in the current environment" in log or "Cannot find a physical path bound to logical path" in log:
-        left = leftAfterError(v, log)
         if "." in left:
-            return -1.0
+            return -1.0, v0
         else:
-            return None
+            return None, v
     else:
-        return -1.0
-
+        return -1.0, v0
 
 def score_func(sentence: str) -> Optional[float]:
     print("TEXT")
@@ -119,6 +122,13 @@ def score_func(sentence: str) -> Optional[float]:
     print(score)
     return score
 
+def score_func_code(sentence: str) -> (Optional[float], Optional[str]):
+    print("TEXT")
+    print(sentence)
+    score, v = calculateScoreHelper(sentence)
+    print("SCORE")
+    print(score)
+    return score, v
 
 def filterCoq(msg: str) -> str:
     m = re.findall("```([Cc]oq)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
@@ -189,6 +199,31 @@ def all_names(hs):
     for h in hs:
         r += h.names
     return r
+
+def extract_lemma(v):
+    f = io.StringIO()
+    with redirect_stderr(f):
+        r = annotate([v])
+    err = f.getvalue()
+    gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
+    if gs != []:
+        g = gs[-1].goals[0]
+        return g, err
+    return None, err
+
+def lemma_statement(g):
+    s = ""
+    for h in g.hypotheses:
+        s += "forall " + " ".join(h.names) + " : " + h.type + ", "
+    s += g.conclusion
+    return s
+
+def lemma_args(g):
+    return " ".join([" ".join(h.names) for h in g.hypotheses])
+
+def new_conclusion(goal, code):
+    conclusion = goal.conclusion.split(",")[-1].strip() # TODO: a bit crude?
+    return conclusion not in code
 
 filter_code = filterCoq
 check_code = checkCoq

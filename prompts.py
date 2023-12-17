@@ -38,18 +38,43 @@ problem_fact = (
     ALL_LANGS,
 )
 
+problem_opt0_proof_coq = (
+    """
+```Coq
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
 
-problem_opt0_coq_proof_hints = '''
-### Hint: For the proof, do `induction e.`.
-### Hint: The simple cases are by `simpl. reflexivity.`.
-### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
-'''
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
 
-problem_opt0_coq_proof_hints_basic = '''
-### Hint: For the proof, do `induction e.`. Do NOT do `induction e as ...`.
-### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
-### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
-'''
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'])
 
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
@@ -64,10 +89,8 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
-### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
-### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
-### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 ''' if LANG=='Coq' else ''
 }""",
     1000,
@@ -347,6 +370,9 @@ Fixpoint factorial
 """
 #Check Nat.lt_0_1.
 #Check Nat.lt_lt_add_r.
+
+elif LANG == "Coq" and "Proof." in prompt:
+    pass
 
 elif LANG != "Lean4":
     prompt += f"""

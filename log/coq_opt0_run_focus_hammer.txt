@@ -1,0 +1,1516 @@
+
+['ductive Exp : Type :=\n| Const : nat -> Exp\n| Var : string -> Exp\n| Add : Exp -> Exp -> Exp.', ' ADT for arithmetic expressions *)\nInductive Expr : Type :=\n  | Const : nat -> Expr\n  | Var : string -> Expr\n  | Add : Expr -> Expr -> Expr.', 'ductive Expr : Type :=\n  | Const : nat -> Expr\n  | Var : string -> Expr\n  | Add : Expr -> Expr -> Expr.', ' Define the ADT for arithmetic expressions *)\nInductive expr : Type :=\n| Const : nat -> expr\n| Var : string -> expr\n| Add : expr -> expr -> expr.', ' Arithmetic expressions *)\nInductive AExpr : Type :=\n  | AEConst : nat -> AExpr\n  | AEVar : string -> AExpr\n  | AEAdd : AExpr -> AExpr -> AExpr.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+SCORE
+1.0
+['Definition eval (e : Exp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => eval e1 env + eval e2 env\n  end.', 'Fixpoint eval (e : Exp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => eval e1 env + eval e2 env\n  end.', 'Fixpoint evaluate (e : Exp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => evaluate e1 env + evaluate e2 env\n  end.', 'Fixpoint eval (e : Exp) (env : string -> nat) : nat :=\nmatch e with\n| Const n => n\n| Var x => env x\n| Add e1 e2 => eval e1 env + eval e2 env\nend.', 'Fixpoint evaluate (e : Exp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => evaluate e1 env + evaluate e2 env\n  end.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+SCORE
+1.0
+['Fixpoint optimize (e : Exp) : Exp :=\nmatch e with\n| Add (Const 0) e2 => optimize e2\n| Add e1 (Const 0) => optimize e1\n| Add e1 e2 => Add (optimize e1) (optimize e2)\n| _ => e\nend.', 'Fixpoint optimize (e : Exp) : Exp :=\nmatch e with\n| Add e1 (Const 0) => optimize e1\n| Add (Const 0) e2 => optimize e2\n| Add e1 e2 => Add (optimize e1) (optimize e2)\n| _ => e\nend.', 'Fixpoint optimize (e : Exp) : Exp :=\nmatch e with\n| Add e1 (Const 0) => optimize e1\n| Add (Const 0) e2 => optimize e2\n| Add e1 e2 => Add (optimize e1) (optimize e2)\n| _ => e\nend.', 'Fixpoint optimize (e : Exp) : Exp :=\nmatch e with\n| Add e1 (Const 0) => optimize e1\n| Add (Const 0) e2 => optimize e2\n| Add e1 e2 => Add (optimize e1) (optimize e2)\n| _ => e\nend.', 'Fixpoint optimize (e : Exp) : Exp :=\nmatch e with\n| Const _ => e\n| Var _ => e\n| Add e1 e2 =>\n  match optimize e1, optimize e2 with\n  | Const 0, e2 => e2\n  | e1, Const 0 => e1\n  | e1, e2 => Add e1 e2\n  end\nend.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+SCORE
+1.0
+['Theorem optimize_preserves_semantics :\n  forall e env, eval (optimize e) env = eval e env.', 'Theorem optimize_preserves_semantics :\n  forall e env, eval (optimize e) env = eval e env.', 'Theorem optimize_preserves_semantics :\n  forall e env, eval (optimize e) env = eval e env.', 'Theorem optimize_preserves_semantics :\n  forall e env, eval (optimize e) env = eval e env.', 'Theorem optimize_preserves_semantics : forall e env,\n  eval (optimize e) env = eval e env.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+['roof.', 'roof.', 'roof.', 'roof.', 'roof.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (e : Exp) (env : string -> nat),
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+(none).
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+[' intros e env.', ' intros e env.', ' intros e env.', ' intros e env.', 'ntros e env.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (e : Exp) (env : string -> nat),
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+(none).
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+intros e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+['nduction e as [| x | e1 e2 IH1 IH2].\n- (* Const x *) reflexivity.', 'nduction e as [| n | x | e1 e2 IH1 IH2]; simpl.', 'nduction e as [|n |x |e1 e2 IH1 IH2].\n- (* Const n *) reflexivity.', 'nduction e as [| x | e1 e2 IH1 IH2].\n- reflexivity.', 'nduction e as [| n | x | e1 e2 IHe1 IHe2].\n- (* Const n *)\n  reflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+e, env as follows.
+
+e : Exp
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+intros e env.
+induction e as [| n | x | e1 e2 IH1 IH2]; simpl.
+File "./ex.v", line 35, characters 15-40:
+Error: Expects a disjunctive pattern with 3 branches.
+
+
+SCORE
+-1.0
+['nduction e as [| n | x | e1 e2 IHe1 IHe2].\n- (* Const *)\n  reflexivity.', 'nduction e as [| n | x | e1 e2 IH1 IH2].\n- reflexivity.', 'nduction e as [|n |x |e1 e2 IHe1 IHe2].\n- reflexivity.', 'nduction e as [| x | e1 e2 IH1 IH2].\n- reflexivity.', 'nduction e as [|x|e1 e2 IHe1 IHe2].\n- (* Const x *)\n  reflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+e, env as follows.
+
+e : Exp
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+intros e env.
+induction e as [| n | x | e1 e2 IH1 IH2].
+- reflexivity.
+File "./ex.v", line 35, characters 15-40:
+Error: Expects a disjunctive pattern with 3 branches.
+
+
+SCORE
+-1.0
+['ntros e env.', ' intros e env.', ' intros e env.', 'ntros e env.', ' intros e env.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (e : Exp) (env : string -> nat),
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+(none).
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+[' induction e as [|x e1 e2 e].\n  - (* Const *) reflexivity.', ' induction e as [|x|e1 e2 IH1 IH2]; simpl.', ' induction e as [|n |x |e1 e2 IHe1 IHe2].\n  - reflexivity.', ' induction e.', ' induction e as [|x |e1 e2 IH1 IH2].\n  - (* Const *)\n    reflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+eval (optimize e) env = eval e env
+
+### given assumptions
+
+e, env as follows.
+
+e : Exp
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+[' - (* Const *)\n    reflexivity.', ' - reflexivity.', ' - (* Const n *)\n    reflexivity.', ' (* Const *)\n  simpl.', ' - reflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+eval (optimize (Const n)) env = eval (Const n) env
+
+### given assumptions
+
+n, env as follows.
+
+n : nat
+env : string -> nat.
+### Need to show
+
+eval (optimize (Var s)) env = eval (Var s) env
+
+### given assumptions
+
+s, env as follows.
+
+s : string
+env : string -> nat.
+### Need to show
+
+eval (optimize (Add e1 e2)) env = eval (Add e1 e2) env
+
+### given assumptions
+
+e1, e2, env, IHe1, IHe2 as follows.
+
+e1, e2 : Exp
+env : string -> nat
+IHe1 : eval (optimize e1) env = eval e1 env
+IHe2 : eval (optimize e2) env = eval e2 env.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+['eflexivity.', ' reflexivity.', 'eflexivity.', ' reflexivity.', ' reflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+n = n
+
+### given assumptions
+
+n, env as follows.
+
+n : nat
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+[' (* Var *)\n  simpl.', ' (* Var *)\n  simpl.', ' (* Var *)\n  simpl.', ' (* Var *)\n  simpl.', ' (* Var *)\n  simpl.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+n = n
+
+### given assumptions
+
+n, env as follows.
+
+n : nat
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+['eflexivity.', 'eflexivity.', 'eflexivity.', 'eflexivity.', 'eflexivity.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+s, env as follows.
+
+s : string
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl. reflexivity.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+[' (* Add *)\n  simpl.', ' (* Add e1 e2 *)\n  simpl.', ' (* Add *)\n  simpl.', ' (* Add e1 e2 *)\n  simpl.', ' (* Add *)\n  simpl in *. destruct (optimize e1); destruct (optimize e2); hammer.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+s, env as follows.
+
+s : string
+env : string -> nat.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl. reflexivity.
+- (* Add *)
+  simpl in *. destruct (optimize e1); destruct (optimize e2); hammer.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+['ed.', 'ed.', 'ed.', 'ed.', 'ed.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto 
+Replace the hammer tactic with: hauto 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+### Need to show
+
+eval
+  match optimize e1 with
+  | Const 0 => optimize e2
+  | Const (S n0) =>
+      match optimize e2 with
+      | Const 0 => Const (S n0)
+      | Const (S n2) =>
+          Add (Const (S n0)) (Const (S n2))
+      | Var s => Add (Const (S n0)) (Var s)
+      | Add e0 e3 => Add (Const (S n0)) (Add e0 e3)
+      end
+  | Var s =>
+      match optimize e2 with
+      | Const 0 => Var s
+      | Const (S n0) => Add (Var s) (Const (S n0))
+      | Var s0 => Add (Var s) (Var s0)
+      | Add e0 e3 => Add (Var s) (Add e0 e3)
+      end
+  | Add e0 e3 =>
+      match optimize e2 with
+      | Const 0 => Add e0 e3
+      | Const (S n0) => Add (Add e0 e3) (Const (S n0))
+      | Var s => Add (Add e0 e3) (Var s)
+      | Add e4 e5 => Add (Add e0 e3) (Add e4 e5)
+      end
+  end env = eval e1 env + eval e2 env
+
+### given assumptions
+
+e1, e2, env, IHe1, IHe2 as follows.
+
+e1, e2 : Exp
+env : string -> nat
+IHe1 : eval (optimize e1) env = eval e1 env
+IHe2 : eval (optimize e2) env = eval e2 env.
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl. reflexivity.
+- (* Add *)
+  simpl in *. destruct (optimize e1); destruct (optimize e2); hammer.
+Qed.
+SCORE
+1.0
+['``\n\n### Proof steps\n\nIn the proof `optimize_preserves_semantics`, we have three induction cases: Const, Var, and Add.', '`` package com.', '``\n\nThis code defines an ADT for arithmetic expressions, an evaluator, an optimizer, and a theorem that the optimizer preserves the semantics of the evaluator.', '``\n\nThis code defines an ADT for arithmetic expressions, an evaluator, an optimizer, and a proof that the optimizer preserves the semantics.', '``\n\n## Explanation\n\nIn this code, we define an ADT `Exp` for arithmetic expressions with constructors for constants, variables, and binary additions.']
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl. reflexivity.
+- (* Add *)
+  simpl in *. destruct (optimize e1); destruct (optimize e2); hammer.
+Qed.
+```
+
+This code defines an ADT for arithmetic expressions, an evaluator, an optimizer, and a proof that the optimizer preserves the semantics.
+SCORE
+1.0
+CHOSEN SOLUTION
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
+### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
+### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
+### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
+### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
+### Hint: The base cases can be solved by `reflexivity`.
+### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+
+
+
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+
+Inductive Exp : Type :=
+| Const : nat -> Exp
+| Var : string -> Exp
+| Add : Exp -> Exp -> Exp.
+
+Fixpoint eval (e : Exp) (env : string -> nat) : nat :=
+match e with
+| Const n => n
+| Var x => env x
+| Add e1 e2 => eval e1 env + eval e2 env
+end.
+
+Fixpoint optimize (e : Exp) : Exp :=
+match e with
+| Const _ => e
+| Var _ => e
+| Add e1 e2 =>
+  match optimize e1, optimize e2 with
+  | Const 0, e2 => e2
+  | e1, Const 0 => e1
+  | e1, e2 => Add e1 e2
+  end
+end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, eval (optimize e) env = eval e env.
+Proof.
+  intros e env.
+  induction e.
+- (* Const *)
+  simpl. reflexivity.
+- (* Var *)
+  simpl. reflexivity.
+- (* Add *)
+  simpl in *. destruct (optimize e1); destruct (optimize e2); hammer.
+Qed.
+```
+
+This code defines an ADT for arithmetic expressions, an evaluator, an optimizer, and a proof that the optimizer preserves the semantics.
+
+STATS
+
+number of nodes: 31
+number of gen nodes: 16 (including leaves: 2)
+number of back nodes: 15 (including leaves: 14)
+
+expansion count: 17 (including failed: 2)

@@ -43,6 +43,8 @@ pip install -r requirements.txt
 opam init
 opam install coq
 opam install "coq-serapi>=8.10.0+0.7.0"
+opam repo add coq-released https://coq.inria.fr/opam/released
+opam install coq-hammer
 ```
 
 (If you want to use Lean) Install Lean: See detailed instructions [here](https://leanprover-community.github.io/get_started.html). Then,
@@ -91,9 +93,30 @@ For the PPO trainer (slow!), do:
 python run_ppo.py
 ```
 
+For a run that selects the next completion diversely, do:
+
+```
+python run_diverse.py
+```
+
+For a more extensive prompt populated with the goal to prove (Coq only) -- do:
+
+```
+python run_focus.py
+```
+
+For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
+
+```
+python run_meta.py
+```
+
+`run_focus.py` and `run_meta.py` have some configuration options at the top.
+
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
 - The [pySagredo](pySagredo) library is adapted from [zhangir-azerbayev/pySagredo](https://github.com/zhangir-azerbayev/pySagredo).
 - The [leanprover-community/repl](https://github.com/leanprover-community/repl) library is used as a clone.
 - The inspiration comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://codeaimcts.github.io/).
+- `run_meta.py` is inspired by [Tarun Prasad's coq-prover](https://github.com/mtarunpr/coq-prover), and some of the code snippets are adapted from there.
