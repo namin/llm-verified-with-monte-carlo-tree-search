@@ -38,6 +38,20 @@ problem_fact = (
     ALL_LANGS,
 )
 
+problem_mult_proof_coq = (
+    """
+```Coq
+Require Import Arith.
+Theorem mult_lemma6 : forall a b n : nat, n <> 0 -> n * a = n * b -> a = b.
+Proof.
+""",
+    1000,
+    None,
+    4,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'])
+
 problem_1_divides_n_proof_coq = (
     """
 ```Coq
