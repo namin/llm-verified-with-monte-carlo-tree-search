@@ -10,14 +10,12 @@ assert LANG=='Coq'
 from lang import can_be_solution, filter_code
 from coq import score_func_code, give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
 
-from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
+from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_diversity import select_diversely
 from common_interactive import ask_keep
 from common_stats import stats
-
-from transformers import AutoTokenizer
-from model_config import BASE_MODEL_NAME
+from common_bad_words import bad_words_ids
 
 import llm
 
@@ -91,23 +89,6 @@ You take a single step and will be given feedback -- listen to the feedback in t
 
 ```{LANG}
 {self.code}"""
-
-# from https://huggingface.co/docs/transformers/internal/generation_utils#transformers.NoBadWordsLogitsProcessor.example
-
-tokenizer_with_prefix_space = AutoTokenizer.from_pretrained(BASE_MODEL_NAME, add_prefix_space=True)
-
-def get_tokens_as_list(word_list):
-    "Converts a sequence of words into a list of tokens"
-    tokens_list = []
-    for word in word_list:
-        tokenized_word = tokenizer_with_prefix_space([word], add_special_tokens=False).input_ids[0]
-        tokens_list.append(tokenized_word)
-    return tokens_list
-
-def get_bad_words_ids():
-    return get_tokens_as_list([cheat_marker])
-
-bad_words_ids = get_bad_words_ids()
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
