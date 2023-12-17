@@ -1,4 +1,4 @@
-DIVERSITY = False
+DIVERSITY = True
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -20,6 +20,12 @@ from transformers import AutoTokenizer
 from model_config import BASE_MODEL_NAME
 
 import llm
+
+def limit(x):
+    if DIVERSITY:
+        return x[0:200]
+    else:
+        return x
 
 class FocusNode:
     def __init__(self, instructions, code, stack, lemma_counter):
@@ -74,10 +80,10 @@ You take a single step and will be given feedback -- listen to the feedback in t
 {self.instructions}
 
 ## Out
-{self.outlog}
+{limit(self.outlog)}
 
 ## Context
-{self.context}
+{limit(self.context)}
 
 [/INST]
 ## Code
