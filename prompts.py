@@ -38,6 +38,44 @@ problem_fact = (
     ALL_LANGS,
 )
 
+problem_opt0_proof_coq = (
+    """
+```Coq
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'])
+
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
@@ -307,7 +345,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0
+) = problem_opt0_proof_coq
 
 assert LANG in supported_langs
 
@@ -332,6 +370,9 @@ Fixpoint factorial
 """
 #Check Nat.lt_0_1.
 #Check Nat.lt_lt_add_r.
+
+elif LANG == "Coq" and "Proof." in prompt:
+    pass
 
 elif LANG != "Lean4":
     prompt += f"""
