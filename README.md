@@ -96,7 +96,7 @@ python run_ppo.py
 For a run that selects the next completion diversely, do:
 
 ```
-python run_diverse.py
+python run_diversity.py
 ```
 
 For a more extensive prompt populated with the goal to prove (Coq only) -- do:
