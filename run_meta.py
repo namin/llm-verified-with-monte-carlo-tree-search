@@ -1,4 +1,4 @@
-DIVERSITY = True
+USE_HAMMER = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -12,18 +12,12 @@ from coq import score_func_code, give_context, extract_lemma, lemma_statement, l
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
-from common_diversity import select_diversely
+from common_diversity import select_diversely, DIVERSITY, limit
 from common_interactive import ask_keep
 from common_stats import stats
 from common_bad_words import bad_words_ids
 
 import llm
-
-def limit(x):
-    if DIVERSITY:
-        return x[0:200]
-    else:
-        return x
 
 class FocusNode:
     def __init__(self, instructions, code, stack, lemma_counter):
@@ -70,8 +64,8 @@ class FocusNode:
 <s>[INST] <<SYS>>
 You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
 
-You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
-To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+{'''You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.''' if USE_HAMMER else ''}
 
 You take a single step and will be given feedback -- listen to the feedback in the instructions.
 <</SYS>>
@@ -150,7 +144,8 @@ def run(prompt = prompt):
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
-    prompt_code = """From Hammer Require Import Tactics.
+    if USE_HAMMER:
+        prompt_code = """From Hammer Require Import Tactics.
 From Hammer Require Import Hammer.
 Require Import Coq.Strings.String.
 Require Import Arith.

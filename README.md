@@ -111,8 +111,6 @@ For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
 python run_meta.py
 ```
 
-`run_focus.py` and `run_meta.py` have some configuration options at the top.
-
 ## Credits
 
 - The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).

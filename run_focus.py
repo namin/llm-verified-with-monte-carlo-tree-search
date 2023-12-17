@@ -1,6 +1,5 @@
 USE_HAMMER = True
 SHOW_MISTAKES = False
-DIVERSITY = False
 INTERACTIVE = False
 
 from montecarlo.node import Node
@@ -13,7 +12,7 @@ from coq import give_context, short_verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
-from common_diversity import select_diversely
+from common_diversity import select_diversely, DIVERSITY, limit
 from common_interactive import ask_keep
 from common_stats import stats
 from common_bad_words import bad_words_ids
@@ -67,10 +66,10 @@ You take a single step and will be given feedback -- listen to the feedback in t
 {self.instructions}
 
 ## Out
-{self.outlog}
+{limit(self.outlog)}
 
 ## Context
-{self.context}
+{limit(self.context)}
 
 {self.prev_mistakes()}
 {self.prev_hint()}

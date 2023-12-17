@@ -1,3 +1,11 @@
+DIVERSITY = True
+
+def limit(x):
+    if DIVERSITY:
+        return x[0:200]
+    else:
+        return x
+
 import torch
 
 def add_features(features, montecarlo):
