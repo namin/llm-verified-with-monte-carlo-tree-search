@@ -1,7 +1,4 @@
-USE_HAMMER = True
-SHOW_MISTAKES = False
 DIVERSITY = False
-INTERACTIVE = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -23,44 +20,24 @@ from model_config import BASE_MODEL_NAME
 import llm
 
 class FocusNode:
-    def __init__(self, instructions, code, hint):
+    def __init__(self, instructions, code):
         (context, outlog) = give_context(code)
 
         self.instructions = instructions
         self.context = context
         self.code = code
         self.outlog = outlog
-        self.hint = hint
 
     def update(self, text):
         code = filter_code(text+"```").lstrip()
-        return FocusNode(self.instructions, code, self.hint)
-
-    def update_hint(self, hint):
-        return FocusNode(self.instructions, self.code, self.hint+"\n"+hint)
-
-    def prev_hint(self):
-        if self.hint:
-            return f"## Hints\n{self.hint}\n"
-        return ""
-
-    def prev_mistakes(self):
-        if SHOW_MISTAKES and mistakes:
-            mistakes_text = "\n\n".join([f"Do NOT reproduce this snippet:\n{snippet.replace('```', '')}\nIt is wrong:\n{err}" for snippet,err in mistakes])
-            return f"""## Previous Mistakes (NOT TO DO AGAIN)
-
-{mistakes_text}
-
-Don't do the above mistakes, but DO use`Search` to find lemmas, for example: `Search (0 < _).`.
-"""
-        return ""
+        return FocusNode(self.instructions, code)
 
     def text(self):
         return f"""
 <s>[INST] <<SYS>>
-You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs. Do not repeat the previous mistakes.
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
 
-{'You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.' if USE_HAMMER else ''}
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
 
 You take a single step and will be given feedback -- listen to the feedback in the instructions.
 <</SYS>>
@@ -73,9 +50,6 @@ You take a single step and will be given feedback -- listen to the feedback in t
 
 ## Context
 {self.context}
-
-{self.prev_mistakes()}
-{self.prev_hint()}
 
 [/INST]
 ## Code
@@ -102,14 +76,7 @@ bad_words_ids = get_bad_words_ids()
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
-    if INTERACTIVE:
-        texts = llm.generate(text, 10, bad_words_ids=bad_words_ids)
-        inp = ask_keep(text, texts)
-        if isinstance(inp, int):
-            text = texts[inp]
-        else:
-            return (None, 0.9, inp)
-    elif DIVERSITY:
+    if DIVERSITY:
         prev = text
         text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
         print([t[len(prev):] for t in text])
@@ -119,27 +86,24 @@ def generate_complete(focus, montecarlo):
     score = score_func(text)
     if score is not None:
         if score < 0:
-            return (text, score, None)
+            return (text, score)
         else:
             if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = text
-            return (text, score, None)
+            return (text, score)
     else:
-        return (text, 0.3, None)
+        return (text, 0.3)
 
 
 def child_finder(node, montecarlo):
     if limit_depth(node):
         return
 
-    (text, score, hint) = generate_complete(node.state, montecarlo)
+    (text, score) = generate_complete(node.state, montecarlo)
     if score < 0:
-        hint = short_verifier_feedback(node.state.text(), text)
-        if hint and hint not in mistakes:
-            mistakes.append(hint)
         node.update_win_value(-1)
     else:
-        state = node.state.update(text) if hint is None else node.state.update_hint(hint)
+        state = node.state.update(text)
         child = Node(state)
         node.add_child(child)
         child.update_win_value(score)
@@ -150,19 +114,15 @@ def child_finder(node, montecarlo):
         child.update_policy_value(0.2)
 
 def run(prompt = prompt):
-    global mistakes
-    mistakes = []
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
-    if USE_HAMMER:
-        prompt_code = """From Hammer Require Import Tactics.
+    prompt_code = """From Hammer Require Import Tactics.
 From Hammer Require Import Hammer.
 Require Import Coq.Strings.String.
 Require Import Arith.
-
-""" + prompt_code
-    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
+"""
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code)))
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 
