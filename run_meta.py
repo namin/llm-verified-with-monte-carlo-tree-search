@@ -8,7 +8,7 @@ import re
 from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
-from coq import score_func_code, give_context, extract_lemma, lemma_statement, lemma_args
+from coq import score_func_code, give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
 
 from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
 from common import limit_depth, max_completion_depth
@@ -47,8 +47,8 @@ class FocusNode:
         statement = lemma_statement(goal)
         args = lemma_args(goal)
         last_lemma_index = list(re.finditer(r"Lemma|Theorem", code))[-1].start(0)
-        code = code[:last_lemma_index]
         last_lemma = code[last_lemma_index:]
+        code = code[:last_lemma_index]
         last_lemma += f" apply (@{name} {args}).\n"
         stack = [last_lemma] + self.stack
         code += "\n"
@@ -72,6 +72,7 @@ class FocusNode:
 You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
 
 You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
 
 You take a single step and will be given feedback -- listen to the feedback in the instructions.
 <</SYS>>
@@ -135,11 +136,14 @@ def child_finder(node, montecarlo):
 
     (text, score, code) = generate_complete(node.state, montecarlo)
     if score < 0:
-        code = code[:code.rindex('.')]
-        last_cmd_index = list(re.finditer(r"\+|\-|\.", code))[-1].start(0)
-        code = code[:last_cmd_index+1]
-        goal, err = extract_lemma(code)
-        if goal is not None and not err and str(goal.conclusion) not in code:
+        if node.state.stack == []:
+            code = code[:code.rindex('.')]
+            last_cmd_index = list(re.finditer(r"\+|\-|\.", code))[-1].start(0)
+            code = code[:last_cmd_index+1]
+            goal, err = extract_lemma(code)
+        else:
+            goal = None
+        if goal is not None and not err and new_conclusion(goal, code):
             state = node.state.update_lemma(goal, code)
             score = 0.5
         else:

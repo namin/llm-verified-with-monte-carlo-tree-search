@@ -221,5 +221,9 @@ def lemma_statement(g):
 def lemma_args(g):
     return " ".join([" ".join(h.names) for h in g.hypotheses])
 
+def new_conclusion(goal, code):
+    conclusion = goal.conclusion.split(",")[-1].strip() # TODO: a bit crude?
+    return conclusion not in code
+
 filter_code = filterCoq
 check_code = checkCoq
