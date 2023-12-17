@@ -38,19 +38,6 @@ problem_fact = (
     ALL_LANGS,
 )
 
-
-problem_opt0_coq_proof_hints = '''
-### Hint: For the proof, do `induction e.`.
-### Hint: The simple cases are by `simpl. reflexivity.`.
-### Hint: The addition case is by `rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
-'''
-
-problem_opt0_coq_proof_hints_basic = '''
-### Hint: For the proof, do `induction e.`. Do NOT do `induction e as ...`.
-### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
-### Hint: Do rewrite <- on the induction hypotheses, before destructing the optimized expressions.
-'''
-
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
@@ -64,13 +51,8 @@ case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
-### Hint: When doing the proof, look at the Context to guide you in what you need to prove.
-### Hint: For the recursive case, first rewrite <- using the induction hypotheses.
-### Hint: Then destruct on the optimized expressions, and combine with ;, with trying to destruct on the numbers, then combine with eauto using PeanoNat.Nat.add_0_r. You'll need the line `Require Import Arith.`.
-### Hint: You can do `induction e` for the proof. Do not use `as` because it is tricky to get right.
-### Hint: To find the names of the induction hypotheses, look at the assumptions given in the Context.
-### Hint: The base cases can be solved by `reflexivity`.
-### Hint: The recursive addition case can be solved by first rewriting backwards using `rewrite <-` the inductive hypotheses, and then finishing off with `destruct (optimize e1); destruct (optimize e2); hammer.`
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
 ''' if LANG=='Coq' else ''
 }""",
     1000,
