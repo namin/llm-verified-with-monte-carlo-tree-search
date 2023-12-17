@@ -1,4 +1,5 @@
-USE_HAMMER = False
+USE_HAMMER = True
+EXTRACT_LEMMA_DEPTH = 2
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -112,7 +113,7 @@ def child_finder(node, montecarlo):
 
     (text, score, code) = generate_complete(node.state, montecarlo)
     if score < 0:
-        if node.state.stack == []:
+        if len(node.state.stack) < EXTRACT_LEMMA_DEPTH:
             code = code[:code.rindex('.')]
             last_cmd_index = list(re.finditer(r"\+|\-|\.", code))[-1].start(0)
             code = code[:last_cmd_index+1]
