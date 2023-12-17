@@ -87,7 +87,7 @@ def leftAfterErrorHelper(v: str, log: str) -> str:
 
 
 def calculateScore(msg: str) -> Optional[float]:
-    return calculateScoreHelper(msg)
+    return calculateScoreHelper(msg)[0]
 
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filterCoq(msg + "```")
