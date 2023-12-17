@@ -58,6 +58,7 @@ class FocusNode:
         code = filter_code(text+"```").lstrip()
         last_lemma = self.stack[0]
         stack = self.stack[1:]
+        code += "\n\n"
         code += last_lemma
         return FocusNode(self.instructions, code, stack, self.lemma_counter)
                          
