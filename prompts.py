@@ -38,6 +38,27 @@ problem_fact = (
     ALL_LANGS,
 )
 
+problem_1_divides_n_proof_coq = (
+    """
+```Coq
+Require Import Arith.
+Require Import Peano_dec.
+Require Import Compare_dec.
+Require Import Wf_nat.
+ 
+Inductive divides : nat -> nat -> Prop :=
+    dividesDef : forall a b q : nat, b = q * a -> divides a b.
+
+Lemma SO_divides_all : forall n : nat, divides 1 n.
+Proof.
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'])
+
 problem_opt0_proof_coq = (
     """
 ```Coq
