@@ -207,7 +207,8 @@ def extract_lemma(v):
     err = f.getvalue()
     gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
     if gs != []:
-        return lemma_statement(gs[-1].goals[0]), err
+        g = gs[-1].goals[0]
+        return g, err
     return None, err
 
 def lemma_statement(g):
@@ -216,6 +217,9 @@ def lemma_statement(g):
         s += "forall " + " ".join(h.names) + " : " + h.type + ", "
     s += g.conclusion
     return s
+
+def lemma_args(g):
+    return " ".join([" ".join(h.names) for h in g.hypotheses])
 
 filter_code = filterCoq
 check_code = checkCoq

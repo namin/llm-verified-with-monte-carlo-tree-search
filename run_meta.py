@@ -1,4 +1,4 @@
-DIVERSITY = True
+DIVERSITY = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -8,7 +8,7 @@ import re
 from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
-from coq import score_func_code, give_context, extract_lemma
+from coq import score_func_code, give_context, extract_lemma, lemma_statement, lemma_args
 
 from prompts import prompt, expansion_count, min_lines, check_func, cheat_marker
 from common import limit_depth, max_completion_depth
@@ -36,12 +36,23 @@ class FocusNode:
         code = filter_code(text+"```").lstrip()
         return FocusNode(self.instructions, code, self.stack, self.lemma_counter)
 
-    def update_lemma(self, goal, err, code):
-        print('code is', code)
-        print('err is', err)
-        print('goal is', goal)
-        return FocusNode(self.instructions, self.code, self.stack, self.lemma_counter+1)
-    
+    def update_lemma(self, goal, code):
+        name = self.lemma_name(self.lemma_counter)
+        statement = lemma_statement(goal)
+        args = lemma_args(goal)
+        last_lemma_index = list(re.finditer(r"Lemma|Theorem", code))[-1].start(0)
+        code = code[:last_lemma_index]
+        last_lemma = code[last_lemma_index:]
+        last_lemma += f" apply (@{name} {args}).\n"
+        stack = [last_lemma] + self.stack
+        code += "\n"
+        code += f"Lemma {name}: {statement}.\nProof.\n"
+        print(f'Created Lemma {name}.')
+        return FocusNode(self.instructions, code, stack, self.lemma_counter+1)
+
+    def lemma_name(self, counter):
+        return "helper"+str(counter)
+
     def text(self):
         return f"""
 <s>[INST] <<SYS>>
@@ -111,16 +122,13 @@ def child_finder(node, montecarlo):
 
     (text, score, code) = generate_complete(node.state, montecarlo)
     if score < 0:
-        print('code is', code)
         code = code[:code.rindex('.')]
         last_cmd_index = list(re.finditer(r"\+|\-|\.", code))[-1].start(0)
         code = code[:last_cmd_index+1]
-        print('doctored code is', code)
         goal, err = extract_lemma(code)
-        if goal is not None:
-            node.state.update_lemma(goal, err, code)
-            node.update_win_value(-1)
-            return
+        if goal is not None and not err and str(goal.conclusion) not in code:
+            state = node.state.update_lemma(goal, code)
+            score = 0.5
         else:
             node.update_win_value(-1)
             return
