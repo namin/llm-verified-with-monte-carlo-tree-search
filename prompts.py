@@ -178,6 +178,13 @@ Proof.
     CHECK_PROOF, CHECK_CHEAT,
     ['Coq'])
 
+problem_opt0_coq_proof_hints = """
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+"""
+
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
 {'''### Hint: Recall that in Dafny, pattern match takes the form
@@ -192,8 +199,7 @@ case _ => 3
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
-### Hint: For the binary addition case in the proof, you can `destruct` over the sub-expressions and then use `hammer` so like `destruct e1; destruct e2; hammer.`
-''' if LANG=='Coq' else ''
+''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
 }""",
     1000,
     None,
@@ -447,7 +453,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_fact
+) = problem_opt0
 
 assert LANG in supported_langs
 
