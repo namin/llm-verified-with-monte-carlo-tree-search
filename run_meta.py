@@ -50,6 +50,13 @@ class FocusNode:
         print(f'Created Lemma {name}.')
         return FocusNode(self.instructions, code, stack, self.lemma_counter+1)
 
+    def update_pop(self, text):
+        code = filter_code(text+"```").lstrip()
+        last_lemma = self.stack[0]
+        stack = self.stack[1:]
+        code += last_lemma
+        return FocusNode(self.instructions, code, stack, self.lemma_counter)
+                         
     def lemma_name(self, counter):
         return "helper"+str(counter)
 
@@ -133,7 +140,10 @@ def child_finder(node, montecarlo):
             node.update_win_value(-1)
             return
     else:
-        state = node.state.update(text)
+        if text.rstrip().endswith("Qed.") and node.state.stack != []:
+            state = node.state.update_pop(text)
+        else:
+            state = node.state.update(text)
     
     child = Node(state)
     node.add_child(child)
