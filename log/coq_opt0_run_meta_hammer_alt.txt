@@ -1,0 +1,2326 @@
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (e : Expr) (env : string -> nat),
+Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+e, env as follows.
+
+e : Expr
+env : string -> nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall e : Expr, Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+env as follows.
+
+env : string -> nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (env : string -> nat) (e : Expr),
+Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e as [| e1 e2]; simpl.
+File "./ex.v", line 36, characters 17-26:
+Error: Expects a disjunctive pattern with 3 branches.
+
+
+SCORE
+-1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (env : string -> nat) (e : Expr),
+Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e as [| e1 e2 e]; simpl.
+File "./ex.v", line 36, characters 17-28:
+Error: Expects a disjunctive pattern with 3 branches.
+
+
+SCORE
+-1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall e : Expr, Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+env as follows.
+
+env : string -> nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (env : string -> nat) (e : Expr),
+Eval (Optimize e) env = Eval e env
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval (Optimize (Const n)) env = Eval (Const n) env
+
+### given assumptions
+
+env, n as follows.
+
+env : string -> nat
+n : nat.
+### Need to show
+
+Eval (Optimize (Var s)) env = Eval (Var s) env
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+### Need to show
+
+Eval (Optimize (Add e1 e2)) env = Eval (Add e1 e2) env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - intros env.
+File "./ex.v", line 37, characters 11-14:
+Error: env is already used.
+
+
+SCORE
+-1.0
+Created Lemma helper0.
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+(string -> nat) -> forall n : nat, n = n
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+Error: There are pending proofs in file ./ex.v: helper0.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+n = n
+
+### given assumptions
+
+env, n as follows.
+
+env : string -> nat
+n : nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Error: There are pending proofs in file ./ex.v: helper0.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+n = n
+
+### given assumptions
+
+env, n as follows.
+
+env : string -> nat
+n : nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval (Optimize (Const n)) env = Eval (Const n) env
+
+### given assumptions
+
+env, n as follows.
+
+env : string -> nat
+n : nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - apply (@helper0 env n).
+  - apply helper0.
+File "./ex.v", line 45, characters 24-25:
+Error: The variable n was not found in the current environment.
+
+
+SCORE
+-1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval (Optimize (Const n)) env = Eval (Const n) env
+
+### given assumptions
+
+env, n as follows.
+
+env : string -> nat
+n : nat.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl.
+    destruct e0.
+File "./ex.v", line 46, characters 13-15:
+Error: The variable e0 was not found in the current environment.
+
+
+SCORE
+None
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl.
+    destruct e0.
+    + destruct e1.
+File "./ex.v", line 46, characters 13-15:
+Error: The variable e0 was not found in the current environment.
+
+
+SCORE
+-1.0
+Created Lemma helper1.
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (env : string -> nat) (s : string),
+env s = env s
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+Error: There are pending proofs in file ./ex.v: helper1.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Error: There are pending proofs in file ./ex.v: helper1.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+env s = env s
+
+### given assumptions
+
+env, s as follows.
+
+env : string -> nat
+s : string.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - simpl.
+Error:
+There are pending proofs in file ./ex.v: Optimizer_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - simpl. apply (@helper0 env n1).
+  - simpl.
+File "./ex.v", line 53, characters 31-33:
+Error: The variable n1 was not found in the current environment.
+
+
+SCORE
+-1.0
+Created Lemma helper2.
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+forall (env : string -> nat) (e1 e2 : Expr),
+Eval (Optimize e1) env = Eval e1 env ->
+Eval (Optimize e2) env = Eval e2 env ->
+Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env
+
+### given assumptions
+
+(none).
+
+[/INST]
+## Code
+
+```Coq
+
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+Error: There are pending proofs in file ./ex.v: helper2.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+
+
+## Context
+### Need to show
+
+Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Error: There are pending proofs in file ./ex.v: helper2.
+
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+### Need to show
+
+Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Qed.
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+### Need to show
+
+Eval (Optimize (Add e1 e2)) env = Eval (Add e1 e2) env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - apply (@helper2 env e1 e2 IHe1 IHe2).
+    simpl.
+File "./ex.v", line 69, characters 4-10:
+Error: No such goal.
+
+
+SCORE
+-1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+### Need to show
+
+Eval (Optimize (Add e1 e2)) env = Eval (Add e1 e2) env
+
+### given assumptions
+
+env, e1, e2, IHe1, IHe2 as follows.
+
+env : string -> nat
+e1, e2 : Expr
+IHe1 : Eval (Optimize e1) env = Eval e1 env
+IHe2 : Eval (Optimize e2) env = Eval e2 env.
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - apply (@helper2 env e1 e2 IHe1 IHe2).
+Qed.
+SCORE
+1.0
+TEXT
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: hauto lq: on drew: off 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - apply (@helper2 env e1 e2 IHe1 IHe2).
+Qed.
+```
+
+## Out
+
+## Context
+
+The above Coq code defines an expression language for arithmetic expressions with constants and variables, and an evaluation function that interprets these expressions in a given environment.
+SCORE
+1.0
+CHOSEN SOLUTION
+
+ [INST] <<SYS>>
+You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
+
+You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.
+
+You take a single step and will be given feedback -- listen to the feedback in the instructions.
+<</SYS>>
+
+## Instructions
+
+
+## Out
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: hauto lq: on 
+Replace the hammer tactic with: sauto 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: hauto lq: on drew: off 
+Replace the hammer tactic with: sfirstorder 
+Replace the hammer tactic with: sfirstorder 
+
+
+## Context
+
+
+[/INST]
+## Code
+
+```Coq
+From Hammer Require Import Tactics.
+From Hammer Require Import Hammer.
+Require Import Coq.Strings.String.
+Require Import Arith.
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+
+Fixpoint Eval (e : Expr) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => Eval e1 env + Eval e2 env
+  end.
+
+Fixpoint Optimize (e : Expr) : Expr :=
+  match e with
+    | Const n => e
+    | Var x => e
+    | Add e1 e2 =>
+      match e1, e2 with
+        | Const 0, _ => Optimize e2
+        | _, Const 0 => Optimize e1
+        | _, _ => Add (Optimize e1) (Optimize e2)
+      end
+  end.
+
+
+Lemma helper0: forall env : string -> nat, forall n : nat, n = n.
+Proof.
+  intros env n.
+  reflexivity.
+Qed.
+
+
+Lemma helper1: forall env : string -> nat, forall s : string, env s = env s.
+Proof.
+  intros env s.
+  reflexivity.
+Qed.
+
+
+Lemma helper2: forall env : string -> nat, forall e1 e2 : Expr, forall IHe1 : Eval (Optimize e1) env = Eval e1 env, forall IHe2 : Eval (Optimize e2) env = Eval e2 env, Eval
+  match e1 with
+  | Const 0 => Optimize e2
+  | _ =>
+      match e2 with
+      | Const 0 => Optimize e1
+      | _ => Add (Optimize e1) (Optimize e2)
+      end
+  end env = Eval e1 env + Eval e2 env.
+Proof.
+  intros env e1 e2 IHe1 IHe2.
+  destruct e1; destruct e2; try (hammer); subst; auto; subst; auto; subst.
+Qed.
+
+Theorem Optimizer_preserves_semantics :
+  forall e env, Eval (Optimize e) env = Eval e env.
+Proof.
+  intros e env.
+  generalize dependent e.
+  generalize dependent env.
+  induction e.
+  - apply (@helper0 env n).
+  - simpl. apply (@helper1 env s).
+  - apply (@helper2 env e1 e2 IHe1 IHe2).
+Qed.
+```
+
+## Out
+
+## Context
+
+The above Coq code defines an expression language for arithmetic expressions with constants and variables, and an evaluation function that interprets these expressions in a given environment.
+
+STATS
+
+number of nodes: 45
+number of gen nodes: 23 (including leaves: 2)
+number of back nodes: 22 (including leaves: 21)
+
+expansion count: 26 (including failed: 4)
