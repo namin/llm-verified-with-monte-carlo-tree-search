@@ -18,7 +18,7 @@ from common_cache import score_first, create_score_predicate, create_cached_func
 score_func_code = create_cached_func(uncached_score_func_code)
 score_predicate = create_score_predicate(score_first)
 from common_diversity import select_diversely_with_scores, DIVERSITY, limit
-from common_interactive import ask_keep
+from common_interactive import ask_keep, diffprompt
 from common_stats import stats
 from common_bad_words import bad_words_ids
 
@@ -92,16 +92,13 @@ You take a single step and will be given feedback -- listen to the feedback in t
 
 def generate_complete(focus, montecarlo):
     text = focus.text()
+    prev = text
     if DIVERSITY:
-        prev = text
         texts, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
         scores = [score_func_code(text) for text in texts]
-        print([t[len(prev):] for t in texts])
         text, (score, code) = select_diversely_with_scores(texts, scores, score_predicate, features, montecarlo)
     elif EXPLORE_MANY:
-        prev = text
         texts = llm.generate(text, 5, bad_words_ids=bad_words_ids)
-        print([t[len(prev):] for t in texts])
         idx = 0
         for i in range(len(texts)):
             if score_predicate(score_func_code(texts[i])):
@@ -110,8 +107,10 @@ def generate_complete(focus, montecarlo):
         text = texts[idx]
         score, code = score_func_code(text)
     else:
-        text = llm.generate(text, 1, bad_words_ids=bad_words_ids)[0]
+        texts = llm.generate(text, 1, bad_words_ids=bad_words_ids)
+        text = texts[0]
         score, code = score_func_code(text)
+    print(diffprompt(prev, texts))
     if score is not None:
         if score < 0:
             return (text, score, code)
