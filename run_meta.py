@@ -10,11 +10,13 @@ import re
 from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
-from coq import score_func_code, give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
-
+from coq import give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
+from coq import score_func_code as uncached_score_func_code
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
-from common_cache import score_first, create_score_predicate, create_caching_score_func
+from common_cache import score_first, create_score_predicate, create_cached_func
+score_func_code = create_cached_func(uncached_score_func_code)
+score_predicate = create_score_predicate(score_first)
 from common_diversity import select_diversely_with_scores, DIVERSITY, limit
 from common_interactive import ask_keep
 from common_stats import stats
@@ -88,15 +90,12 @@ You take a single step and will be given feedback -- listen to the feedback in t
 ```{LANG}
 {self.code}"""
 
-cached_score_func_code = create_caching_score_func(score_func_code)
-score_predicate = create_score_predicate(score_first)
-
 def generate_complete(focus, montecarlo):
     text = focus.text()
     if DIVERSITY:
         prev = text
         texts, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
-        scores = [cached_score_func_code(text) for text in texts]
+        scores = [score_func_code(text) for text in texts]
         print([t[len(prev):] for t in texts])
         text, (score, code) = select_diversely_with_scores(texts, scores, score_predicate, features, montecarlo)
     elif EXPLORE_MANY:
@@ -105,14 +104,14 @@ def generate_complete(focus, montecarlo):
         print([t[len(prev):] for t in texts])
         idx = 0
         for i in range(len(texts)):
-            if score_predicate(cached_score_func_code(texts[i])):
+            if score_predicate(score_func_code(texts[i])):
                 idx = i
                 break
         text = texts[idx]
-        score, code = cached_score_func_code(text)
+        score, code = score_func_code(text)
     else:
         text = llm.generate(text, 1, bad_words_ids=bad_words_ids)[0]
-        score, code = cached_score_func_code(text)
+        score, code = score_func_code(text)
     if score is not None:
         if score < 0:
             return (text, score, code)

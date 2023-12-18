@@ -14,7 +14,7 @@ def create_score_predicate(f=lambda x: x):
 def score_first(x):
     return x[0]
 
-def create_caching_score_func(f):
+def create_cached_func(f):
     cache = {}
     def fetch(x):
         INITIAL = object()
