@@ -139,7 +139,7 @@ def child_finder(node, montecarlo):
                 code = code[:code.rindex('.')]
             except ValueError:
                 pass
-            last_cmd_index = list(re.finditer(r"\+|\-|\.|((?![^(])\*(?![^)]))", code))[-1].start(0)
+            last_cmd_index = list(re.finditer(r"\+|((?![^<])\-)|\.|((?![^(])\*(?![^)]))", code))[-1].start(0)
             code = code[:last_cmd_index+1]
             print('<CODE>', code)
             print('</CODE>')
