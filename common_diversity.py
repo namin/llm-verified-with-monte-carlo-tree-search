@@ -1,5 +1,7 @@
 DIVERSITY = True
 
+from common_cache import select_with_scores
+
 def limit(x):
     if DIVERSITY:
         return x[0:200]
@@ -38,3 +40,8 @@ def select_diversely(text, features, montecarlo):
 
     add_features(features[idx], montecarlo)
     return text[idx]
+
+def select_diversely_with_scores(texts, scores, score_predicate, features, montecarlo):
+    def select(texts, indices):
+        return select_diversely(texts, features[indices], montecarlo)
+    return select_with_scores(texts, scores, score_predicate, select)
