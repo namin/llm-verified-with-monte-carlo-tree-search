@@ -143,6 +143,9 @@ Proof.
 problem_opt0_proof_coq = (
     """
 ```Coq
+Require Import Coq.Strings.String.
+Require Import Arith.
+
 Inductive Expr : Type :=
   | Const : nat -> Expr
   | Var : string -> Expr
