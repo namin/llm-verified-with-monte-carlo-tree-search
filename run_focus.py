@@ -1,4 +1,4 @@
-USE_HAMMER = False
+USE_HAMMER = True
 SHOW_MISTAKES = False
 INTERACTIVE = False
 

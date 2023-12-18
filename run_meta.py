@@ -1,4 +1,4 @@
-USE_HAMMER = False
+USE_HAMMER = True
 EXTRACT_LEMMA_DEPTH = 1
 EXPLORE_MANY = True
 
@@ -50,6 +50,8 @@ class FocusNode:
         stack = [last_lemma] + self.stack
         code += "\n"
         code += f"Lemma {name}: {statement}.\nProof.\n"
+        if USE_HAMMER:
+            code += "(* do not use induction, try using hammer *)\n"
         print(f'Created Lemma {name}.')
         return FocusNode(self.instructions, code, stack, self.lemma_counter+1)
 
@@ -135,6 +137,8 @@ def child_finder(node, montecarlo):
                 pass
             last_cmd_index = list(re.finditer(r"\+|\-|\.|((?![^(])\*(?![^)]))", code))[-1].start(0)
             code = code[:last_cmd_index+1]
+            print('<CODE>', code)
+            print('</CODE>')
             goal, err = extract_lemma(code+" simpl.")
             if err:
                 print('err', err)
