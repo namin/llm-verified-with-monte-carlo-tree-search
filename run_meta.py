@@ -117,8 +117,12 @@ def generate_complete(focus, montecarlo):
         if score < 0:
             return (text, score, code)
         else:
-            if can_be_solution(text, min_lines, check_func):
-                montecarlo.solution = text
+            if focus.stack == []:
+                if can_be_solution(text, min_lines, check_func):
+                    montecarlo.solution = text
+                if can_be_solution(text+"```", min_lines, check_func):
+                    text = text+"```"
+                    montecarlo.solution = text
             return (text, score, code)
     else:
         return (text, 0.3, code)
