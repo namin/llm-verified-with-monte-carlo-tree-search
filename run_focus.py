@@ -7,15 +7,19 @@ from montecarlo.montecarlo import MonteCarlo
 
 from lang_config import LANG
 assert LANG=='Coq'
-from lang import score_func, can_be_solution, filter_code
+from lang import can_be_solution, filter_code
+from lang import score_func as uncached_score_func
 from coq import give_context, short_verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_diversity import select_diversely, DIVERSITY, limit
-from common_interactive import ask_keep
+from common_interactive import ask_keep, diffprompt
 from common_stats import stats
 from common_bad_words import bad_words_ids
+from common_cache import create_score_predicate, create_cached_func
+score_func = create_cached_func(uncached_score_func)
+score_predicate = create_score_predicate()
 
 import llm
 
@@ -89,14 +93,19 @@ def generate_complete(focus, montecarlo):
             text = texts[inp]
         else:
             return (None, 0.9, inp)
+        score = score_func(text)
     elif DIVERSITY:
         prev = text
-        text, features = llm.generate(text, 5, return_hiddens=True, bad_words_ids=bad_words_ids)
-        print([t[len(prev):] for t in text])
-        text = select_diversely(text, features, montecarlo)
+        texts, features = llm.generate(text, 5, return_hiddens=True)
+        scores = [score_func(text) for text in texts]
+        text, score = select_diversely_with_scores(texts, scores, score_predicate, features, montecarlo)
+        print(diffprompt(prev, texts))
     else:
-        text = llm.generate(text, 1, bad_words_ids=bad_words_ids)[0]
-    score = score_func(text)
+        prev = text
+        texts = llm.generate(text, 1)
+        text = texts[0]
+        score = score_func(text)
+        print(diffprompt(prev, texts))
     if score is not None:
         if score < 0:
             return (text, score, None)
