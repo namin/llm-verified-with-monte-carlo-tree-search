@@ -129,9 +129,15 @@ def child_finder(node, montecarlo):
     (text, score, code) = generate_complete(node.state, montecarlo)
     if score < 0:
         if len(node.state.stack) < EXTRACT_LEMMA_DEPTH:
-            last_cmd_index = list(re.finditer(r"\+|\-|\.", code))[-1].start(0)
+            try:
+                code = code[:code.rindex('.')]
+            except ValueError:
+                pass
+            last_cmd_index = list(re.finditer(r"\+|\-|\.|((?![^(])\*(?![^)]))", code))[-1].start(0)
             code = code[:last_cmd_index+1]
             goal, err = extract_lemma(code+" simpl.")
+            if err:
+                print('err', err)
         else:
             goal = None
         if goal is not None and not err and new_conclusion(goal, code):
