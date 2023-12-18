@@ -14,13 +14,13 @@ def create_score_predicate(f=lambda x: x):
 def score_first(x):
     return x[0]
 
-cache = {}
 def create_caching_score_func(f):
+    cache = {}
     def fetch(x):
-        if x in cache:
-            return cache[x]
-        else:
+        INITIAL = object()
+        y = cache.get(x, INITIAL)
+        if y == INITIAL:
             y = f(x)
             cache[x] = y
-            return y
+        return y
     return fetch
