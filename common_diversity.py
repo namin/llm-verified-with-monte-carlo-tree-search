@@ -1,4 +1,4 @@
-DIVERSITY = False
+DIVERSITY = True
 
 def limit(x):
     if DIVERSITY:

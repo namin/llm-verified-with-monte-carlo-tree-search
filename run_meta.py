@@ -1,4 +1,4 @@
-USE_HAMMER = True
+USE_HAMMER = False
 EXTRACT_LEMMA_DEPTH = 1
 
 from montecarlo.node import Node
