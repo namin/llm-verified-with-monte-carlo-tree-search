@@ -1,4 +1,4 @@
-DIVERSITY = True
+DIVERSITY = False
 
 from common_cache import select_with_scores
 

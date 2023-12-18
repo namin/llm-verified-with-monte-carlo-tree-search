@@ -1,5 +1,6 @@
 USE_HAMMER = False
 EXTRACT_LEMMA_DEPTH = 1
+EXPLORE_MANY = True
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -98,6 +99,17 @@ def generate_complete(focus, montecarlo):
         scores = [cached_score_func_code(text) for text in texts]
         print([t[len(prev):] for t in texts])
         text, (score, code) = select_diversely_with_scores(texts, scores, score_predicate, features, montecarlo)
+    elif EXPLORE_MANY:
+        prev = text
+        texts = llm.generate(text, 5, bad_words_ids=bad_words_ids)
+        print([t[len(prev):] for t in texts])
+        idx = 0
+        for i in range(len(texts)):
+            if score_predicate(cached_score_func_code(texts[i])):
+                idx = i
+                break
+        text = texts[idx]
+        score, code = cached_score_func_code(text)
     else:
         text = llm.generate(text, 1, bad_words_ids=bad_words_ids)[0]
         score, code = cached_score_func_code(text)
