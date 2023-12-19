@@ -24,5 +24,8 @@ PPO_MODEL_PATH = None
 # Set to True to use custom stop words:
 CUSTOM_STOP = True
 
+# Sample the same whether generating one or many samples
+SAME_FOR_MANY_SAMPLES = True
+
 # Set to True to use beam search instead of sampling
 BEAM_SEARCH = False

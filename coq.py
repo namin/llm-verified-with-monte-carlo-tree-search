@@ -6,14 +6,6 @@ from alectryon.serapi import annotate
 import re
 from typing import Optional
 
-
-def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
-    v = filterCoq(msg)
-    r = v.count("\n") >= min_lines
-    if r and check_func:
-        r = check_func(v)
-    return r
-
 def give_context(v: str) -> (str, str):
     r = checkCoq(v, giveDetails=True)
     return ((r["details"] or ""), r["out"])

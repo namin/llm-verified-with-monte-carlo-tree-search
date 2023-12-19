@@ -3,7 +3,6 @@ from lang_config import LANG
 if LANG == "Dafny":
     from dafny import (
         score_func,
-        can_be_solution,
         verifier_feedback,
         filter_code,
         check_code,
@@ -11,7 +10,6 @@ if LANG == "Dafny":
 elif LANG == "Coq":
     from coq import (
         score_func,
-        can_be_solution,
         verifier_feedback,
         filter_code,
         check_code,
@@ -19,7 +17,6 @@ elif LANG == "Coq":
 elif LANG == "Lean4":
     from lean import (
         score_func,
-        can_be_solution,
         verifier_feedback,
         filter_code,
         check_code,
@@ -28,6 +25,12 @@ elif LANG == "Lean4":
 else:
     assert False
 
+def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
+    v = filter_code(msg)
+    r = v.count("\n") >= min_lines
+    if r and check_func:
+        r = check_func(v)
+    return r
 
 def find_largest_new_block(old_text: str, text: str) -> str:
     return find_largest_new_block_code(

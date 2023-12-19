@@ -3,15 +3,6 @@ import requests
 import re
 from typing import Optional
 
-
-def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
-    v = filterDafny(msg)
-    r = v.count("\n") >= min_lines
-    if r and check_func:
-        r = check_func(v)
-    return r
-
-
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     msg = "Consider previous issue"
     if msg in ok:
