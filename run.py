@@ -1,5 +1,3 @@
-import llm
-
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
@@ -14,8 +12,9 @@ from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_stats import stats
 
-montecarlo = MonteCarlo(Node(prompt))
+import llm
 
+montecarlo = MonteCarlo(Node(prompt))
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:

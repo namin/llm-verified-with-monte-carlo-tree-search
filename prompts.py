@@ -9,6 +9,9 @@ elif LANG == "Coq":
 elif LANG == "Lean4":
     proof_marker = "theorem"
     cheat_marker = "sorry"
+elif LANG == "Scala":
+    proof_marker = None
+    cheat_marker = None
 
 if proof_marker:
     CHECK_PROOF = lambda v: proof_marker in v
@@ -456,7 +459,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_fact
+) = problem_opt0
 
 assert LANG in supported_langs
 
