@@ -71,7 +71,7 @@ class FocusNode:
 <s>[INST] <<SYS>>
 You are a Coq programmer that writes functional code and prove properties about it. When you are unsure of which lemmas to use, you use the `Search` function, for example `Search (0 < _).`. You can see the output of the Coq verifier in the Out section, and the context of the current proof, comprising the current goal and assumptions, in the Context section. The assumptions have names that you can use in your proofs.
 
-{'''You can use Coq Hammer, including the tactics `sauto` and `hammer` to attempt to discharge a goal automatically.
+{'''You can use Coq Hammer, including the tactic `hammer` to attempt to discharge a goal automatically.
 To use Coq Hammer effectively, combine it with destruct using `;`: `destruct e1; destruct e2; hammer`.''' if USE_HAMMER else ''}
 
 You take a single step and will be given feedback -- listen to the feedback in the instructions.
