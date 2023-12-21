@@ -1,9 +1,10 @@
-ALL_LANGS = ["Dafny", "Coq", "Lean4", "Scala"]
+ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala"]
 
 # Pick a language:
 LANG = 'Coq'
 # LANG = "Dafny"
 # LANG = "Lean4"
+# LANG = "Rust"
 # LANG = "Scala"
 
 # Set features for the language:
@@ -19,7 +20,7 @@ elif LANG == "Lean4":
     COMMENT = lambda inp: " /- " + inp + " -/ "
     STOP_WORD = "\n\n"
 
-elif LANG == "Scala":
+elif LANG == "Rust" or LANG == "Scala":
     COMMENT = lambda inp: " /* " + inp + " */ "
     STOP_WORD = "\n"
 

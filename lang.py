@@ -21,6 +21,13 @@ elif LANG == "Lean4":
         filter_code,
         check_code,
     )
+elif LANG == "Rust":
+    from rust import (
+        score_func,
+        verifier_feedback,
+        filter_code,
+        check_code,
+    )
 elif LANG == "Scala":
     from scala import (
         score_func,
