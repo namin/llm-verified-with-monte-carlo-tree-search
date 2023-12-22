@@ -13,15 +13,45 @@ elif LANG == "Rust" or LANG == "Scala":
     proof_marker = None
     cheat_marker = None
 
+NO_CHECK_PROOF = lambda v: True
 if proof_marker:
     CHECK_PROOF = lambda v: proof_marker in v
 else:
-    CHECK_PROOF = lambda v: True
+    CHECK_PROOF = NO_CHECK_PROOF
 
+NO_CHECK_CHEAT = lambda v: False
 if cheat_marker:
     CHECK_CHEAT = lambda v: cheat_marker in v
 else:
-    CHECK_CHEAT = lambda v: False
+    CHECK_CHEAT = NO_CHECK_CHEAT
+
+problem_parser_res = (
+    f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition.
+The function should take a string that contains a sequence of integers and '+' symbols, and return its result.
+No characters other than digits and '+' may be in the string.
+Example: "1" evaluates to 1. "1+1" evaluates to 2. "100+3" evaluates to 103. "1+2+3+4+5+8+12" evaluates to 35.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+)
+problem_parser_data = (
+    f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition and multiplication.
+First, create a data structure that stores expressions.
+Then write a function takes a string that contains a sequence of integers and '+', '*' symbols, and return the expression in the data structure you defined earlier.
+Both operators have the same precedence. There are no parentheses.
+No characters other than digits and '+', '*' may be in the string.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+)
 
 problem_fact = (
     f"""### Spec: In {LANG}, write a factorial function and prove that the factorial is always strictly positive.
