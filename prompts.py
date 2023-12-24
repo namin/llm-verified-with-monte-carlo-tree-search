@@ -493,12 +493,15 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 
 assert LANG in supported_langs
 
+def remove_hints2(prompt):
+    return prompt[:prompt.index('### Hint')]
+    
 def remove_hints(prompt):
     lines = prompt.split("\n")
     lines = [line for line in lines if not line.startswith("### Hint: ")]
     return "\n".join(lines)
 
-#prompt = remove_hints(prompt)
+#prompt = remove_hints2(prompt)
 
 if False and 'factorial' in prompt and LANG == "Coq":
     prompt += f"""

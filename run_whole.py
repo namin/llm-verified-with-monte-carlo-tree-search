@@ -1,3 +1,5 @@
+GREEDY = False
+
 from lang import can_be_solution
 from lang import score_func as uncached_score_func
 
@@ -13,7 +15,10 @@ solution_stats = {'yes': 0, 'no': 0}
 solutions = []
 
 def attempt():
-    text = llm.generate_full(prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8)
+    if GREEDY:
+        text = llm.generate_full(prompt)
+    else:
+        text = llm.generate_full(prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8)
     score = score_func(text)
     score_key = "unknown" if score is None else "positive" if score > 0 else "negative"
     score_stats[score_key] += 1
@@ -23,7 +28,7 @@ def attempt():
         solutions.append(text)
 
 def main():
-    for i in range(0, 10):
+    for i in range(0, 1 if GREEDY else 10):
         attempt()
     for solution in solutions:
         print("ONE SOLUTION")
