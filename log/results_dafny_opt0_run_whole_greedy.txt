@@ -1,0 +1,143 @@
+[2023-12-24 13:23:41,013] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+<s> ### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr = Const(val: int)
+             | Var(name: string)
+             | Add(e1: Expr, e2: Expr)
+
+function Evaluate(e: Expr, env: string -> int): int
+{
+   match e
+   case Const(val) => val
+   case Var(name) => env(name)
+   case Add(e1, e2) => Evaluate(e1, env) + Evaluate(e2, env)
+}
+
+function Optimize(e: Expr): Expr
+{
+   match e
+   case Add(Const(0), e2) => Optimize(e2)
+   case Add(e1, Const(0)) => Optimize(e1)
+   case Add(e1, e2) => Add(Optimize(e1), Optimize(e2))
+   case _ => e
+}
+
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+   ensures Evaluate(Optimize(e), env) == Evaluate(e, env)
+{
+   match e
+   case Const(_) =>
+   case Var(_) =>
+   case Add(e1, e2) =>
+       OptimizerPreservesSemantics(e1, env);
+       OptimizerPreservesSemantics(e2, env);
+}
+```
+
+This Dafny program defines an arithmetic expression data type (Expr) with three constructors: Const for constants, Var for variables, and Add for binary addition. The Evaluate function recursively evaluates an expression given an environment that maps variable names to values. The Optimize function recursively optimizes an expression by removing additions by 0. The OptimizerPreservesSemantics lemma proves that the optimization does not change the semantics of the expression, i.e., the result of evaluating the optimized expression is the same as that of the original one.</s>
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr = Const(val: int)
+              | Var(name: string)
+              | Add(e1: Expr, e2: Expr)
+
+function Evaluate(e: Expr, env: string -> int): int
+{
+    match e
+    case Const(val) => val
+    case Var(name) => env(name)
+    case Add(e1, e2) => Evaluate(e1, env) + Evaluate(e2, env)
+}
+
+function Optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => Optimize(e2)
+    case Add(e1, Const(0)) => Optimize(e1)
+    case Add(e1, e2) => Add(Optimize(e1), Optimize(e2))
+    case _ => e
+}
+
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+    ensures Evaluate(Optimize(e), env) == Evaluate(e, env)
+{
+    match e
+    case Const(_) =>
+    case Var(_) =>
+    case Add(e1, e2) =>
+        OptimizerPreservesSemantics(e1, env);
+        OptimizerPreservesSemantics(e2, env);
+}
+```
+
+This Dafny program defines an arithmetic expression data type (Expr) with three constructors: Const for constants, Var for variables, and Add for binary addition. The Evaluate function recursively evaluates an expression given an environment that maps variable names to values. The Optimize function recursively optimizes an expression by removing additions by 0. The OptimizerPreservesSemantics lemma proves that the optimization does not change the semantics of the expression, i.e., the result of evaluating the optimized expression is the same as that of the original one.
+SCORE
+1.0
+ONE SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr = Const(val: int)
+              | Var(name: string)
+              | Add(e1: Expr, e2: Expr)
+
+function Evaluate(e: Expr, env: string -> int): int
+{
+    match e
+    case Const(val) => val
+    case Var(name) => env(name)
+    case Add(e1, e2) => Evaluate(e1, env) + Evaluate(e2, env)
+}
+
+function Optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => Optimize(e2)
+    case Add(e1, Const(0)) => Optimize(e1)
+    case Add(e1, e2) => Add(Optimize(e1), Optimize(e2))
+    case _ => e
+}
+
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+    ensures Evaluate(Optimize(e), env) == Evaluate(e, env)
+{
+    match e
+    case Const(_) =>
+    case Var(_) =>
+    case Add(e1, e2) =>
+        OptimizerPreservesSemantics(e1, env);
+        OptimizerPreservesSemantics(e2, env);
+}
+```
+
+This Dafny program defines an arithmetic expression data type (Expr) with three constructors: Const for constants, Var for variables, and Add for binary addition. The Evaluate function recursively evaluates an expression given an environment that maps variable names to values. The Optimize function recursively optimizes an expression by removing additions by 0. The OptimizerPreservesSemantics lemma proves that the optimization does not change the semantics of the expression, i.e., the result of evaluating the optimized expression is the same as that of the original one.
+{'positive': 1, 'negative': 0, 'unknown': 0}
+{'yes': 1, 'no': 0}
+
+real	1m2.617s
+user	3m19.849s
+sys	0m55.296s
