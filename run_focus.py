@@ -18,7 +18,7 @@ from common_interactive import ask_keep, diffprompt
 from common_stats import stats
 from common_bad_words import bad_words_ids
 from common_cache import create_score_predicate, create_cached_func
-score_func = create_cached_func(uncached_score_func)
+score_func, cache_stats = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
 
 import llm
@@ -161,6 +161,7 @@ Require Import Arith.
     print(montecarlo.solution)
 
     stats(montecarlo)
+    print('cache stats', cache_stats)
 
     return filter_code(montecarlo.solution)
 

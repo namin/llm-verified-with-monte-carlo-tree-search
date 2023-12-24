@@ -13,7 +13,7 @@ from common_diversity import select_diversely_with_scores
 from common_interactive import diffprompt
 from common_stats import stats
 from common_cache import create_score_predicate, create_cached_func
-score_func = create_cached_func(uncached_score_func)
+score_func, cache_stats = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
 
 montecarlo = MonteCarlo(Node(prompt))
@@ -64,3 +64,4 @@ print("CHOSEN SOLUTION")
 print(montecarlo.solution)
 
 stats(montecarlo)
+print('cache stats', cache_stats)

@@ -16,11 +16,15 @@ def score_first(x):
 
 def create_cached_func(f):
     cache = {}
+    stats = {'hit': 0, 'miss': 0}
     def fetch(x):
         INITIAL = object()
         y = cache.get(x, INITIAL)
         if y == INITIAL:
+            stats['miss'] += 1
             y = f(x)
             cache[x] = y
+        else:
+            stats['hit'] += 1
         return y
-    return fetch
+    return fetch, stats
