@@ -22,7 +22,7 @@ def attempt():
     score = score_func(text)
     score_key = "unknown" if score is None else "positive" if score > 0 else "negative"
     score_stats[score_key] += 1
-    solution_key = 'yes' if score > 0 and can_be_solution(text, min_lines, check_func) else 'no'
+    solution_key = 'yes' if score is not None and score > 0 and can_be_solution(text, min_lines, check_func) else 'no'
     solution_stats[solution_key] += 1
     if solution_key == 'yes':
         solutions.append(text)
