@@ -12085,3 +12085,7 @@ lemma OptimizePreservesSemantics(e: Expr, env: string -> int)
 ```
 {'positive': 1, 'negative': 99, 'unknown': 0}
 {'yes': 1, 'no': 99}
+
+real 58m4.985s
+user 60m10.311s
+sys  1m7.270s
