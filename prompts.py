@@ -255,9 +255,9 @@ predicate optimal(e: Expr) {
   case _ => true
 }
 ### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
-### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
 ''' if LANG=='Dafny' else ''
-}{'''### Hint: Do NOT use `requires` anywhere.
+}### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+{'''### Hint: Do NOT use `requires` anywhere.
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: Write the lemma as
 lemma OptimizerOptimal(e: Expr)
@@ -269,8 +269,7 @@ case Foo(x, y) => 1
 case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
-}### Hint: In the optimizer, recursively optimize the sub-expressions.
-{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+}{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
