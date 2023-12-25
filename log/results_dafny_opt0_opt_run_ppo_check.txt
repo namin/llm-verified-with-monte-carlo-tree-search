@@ -1,0 +1,3647 @@
+[2023-12-25 12:30:09,557] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+ITERATION 0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) : optimize(e2)
+
+  |
+6 |   case Add(Const(0), e2) : optimize(e2)
+  |                          ^
+
+ex.dfy(6,25): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) : optimize(e2)
+  case Add(e1, Const(0)): optimize(e1)
+
+  |
+6 |   case Add(Const(0), e2) : optimize(e2)
+  |                          ^
+
+ex.dfy(6,25): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) : optimize(e2)
+  case Add(e1, Const(0)): optimize(e1)
+  case Add(e1, e2)      : Add(optimize(e1), optimize(e2))
+
+  |
+6 |   case Add(Const(0), e2) : optimize(e2)
+  |                          ^
+
+ex.dfy(6,25): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+
+  |
+5 |     match e
+  |            ^
+
+ex.dfy(5,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) : 
+
+  |
+6 |     case Add(Const(0), e2) :
+  |                            ^
+
+ex.dfy(6,27): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) : 
+        return optimize(e2);
+
+  |
+6 |     case Add(Const(0), e2) : 
+  |                            ^
+
+ex.dfy(6,27): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) : 
+        return optimize(e2);
+    case Add(e1, Const(0)) : 
+
+  |
+6 |     case Add(Const(0), e2) : 
+  |                            ^
+
+ex.dfy(6,27): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+
+  |
+5 |     match e
+  |            ^
+
+ex.dfy(5,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) | Add(e2, Const(0)): 
+
+  |
+6 |     case Add(Const(0), e2) | Add(e2, Const(0)):
+  |                                               ^
+
+ex.dfy(6,46): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) | Add(e2, Const(0)): 
+        return optimize(e2);
+
+  |
+6 |     case Add(Const(0), e2) | Add(e2, Const(0)): 
+  |                                               ^
+
+ex.dfy(6,46): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) | Add(e2, Const(0)): 
+        return optimize(e2);
+    case Add(e1, e2): 
+
+  |
+6 |     case Add(Const(0), e2) | Add(e2, Const(0)): 
+  |                                               ^
+
+ex.dfy(6,46): Error: darrow expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+
+  |
+6 |   case Add(e1, e2) =>
+  |                      ^
+
+ex.dfy(6,21): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+
+  |
+7 |     var e1_opt := optimize(e1);
+  |                                ^
+
+ex.dfy(7,31): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+
+  |
+8 |     var e2_opt := optimize(e2);
+  |                                ^
+
+ex.dfy(8,31): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+
+  |
+9 |     if e2_opt == Const(0) then
+  |                               ^
+
+ex.dfy(9,30): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+
+   |
+10 |       e1_opt
+   |             ^
+
+ex.dfy(10,12): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+
+   |
+11 |     else if e1_opt == Const(0) then
+   |                                    ^
+
+ex.dfy(11,35): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+
+   |
+12 |       e2_opt
+   |             ^
+
+ex.dfy(12,12): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+
+   |
+13 |     else
+   |         ^
+
+ex.dfy(13,8): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+
+   |
+14 |       Add(e1_opt, e2_opt)
+   |                          ^
+
+ex.dfy(14,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+  case _ => e
+
+   |
+15 |   case _ => e
+   |              ^
+
+ex.dfy(15,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+  case _ => e
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+  case _ => e
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+  case _ => e
+}
+```
+
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => 
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e2_opt == Const(0) then
+      e1_opt
+    else if e1_opt == Const(0) then
+      e2_opt
+    else
+      Add(e1_opt, e2_opt)
+  case _ => e
+}
+```
+
+
+
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+ITERATION 1
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+
+  |
+5 |     match e
+  |            ^
+
+ex.dfy(5,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+
+  |
+6 |     case Const(i) => e
+  |                       ^
+
+ex.dfy(6,22): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+
+  |
+7 |     case Var(x) => e
+  |                     ^
+
+ex.dfy(7,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+
+  |
+8 |     case Add(e1, e2) =>
+  |                        ^
+
+ex.dfy(8,23): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+
+  |
+9 |         var oe1 := optimize(e1);
+  |                                 ^
+
+ex.dfy(9,32): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+
+   |
+10 |         var oe2 := optimize(e2);
+   |                                 ^
+
+ex.dfy(10,32): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+
+   |
+11 |         if oe2 == Const(0) then oe1
+   |                                    ^
+
+ex.dfy(11,35): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+
+   |
+12 |         else if oe1 == Const(0) then oe2
+   |                                         ^
+
+ex.dfy(12,40): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+
+   |
+13 |         else Add(oe1, oe2)
+   |                           ^
+
+ex.dfy(13,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+}
+
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+}
+
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+}
+
+```
+
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Const(i) => e
+    case Var(x) => e
+    case Add(e1, e2) =>
+        var oe1 := optimize(e1);
+        var oe2 := optimize(e2);
+        if oe2 == Const(0) then oe1
+        else if oe1 == Const(0) then oe2
+        else Add(oe1, oe2)
+}
+
+```
+
+
+
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+ITERATION 2
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+
+  |
+6 |   case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+  |                                                    ^
+
+ex.dfy(6,51): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+    case (Const(0), _) => e2
+
+  |
+6 |   case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+  |                                                    ^
+
+ex.dfy(6,51): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+    case (Const(0), _) => e2
+    case (_, Const(0)) => e1
+
+  |
+6 |   case Add(e1, e2) => (optimize(e1), optimize(e2)) matches {
+  |                                                    ^
+
+ex.dfy(6,51): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+
+  |
+6 |   case Const(i) => e
+  |                     ^
+
+ex.dfy(6,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+
+  |
+7 |   case Var(x) => e
+  |                   ^
+
+ex.dfy(7,18): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+
+  |
+8 |   case Add(e1, e2) =>
+  |                      ^
+
+ex.dfy(8,21): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+
+  |
+9 |     var e1_opt := optimize(e1);
+  |                                ^
+
+ex.dfy(9,31): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+
+   |
+10 |     var e2_opt := optimize(e2);
+   |                                ^
+
+ex.dfy(10,31): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+
+   |
+11 |     if e1_opt == Const(0) then e2_opt
+   |                                      ^
+
+ex.dfy(11,37): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+
+   |
+12 |     else if e2_opt == Const(0) then e1_opt
+   |                                           ^
+
+ex.dfy(12,42): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+    else Add(e1_opt, e2_opt)
+
+   |
+13 |     else Add(e1_opt, e2_opt)
+   |                             ^
+
+ex.dfy(13,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+    else Add(e1_opt, e2_opt)
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+    else Add(e1_opt, e2_opt)
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+    else Add(e1_opt, e2_opt)
+}
+```
+
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_opt := optimize(e1);
+    var e2_opt := optimize(e2);
+    if e1_opt == Const(0) then e2_opt
+    else if e2_opt == Const(0) then e1_opt
+    else Add(e1_opt, e2_opt)
+}
+```
+
+
+
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+ITERATION 3
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+
+  |
+6 |   case Const(i) => e
+  |                     ^
+
+ex.dfy(6,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+
+  |
+7 |   case Var(x) => e
+  |                   ^
+
+ex.dfy(7,18): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+
+  |
+8 |   case Add(e1, e2) =>
+  |                      ^
+
+ex.dfy(8,21): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+
+  |
+9 |     var e1_optimized := optimize(e1);
+  |                                      ^
+
+ex.dfy(9,37): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+
+   |
+10 |     var e2_optimized := optimize(e2);
+   |                                      ^
+
+ex.dfy(10,37): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+
+   |
+11 |     match (e1_optimized, e2_optimized)
+   |                                       ^
+
+ex.dfy(11,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+
+   |
+12 |     case (Const(0), _) => e2_optimized
+   |                                       ^
+
+ex.dfy(12,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+
+   |
+13 |     case (_, Const(0)) => e1_optimized
+   |                                       ^
+
+ex.dfy(13,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+
+   |
+14 |     case _ => Add(e1_optimized, e2_optimized)
+   |                                              ^
+
+ex.dfy(14,45): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+
+   |
+19 | {
+   |  ^
+
+ex.dfy(19,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+
+   |
+20 |   // The proof is by structural induction on the expression e.
+   |                                                               ^
+
+ex.dfy(20,62): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+
+   |
+21 |   if e == Const(0) {
+   |                     ^
+
+ex.dfy(21,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+
+   |
+22 |     // Base case 1: e is a constant 0.
+   |                                       ^
+
+ex.dfy(22,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+
+   |
+23 |   } else if e == Const(1) {
+   |                            ^
+
+ex.dfy(23,27): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+
+   |
+24 |     // Base case 2: e is a constant 1.
+   |                                       ^
+
+ex.dfy(24,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+
+   |
+25 |   } else if e == Var("x") {
+   |                            ^
+
+ex.dfy(25,27): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+
+   |
+26 |     // Base case 3: e is a variable x.
+   |                                       ^
+
+ex.dfy(26,38): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+
+   |
+27 |   } else if e == Add(Const(0), Const(0)) {
+   |                                           ^
+
+ex.dfy(27,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+
+   |
+28 |     // Inductive case 1: e is an addition of two constant 0s.
+   |                                                              ^
+
+ex.dfy(28,61): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+
+   |
+29 |   } else if e == Add(Const(1), Const(0)) {
+   |                                           ^
+
+ex.dfy(29,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+
+   |
+30 |     // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+   |                                                                            ^
+
+ex.dfy(30,75): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+
+   |
+31 |   } else if e == Add(Var("x"), Const(0)) {
+   |                                           ^
+
+ex.dfy(31,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+
+   |
+32 |     // Inductive case 3: e is an addition of a variable x and a constant 0.
+   |                                                                            ^
+
+ex.dfy(32,75): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+
+   |
+33 |   } else {
+   |           ^
+
+ex.dfy(33,10): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+
+   |
+34 |     // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+   |                                                                                  ^
+
+ex.dfy(34,81): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+
+   |
+35 |     // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+   |                                                                                            ^
+
+ex.dfy(35,91): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+
+   |
+36 |     // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+   |                                                                                               ^
+
+ex.dfy(36,94): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+
+   |
+37 |     // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+   |                                                                                             ^
+
+ex.dfy(37,92): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+
+   |
+38 |     // Thus, we have:
+   |                      ^
+
+ex.dfy(38,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+
+   |
+39 |     //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+   |                                                                  ^
+
+ex.dfy(39,65): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+
+   |
+40 |     // By the lemma postcondition, we also have:
+   |                                                 ^
+
+ex.dfy(40,48): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+
+   |
+41 |     //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+   |                                                                      ^
+
+ex.dfy(41,69): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+
+   |
+42 |     // Therefore, the lemma holds by transitivity.
+   |                                                   ^
+
+ex.dfy(42,50): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+  }
+
+   |
+43 |   }
+   |    ^
+
+ex.dfy(43,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+  }
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+  }
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+  }
+}
+```
+
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var e1_optimized := optimize(e1);
+    var e2_optimized := optimize(e2);
+    match (e1_optimized, e2_optimized)
+    case (Const(0), _) => e2_optimized
+    case (_, Const(0)) => e1_optimized
+    case _ => Add(e1_optimized, e2_optimized)
+}
+
+lemma Add_0_elimination(e: Expr)
+  ensures optimize(Add(e, Const(0))) == optimize(e) && optimize(Add(Const(0), e)) == optimize(e)
+{
+  // The proof is by structural induction on the expression e.
+  if e == Const(0) {
+    // Base case 1: e is a constant 0.
+  } else if e == Const(1) {
+    // Base case 2: e is a constant 1.
+  } else if e == Var("x") {
+    // Base case 3: e is a variable x.
+  } else if e == Add(Const(0), Const(0)) {
+    // Inductive case 1: e is an addition of two constant 0s.
+  } else if e == Add(Const(1), Const(0)) {
+    // Inductive case 2: e is an addition of a constant 1 and a constant 0.
+  } else if e == Add(Var("x"), Const(0)) {
+    // Inductive case 3: e is an addition of a variable x and a constant 0.
+  } else {
+    // Inductive case 4: e is an addition of two arbitrary expressions e1 and e2.
+    // By the inductive hypothesis, we know that optimize(e1) and optimize(e2) are equal to
+    // optimize(e1') and optimize(e2') respectively, for some expressions e1' and e2' that are
+    // similar to e1 and e2 but may have been simplified by the recursive calls of optimize.
+    // Thus, we have:
+    //   optimize(Add(e1, e2)) == Add(optimize(e1), optimize(e2))
+    // By the lemma postcondition, we also have:
+    //   optimize(Add(e1', e2')) == Add(optimize(e1'), optimize(e2'))
+    // Therefore, the lemma holds by transitivity.
+  }
+}
+```
+
+
+
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+ITERATION 4
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+
+  |
+5 |     match e
+  |            ^
+
+ex.dfy(5,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+
+  |
+6 |     case Add(Const(0), e2) => optimize(e2)
+  |                                           ^
+
+ex.dfy(6,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+    case Add(e1, Const(0)) => optimize(e1)
+
+  |
+7 |     case Add(e1, Const(0)) => optimize(e1)
+  |                                           ^
+
+ex.dfy(7,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+    case Add(e1, Const(0)) => optimize(e1)
+    case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+
+  |
+8 |     case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  |                                                        ^
+
+ex.dfy(8,55): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+    case Add(e1, Const(0)) => optimize(e1)
+    case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+    case Const(i) | Var(x) => e
+
+  |
+9 |     case Const(i) | Var(x) => e
+  |                                ^
+
+ex.dfy(9,31): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+    case Add(e1, Const(0)) => optimize(e1)
+    case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+    case Const(i) | Var(x) => e
+}
+
+  |
+9 |     case Const(i) | Var(x) => e
+  |                ^
+
+ex.dfy(9,15): Error: Disjunctive patterns may not bind variables
+  |
+9 |     case Const(i) | Var(x) => e
+  |                         ^
+
+ex.dfy(9,24): Error: Disjunctive patterns may not bind variables
+2 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+    match e
+    case Add(Const(0), e2) => optimize(e2)
+    case Add(e1, Const(0)) => optimize(e1)
+    case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+    case Const(i) | Var(x) => e
+}
+```
+
+  |
+9 |     case Const(i) | Var(x) => e
+  |                ^
+
+ex.dfy(9,15): Error: Disjunctive patterns may not bind variables
+  |
+9 |     case Const(i) | Var(x) => e
+  |                         ^
+
+ex.dfy(9,24): Error: Disjunctive patterns may not bind variables
+2 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+  |
+5 |   match e
+  |          ^
+
+ex.dfy(5,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+
+  |
+6 |   case Const(i) => e
+  |                     ^
+
+ex.dfy(6,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+
+  |
+7 |   case Var(x) => e
+  |                   ^
+
+ex.dfy(7,18): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+
+  |
+8 |   case Add(e1, e2) =>
+  |                      ^
+
+ex.dfy(8,21): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+
+  |
+9 |     var newE1 := optimize(e1);
+  |                               ^
+
+ex.dfy(9,30): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+
+   |
+10 |     var newE2 := optimize(e2);
+   |                               ^
+
+ex.dfy(10,30): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+
+   |
+11 |     if newE1 == Const(0) then newE2
+   |                                    ^
+
+ex.dfy(11,35): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+
+   |
+12 |     else if newE2 == Const(0) then newE1
+   |                                         ^
+
+ex.dfy(12,40): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+    else Add(newE1, newE2)
+
+   |
+13 |     else Add(newE1, newE2)
+   |                           ^
+
+ex.dfy(13,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+    else Add(newE1, newE2)
+}
+
+SCORE
+1.0
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+    else Add(newE1, newE2)
+}
+```
+SCORE
+1.0
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+    else Add(newE1, newE2)
+}
+```
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Const(i) => e
+  case Var(x) => e
+  case Add(e1, e2) =>
+    var newE1 := optimize(e1);
+    var newE2 := optimize(e2);
+    if newE1 == Const(0) then newE2
+    else if newE2 == Const(0) then newE1
+    else Add(newE1, newE2)
+}
+```
+
+
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+
+real 89m54.649s
+user 63m26.500s
+sys  31m7.213s
