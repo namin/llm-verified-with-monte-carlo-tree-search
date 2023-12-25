@@ -10,7 +10,8 @@ from common import limit_depth, max_completion_depth
 
 import ppo
 
-n_iter = 5
+n_success_goal = 3
+n_success = 0
 
 class GenNode:
     def __init__(self, text, gens):
@@ -74,6 +75,10 @@ def main_iter():
 
         score = score_func(text+"\n\n"+sanity_check)
         if score is not None:
+            if score > 0:
+                score = score * 10
+                global n_success
+                n_success += 1
             node = montecarlo.solution
             while node:
                 reinforce(node.state.gens, score)
@@ -83,8 +88,10 @@ def main_iter():
 
 
 def main():
-    for i in range(0, n_iter):
+    i = 0
+    while n_success < n_success_goal:
         print("ITERATION", i)
+        i += 1
         main_iter()
 
 

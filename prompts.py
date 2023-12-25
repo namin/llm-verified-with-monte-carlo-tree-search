@@ -275,7 +275,13 @@ predicate optimal(e: Expr) {
 )
 
 problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
-### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+
 
 ```dafny
 datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
