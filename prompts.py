@@ -274,6 +274,43 @@ predicate optimal(e: Expr) {
     ['Dafny'],
 )
 
+problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.[/INST]
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+function optimize(e: Expr): Expr
+{
+""", """
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+"""),
+    500,
+    None,
+    5,
+    15,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Dafny'],
+)
+
 problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
@@ -528,7 +565,12 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0
+) = problem_opt0_opt_dafny_sanity_check
+
+if type(prompt) is tuple:
+    (prompt, sanity_check) = prompt
+else:
+    sanity_check = ""
 
 assert LANG in supported_langs
 
@@ -542,7 +584,10 @@ def remove_hints(prompt):
 
 #prompt = remove_hints2(prompt)
 
-if False and 'factorial' in prompt and LANG == "Coq":
+if sanity_check:
+    pass
+
+elif False and 'factorial' in prompt and LANG == "Coq":
     prompt += f"""
 ### Hint: Use some lemmas provided in Out. You cannot solve the base case by `reflexivity` since `<` is not reflexive. You also need a lemma in the inductive case. Use `apply` to use a lemma.
 
