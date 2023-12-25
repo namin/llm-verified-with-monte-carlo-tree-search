@@ -1,0 +1,5731 @@
+[2023-12-25 14:02:45,197] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+
+  |
+1 | datatype Expr =
+  |                ^
+
+ex.dfy(1,15): Error: invalid NoUSIdentOrDigits
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['datatype Expr =\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+
+SCORE
+1.0
+['  | Const(v: int)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+
+SCORE
+1.0
+['  | Var(name: string)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+SCORE
+1.0
+['  | Add(e1: Expr, e2: Expr)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+
+  |
+6 | predicate optimal(e: Expr) {
+  |                             ^
+
+ex.dfy(6,28): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['predicate optimal(e: Expr) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+
+  |
+7 |   match e
+  |          ^
+
+ex.dfy(7,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+
+  |
+8 |   case Add(Const(0), _) => false
+  |                                 ^
+
+ex.dfy(8,32): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(Const(0), _) => false\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+
+  |
+9 |   case Add(_, Const(0)) => false
+  |                                 ^
+
+ex.dfy(9,32): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(_, Const(0)) => false\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+
+   |
+10 |   case Add(e1, e2) => optimal(e1) && optimal(e2)
+   |                                                 ^
+
+ex.dfy(10,48): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) => optimal(e1) && optimal(e2)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+
+   |
+11 |   case _ => true
+   |                 ^
+
+ex.dfy(11,16): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case _ => true\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+
+SCORE
+1.0
+['function optimize(e: Expr): Expr\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+
+   |
+15 | {
+   |  ^
+
+ex.dfy(15,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+
+   |
+16 |   match e
+   |          ^
+
+ex.dfy(16,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+
+   |
+17 |   case Add(e1, e2) =>
+   |                      ^
+
+ex.dfy(17,21): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+
+   |
+18 |     var oe1 := optimize(e1);
+   |                             ^
+
+ex.dfy(18,28): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var oe1 := optimize(e1);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+
+   |
+19 |     var oe2 := optimize(e2);
+   |                             ^
+
+ex.dfy(19,28): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var oe2 := optimize(e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+
+   |
+20 |     if oe1 == Const(0) then oe2
+   |                                ^
+
+ex.dfy(20,31): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if oe1 == Const(0) then oe2\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+
+   |
+21 |     else if oe2 == Const(0) then oe1
+   |                                     ^
+
+ex.dfy(21,36): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    else if oe2 == Const(0) then oe1\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+
+   |
+22 |     else Add(oe1, oe2)
+   |                       ^
+
+ex.dfy(22,22): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    else Add(oe1, oe2)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+
+   |
+23 |   case _ => e
+   |              ^
+
+ex.dfy(23,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case _ => e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+
+SCORE
+1.0
+['lemma OptimizerOptimal(e: Expr)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+
+SCORE
+1.0
+['  ensures optimal(optimize(e))\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+
+   |
+28 | {
+   |  ^
+
+ex.dfy(28,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case: If e is not an addition, then it is already optimal.
+
+   |
+29 |   // Base case: If e is not an addition, then it is already optimal.
+   |                                                                     ^
+
+ex.dfy(29,68): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Base case: If e is not an addition, then it is already optimal.\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case: If e is not an addition, then it is already optimal.
+  if e is Add then
+
+   |
+30 |   if e is Add then
+   |               ^
+
+ex.dfy(30,14): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if e is Add then\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case: If e is not an addition, then it is already optimal.
+  if e is Add then
+  {
+
+   |
+30 |   if e is Add then
+   |               ^
+
+ex.dfy(30,14): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case: If e is not an addition, then it is already optimal.
+  if e is Add then
+  {
+    // Recursive case: Optimize the sub-expressions and then check the
+
+   |
+30 |   if e is Add then
+   |               ^
+
+ex.dfy(30,14): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    // Recursive case: Optimize the sub-expressions and then check the\n']
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+
+   |
+29 |   // Proof by structural induction on e
+   |                                        ^
+
+ex.dfy(29,39): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Proof by structural induction on e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+
+   |
+30 |   if e == Const(_) {
+   |                     ^
+
+ex.dfy(30,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if e == Const(_) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+
+   |
+31 |     // Base case for constants
+   |                               ^
+
+ex.dfy(31,30): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Base case for constants\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+
+   |
+32 |   } else if e == Var(_) {
+   |                          ^
+
+ex.dfy(32,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Var(_) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+
+   |
+33 |     // Base case for variables
+   |                               ^
+
+ex.dfy(33,30): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Base case for variables\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+
+   |
+34 |   } else if e == Add(_, _) {
+   |                             ^
+
+ex.dfy(34,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(_, _) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+
+   |
+35 |     // Inductive case for addition
+   |                                   ^
+
+ex.dfy(35,34): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Inductive case for addition\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+
+   |
+36 |     var e1 := e.e1;
+   |                    ^
+
+ex.dfy(36,19): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var e1 := e.e1;\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+
+   |
+37 |     var e2 := e.e2;
+   |                    ^
+
+ex.dfy(37,19): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var e2 := e.e2;\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+    // Recursive call
+
+   |
+38 |     // Recursive call
+   |                      ^
+
+ex.dfy(38,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Recursive call\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+    // Recursive call
+    OptimizerOptimal(e1);
+
+   |
+39 |     OptimizerOptimal(e1);
+   |                          ^
+
+ex.dfy(39,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e1);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+    // Recursive call
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+
+   |
+40 |     OptimizerOptimal(e2);
+   |                          ^
+
+ex.dfy(40,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+    // Recursive call
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+
+   |
+41 |   }
+   |    ^
+
+ex.dfy(41,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  if e == Const(_) {
+    // Base case for constants
+  } else if e == Var(_) {
+    // Base case for variables
+  } else if e == Add(_, _) {
+    // Inductive case for addition
+    var e1 := e.e1;
+    var e2 := e.e2;
+    // Recursive call
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+}
+
+   |
+30 |   if e == Const(_) {
+   |                 ^
+
+ex.dfy(30,16): Error: unresolved identifier: _
+   |
+32 |   } else if e == Var(_) {
+   |                      ^
+
+ex.dfy(32,21): Error: unresolved identifier: _
+   |
+34 |   } else if e == Add(_, _) {
+   |                      ^
+
+ex.dfy(34,21): Error: unresolved identifier: _
+   |
+34 |   } else if e == Add(_, _) {
+   |                         ^
+
+ex.dfy(34,24): Error: unresolved identifier: _
+4 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['  ensures optimal(optimize(e))\n']
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+
+   |
+29 |   // Base case
+   |               ^
+
+ex.dfy(29,14): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Base case\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+
+   |
+30 |   if e == Const(0) || e == Var(0)
+   |                                  ^
+
+ex.dfy(30,33): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if e == Const(0) || e == Var(0)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+
+   |
+31 |   {
+   |    ^
+
+ex.dfy(31,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+
+   |
+32 |   }
+   |    ^
+
+ex.dfy(32,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+
+   |
+33 |   else
+   |       ^
+
+ex.dfy(33,6): Error: invalid IfStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  else\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+
+   |
+34 |   {
+   |    ^
+
+ex.dfy(34,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+
+   |
+35 |     // Recursive case
+   |                      ^
+
+ex.dfy(35,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Recursive case\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+
+   |
+36 |     assert e == Add(e1, e2);
+   |                             ^
+
+ex.dfy(36,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert e == Add(e1, e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+
+   |
+37 |     var oe1 := optimize(e1);
+   |                             ^
+
+ex.dfy(37,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var oe1 := optimize(e1);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+
+   |
+38 |     var oe2 := optimize(e2);
+   |                             ^
+
+ex.dfy(38,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var oe2 := optimize(e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    OptimizerOptimal(e1);
+
+   |
+39 |     OptimizerOptimal(e1);
+   |                          ^
+
+ex.dfy(39,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e1);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+
+   |
+40 |     OptimizerOptimal(e2);
+   |                          ^
+
+ex.dfy(40,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+
+   |
+41 |   }
+   |    ^
+
+ex.dfy(41,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(0)
+  {
+  }
+  else
+  {
+    // Recursive case
+    assert e == Add(e1, e2);
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+}
+
+   |
+36 |     assert e == Add(e1, e2);
+   |                     ^^
+
+ex.dfy(36,20): Error: unresolved identifier: e1
+   |
+36 |     assert e == Add(e1, e2);
+   |                         ^^
+
+ex.dfy(36,24): Error: unresolved identifier: e2
+   |
+37 |     var oe1 := optimize(e1);
+   |                         ^^
+
+ex.dfy(37,24): Error: unresolved identifier: e1
+   |
+38 |     var oe2 := optimize(e2);
+   |                         ^^
+
+ex.dfy(38,24): Error: unresolved identifier: e2
+   |
+39 |     OptimizerOptimal(e1);
+   |                      ^^
+
+ex.dfy(39,21): Error: unresolved identifier: e1
+   |
+40 |     OptimizerOptimal(e2);
+   |                      ^^
+
+ex.dfy(40,21): Error: unresolved identifier: e2
+   |
+30 |   if e == Const(0) || e == Var(0)
+   |                            ^^^
+
+ex.dfy(30,27): Error: incorrect argument type for datatype constructor parameter 'name' (expected string, found int)
+7 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['{\n']
+['  // Base case\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(_) then
+
+   |
+30 |   if e == Const(0) || e == Var(_) then
+   |                                   ^
+
+ex.dfy(30,34): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if e == Const(0) || e == Var(_) then\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(_) then
+  {
+
+   |
+30 |   if e == Const(0) || e == Var(_) then
+   |                                   ^
+
+ex.dfy(30,34): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) || e == Var(_) then
+  {
+    // nothing to optimize
+
+   |
+30 |   if e == Const(0) || e == Var(_) then
+   |                                   ^
+
+ex.dfy(30,34): Error: lbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    // nothing to optimize\n']
+['lemma OptimizerOptimal(e: Expr)\n']
+['  ensures optimal(optimize(e))\n']
+['{\n']
+['  // Base case\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+
+   |
+30 |   if e == Const(0) {
+   |                     ^
+
+ex.dfy(30,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if e == Const(0) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+
+   |
+31 |   } else if e == Var("x") {
+   |                            ^
+
+ex.dfy(31,27): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Var("x") {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+
+   |
+32 |   } else if e == Add(Const(0), Var("x")) {
+   |                                           ^
+
+ex.dfy(32,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(Const(0), Var("x")) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+
+   |
+33 |   } else if e == Add(Var("x"), Const(0)) {
+   |                                           ^
+
+ex.dfy(33,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(Var("x"), Const(0)) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+
+   |
+34 |   } else if e == Add(Const(0), Const(0)) {
+   |                                           ^
+
+ex.dfy(34,42): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(Const(0), Const(0)) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+
+   |
+35 |   } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+   |                                                          ^
+
+ex.dfy(35,57): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+
+   |
+36 |   } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+   |                                                          ^
+
+ex.dfy(36,57): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+
+   |
+37 |   } else {
+   |           ^
+
+ex.dfy(37,10): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  } else {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+
+   |
+38 |     // Recursive case
+   |                      ^
+
+ex.dfy(38,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Recursive case\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+
+   |
+39 |     var oe := optimize(e);
+   |                           ^
+
+ex.dfy(39,26): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    var oe := optimize(e);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+
+   |
+40 |     if e == Add(Var("x"), Var("y")) {
+   |                                      ^
+
+ex.dfy(40,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if e == Add(Var("x"), Var("y")) {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+
+   |
+41 |     } else {
+   |             ^
+
+ex.dfy(41,12): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    } else {\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+      OptimizerOptimal(Var("x"));
+
+   |
+42 |       OptimizerOptimal(Var("x"));
+   |                                  ^
+
+ex.dfy(42,33): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['      OptimizerOptimal(Var("x"));\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+      OptimizerOptimal(Var("x"));
+      OptimizerOptimal(Var("y"));
+
+   |
+43 |       OptimizerOptimal(Var("y"));
+   |                                  ^
+
+ex.dfy(43,33): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['      OptimizerOptimal(Var("y"));\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+      OptimizerOptimal(Var("x"));
+      OptimizerOptimal(Var("y"));
+    }
+
+   |
+44 |     }
+   |      ^
+
+ex.dfy(44,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+      OptimizerOptimal(Var("x"));
+      OptimizerOptimal(Var("y"));
+    }
+  }
+
+   |
+45 |   }
+   |    ^
+
+ex.dfy(45,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Base case
+  if e == Const(0) {
+  } else if e == Var("x") {
+  } else if e == Add(Const(0), Var("x")) {
+  } else if e == Add(Var("x"), Const(0)) {
+  } else if e == Add(Const(0), Const(0)) {
+  } else if e == Add(Const(0), Add(Var("x"), Const(0))) {
+  } else if e == Add(Add(Const(0), Var("x")), Const(0)) {
+  } else {
+    // Recursive case
+    var oe := optimize(e);
+    if e == Add(Var("x"), Var("y")) {
+    } else {
+      OptimizerOptimal(Var("x"));
+      OptimizerOptimal(Var("y"));
+    }
+  }
+}
+
+ex.dfy(42,6): Error: cannot prove termination; try supplying a decreases clause
+   |
+42 |       OptimizerOptimal(Var("x"));
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(43,6): Error: cannot prove termination; try supplying a decreases clause
+   |
+43 |       OptimizerOptimal(Var("y"));
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 2 verified, 2 errors
+
+SCORE
+-1.0
+['}\n']
+['{\n']
+['  // Proof by structural induction on e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+
+   |
+30 |   match e
+   |          ^
+
+ex.dfy(30,9): Error: invalid MatchStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+
+   |
+31 |   case Const(_) =>
+   |                   ^
+
+ex.dfy(31,18): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Const(_) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+
+   |
+32 |   case Var(_) =>
+   |                 ^
+
+ex.dfy(32,16): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Var(_) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+
+   |
+33 |   case Add(e1, e2) =>
+   |                      ^
+
+ex.dfy(33,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+
+   |
+34 |     // Base case: optimal(optimize(e)) holds for e1 and e2
+   |                                                           ^
+
+ex.dfy(34,58): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    // Base case: optimal(optimize(e)) holds for e1 and e2\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+    OptimizerOptimal(e1);
+
+   |
+35 |     OptimizerOptimal(e1);
+   |                          ^
+
+ex.dfy(35,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e1);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+
+   |
+36 |     OptimizerOptimal(e2);
+   |                          ^
+
+ex.dfy(36,25): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerOptimal(e2);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+
+SCORE
+1.0
+['  }\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+``` #include "stdafx.h"
+
+SCORE
+1.0
+['``` #include "stdafx.h"\n']
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr =
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(e1, e2) =>
+    var oe1 := optimize(e1);
+    var oe2 := optimize(e2);
+    if oe1 == Const(0) then oe2
+    else if oe2 == Const(0) then oe1
+    else Add(oe1, oe2)
+  case _ => e
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  // Proof by structural induction on e
+  match e
+  case Const(_) =>
+  case Var(_) =>
+  case Add(e1, e2) =>
+    // Base case: optimal(optimize(e)) holds for e1 and e2
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  }
+``` #include "stdafx.h"
+
+
+STATS
+
+number of nodes: 33
+number of gen nodes: 17 (including leaves: 3)
+number of back nodes: 16 (including leaves: 14)
+
+expansion count: 21 (including failed: 5)
+
+cache stats {'hit': 11, 'miss': 89}
+
+real	3m23.737s
+user	5m43.399s
+sys	1m17.697s
