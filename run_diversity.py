@@ -19,9 +19,13 @@ score_predicate = create_score_predicate()
 montecarlo = MonteCarlo(Node(prompt))
 montecarlo.global_features = None
 
+calls_to_generate = 0
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
+    global calls_to_generate
+    calls_to_generate += 1
+    
     prev = text
     texts, features = llm.generate(text, 5, return_hiddens=True)
     scores = [score_func(text) for text in texts]
@@ -65,3 +69,4 @@ print(montecarlo.solution)
 
 stats(montecarlo)
 print('cache stats', cache_stats)
+print('calls to generate', calls_to_generate)
