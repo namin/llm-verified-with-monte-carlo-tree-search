@@ -10,7 +10,7 @@ from common import limit_depth, max_completion_depth
 
 import ppo
 
-n_iter = 10
+n_iter = 5
 
 class GenNode:
     def __init__(self, text, gens):
@@ -74,7 +74,6 @@ def main_iter():
 
         score = score_func(text+"\n\n"+sanity_check)
         if score is not None:
-            score = score * 10
             node = montecarlo.solution
             while node:
                 reinforce(node.state.gens, score)
