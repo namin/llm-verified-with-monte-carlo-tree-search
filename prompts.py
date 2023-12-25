@@ -245,6 +245,35 @@ case _ => 3
     ALL_LANGS,
 )
 
+problem_opt0_opt_dafny = ("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+### Hint: Do NOT use `requires` anywhere.
+### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
+    ['Dafny'],
+)
+
 problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
