@@ -44,7 +44,9 @@ ppo_trainer = PPOTrainer(
 )
 
 
-model_generation_args = huggingface_generate.get_model_generation_args(tokenizer)
+model_generation_token_args = huggingface_generate.get_model_generation_token_args(tokenizer)
+model_generation_search_args = huggingface_generate.get_model_generation_search_args(1)
+model_generation_args = {**model_generation_token_args, **model_generation_search_args}
 model_generation_args["min_length"] = -1
 model_generation_args["top_k"] = 0.0
 model_generation_args["top_p"] = 1.0
