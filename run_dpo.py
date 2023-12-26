@@ -14,7 +14,7 @@ _, model_ref, _ = huggingface_generate.load_model()
 
 training_args = TrainingArguments(
     per_device_train_batch_size=1, #4
-    max_steps=100, #1000
+    max_steps=20, #1000
     remove_unused_columns=False,
     gradient_accumulation_steps=1,
     learning_rate=1e-3,
@@ -40,9 +40,9 @@ peft_config = LoraConfig(
 dpo_trainer = DPOTrainer(
     model,
     model_ref,
-    loss_type="ipo",
+    #loss_type="ipo",
     args=training_args,
-    beta=0.1, #0.1
+    beta=0.5, #0.1
     train_dataset=train_dataset,
     eval_dataset=eval_dataset,
     tokenizer=tokenizer,

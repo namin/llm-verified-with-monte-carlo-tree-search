@@ -704,7 +704,7 @@ def remove_hints(prompt):
 
 #prompt = remove_hints3(prompt)
 
-if sanity_check:
+if prompt.count("```") % 2 == 1:
     pass
 
 elif False and 'factorial' in prompt and LANG == "Coq":
