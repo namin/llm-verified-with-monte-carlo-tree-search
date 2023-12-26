@@ -4,13 +4,13 @@
 "chosen":
 "   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```",
 "rejected":
-"  match e\n  case Const(i): i\n  case Var(x): env(x)\n  case Add(e1, e2): eval(e1, env) + eval(e2, env)\n}```"
+"  match e\n  case Const(i): i\n  case Var(x): env(x)\n  case Add(e1, e2): eval(e1, env) + eval(e2, env)\n}\n```"
 }
 {
 "prompt":
 "In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\nfunction eval(e: Expr, env: string -> int): int\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```\n\n\n\nAn optimizer taking an expression and returning an expression with all additions by 0 removed.\nIn the addition case, the `optimize` function first recursively optimize the sub-expressions, then matches against the the optimized sub-expressions to check for constants 0.\n\n```dafny\nfunction optimize(e: Expr): Expr\n{\n",
 "chosen":
-"   match e\n   {\n      case Add(e1, e2) =>\n         var e1_opt := optimize(e1);\n         var e2_opt := optimize(e2);\n         if e1_opt == Const(0) then e2_opt\n         else if e2_opt == Const(0) then e1_opt\n         else Add(e1_opt, e2_opt)\n      case _ => e\n   }\n}```",
+"   match e\n   {\n      case Add(e1, e2) =>\n         var e1_opt := optimize(e1);\n         var e2_opt := optimize(e2);\n         if e1_opt == Const(0) then e2_opt\n         else if e2_opt == Const(0) then e1_opt\n         else Add(e1_opt, e2_opt)\n      case _ => e\n   }\n}\n```",
 "rejected":
 "   match e\n   {\n      case Add(Const(0), e2) => optimize(e2)\n      case Add(e1, Const(0)) => optimize(e1)\n      case Add(e1, e2) => Add(optimize(e1), optimize(e2))\n      case _ => e\n   }\n}\n```"
 }
