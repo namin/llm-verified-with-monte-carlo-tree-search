@@ -29,3 +29,11 @@ SAME_FOR_MANY_SAMPLES = True
 
 # Set to True to use beam search instead of sampling
 BEAM_SEARCH = False
+
+# Can set to None
+MODEL_ARG_TOP_K = 0.0
+MODEL_ARG_TOP_P = 1.0
+MODEL_ARG_TEMP = 1.0
+MODEL_ARG_TOP_K = None
+MODEL_ARG_TOP_P = None
+MODEL_ARG_TEMP = None

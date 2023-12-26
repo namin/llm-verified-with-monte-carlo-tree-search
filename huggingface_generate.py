@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer
 from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
 from lang_config import STOP_WORD
-from model_config import BASE_MODEL_NAME, PEFT_MODEL_PATH, PPO_MODEL_PATH, CUSTOM_STOP, SAME_FOR_MANY_SAMPLES, BEAM_SEARCH
+from model_config import BASE_MODEL_NAME, PEFT_MODEL_PATH, PPO_MODEL_PATH, CUSTOM_STOP, SAME_FOR_MANY_SAMPLES, BEAM_SEARCH, MODEL_ARG_TOP_K, MODEL_ARG_TOP_P, MODEL_ARG_TEMP
 from typing import List
 
 
@@ -73,8 +73,8 @@ def get_model_generation_search_args(
         )
     else:
         return dict(
-            top_k=50 if num>1 and not SAME_FOR_MANY_SAMPLES else 7,
-            top_p=0.9,
+            top_k=MODEL_ARG_TOP_K if MODEL_ARG_TOP_K is not None else 50 if num>1 and not SAME_FOR_MANY_SAMPLES else 7,
+            top_p=MODEL_ARG_TOP_P if MODEL_ARG_TOP_P is not None else 0.9,
             do_sample=True,
-            temperature=0.9 if num>1 and not SAME_FOR_MANY_SAMPLES else 0.8,
+            temperature=MODEL_ARG_TEMP if MODEL_ARG_TEMP is not None else 0.9 if num>1 and not SAME_FOR_MANY_SAMPLES else 0.8,
         )
