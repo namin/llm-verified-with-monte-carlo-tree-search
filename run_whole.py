@@ -1,4 +1,4 @@
-GREEDY = False
+GREEDY = True
 
 from lang import can_be_solution
 from lang import score_func as uncached_score_func

@@ -362,6 +362,65 @@ lemma OptimizerOptimal(e: Expr)
     ['Dafny'],
 )
 
+problem_opt0_dafny_sanity_check = (("""In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.
+
+```dafny
+datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
+```
+
+An evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.
+
+```dafny
+function eval(e: Expr, env: string -> int): int
+{
+"""
+, ["",
+   """
+
+An optimizer taking an expression and returning an expression with all additions by 0 removed. It is optimal.
+
+```dafny
+function optimize(e: Expr): Expr
+{
+""", """
+```dafny
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+{
+  match e
+  case Add(e1, e2) =>
+    OptimizerOptimal(e1);
+    OptimizerOptimal(e2);
+  case _ =>
+}
+```
+""", """
+
+A lemma proving that the optimizer preserves the semantics.
+
+```dafny
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+ensures eval(optimize(e), env) == eval(e, env)
+{
+}
+"""
+]),
+    500,
+    None,
+    5,
+    15,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Dafny'],
+)
+
 problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
@@ -616,7 +675,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_pattern_match_train_dafny
+) = problem_opt0_dafny_sanity_check
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt

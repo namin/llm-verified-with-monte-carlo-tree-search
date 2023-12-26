@@ -8,35 +8,21 @@ from lang import score_func, can_be_solution
 from prompts import prompt, sanity_check, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
-import ppo
+import llm
 
-n_success_goal = 3
+n_success_goal = 1
 n_success = 0
-
-class GenNode:
-    def __init__(self, text, gens):
-        self.text = text
-        self.gens = gens
-
-
-def reinforce(gens, reward):
-    rewards = [torch.tensor(reward)]
-    for query_tensors, response_tensors in gens:
-        ppo.trainer_step(query_tensors, response_tensors, rewards)
-
 
 def generate_complete(text, montecarlo, gens, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
-    (text, gen) = ppo.generate(text)
-    gens.append(gen)
+    text = llm.generate(text, 1)[0]
     score = score_func(text)
     if score is not None:
         if score < 0:
-            reinforce(gens, score)
             return None
         else:
-            node = Node(GenNode(text, gens))
+            node = Node(text)
             if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = node
             return node
@@ -45,10 +31,10 @@ def generate_complete(text, montecarlo, gens, current_completion_depth=1):
 
 
 def child_finder(node, montecarlo):
-    if limit_depth(node, lambda state: state.text):
+    if limit_depth(node):
         return
 
-    child = generate_complete(node.state.text, montecarlo, [])
+    child = generate_complete(node.state, montecarlo, [])
     if child is None:
         node.update_win_value(-1)
     else:
@@ -56,20 +42,20 @@ def child_finder(node, montecarlo):
         child.update_win_value(1)
         child.update_policy_value(1)
 
-        retry_child = Node(GenNode(node.state.text, []))
+        retry_child = Node(node.state)
         node.add_child(retry_child)
         retry_child.update_policy_value(0.2)
 
 
 def main_iter(prompt, pending):
-    montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
+    montecarlo = MonteCarlo(Node(prompt))
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
 
     assert montecarlo.solution
     if montecarlo.solution:
-        text = montecarlo.solution.state.text
+        text = montecarlo.solution.state
 
         print("CHOSEN SOLUTION")
         print(text)
@@ -82,16 +68,10 @@ def main_iter(prompt, pending):
             score = 1.0
         if score is not None:
             if score > 0:
-                score = score * 10
                 if pending == []:
                     global n_success
                     n_success += 1
-            node = montecarlo.solution
-            while node:
-                reinforce(node.state.gens, score)
-                node = node.parent
 
-    ppo.save()
     return text, pending
 
 
