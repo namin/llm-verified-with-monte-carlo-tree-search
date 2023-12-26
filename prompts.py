@@ -377,7 +377,8 @@ function eval(e: Expr, env: string -> int): int
 , ["",
    """
 
-An optimizer taking an expression and returning an expression with all additions by 0 removed. It is optimal.
+An optimizer taking an expression and returning an expression with all additions by 0 removed.
+It is optimal: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions to check for constants 0.
 
 ```dafny
 function optimize(e: Expr): Expr

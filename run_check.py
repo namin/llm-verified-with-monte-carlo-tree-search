@@ -72,20 +72,6 @@ def main_iter(prompt, pending):
     return False, text, pending
 
 
-def main():
-    i = 0
-    n_success = 0
-    while n_success < n_success_goal:
-        print("ITERATION", i)
-        i += 1
-        success_p, text, pending = main_iter(prompt, sanity_check)
-        while success_p and pending:
-            new_prompt = text+"\n"+pending[0]
-            pending = pending[1:]
-            success_p, text, pending = main_iter(new_prompt, pending)
-        if success_p:
-            n_success += 1
-
-
 if __name__ == "__main__":
-    main()
+    from common_check import main
+    main(main_iter, n_success_goal)
