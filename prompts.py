@@ -406,6 +406,8 @@ lemma OptimizerOptimal(e: Expr)
 """, """
 
 A lemma proving that the optimizer preserves the semantics.
+By structural induction on e.
+Pattern match against e, and simply call the lemma recursively on the sub-expressions.
 
 ```dafny
 lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
@@ -675,7 +677,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0
+) = problem_opt0#_dafny_sanity_check
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt
