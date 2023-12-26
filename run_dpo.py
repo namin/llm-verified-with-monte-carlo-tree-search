@@ -4,16 +4,17 @@ from peft import LoraConfig
 from transformers import TrainingArguments
 from trl import DPOTrainer
 
-data_files = "datasets/opt0.jsonl"
+data_files = "datasets/gen.jsonl"
+eval_data_files = "datasets/opt0.jsonl"
 train_dataset = load_dataset("json", data_files=data_files, split="train")
-eval_dataset = load_dataset("json", data_files={"test": data_files}, split="test")
+eval_dataset = load_dataset("json", data_files={"test": eval_data_files}, split="test")
 
 _, model, tokenizer = huggingface_generate.load_model()
-model_ref = model
+_, model_ref, _ = huggingface_generate.load_model()
 
 training_args = TrainingArguments(
     per_device_train_batch_size=1, #4
-    max_steps=10, #1000
+    max_steps=100, #1000
     remove_unused_columns=False,
     gradient_accumulation_steps=1,
     learning_rate=1e-3,
@@ -39,8 +40,9 @@ peft_config = LoraConfig(
 dpo_trainer = DPOTrainer(
     model,
     model_ref,
+    loss_type="ipo",
     args=training_args,
-    beta=0.5, #0.1
+    beta=0.1, #0.1
     train_dataset=train_dataset,
     eval_dataset=eval_dataset,
     tokenizer=tokenizer,
