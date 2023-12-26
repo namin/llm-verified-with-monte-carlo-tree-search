@@ -675,7 +675,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0_dafny_sanity_check
+) = problem_opt0
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt

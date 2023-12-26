@@ -11,6 +11,7 @@ BASE_MODEL_NAME = "Phind/Phind-CodeLlama-34B-v2"
 # BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-base"
 # BASE_MODEL_NAME = "deepseek-ai/deepseek-coder-33b-instruct"
 # BASE_MODEL_NAME = "mistralai/Mixtral-8x7B-Instruct-v0.1"
+# BASE_MODEL_NAME = "./my_dpo_model"
 
 # Provide an optional checkpoint on top of the base model:
 PEFT_MODEL_PATH = None
