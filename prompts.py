@@ -378,7 +378,7 @@ function eval(e: Expr, env: string -> int): int
    """
 
 An optimizer taking an expression and returning an expression with all additions by 0 removed.
-In the addition case, the `optimize` function fist recursively optimize the sub-expressions, then matches against the the optimized sub-expressions to check for constants 0.
+In the addition case, the `optimize` function first recursively optimize the sub-expressions, then matches against the the optimized sub-expressions to check for constants 0.
 
 ```dafny
 function optimize(e: Expr): Expr
