@@ -571,7 +571,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0_opt_dafny_sanity_check
+) = problem_opt0
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt
@@ -582,6 +582,14 @@ assert LANG in supported_langs
 
 def remove_hints2(prompt):
     return prompt[:prompt.index('### Hint')]
+
+def remove_hints3(prompt):
+    try:
+        i = prompt.rindex("```")
+        code = prompt[i:]
+    except ValueError:
+        code = ""
+    return prompt[:prompt.index('### Hint')]+"\n\n"+code
     
 def remove_hints(prompt):
     lines = prompt.split("\n")
