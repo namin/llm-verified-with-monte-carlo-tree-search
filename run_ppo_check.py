@@ -10,7 +10,7 @@ from common import limit_depth, max_completion_depth
 
 import ppo
 
-n_success_goal = 3
+n_success_goal = 2
 
 class GenNode:
     def __init__(self, text, gens):
@@ -27,8 +27,12 @@ def reinforce(gens, reward):
 def generate_complete(text, montecarlo, gens, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
+    prev = text
     (text, gen) = ppo.generate(text)
     gens.append(gen)
+    if text==prev:
+        reinforce(gens, -10.0)
+        return generate_complete(prev, montecarlo, [])
     score = score_func(text)
     if score is not None:
         if score < 0:
@@ -82,6 +86,8 @@ def main_iter(prompt, pending):
         if score is not None:
             if score > 0:
                 score = score * 10
+            else:
+                score = score * 2
             node = montecarlo.solution
             while node:
                 reinforce(node.state.gens, score)
