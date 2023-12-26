@@ -11,7 +11,6 @@ from common import limit_depth, max_completion_depth
 import ppo
 
 n_success_goal = 3
-n_success = 0
 
 class GenNode:
     def __init__(self, text, gens):
@@ -83,28 +82,28 @@ def main_iter(prompt, pending):
         if score is not None:
             if score > 0:
                 score = score * 10
-                if pending == []:
-                    global n_success
-                    n_success += 1
             node = montecarlo.solution
             while node:
                 reinforce(node.state.gens, score)
                 node = node.parent
 
     ppo.save()
-    return text, pending
+    return score is not None and score > 0, text, pending
 
 
 def main():
     i = 0
+    n_success = 0
     while n_success < n_success_goal:
         print("ITERATION", i)
         i += 1
-        text, pending = main_iter(prompt, sanity_check)
-        while pending:
+        success_p, text, pending = main_iter(prompt, sanity_check)
+        while success_p and pending:
             new_prompt = text+"\n"+pending[0]
             pending = pending[1:]
-            text, pending = main_iter(new_prompt, pending)
+            success_p, text, pending = main_iter(new_prompt, pending)
+        if success_p:
+            n_success += 1
 
 
 if __name__ == "__main__":

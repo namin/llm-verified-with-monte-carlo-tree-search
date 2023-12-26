@@ -11,7 +11,6 @@ from common import limit_depth, max_completion_depth
 import llm
 
 n_success_goal = 1
-n_success = 0
 
 def generate_complete(text, montecarlo, gens, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -68,23 +67,24 @@ def main_iter(prompt, pending):
             score = 1.0
         if score is not None:
             if score > 0:
-                if pending == []:
-                    global n_success
-                    n_success += 1
+                return True, text, pending
 
-    return text, pending
+    return False, text, pending
 
 
 def main():
     i = 0
+    n_success = 0
     while n_success < n_success_goal:
         print("ITERATION", i)
         i += 1
-        text, pending = main_iter(prompt, sanity_check)
-        while pending:
+        success_p, text, pending = main_iter(prompt, sanity_check)
+        while success_p and pending:
             new_prompt = text+"\n"+pending[0]
             pending = pending[1:]
-            text, pending = main_iter(new_prompt, pending)
+            success_p, text, pending = main_iter(new_prompt, pending)
+        if success_p:
+            n_success += 1
 
 
 if __name__ == "__main__":
