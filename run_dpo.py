@@ -53,4 +53,4 @@ dpo_trainer = DPOTrainer(
 
 dpo_trainer.train()
 
-dpo_trainer.save_pretrained("my_dpo_model")
+dpo_trainer.save_model("my_dpo_model")
