@@ -274,6 +274,51 @@ predicate optimal(e: Expr) {
     ['Dafny'],
 )
 
+problem_pattern_match_train_dafny = (("""In Dafny, we have the following ADT:
+
+```dafny
+datatype Foo = Bar(n: nat) | Baz(a: Foo, b: Foo)
+```
+
+Take the denotation of a Foo to be 2 times n for a Bar, and sum of the denotations of its Foos for a Baz.
+
+```dafny
+function denotation(foo: Foo): nat
+{
+""", [
+    """
+```dafny
+lemma ex1()
+ensures denotation(Baz(Bar(2), Bar(1))) == 6
+{}
+
+lemma denotationAlwaysEven(foo: Foo)
+ensures denotation(foo) % 2 == 0
+{
+  match foo
+  case Bar(n) =>
+  case Baz(a, b) =>
+    denotationAlwaysEven(a);
+    denotationAlwaysEven(b);
+}
+```
+""",
+    """
+A lemma that proves that the denotation of a Foo is always even.
+
+```dafny
+lemma denotationAlwaysEven(foo: Foo)
+ensures denotation(foo) % 2 == 0
+{
+"""]),
+    500,
+    None,
+    5,
+    15,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Dafny'],
+)
+
 problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
 ### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
 ### Hint: Recall that in Dafny, pattern match takes the form
@@ -288,7 +333,7 @@ datatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)
 
 function optimize(e: Expr): Expr
 {
-""", """
+""", ["""
 ```dafny
 predicate optimal(e: Expr) {
   match e
@@ -308,7 +353,7 @@ lemma OptimizerOptimal(e: Expr)
   case _ =>
 }
 ```
-"""),
+"""]),
     500,
     None,
     5,
@@ -571,12 +616,12 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0
+) = problem_pattern_match_train_dafny
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt
 else:
-    sanity_check = ""
+    sanity_check = []
 
 assert LANG in supported_langs
 
@@ -596,7 +641,7 @@ def remove_hints(prompt):
     lines = [line for line in lines if not line.startswith("### Hint: ")]
     return "\n".join(lines)
 
-#prompt = remove_hints2(prompt)
+#prompt = remove_hints3(prompt)
 
 if sanity_check:
     pass

@@ -61,30 +61,38 @@ def child_finder(node, montecarlo):
         retry_child.update_policy_value(0.2)
 
 
-def main_iter():
+def main_iter(prompt, pending):
     montecarlo = MonteCarlo(Node(GenNode(prompt, [])))
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
 
+    assert montecarlo.solution
     if montecarlo.solution:
         text = montecarlo.solution.state.text
 
         print("CHOSEN SOLUTION")
         print(text)
 
-        score = score_func(text+"\n\n"+sanity_check)
+        if pending:
+            check_code = pending[0]
+            pending = pending[1:]
+            score = score_func(text+"\n\n"+check_code)
+        else:
+            score = 1.0
         if score is not None:
             if score > 0:
                 score = score * 10
-                global n_success
-                n_success += 1
+                if pending == []:
+                    global n_success
+                    n_success += 1
             node = montecarlo.solution
             while node:
                 reinforce(node.state.gens, score)
                 node = node.parent
 
     ppo.save()
+    return text, pending
 
 
 def main():
@@ -92,7 +100,11 @@ def main():
     while n_success < n_success_goal:
         print("ITERATION", i)
         i += 1
-        main_iter()
+        text, pending = main_iter(prompt, sanity_check)
+        while pending:
+            new_prompt = text+"\n"+pending[0]
+            pending = pending[1:0]
+            text, pending = main_iter(new_prompt, pending)
 
 
 if __name__ == "__main__":
