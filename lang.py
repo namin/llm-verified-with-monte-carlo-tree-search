@@ -39,6 +39,8 @@ else:
     assert False
 
 def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
+    if not (msg.count("```") % 2 == 0):
+        return False
     v = filter_code(msg)
     r = v.count("\n") >= min_lines
     if r and check_func:

@@ -410,7 +410,6 @@ A lemma proving that the optimizer preserves the semantics.
 lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
 ensures eval(optimize(e), env) == eval(e, env)
 {
-}
 """
 ]),
     500,
