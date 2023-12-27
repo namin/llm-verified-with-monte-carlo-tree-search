@@ -40,7 +40,7 @@ peft_config = LoraConfig(
 dpo_trainer = DPOTrainer(
     model,
     model_ref,
-    #loss_type="ipo",
+    #loss_type="kto_pair",#"ipo",
     args=training_args,
     beta=0.5, #0.1
     train_dataset=train_dataset,

@@ -1,5 +1,13 @@
 {
 "prompt":
+"In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\n",
+"chosen":
+"function eval(e: Expr, env: string -> int): int\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```",
+"rejected":
+"function eval(e: Expr, env: string -> int): int\nreads env\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```"
+}
+{
+"prompt":
 "In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\nfunction eval(e: Expr, env: string -> int): int\n{\n",
 "chosen":
 "   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```",
