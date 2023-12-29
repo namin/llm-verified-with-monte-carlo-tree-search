@@ -1,6 +1,10 @@
 from prompts import max_depth
+from cmdline import get_args
 
-max_completion_depth = 30
+args = get_args()
+max_completion_depth = args._max_completion_depth
+
+# max_completion_depth = 30
 
 def count_depth(node, f=lambda x: x):
     depth = 1

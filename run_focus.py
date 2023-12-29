@@ -1,6 +1,13 @@
-USE_HAMMER = True
-SHOW_MISTAKES = False
-INTERACTIVE = False
+from cmdline import get_args
+
+args = get_args()
+
+USE_HAMMER = args._use_hammer
+SHOW_MISTAKES = args._show_mistakes
+INTERACTIVE = args._interactive
+# USE_HAMMER = True
+# SHOW_MISTAKES = False
+# INTERACTIVE = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
@@ -13,7 +20,7 @@ from coq import give_context, short_verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
-from common_diversity import select_diversely, DIVERSITY, limit
+from common_diversity import select_diversely, DIVERSITY, limit, select_diversely_with_scores
 from common_interactive import ask_keep, diffprompt
 from common_stats import stats
 from common_bad_words import bad_words_ids

@@ -1,8 +1,13 @@
 import hashlib
 import os
 
+from cmdline import get_args
+
+args = get_args()
+livecode = args._livecode
+
 # Only set to True for lightweight testing.
-livecode = False
+# livecode = False
 
 if livecode:
     print("WARNING: livecode is True. Be gentle!")

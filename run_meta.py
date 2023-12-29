@@ -1,6 +1,14 @@
-USE_HAMMER = True
-EXTRACT_LEMMA_DEPTH = 1
-EXPLORE_MANY = True
+from cmdline import get_args
+
+args = get_args()
+
+USE_HAMMER = args._use_hammer
+EXTRACT_LEMMA_DEPTH = args._extract_lemma_depth
+EXPLORE_MANY = args._explore_many
+
+# USE_HAMMER = True
+# EXTRACT_LEMMA_DEPTH = 1
+# EXPLORE_MANY = True
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo

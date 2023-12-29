@@ -1,4 +1,10 @@
-GREEDY = True
+from cmdline import get_args
+
+args = get_args()
+
+GREEDY = args._greedy
+
+# GREEDY = True
 
 from lang import can_be_solution
 from lang import score_func as uncached_score_func
