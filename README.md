@@ -69,7 +69,7 @@ Note: For both Dafny and Coq, the executables `dafny` and `coqc` need to be in y
 
 ### Execution
 
-Pick a language in [lang_config.py](lang_config.py), an LLM in [model_config.py](model_config.py), and a prompt in [prompts.py](prompts.py), then:
+To run the default experiment configuration, which uses the `Phind-CodeLlama-34B-v2` LLM to solve the `problem_opt0` as specified in `prompts.py` in Dafny, do:
 
 ```
 python run.py
@@ -99,16 +99,22 @@ For a run that selects the next completion diversely, do:
 python run_diversity.py
 ```
 
+Note that `cmdline.py` handles the usage of command line arguments for the codebase. To see what arguments are available, simply execute `cmdline.py --help`. To run with specific arguments, simply add a `--[argument name] [desired argument value]` for each argument after the original command to run. For example, to execute `run.py` as before but with Coq instead of Dafny, simply execute:
+
+```
+python run.py --language "Coq"
+```
+
 For a more extensive prompt populated with the goal to prove (Coq only) -- do:
 
 ```
-python run_focus.py
+python run_focus.py --language "Coq"
 ```
 
 For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
 
 ```
-python run_meta.py
+python run_meta.py --language "Coq"
 ```
 
 ## Credits

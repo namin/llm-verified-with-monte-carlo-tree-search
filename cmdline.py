@@ -3,8 +3,6 @@ from transformers import HfArgumentParser
 
 @dataclass
 class CommonArguments:
-    input_string: str = field(default=None, metadata={"help": "a sample input string"})
-    repeat_times: int = field(default=1, metadata={"help": "number of times to repeat the input"})
     diversity: bool = field(default=True, metadata={"help": "Diversity flag for `common_diversity.py"})
     max_completion_depth: int = field(default=30, metadata={"help": "Limit for the depth of the mcts"})
     livecode: bool = field(default=False, metadata={"help": "Use livecode API checker or local compiler"})
