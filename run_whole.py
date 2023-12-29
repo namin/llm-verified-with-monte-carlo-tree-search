@@ -1,8 +1,6 @@
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-
-GREEDY = args._greedy
+GREEDY = args.greedy
 
 # GREEDY = True
 

@@ -9,11 +9,9 @@ from lang import score_func, can_be_solution
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-
-n_iter = args._n_iter
+n_iter = args.n_iter
 # n_iter = 10
 
 

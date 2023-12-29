@@ -1,10 +1,8 @@
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-
-USE_HAMMER = args._use_hammer
-SHOW_MISTAKES = args._show_mistakes
-INTERACTIVE = args._interactive
+USE_HAMMER = args.use_hammer
+SHOW_MISTAKES = args.show_mistakes
+INTERACTIVE = args.interactive
 # USE_HAMMER = True
 # SHOW_MISTAKES = False
 # INTERACTIVE = False

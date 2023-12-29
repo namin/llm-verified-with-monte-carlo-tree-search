@@ -1,7 +1,5 @@
 from lang_config import LANG, ALL_LANGS
-from cmdline import get_args
-
-args = get_args()
+from cmdline import args
 
 if LANG == "Dafny":
     proof_marker = "ensures"
@@ -715,7 +713,7 @@ problems_dict = {
     check_func,
     check_cheat_func,
     supported_langs,
-) = problems_dict[args._problem_name]
+) = problems_dict[args.problem_name]
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt

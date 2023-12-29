@@ -1,8 +1,7 @@
 from prompts import max_depth
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-max_completion_depth = args._max_completion_depth
+max_completion_depth = args.max_completion_depth
 
 # max_completion_depth = 30
 

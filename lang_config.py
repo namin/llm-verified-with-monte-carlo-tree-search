@@ -1,7 +1,6 @@
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-LANG = args._language
+LANG = args.language
 
 ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala"]
 

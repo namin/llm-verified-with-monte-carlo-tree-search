@@ -1,10 +1,9 @@
 # DIVERSITY = True
 
 from common_cache import select_with_scores
-from cmdline import get_args
+from cmdline import args
 
-args = get_args()
-DIVERSITY = args._diversity
+DIVERSITY = args.diversity
 
 def limit(x):
     if DIVERSITY:
