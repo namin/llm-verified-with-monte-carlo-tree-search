@@ -10,7 +10,10 @@ from common import limit_depth, max_completion_depth
 
 import llm
 
-n_success_goal = 1
+from cmdline import args
+
+# n_success_goal = 1
+n_success_goal = args.n_success_goal
 
 def generate_complete(text, montecarlo, gens, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:

@@ -10,7 +10,10 @@ from common import limit_depth, max_completion_depth
 
 import ppo
 
-n_iter = 3
+from cmdline import args
+
+n_iter = args.n_iter
+# n_iter = 3
 FAIL = object()
 calls_to_generate = 0
 

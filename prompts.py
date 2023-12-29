@@ -1,4 +1,5 @@
 from lang_config import LANG, ALL_LANGS
+from cmdline import args
 
 if LANG == "Dafny":
     proof_marker = "ensures"
@@ -24,6 +25,7 @@ if cheat_marker:
     CHECK_CHEAT = lambda v: cheat_marker in v
 else:
     CHECK_CHEAT = NO_CHECK_CHEAT
+
 
 problem_parser_res = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition.
@@ -669,8 +671,39 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     ["Dafny"],
 )
 
+problems_dict = {
+    "problem_parser_res" : problem_parser_res,
+    "problem_parser_data" : problem_parser_data,
+    "problem_fact" : problem_fact,
+    "problem_mult_proof_coq" : problem_mult_proof_coq,
+    "problem_1_divides_n_proof_coq" : problem_1_divides_n_proof_coq,
+    "problem_partial_maps_proof_coq" : problem_partial_maps_proof_coq,
+    "problem_opt0_proof_coq" : problem_opt0_proof_coq,
+    "problem_opt0_coq_proof_hints" : problem_opt0_coq_proof_hints,
+    "problem_opt0" : problem_opt0,
+    "problem_opt0_opt_dafny" : problem_opt0_opt_dafny,
+    "problem_opt0_opt_dafny_sanity_check" : problem_opt0_opt_dafny_sanity_check,
+    "problem_opt0_dafny_sanity_check" : problem_opt0_dafny_sanity_check,
+    "problem_opt0_opt" : problem_opt0_opt,
+    "problem_mult" : problem_mult,
+    "problem_max_dafny" : problem_max_dafny,
+    "problem_rolling_max_dafny" : problem_rolling_max_dafny,
+    "problem_below0_dafny" : problem_below0_dafny,
+    "problem_intersperse_invariants_dafny" : problem_intersperse_invariants_dafny,
+    "problem_intersperse_dafny" : problem_intersperse_dafny
+}
 
 # Set the right-hand side to the selected problem.
+# (
+#     prompt,
+#     max_new_tokens,
+#     expansion_count,
+#     min_lines,
+#     max_depth,
+#     check_func,
+#     check_cheat_func,
+#     supported_langs,
+# ) = problem_opt0#_dafny_sanity_check
 (
     prompt,
     max_new_tokens,
@@ -680,7 +713,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     check_func,
     check_cheat_func,
     supported_langs,
-) = problem_opt0#_dafny_sanity_check
+) = problems_dict[args.problem_name]
 
 if type(prompt) is tuple:
     (prompt, sanity_check) = prompt

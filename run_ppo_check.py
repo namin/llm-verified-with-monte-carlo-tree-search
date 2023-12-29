@@ -10,7 +10,10 @@ from common import limit_depth, max_completion_depth
 
 import ppo
 
-n_success_goal = 2
+from cmdline import args
+
+n_success_goal = args.n_success_goal
+# n_success_goal = 2
 
 class GenNode:
     def __init__(self, text, gens):

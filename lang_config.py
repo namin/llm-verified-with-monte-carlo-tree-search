@@ -1,8 +1,12 @@
+from cmdline import args
+
+LANG = args.language
+
 ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala"]
 
 # Pick a language:
 # LANG = 'Coq'
-LANG = "Dafny"
+# LANG = "Dafny"
 # LANG = "Lean4"
 # LANG = "Rust"
 # LANG = "Scala"

@@ -9,7 +9,10 @@ from lang import score_func, can_be_solution, find_largest_new_block
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 
-n_iter = 10
+from cmdline import args
+
+n_iter = args.n_iter
+# n_iter = 10
 
 
 class GenNode:
