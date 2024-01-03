@@ -684,7 +684,7 @@ case Foo(x, y) => 1
 case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
-}
+}{'### Hint: use an `int` not a `nat` for the value in the tree.' if LANG=='Dafny' else ''}
 """,
     1000,
     None,
