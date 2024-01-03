@@ -671,7 +671,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     ["Dafny"],
 )
 
-problem_bst = (f"In {LANG}, write an ADT for a tree of natural numbers. Also write two functions: one that checks whether a given tree is a binary search tree (returning a Prop), and one that inserts an element into a binary search tree while preserving the BST property. Then prove that your implementation of insert is correct by checking two facts: (1) that the inserted element exists in the tree, and (2) that the BST property continues to hold after insertion.",
+problem_bst = (f"In {LANG}, write an ADT for a tree of natural numbers. Also write two functions: one that checks whether a given tree is a binary search tree (BST), and one that inserts an element into a binary search tree while preserving the BST property. Then prove that your implementation of insert is correct by checking two facts: (1) that the inserted element exists in the tree, and (2) that the BST property continues to hold after insertion.",
     1000,
     None,
     5,
@@ -704,16 +704,6 @@ problems_dict = {
 }
 
 # Set the right-hand side to the selected problem.
-# (
-#     prompt,
-#     max_new_tokens,
-#     expansion_count,
-#     min_lines,
-#     max_depth,
-#     check_func,
-#     check_cheat_func,
-#     supported_langs,
-# ) = problem_opt0#_dafny_sanity_check
 (
     prompt,
     max_new_tokens,
