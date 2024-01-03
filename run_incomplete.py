@@ -1,18 +1,29 @@
-import llm
-
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
-from lang import score_func, can_be_solution
+from lang import can_be_solution
+from lang import score_func as uncached_score_func
+
+from common_cache import create_cached_func
+score_func, cache_stats = create_cached_func(uncached_score_func)
+from common_interactive import diffprompt
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
+from common_stats import stats
+
+import llm
 
 montecarlo = MonteCarlo(Node(prompt))
 
-def generate_complete(text, montecarlo):
-    text = llm.generate(text, 1)[0]
+def generate_complete(text, montecarlo, current_completion_depth=1):
+    if current_completion_depth >= max_completion_depth:
+        return None
+    prev = text
+    texts = llm.generate(text, 1)
+    text = texts[0]
     score = score_func(text)
+    print(diffprompt(prev, texts))
     if score is not None:
         if score < 0:
             return (None, score)
@@ -41,9 +52,15 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
+
 montecarlo.child_finder = child_finder
 
 montecarlo.simulate(expansion_count)
 
-print('CHOSEN SOLUTION')
+print("CHOSEN SOLUTION")
 print(montecarlo.solution)
+
+stats(montecarlo)
+print('cache stats', cache_stats)
+with open("graph.dot", "w") as f:
+    montecarlo.print_tree(f)
