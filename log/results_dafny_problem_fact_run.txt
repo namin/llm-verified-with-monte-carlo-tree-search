@@ -1,0 +1,726 @@
+
+
+========
+Experiment configuration: python run.py --problem_name problem_fact 
+
+
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+
+  |
+1 | function factorial(n: nat): nat {
+  |                                  ^
+
+ex.dfy(1,33): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['function factorial(n: nat): nat {\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+
+  |
+2 |     if n == 0 then 1 else n * factorial(n - 1)
+  |                                               ^
+
+ex.dfy(2,46): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if n == 0 then 1 else n * factorial(n - 1)\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma "Factorial is always strictly positive"
+
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,6): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^
+
+ex.dfy(5,6): Error: invalid MethodDecl
+2 parse errors detected in ex.dfy
+
+SCORE
+None
+['lemma "Factorial is always strictly positive"\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma "Factorial is always strictly positive"
+    ensures factorial(n) > 0
+
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,6): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^
+
+ex.dfy(5,6): Error: invalid MethodDecl
+2 parse errors detected in ex.dfy
+
+SCORE
+None
+['    ensures factorial(n) > 0\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma "Factorial is always strictly positive"
+    ensures factorial(n) > 0
+{
+
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,6): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma "Factorial is always strictly positive"
+  |       ^
+
+ex.dfy(5,6): Error: invalid MethodDecl
+  |
+7 | {
+  |  ^
+
+ex.dfy(7,1): Error: rbrace expected
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['{\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,21): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^
+
+ex.dfy(5,21): Error: invalid MethodDecl
+2 parse errors detected in ex.dfy
+
+SCORE
+None
+['lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+{
+
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,21): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^
+
+ex.dfy(5,21): Error: invalid MethodDecl
+  |
+6 | {
+  |  ^
+
+ex.dfy(6,1): Error: rbrace expected
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+{
+    case n == 0
+
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,21): Error: a method must be given a name (expecting identifier)
+  |
+5 | lemma {:induction n} "FactorialPositive(n: nat): factorial(n) > 0"
+  |                      ^
+
+ex.dfy(5,21): Error: invalid MethodDecl
+  |
+7 |     case n == 0
+  |     ^
+
+ex.dfy(7,4): Error: rbrace expected
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    case n == 0\n']
+['\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+
+SCORE
+1.0
+['lemma FactorialAlwaysPositive(n: nat) \n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+{
+
+  |
+6 | {
+  |  ^
+
+ex.dfy(6,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+{
+    assert factorial(n) > 0;
+
+  |
+7 |     assert factorial(n) > 0;
+  |                             ^
+
+ex.dfy(7,28): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    assert factorial(n) > 0;\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+{
+    assert factorial(n) > 0;
+}
+
+ex.dfy(7,11): Error: assertion might not hold
+  |
+7 |     assert factorial(n) > 0;
+  |            ^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+None
+['}\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+{
+    assert factorial(n) > 0;
+}
+```
+
+ex.dfy(7,11): Error: assertion might not hold
+  |
+7 |     assert factorial(n) > 0;
+  |            ^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+-1.0
+['```\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+
+SCORE
+1.0
+['    ensures factorial(n) > 0 \n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+
+  |
+7 | {
+  |  ^
+
+ex.dfy(7,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+
+  |
+8 |     if n == 0 {
+  |                ^
+
+ex.dfy(8,15): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    if n == 0 {\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+
+  |
+9 |         assert factorial(0) == 1;
+  |                                  ^
+
+ex.dfy(9,33): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        assert factorial(0) == 1;\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+
+   |
+10 |         assert 1 > 0;
+   |                      ^
+
+ex.dfy(10,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        assert 1 > 0;\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+
+   |
+11 |     } else {
+   |             ^
+
+ex.dfy(11,12): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    } else {\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+
+   |
+12 |         FactorialAlwaysPositive(n - 1);
+   |                                        ^
+
+ex.dfy(12,39): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        FactorialAlwaysPositive(n - 1);\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+
+   |
+13 |         assert factorial(n - 1) > 0;
+   |                                     ^
+
+ex.dfy(13,36): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        assert factorial(n - 1) > 0;\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+
+   |
+14 |         assert n * factorial(n - 1) > 0;
+   |                                         ^
+
+ex.dfy(14,40): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['        assert n * factorial(n - 1) > 0;\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+
+   |
+15 |     }
+   |      ^
+
+ex.dfy(15,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    }\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+```
+
+SCORE
+1.0
+['```\n']
+CHOSEN SOLUTION
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 then 1 else n * factorial(n - 1)
+}
+
+lemma FactorialAlwaysPositive(n: nat) 
+    ensures factorial(n) > 0 
+{
+    if n == 0 {
+        assert factorial(0) == 1;
+        assert 1 > 0;
+    } else {
+        FactorialAlwaysPositive(n - 1);
+        assert factorial(n - 1) > 0;
+        assert n * factorial(n - 1) > 0;
+    }
+}
+```
+
+
+STATS
+
+number of nodes: 15
+number of gen nodes: 8 (including leaves: 2)
+number of back nodes: 7 (including leaves: 6)
+
+expansion count: 10 (including failed: 3)
+
+cache stats {'hit': 1, 'miss': 27}
+1 minutes and 28 seconds elapsed.
+

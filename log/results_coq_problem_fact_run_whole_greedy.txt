@@ -1,0 +1,89 @@
+
+
+========
+Experiment configuration: python run_whole.py --problem_name problem_fact --language Coq 
+
+
+<s> ### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Coq.Arith.Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+ match n with
+ | 0 => 1
+ | S n' => n * factorial n'
+ end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+ intros n.
+ induction n as [|n' IHn'].
+ - now rewrite Nat.lt_0_1.
+ - now rewrite Nat.lt_lt_add_r, IHn', Nat.mul_lt_mul_of_lt_of_le.
+Qed.
+```
+
+In this Coq script, we first define a factorial function on natural numbers. Then we prove that the factorial is always strictly positive.
+
+The proof is by induction on `n`. In the base case, we have `n = 0`, and we use `Nat.lt_0_1` to show `0 < factorial 0`.
+
+In the inductive case, we have `n = S n'`, and we use `Nat.lt_lt_add_r` to show `0 < factorial (S n')`. We also use the induction hypothesis `IHn'` to show `0 < factorial n'`. Finally, we use `Nat.mul_lt_mul_of_lt_of_le` to complete the proof.</s>
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Coq.Arith.Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => n * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [|n' IHn'].
+  - now rewrite Nat.lt_0_1.
+  - now rewrite Nat.lt_lt_add_r, IHn', Nat.mul_lt_mul_of_lt_of_le.
+Qed.
+```
+
+In this Coq script, we first define a factorial function on natural numbers. Then we prove that the factorial is always strictly positive.
+
+The proof is by induction on `n`. In the base case, we have `n = 0`, and we use `Nat.lt_0_1` to show `0 < factorial 0`.
+
+In the inductive case, we have `n = S n'`, and we use `Nat.lt_lt_add_r` to show `0 < factorial (S n')`. We also use the induction hypothesis `IHn'` to show `0 < factorial n'`. Finally, we use `Nat.mul_lt_mul_of_lt_of_le` to complete the proof.
+File "./ex.v", line 14, characters 4-26:
+Error:
+setoid rewrite failed: Unable to satisfy the following constraints:
+UNDEFINED EVARS:
+ ?X13==[ |- Relation_Definitions.relation nat] (internal placeholder) {?r}
+ ?X14==[(do_subrelation:=Morphisms.do_subrelation) |-
+         Morphisms.Proper (Morphisms.respectful lt ?r) factorial]
+         (internal placeholder) {?p}
+ ?X15==[(do_subrelation:=Morphisms.do_subrelation) |-
+         Morphisms.Proper
+           (Morphisms.respectful lt
+              (Morphisms.respectful ?r (Basics.flip Basics.impl))) lt]
+         (internal placeholder) {?p0}
+TYPECLASSES:?X13 ?X14 ?X15
+SHELF:||
+FUTURE GOALS STACK:?X15 ?X14 ?X13||
+
+
+
+SCORE
+-1.0
+{'positive': 0, 'negative': 1, 'unknown': 0}
+{'yes': 0, 'no': 1}
+1 minutes and 6 seconds elapsed.
+
+

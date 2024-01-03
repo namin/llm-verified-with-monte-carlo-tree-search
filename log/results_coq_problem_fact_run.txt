@@ -1,0 +1,551 @@
+
+
+========
+Experiment configuration: python run.py --problem_name problem_fact --language Coq 
+
+
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+SCORE
+1.0
+['Require Import Arith.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Definition factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => n * factorial n'
+  end.
+File "./ex.v", line 7, characters 16-25:
+Error: The reference factorial was not found in the current environment.
+
+
+SCORE
+-1.0
+["\n\nDefinition factorial (n : nat) : nat :=\n  match n with\n  | 0 => 1\n  | S n' => n * factorial n'\n  end."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+SCORE
+1.0
+["\n\nFixpoint factorial (n : nat) : nat :=\n  match n with\n  | 0 => 1\n  | S n' => S n' * factorial n'\n  end."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['\n\nTheorem factorial_pos : forall n, 0 < factorial n.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['\nProof.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['\n  intros n.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.
+File "./ex.v", line 14, characters 4-17:
+Error: The variable Nat was not found in the current environment.
+
+
+SCORE
+None
+["\n  induction n as [| n' IHn'].\n  - now apply Nat."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.lt_0_1.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['lt_0_1.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.lt_0_1.
+  - now apply Nat.
+File "./ex.v", line 15, characters 4-17:
+Error: The variable Nat was not found in the current environment.
+
+
+SCORE
+None
+['\n  - now apply Nat.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.lt_0_1.
+  - now apply Nat.lt_lt_add_r with (1 * factorial n') and 1.
+File "./ex.v", line 15, characters 4-59:
+Error: Not the right number of missing arguments (expected 0).
+
+
+SCORE
+-1.0
+["lt_lt_add_r with (1 * factorial n') and 1."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.lt_0_1.
+  - apply Nat.
+File "./ex.v", line 15, characters 10-13:
+Error: The variable Nat was not found in the current environment.
+
+
+SCORE
+None
+['\n  - apply Nat.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - now apply Nat.lt_0_1.
+  - apply Nat.lt_lt_add_r in IHn'.
+    + exact IHn'.
+    + apply Nat.
+File "./ex.v", line 15, characters 4-33:
+Error: Unable to find an instance for the variable p.
+
+
+SCORE
+-1.0
+["lt_lt_add_r in IHn'.\n    + exact IHn'.\n    + apply Nat."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+["\n  induction n as [| n' IHn'].\n  - simpl."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.
+File "./ex.v", line 15, characters 10-13:
+Error: The variable Nat was not found in the current environment.
+
+
+SCORE
+None
+['\n    apply Nat.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['lt_0_1.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['\n  - simpl.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+    apply Nat.
+File "./ex.v", line 17, characters 10-13:
+Error: The variable Nat was not found in the current environment.
+
+
+SCORE
+None
+['\n    apply Nat.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+    apply Nat.lt_lt_add_r.
+Error: There are pending proofs in file ./ex.v: factorial_pos.
+
+SCORE
+1.0
+['lt_lt_add_r.']
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+    apply Nat.lt_lt_add_r.
+    apply IHn'.
+Qed.
+SCORE
+1.0
+["\n    apply IHn'.\nQed."]
+TEXT
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+    apply Nat.lt_lt_add_r.
+    apply IHn'.
+Qed.
+```
+
+This Coq script defines a factorial function and proves that the factorial of any natural number is strictly positive.
+SCORE
+1.0
+['\n```\n\nThis Coq script defines a factorial function and proves that the factorial of any natural number is strictly positive.']
+CHOSEN SOLUTION
+### Spec: In Coq, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+
+```coq
+Require Import Arith.
+
+Fixpoint factorial (n : nat) : nat :=
+  match n with
+  | 0 => 1
+  | S n' => S n' * factorial n'
+  end.
+
+Theorem factorial_pos : forall n, 0 < factorial n.
+Proof.
+  intros n.
+  induction n as [| n' IHn'].
+  - simpl.
+    apply Nat.lt_0_1.
+  - simpl.
+    apply Nat.lt_lt_add_r.
+    apply IHn'.
+Qed.
+```
+
+This Coq script defines a factorial function and proves that the factorial of any natural number is strictly positive.
+
+STATS
+
+number of nodes: 25
+number of gen nodes: 13 (including leaves: 2)
+number of back nodes: 12 (including leaves: 11)
+
+expansion count: 15 (including failed: 3)
+
+cache stats {'hit': 0, 'miss': 20}
+1 minutes and 13 seconds elapsed.
+
+
