@@ -17,6 +17,7 @@ elif LANG == "Rust" or LANG == "Scala":
 NO_CHECK_PROOF = lambda v: True
 if proof_marker:
     CHECK_PROOF = lambda v: proof_marker in v
+    CHECK_PROOF2 = lambda v: v.count(proof_marker) >= 2
 else:
     CHECK_PROOF = NO_CHECK_PROOF
 
@@ -671,12 +672,12 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     ["Dafny"],
 )
 
-problem_bst = (f"""### Spec: In {LANG}, write an ADT for a tree of natural numbers.
-Then write a predicate that checks whether a given tree is a binary search tree (BST).
-Then write a function that inserts an element into a binary search tree while preserving the BST property.
-Then write a predicate that checks whether a given tree contains a given element.
-Then write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element.
-Then write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+problem_bst = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
 {'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
 {'''### Hint: Recall that in Dafny, pattern match takes the form
 match e
@@ -684,7 +685,6 @@ case Foo(x, y) => 1
 case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
-}{'### Hint: use an `int` not a `nat` for the value in the tree.' if LANG=='Dafny' else ''
 }{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
 }
 """,
@@ -692,7 +692,7 @@ case _ => 3
     None,
     5,
     40,
-    CHECK_PROOF, CHECK_CHEAT,
+    CHECK_PROOF2, CHECK_CHEAT,
     ALL_LANGS
 )
 
