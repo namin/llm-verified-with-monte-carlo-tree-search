@@ -1,6 +1,6 @@
 import random
+import json
 from math import log, sqrt
-
 
 class Node:
     def __init__(self, state):
@@ -65,3 +65,19 @@ class Node:
 
     def is_scorable(self):
         return self.visits or self.policy_value != None
+    
+    def print_node(self, f, i, root, st):
+        escape = lambda x : json.dumps(x).strip('"')
+        if self.parent is None:
+            f.write((' ' * i) + st + " [label=\"" + escape(self.state) + "\",shape=box]\n")
+        else:
+            #diff = '\n'.join([x for x in self.state.split("\n") if x not in self.parent.state.split("\n")])
+            diff = self.state
+            f.write((' ' * i) + st + " [label=\"" + diff + "\",shape=box]\n")
+
+        num = 0
+        for child in self.children:
+            new_st = st + "_" + str(num)
+            child.print_node(f, i + 2, root, new_st)
+            f.write(' ' * i + st + " -- " + new_st + "\n")
+            num = num + 1

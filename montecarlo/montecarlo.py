@@ -82,3 +82,8 @@ class MonteCarlo:
             node.update_win_value(child_win_value)
         else:
             self.random_rollout(child)
+
+    def print_tree(self, f):
+        f.write("graph\n{\n")
+        self.root_node.print_node(f, 0, self.root_node, "a")
+        f.write("}\n")
