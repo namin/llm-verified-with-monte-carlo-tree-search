@@ -691,7 +691,7 @@ case _ => 3
     1000,
     None,
     5,
-    20,
+    40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS
 )
