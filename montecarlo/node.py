@@ -71,9 +71,8 @@ class Node:
         if self.parent is None:
             f.write((' ' * i) + st + " [label=\"" + escape(self.state) + "\",shape=box]\n")
         else:
-            #diff = '\n'.join([x for x in self.state.split("\n") if x not in self.parent.state.split("\n")])
-            diff = self.state
-            f.write((' ' * i) + st + " [label=\"" + diff + "\",shape=box]\n")
+            diff = '\n'.join([x for x in self.state.split("\n") if x not in self.parent.state.split("\n")])
+            f.write((' ' * i) + st + " [label=\"" + escape(diff) + "\",shape=box]\n")
 
         num = 0
         for child in self.children:
