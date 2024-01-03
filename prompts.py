@@ -674,8 +674,8 @@ Insert a number 'delimeter' between every two consecutive elements of input list
 problem_bst = (f"""### Spec: In {LANG}, write an ADT for a tree of natural numbers.
 Then write a predicate that checks whether a given tree is a binary search tree (BST).
 Then write a function that inserts an element into a binary search tree while preserving the BST property.
-Then write a predicate that whether a given tree contains a given element.
-Then write a lemma about the insert function that ensures that the resulting tree contains the inserted element.
+Then write a predicate that checks whether a given tree contains a given element.
+Then write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element.
 Then write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
 {'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
 {'''### Hint: Recall that in Dafny, pattern match takes the form
