@@ -686,6 +686,7 @@ case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
 }{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+}{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
 }
 """,
     1000,
