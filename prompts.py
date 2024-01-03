@@ -677,7 +677,7 @@ Then write a function that inserts an element into a binary search tree while pr
 Then write a predicate that whether a given tree contains a given element.
 Then write a lemma about the insert function that ensures that the resulting tree contains the inserted element.
 Then write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
-{'### Hint: For each proof, do not use assertions. Just analyze the structure, and insert the recursive inductive calls to the lemma.' if LANG=='Dafny' else ''}
+{'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
 {'''### Hint: Recall that in Dafny, pattern match takes the form
 match e
 case Foo(x, y) => 1
