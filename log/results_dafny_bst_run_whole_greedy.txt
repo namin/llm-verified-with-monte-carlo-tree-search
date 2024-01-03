@@ -1,0 +1,246 @@
+
+
+========
+Experiment configuration: python run_whole.py --problem_name problem_bst 
+
+
+[2024-01-03 07:16:24,239] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree =
+ | Node(left: Tree, value: nat, right: Tree)
+ | Leaf()
+
+// (2) Predicate for checking if a tree is a BST
+predicate IsBST(t: Tree, lower: nat, upper: nat)
+{
+ match t
+ case Node(left, value, right) =>
+   IsBST(left, lower, value) &&
+   value <= upper &&
+   value >= lower &&
+   IsBST(right, value, upper)
+ case Leaf() => true
+}
+
+// (3) Function for inserting an element into a BST
+function Insert(t: Tree, value: nat): Tree
+{
+ if t == Leaf() then Node(Leaf(), value, Leaf())
+ else
+   match t
+   case Node(left, v, right) =>
+     if value < v then Node(Insert(left, value), v, right)
+     else if value > v then Node(left, v, Insert(right, value))
+     else t
+}
+
+// (4) Predicate for checking if a tree contains a given element
+predicate Contains(t: Tree, value: nat)
+{
+ match t
+ case Node(left, v, right) =>
+   (v == value) || Contains(left, value) || Contains(right, value)
+ case Leaf() => false
+}
+
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, value: nat)
+ ensures Contains(Insert(t, value), value)
+{
+ // Proof by structural induction on t
+ if t == Leaf()
+ {
+   assert Contains(Node(Leaf(), value, Leaf()), value);
+ }
+ else
+ {
+   match t
+   case Node(left, v, right) =>
+     if value < v
+     {
+       InsertEnsuresContains(left, value);
+     }
+     else if value > v
+     {
+       InsertEnsuresContains(right, value);
+     }
+ }
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesBST(t: Tree, value: nat, lower: nat, upper: nat)
+ requires IsBST(t, lower, upper)
+ ensures IsBST(Insert(t, value), lower, upper)
+{
+ // Proof by structural induction on t
+ if t == Leaf()
+ {
+   assert IsBST(Node(Leaf(), value, Leaf()), lower, upper);
+ }
+ else
+ {
+   match t
+   case Node(left, v, right) =>
+     if value < v
+     {
+       InsertPreservesBST(left, value, lower, v);
+       assert IsBST(Insert(left, value), lower, v);
+     }
+     else if value > v
+     {
+       InsertPreservesBST(right, value, v, upper);
+       assert IsBST(Insert(right, value), v, upper);
+     }
+ }
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree =
+  | Node(left: Tree, value: nat, right: Tree)
+  | Leaf()
+
+// (2) Predicate for checking if a tree is a BST
+predicate IsBST(t: Tree, lower: nat, upper: nat)
+{
+  match t
+  case Node(left, value, right) =>
+    IsBST(left, lower, value) &&
+    value <= upper &&
+    value >= lower &&
+    IsBST(right, value, upper)
+  case Leaf() => true
+}
+
+// (3) Function for inserting an element into a BST
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Leaf() then Node(Leaf(), value, Leaf())
+  else
+    match t
+    case Node(left, v, right) =>
+      if value < v then Node(Insert(left, value), v, right)
+      else if value > v then Node(left, v, Insert(right, value))
+      else t
+}
+
+// (4) Predicate for checking if a tree contains a given element
+predicate Contains(t: Tree, value: nat)
+{
+  match t
+  case Node(left, v, right) =>
+    (v == value) || Contains(left, value) || Contains(right, value)
+  case Leaf() => false
+}
+
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // Proof by structural induction on t
+  if t == Leaf()
+  {
+    assert Contains(Node(Leaf(), value, Leaf()), value);
+  }
+  else
+  {
+    match t
+    case Node(left, v, right) =>
+      if value < v
+      {
+        InsertEnsuresContains(left, value);
+      }
+      else if value > v
+      {
+        InsertEnsuresContains(right, value);
+      }
+  }
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesBST(t: Tree, value: nat, lower: nat, upper: nat)
+  requires IsBST(t, lower, upper)
+  ensures IsBST(Insert(t, value), lower, upper)
+{
+  // Proof by structural induction on t
+  if t == Leaf()
+  {
+    assert IsBST(Node(Leaf(), value, Leaf()), lower, upper);
+  }
+  else
+  {
+    match t
+    case Node(left, v, right) =>
+      if value < v
+      {
+        InsertPreservesBST(left, value, lower, v);
+        assert IsBST(Insert(left, value), lower, v);
+      }
+      else if value > v
+      {
+        InsertPreservesBST(right, value, v, upper);
+        assert IsBST(Insert(right, value), v, upper);
+      }
+  }
+}
+```
+ex.dfy(71,11): Error: assertion might not hold
+   |
+71 |     assert IsBST(Node(Leaf(), value, Leaf()), lower, upper);
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(13,4): Related location
+   |
+13 |     value >= lower &&
+   |     ^^^^^^^^^^^^^^
+
+ex.dfy(71,11): Error: assertion might not hold
+   |
+71 |     assert IsBST(Node(Leaf(), value, Leaf()), lower, upper);
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(12,4): Related location
+   |
+12 |     value <= upper &&
+   |     ^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 4 verified, 2 errors
+
+SCORE
+-1.0
+{'positive': 0, 'negative': 1, 'unknown': 0}
+{'yes': 0, 'no': 1}
+1 minutes and 43 seconds elapsed.
+
+
