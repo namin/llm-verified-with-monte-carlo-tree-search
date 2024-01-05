@@ -684,6 +684,58 @@ Then (6) write another lemma about the insert function that checks the BST prope
     ALL_LANGS
 )
 
+problem_bst_dafny_sanity_check = ((hint_match_dafny+"""
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+""",
+["", """
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+""",
+ "", """
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+""",
+ "", """
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+""",
+ "", """
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+"""]),
+    1000,
+    None,
+    5,
+    15,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS
+)
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -704,7 +756,8 @@ problems_dict = {
     "problem_below0_dafny" : problem_below0_dafny,
     "problem_intersperse_invariants_dafny" : problem_intersperse_invariants_dafny,
     "problem_intersperse_dafny" : problem_intersperse_dafny,
-    "problem_bst" : problem_bst
+    "problem_bst" : problem_bst,
+    "problem_bst_dafny_sanity_check" : problem_bst_dafny_sanity_check
 }
 
 # Set the right-hand side to the selected problem.
