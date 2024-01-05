@@ -1,0 +1,2751 @@
+
+
+========
+Experiment configuration: python run_check.py --problem_name problem_bst_dafny_sanity_check --base_model_name ./my_dpo_model 
+
+
+[2024-01-05 08:11:33,240] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+ITERATION 0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+
+  |
+6 |   match t
+  |          ^
+
+ex.dfy(6,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+
+  |
+7 |   {
+  |    ^
+
+ex.dfy(7,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+
+  |
+8 |     case Empty => true
+  |                       ^
+
+ex.dfy(8,22): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+
+  |
+9 |     case Node(left, value, right) =>
+  |                                     ^
+
+ex.dfy(9,36): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+
+   |
+10 |       value >= min && value <= max &&
+   |                                      ^
+
+ex.dfy(10,37): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+
+   |
+11 |       IsBST(left, min, value) &&
+   |                                 ^
+
+ex.dfy(11,32): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+
+   |
+12 |       IsBST(right, value, max)
+   |                               ^
+
+ex.dfy(12,30): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+
+   |
+13 |   }
+   |    ^
+
+ex.dfy(13,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+
+   |
+19 |   if t == Empty then
+   |                     ^
+
+ex.dfy(19,20): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+
+   |
+20 |     Node(Empty, value, Empty)
+   |                              ^
+
+ex.dfy(20,29): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+
+   |
+21 |   else
+   |       ^
+
+ex.dfy(21,6): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+
+   |
+22 |     match t
+   |            ^
+
+ex.dfy(22,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+
+   |
+23 |     {
+   |      ^
+
+ex.dfy(23,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+
+   |
+24 |       case Node(left, v, right) =>
+   |                                   ^
+
+ex.dfy(24,34): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+
+   |
+25 |         if value < v then
+   |                          ^
+
+ex.dfy(25,25): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+
+   |
+26 |           Node(Insert(left, value), v, right)
+   |                                              ^
+
+ex.dfy(26,45): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+
+   |
+27 |         else if value > v then
+   |                               ^
+
+ex.dfy(27,30): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+
+   |
+28 |           Node(left, v, Insert(right, value))
+   |                                              ^
+
+ex.dfy(28,45): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+
+   |
+29 |         else
+   |             ^
+
+ex.dfy(29,12): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+
+   |
+30 |           t
+   |            ^
+
+ex.dfy(30,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+
+   |
+31 |     }
+   |      ^
+
+ex.dfy(31,5): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+
+   |
+37 |   match t
+   |          ^
+
+ex.dfy(37,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+
+   |
+38 |   {
+   |    ^
+
+ex.dfy(38,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+
+   |
+39 |     case Empty => false
+   |                        ^
+
+ex.dfy(39,23): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+
+   |
+40 |     case Node(left, v, right) =>
+   |                                 ^
+
+ex.dfy(40,32): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+
+   |
+41 |       if value < v then Contains(left, value)
+   |                                              ^
+
+ex.dfy(41,45): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+
+   |
+42 |       else if value > v then Contains(right, value)
+   |                                                    ^
+
+ex.dfy(42,51): Error: else expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+
+   |
+43 |       else true
+   |                ^
+
+ex.dfy(43,15): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+
+   |
+44 |   }
+   |    ^
+
+ex.dfy(44,3): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+
+   |
+51 |   // ...
+   |         ^
+
+ex.dfy(51,8): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+SCORE
+1.0
+CHOSEN SOLUTION
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // ...
+
+   |
+59 |   // ...
+   |         ^
+
+ex.dfy(59,8): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // ...
+}
+
+SCORE
+1.0
+TEXT
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // ...
+}
+``` package com.github.dandelion.core.cache;
+
+SCORE
+1.0
+CHOSEN SOLUTION
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // ...
+}
+``` package com.github.dandelion.core.cache;
+
+CHOSEN CHAIN
+
+In Dafny, an ADT for a tree of natural numbers.
+
+```dafny
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+```
+
+a predicate that checks whether a given tree is a binary search tree (BST):
+
+```dafny
+function IsBST(t: Tree, min: nat, max: nat): bool
+{
+  match t
+  {
+    case Empty => true
+    case Node(left, value, right) => 
+      value >= min && value <= max &&
+      IsBST(left, min, value) &&
+      IsBST(right, value, max)
+  }
+}
+```
+
+
+a function that inserts an element into a binary search tree while preserving the BST property:
+
+```dafny
+function Insert(t: Tree, value: nat): Tree
+{
+  if t == Empty then
+    Node(Empty, value, Empty)
+  else
+    match t
+    {
+      case Node(left, v, right) => 
+        if value < v then
+          Node(Insert(left, value), v, right)
+        else if value > v then
+          Node(left, v, Insert(right, value))
+        else
+          t
+    }
+}
+```
+
+
+a predicate that checks whether a given tree contains a given element:
+
+```dafny
+function Contains(t: Tree, value: nat): bool
+{
+  match t
+  {
+    case Empty => false
+    case Node(left, v, right) => 
+      if value < v then Contains(left, value)
+      else if value > v then Contains(right, value)
+      else true
+  }
+}
+```
+
+
+a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property):
+
+```dafny
+lemma InsertEnsuresContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // ...
+}
+```
+
+
+another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds:
+
+```dafny
+lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
+  requires min <= value < max && IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // ...
+}
+``` package com.github.dandelion.core.cache;
+
+2 minutes and 37 seconds elapsed.
+
+
