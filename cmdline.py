@@ -26,7 +26,7 @@ class CommonArguments:
     explore_many: bool = field(default=True, metadata={"help": "Explore multiple paths"})
     n_iter: int = field(default=10, metadata={"help": "Number of iterations to run ppo for"})
     greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
-    remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"}),
+    remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"})
     show_hint_match_dafny: bool = field(default=True, metadata={"help": "Show Dafny hint about pattern matching syntax"})
 
 
