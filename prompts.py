@@ -227,15 +227,17 @@ problem_opt0_coq_proof_hints = """
 EXTRA_CONSTANT_FOLDING = " and performs all additions by constants"
 EXTRA_CONSTANT_FOLDING = ""
 
-problem_opt0 = (
-    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
-{'''### Hint: Recall that in Dafny, pattern match takes the form
+hint_match_dafny = '''### Hint: Recall that in Dafny, pattern match takes the form
 match e
 case Foo(x, y) => 1
 case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
-}### Hint: In the optimizer, recursively optimize the sub-expressions.
+#hint_match_dafny = ''
+
+problem_opt0 = (
+    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+{hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
 {'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
@@ -327,11 +329,7 @@ ensures denotation(foo) % 2 == 0
 
 problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
 ### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
-### Hint: Recall that in Dafny, pattern match takes the form
-match e
-case Foo(x, y) => 1
-case Bar(x) => 2
-case _ => 3
+"""+hint_match_dafny+"""
 
 
 ```dafny
@@ -447,12 +445,7 @@ predicate optimal(e: Expr) {
 lemma OptimizerOptimal(e: Expr)
   ensures optimal(optimize(e))
 ''' if LANG=='Dafny' else ''
-}{'''### Hint: Recall that in Dafny, pattern match takes the form
-match e
-case Foo(x, y) => 1
-case Bar(x) => 2
-case _ => 3
-''' if LANG=='Dafny' else ''
+}{hint_match_dafny
 }{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if LANG=='Dafny' else ''
 }{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
@@ -679,13 +672,7 @@ Then (4) write a predicate that checks whether a given tree contains a given ele
 Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
 Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
 {'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
-{'''### Hint: Recall that in Dafny, pattern match takes the form
-match e
-case Foo(x, y) => 1
-case Bar(x) => 2
-case _ => 3
-''' if LANG=='Dafny' else ''
-}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+{hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
 }{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
 }
 """,
