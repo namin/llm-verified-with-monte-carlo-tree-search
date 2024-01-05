@@ -755,7 +755,8 @@ def remove_hints(prompt):
     lines = [line for line in lines if not line.startswith("### Hint: ")]
     return "\n".join(lines)
 
-#prompt = remove_hints3(prompt)
+if args.remove_hints:
+    prompt = remove_hints3(prompt)
 
 if prompt.count("```") % 2 == 1:
     pass
