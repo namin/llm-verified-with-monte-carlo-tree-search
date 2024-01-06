@@ -757,7 +757,8 @@ problems_dict = {
     "problem_intersperse_invariants_dafny" : problem_intersperse_invariants_dafny,
     "problem_intersperse_dafny" : problem_intersperse_dafny,
     "problem_bst" : problem_bst,
-    "problem_bst_dafny_sanity_check" : problem_bst_dafny_sanity_check
+    "problem_bst_dafny_sanity_check" : problem_bst_dafny_sanity_check,
+    "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
 }
 
 # Set the right-hand side to the selected problem.
