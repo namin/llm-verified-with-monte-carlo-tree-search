@@ -1,0 +1,1911 @@
+
+
+========
+Experiment configuration: python run_whole.py --greedy False --n_samples 10 --problem_name problem_bst --base_model_name ./my_dpo_ppo 
+
+
+
+
+========
+Experiment configuration: python run_whole.py --greedy False --n_samples 10 --problem_name problem_bst --base_model_name ./my_dpo_model 
+
+
+[2024-01-06 16:58:37,111] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree =
+ | Node(left: Tree, value: nat, right: Tree)
+ | Leaf
+
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+ reads t
+{
+ match t
+ case Leaf => true
+ case Node(left, value, right) =>
+   value >= lo && value <= hi &&
+   IsBST(left, lo, value) &&
+   IsBST(right, value, hi)
+}
+
+function Insert(t: Tree, value: nat): Tree
+ reads t
+ modifies nothing
+{
+ if t == Leaf then Node(Leaf, value, Leaf)
+ else
+   match t
+   case Node(left, tValue, right) =>
+     if value < tValue then Node(Insert(left, value), tValue, right)
+     else if value > tValue then Node(left, tValue, Insert(right, value))
+     else t
+}
+
+predicate Contains(t: Tree, value: nat)
+ reads t
+{
+ match t
+ case Leaf => false
+ case Node(left, tValue, right) =>
+   tValue == value || Contains(left, value) || Contains(right, value)
+}
+
+lemma InsertPreservesContains(t: Tree, value: nat)
+ ensures Contains(Insert(t, value), value)
+{
+ // proof here
+}
+
+lemma InsertPreservesIsBST(t: Tree, value: nat, lo: nat, hi: nat)
+ requires IsBST(t, lo, hi)
+ requires lo <= value <= hi
+ ensures IsBST(Insert(t, value), lo, hi)
+{
+ // proof here
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree =
+  | Node(left: Tree, value: nat, right: Tree)
+  | Leaf
+
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+  reads t
+{
+  match t
+  case Leaf => true
+  case Node(left, value, right) =>
+    value >= lo && value <= hi &&
+    IsBST(left, lo, value) &&
+    IsBST(right, value, hi)
+}
+
+function Insert(t: Tree, value: nat): Tree
+  reads t
+  modifies nothing
+{
+  if t == Leaf then Node(Leaf, value, Leaf)
+  else
+    match t
+    case Node(left, tValue, right) =>
+      if value < tValue then Node(Insert(left, value), tValue, right)
+      else if value > tValue then Node(left, tValue, Insert(right, value))
+      else t
+}
+
+predicate Contains(t: Tree, value: nat)
+  reads t
+{
+  match t
+  case Leaf => false
+  case Node(left, tValue, right) =>
+    tValue == value || Contains(left, value) || Contains(right, value)
+}
+
+lemma InsertPreservesContains(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // proof here
+}
+
+lemma InsertPreservesIsBST(t: Tree, value: nat, lo: nat, hi: nat)
+  requires IsBST(t, lo, hi)
+  requires lo <= value <= hi
+  ensures IsBST(Insert(t, value), lo, hi)
+{
+  // proof here
+}
+```
+   |
+18 |   modifies nothing
+   |   ^
+
+ex.dfy(18,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate that checks whether a given tree is a binary search tree (BST)
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+{
+ match t
+ case Empty => true
+ case Node(left, v, right) =>
+   v >= lo && v <= hi &&
+   IsBST(left, lo, v) &&
+   IsBST(right, v, hi)
+}
+
+// (3) Function that inserts an element into a binary search tree while preserving the BST property
+function Insert(t: Tree, v: nat): Tree
+{
+ match t
+ case Empty => Node(Empty, v, Empty)
+ case Node(left, w, right) =>
+   if v < w then Node(Insert(left, v), w, right)
+   else if v > w then Node(left, w, Insert(right, v))
+   else t
+}
+
+// (4) Predicate that checks whether a given tree contains a given element
+predicate Contains(t: Tree, v: nat)
+{
+ match t
+ case Empty => false
+ case Node(left, w, right) =>
+   v == w || Contains(left, v) || Contains(right, v)
+}
+
+// (5) Lemma about the Insert function that ensures that the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat, t': Tree)
+requires t' == Insert(t, v)
+ensures Contains(t', v)
+{
+ match t
+ case Empty =>
+   assert t' == Node(Empty, v, Empty);
+ case Node(left, w, right) =>
+   if v < w {
+     assert t' == Node(Insert(left, v), w, right);
+     InsertEnsuresContains(left, v, ?left');
+     assert t' == Node(left', w, right);
+   } else if v > w {
+     assert t' == Node(left, w, Insert(right, v));
+     InsertEnsuresContains(right, v, ?right');
+     assert t' == Node(left, w, right');
+   } else {
+     assert t' == t;
+   }
+}
+
+// (6) Lemma about the Insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, lo: nat, hi: nat, t': Tree)
+requires t' == Insert(t, v)
+requires IsBST(t, lo, hi)
+ensures IsBST(t', lo, hi)
+{
+ match t
+ case Empty =>
+   assert t' == Node(Empty, v, Empty);
+ case Node(left, w, right) =>
+   if v < w {
+     assert t' == Node(Insert(left, v), w, right);
+     InsertPreservesIsBST(left, v, lo, w, ?left');
+     assert t' == Node(left', w, right);
+   } else if v > w {
+     assert t' == Node(left, w, Insert(right, v));
+     InsertPreservesIsBST(right, v, w, hi, ?right');
+     assert t' == Node(left, w, right');
+   } else {
+     assert t' == t;
+   }
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate that checks whether a given tree is a binary search tree (BST)
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+{
+  match t
+  case Empty => true
+  case Node(left, v, right) =>
+    v >= lo && v <= hi &&
+    IsBST(left, lo, v) &&
+    IsBST(right, v, hi)
+}
+
+// (3) Function that inserts an element into a binary search tree while preserving the BST property
+function Insert(t: Tree, v: nat): Tree
+{
+  match t
+  case Empty => Node(Empty, v, Empty)
+  case Node(left, w, right) =>
+    if v < w then Node(Insert(left, v), w, right)
+    else if v > w then Node(left, w, Insert(right, v))
+    else t
+}
+
+// (4) Predicate that checks whether a given tree contains a given element
+predicate Contains(t: Tree, v: nat)
+{
+  match t
+  case Empty => false
+  case Node(left, w, right) =>
+    v == w || Contains(left, v) || Contains(right, v)
+}
+
+// (5) Lemma about the Insert function that ensures that the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat, t': Tree)
+requires t' == Insert(t, v)
+ensures Contains(t', v)
+{
+  match t
+  case Empty =>
+    assert t' == Node(Empty, v, Empty);
+  case Node(left, w, right) =>
+    if v < w {
+      assert t' == Node(Insert(left, v), w, right);
+      InsertEnsuresContains(left, v, ?left');
+      assert t' == Node(left', w, right);
+    } else if v > w {
+      assert t' == Node(left, w, Insert(right, v));
+      InsertEnsuresContains(right, v, ?right');
+      assert t' == Node(left, w, right');
+    } else {
+      assert t' == t;
+    }
+}
+
+// (6) Lemma about the Insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, lo: nat, hi: nat, t': Tree)
+requires t' == Insert(t, v)
+requires IsBST(t, lo, hi)
+ensures IsBST(t', lo, hi)
+{
+  match t
+  case Empty =>
+    assert t' == Node(Empty, v, Empty);
+  case Node(left, w, right) =>
+    if v < w {
+      assert t' == Node(Insert(left, v), w, right);
+      InsertPreservesIsBST(left, v, lo, w, ?left');
+      assert t' == Node(left', w, right);
+    } else if v > w {
+      assert t' == Node(left, w, Insert(right, v));
+      InsertPreservesIsBST(right, v, w, hi, ?right');
+      assert t' == Node(left, w, right');
+    } else {
+      assert t' == t;
+    }
+}
+```
+   |
+46 |       InsertEnsuresContains(left, v, ?left');
+   |                                      ^^^^^^
+
+ex.dfy(46,37): Error: unresolved identifier: ?left'
+   |
+47 |       assert t' == Node(left', w, right);
+   |                         ^^^^^
+
+ex.dfy(47,24): Error: unresolved identifier: left'
+   |
+50 |       InsertEnsuresContains(right, v, ?right');
+   |                                       ^^^^^^^
+
+ex.dfy(50,38): Error: unresolved identifier: ?right'
+   |
+51 |       assert t' == Node(left, w, right');
+   |                                  ^^^^^^
+
+ex.dfy(51,33): Error: unresolved identifier: right'
+   |
+69 |       InsertPreservesIsBST(left, v, lo, w, ?left');
+   |                                            ^^^^^^
+
+ex.dfy(69,43): Error: unresolved identifier: ?left'
+   |
+70 |       assert t' == Node(left', w, right);
+   |                         ^^^^^
+
+ex.dfy(70,24): Error: unresolved identifier: left'
+   |
+73 |       InsertPreservesIsBST(right, v, w, hi, ?right');
+   |                                             ^^^^^^^
+
+ex.dfy(73,44): Error: unresolved identifier: ?right'
+   |
+74 |       assert t' == Node(left, w, right');
+   |                                  ^^^^^^
+
+ex.dfy(74,33): Error: unresolved identifier: right'
+8 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree = Node(value: nat, left: Tree, right: Tree) | Null()
+
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+   reads t
+{
+   match t
+   case Node(v, left, right) =>
+       v >= lo && v <= hi &&
+       (lo < v ==> IsBST(left, lo, v - 1)) &&
+       (v < hi ==> IsBST(right, v + 1, hi))
+   case Null() => true
+}
+
+function Insert(t: Tree, v: nat): Tree
+   reads t
+   modifies t
+{
+   if t == Null() then
+       Node(v, Null(), Null())
+   else
+       match t
+       case Node(value, left, right) =>
+           if v < value then
+               Node(value, Insert(left, v), right)
+           else if v > value then
+               Node(value, left, Insert(right, v))
+           else
+               t
+}
+
+predicate Contains(t: Tree, v: nat)
+   reads t
+{
+   match t
+   case Node(value, left, right) =>
+       if v == value then true
+       else if v < value then Contains(left, v)
+       else Contains(right, v)
+   case Null() => false
+}
+
+lemma InsertPreservesContains(t: Tree, v: nat, w: nat)
+   requires Contains(t, w)
+   ensures Contains(Insert(t, v), w)
+{
+   // proof here
+}
+
+lemma InsertMaintainsIsBST(t: Tree, v: nat, lo: nat, hi: nat)
+   requires IsBST(t, lo, hi)
+   ensures IsBST(Insert(t, v), lo, hi)
+{
+   // proof here
+}
+```
+### Here are the proofs for the lemmas:
+
+```dafny
+lemma InsertPreservesContains(t: Tree, v: nat, w: nat)
+   requires Contains(t, w)
+   ensures Contains(Insert(t, v), w)
+{
+   match t
+   case Node(value, left, right) =>
+       if v < value {
+           InsertPreservesContains(left, v, w);
+       } else if v > value {
+           InsertPreservesContains(right, v, w);
+       } else {
+           // base case: v == value, so w == value
+       }
+   case Null() =>
+       // base case: t is empty, so Contains(t, w) is false
+       assert !Contains(Null(), w);
+}
+
+lemma InsertMaintainsIsBST(t: Tree, v: nat, lo: nat, hi: nat)
+   requires IsBST(t, lo, hi)
+   ensures IsBST(Insert(t, v), lo, hi)
+{
+   match t
+   case Node(value, left, right) =>
+       if v < value {
+           InsertMaintainsIsBST(left, v, lo, value - 1);
+       } else if v > value {
+           InsertMaintainsIsBST(right, v, value + 1, hi);
+       } else {
+           // base case: v == value, so t is already a BST
+       }
+   case Null() =>
+       // base case: t is empty, so it is a BST
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree = Node(value: nat, left: Tree, right: Tree) | Null()
+
+predicate IsBST(t: Tree, lo: nat, hi: nat)
+    reads t
+{
+    match t
+    case Node(v, left, right) =>
+        v >= lo && v <= hi &&
+        (lo < v ==> IsBST(left, lo, v - 1)) &&
+        (v < hi ==> IsBST(right, v + 1, hi))
+    case Null() => true
+}
+
+function Insert(t: Tree, v: nat): Tree
+    reads t
+    modifies t
+{
+    if t == Null() then
+        Node(v, Null(), Null())
+    else
+        match t
+        case Node(value, left, right) =>
+            if v < value then
+                Node(value, Insert(left, v), right)
+            else if v > value then
+                Node(value, left, Insert(right, v))
+            else
+                t
+}
+
+predicate Contains(t: Tree, v: nat)
+    reads t
+{
+    match t
+    case Node(value, left, right) =>
+        if v == value then true
+        else if v < value then Contains(left, v)
+        else Contains(right, v)
+    case Null() => false
+}
+
+lemma InsertPreservesContains(t: Tree, v: nat, w: nat)
+    requires Contains(t, w)
+    ensures Contains(Insert(t, v), w)
+{
+    // proof here
+}
+
+lemma InsertMaintainsIsBST(t: Tree, v: nat, lo: nat, hi: nat)
+    requires IsBST(t, lo, hi)
+    ensures IsBST(Insert(t, v), lo, hi)
+{
+    // proof here
+}
+```
+### Here are the proofs for the lemmas:
+
+```dafny
+lemma InsertPreservesContains(t: Tree, v: nat, w: nat)
+    requires Contains(t, w)
+    ensures Contains(Insert(t, v), w)
+{
+    match t
+    case Node(value, left, right) =>
+        if v < value {
+            InsertPreservesContains(left, v, w);
+        } else if v > value {
+            InsertPreservesContains(right, v, w);
+        } else {
+            // base case: v == value, so w == value
+        }
+    case Null() =>
+        // base case: t is empty, so Contains(t, w) is false
+        assert !Contains(Null(), w);
+}
+
+lemma InsertMaintainsIsBST(t: Tree, v: nat, lo: nat, hi: nat)
+    requires IsBST(t, lo, hi)
+    ensures IsBST(Insert(t, v), lo, hi)
+{
+    match t
+    case Node(value, left, right) =>
+        if v < value {
+            InsertMaintainsIsBST(left, v, lo, value - 1);
+        } else if v > value {
+            InsertMaintainsIsBST(right, v, value + 1, hi);
+        } else {
+            // base case: v == value, so t is already a BST
+        }
+    case Null() =>
+        // base case: t is empty, so it is a BST
+}
+```
+   |
+16 |     modifies t
+   |     ^
+
+ex.dfy(16,4): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree =
+ | Empty
+ | Node(left: Tree, value: nat, right: Tree)
+
+// Predicate for BST
+predicate IsBST(tree: Tree, min: nat, max: nat)
+ reads tree
+ reads min, max
+ reads tree.left, tree.right
+{
+ tree == Empty ||
+ (tree.left == Empty && tree.right == Empty && min <= tree.value <= max) ||
+ (tree.left != Empty && tree.right != Empty &&
+  tree.left.value <= tree.value <= tree.right.value &&
+  tree.left.value >= min && tree.right.value <= max &&
+  IsBST(tree.left, min, tree.value) &&
+  IsBST(tree.right, tree.value, max))
+}
+
+// Insert function
+function Insert(tree: Tree, value: nat): Tree
+ reads tree
+ reads value
+ modifies tree
+{
+ if tree == Empty then
+   Node(Empty, value, Empty)
+ else
+   let left := Insert(tree.left, value);
+   let right := Insert(tree.right, value);
+   Node(left, tree.value, right)
+}
+
+// Lemma about insertion
+lemma InsertLemma1(tree: Tree, value: nat, min: nat, max: nat)
+ reads tree
+ reads value, min, max
+ modifies tree
+ ensures IsBST(Insert(tree, value), min, max)
+{
+ if tree == Empty {
+   // Base case
+ } else {
+   // Recursive case
+   let left := Insert(tree.left, value);
+   let right := Insert(tree.right, value);
+   InsertLemma1(tree.left, value, min, tree.value);
+   InsertLemma1(tree.right, value, tree.value, max);
+ }
+}
+
+// Lemma about insertion and BST property
+lemma InsertLemma2(tree: Tree, value: nat, min: nat, max: nat)
+ reads tree
+ reads value, min, max
+ modifies tree
+ requires min <= value <= max
+ ensures IsBST(Insert(tree, value), min, max)
+{
+ if tree == Empty {
+   // Base case
+ } else {
+   // Recursive case
+   let left := Insert(tree.left, value);
+   let right := Insert(tree.right, value);
+   InsertLemma2(tree.left, value, min, tree.value);
+   InsertLemma2(tree.right, value, tree.value, max);
+ }
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+datatype Tree =
+  | Empty
+  | Node(left: Tree, value: nat, right: Tree)
+
+// Predicate for BST
+predicate IsBST(tree: Tree, min: nat, max: nat)
+  reads tree
+  reads min, max
+  reads tree.left, tree.right
+{
+  tree == Empty ||
+  (tree.left == Empty && tree.right == Empty && min <= tree.value <= max) ||
+  (tree.left != Empty && tree.right != Empty &&
+   tree.left.value <= tree.value <= tree.right.value &&
+   tree.left.value >= min && tree.right.value <= max &&
+   IsBST(tree.left, min, tree.value) &&
+   IsBST(tree.right, tree.value, max))
+}
+
+// Insert function
+function Insert(tree: Tree, value: nat): Tree
+  reads tree
+  reads value
+  modifies tree
+{
+  if tree == Empty then
+    Node(Empty, value, Empty)
+  else
+    let left := Insert(tree.left, value);
+    let right := Insert(tree.right, value);
+    Node(left, tree.value, right)
+}
+
+// Lemma about insertion
+lemma InsertLemma1(tree: Tree, value: nat, min: nat, max: nat)
+  reads tree
+  reads value, min, max
+  modifies tree
+  ensures IsBST(Insert(tree, value), min, max)
+{
+  if tree == Empty {
+    // Base case
+  } else {
+    // Recursive case
+    let left := Insert(tree.left, value);
+    let right := Insert(tree.right, value);
+    InsertLemma1(tree.left, value, min, tree.value);
+    InsertLemma1(tree.right, value, tree.value, max);
+  }
+}
+
+// Lemma about insertion and BST property
+lemma InsertLemma2(tree: Tree, value: nat, min: nat, max: nat)
+  reads tree
+  reads value, min, max
+  modifies tree
+  requires min <= value <= max
+  ensures IsBST(Insert(tree, value), min, max)
+{
+  if tree == Empty {
+    // Base case
+  } else {
+    // Recursive case
+    let left := Insert(tree.left, value);
+    let right := Insert(tree.right, value);
+    InsertLemma2(tree.left, value, min, tree.value);
+    InsertLemma2(tree.right, value, tree.value, max);
+  }
+}
+```
+   |
+24 |   modifies tree
+   |   ^
+
+ex.dfy(24,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define the tree ADT
+datatype Tree =
+ | Empty
+ | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Define the predicate for BST
+predicate IsBST(t: Tree, min: nat, max: nat)
+ reads t
+{
+ match t
+ case Empty => true
+ case Node(left, value, right) =>
+   min <= value <= max &&
+   IsBST(left, min, value - 1) &&
+   IsBST(right, value + 1, max)
+}
+
+// (3) Define the insert function
+function Insert(t: Tree, x: nat): Tree
+ reads t
+ reads x
+{
+ if t == Empty then Node(Empty, x, Empty)
+ else
+   match t
+   case Node(left, value, right) =>
+     if x < value then Node(Insert(left, x), value, right)
+     else if x > value then Node(left, value, Insert(right, x))
+     else t
+}
+
+// (4) Define the predicate for containing element
+predicate Contains(t: Tree, x: nat)
+ reads t
+ reads x
+{
+ match t
+ case Empty => false
+ case Node(left, value, right) =>
+   (x == value) || (x < value && Contains(left, x)) || (x > value && Contains(right, x))
+}
+
+// (5) Lemma for the insert function without ensuring BST
+lemma InsertNoBST(t: Tree, x: nat, y: nat)
+ ensures Contains(Insert(t, x), y) == Contains(t, y) || y == x
+ reads t
+ reads x
+ reads y
+{
+ switch t
+ case Empty =>
+ case Node(left, value, right) =>
+   if x < value then InsertNoBST(left, x, y)
+   else if x > value then InsertNoBST(right, x, y)
+   else {}
+}
+
+// (6) Lemma for the insert function maintaining BST
+lemma InsertBST(t: Tree, x: nat, min: nat, max: nat)
+ requires IsBST(t, min, max)
+ ensures IsBST(Insert(t, x), min, max)
+ reads t
+ reads x
+ reads min
+ reads max
+{
+ switch t
+ case Empty =>
+ case Node(left, value, right) =>
+   if x < value then InsertBST(left, x, min, value - 1)
+   else if x > value then InsertBST(right, x, value + 1, max)
+   else {}
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define the tree ADT
+datatype Tree =
+  | Empty
+  | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Define the predicate for BST
+predicate IsBST(t: Tree, min: nat, max: nat)
+  reads t
+{
+  match t
+  case Empty => true
+  case Node(left, value, right) =>
+    min <= value <= max &&
+    IsBST(left, min, value - 1) &&
+    IsBST(right, value + 1, max)
+}
+
+// (3) Define the insert function
+function Insert(t: Tree, x: nat): Tree
+  reads t
+  reads x
+{
+  if t == Empty then Node(Empty, x, Empty)
+  else
+    match t
+    case Node(left, value, right) =>
+      if x < value then Node(Insert(left, x), value, right)
+      else if x > value then Node(left, value, Insert(right, x))
+      else t
+}
+
+// (4) Define the predicate for containing element
+predicate Contains(t: Tree, x: nat)
+  reads t
+  reads x
+{
+  match t
+  case Empty => false
+  case Node(left, value, right) =>
+    (x == value) || (x < value && Contains(left, x)) || (x > value && Contains(right, x))
+}
+
+// (5) Lemma for the insert function without ensuring BST
+lemma InsertNoBST(t: Tree, x: nat, y: nat)
+  ensures Contains(Insert(t, x), y) == Contains(t, y) || y == x
+  reads t
+  reads x
+  reads y
+{
+  switch t
+  case Empty =>
+  case Node(left, value, right) =>
+    if x < value then InsertNoBST(left, x, y)
+    else if x > value then InsertNoBST(right, x, y)
+    else {}
+}
+
+// (6) Lemma for the insert function maintaining BST
+lemma InsertBST(t: Tree, x: nat, min: nat, max: nat)
+  requires IsBST(t, min, max)
+  ensures IsBST(Insert(t, x), min, max)
+  reads t
+  reads x
+  reads min
+  reads max
+{
+  switch t
+  case Empty =>
+  case Node(left, value, right) =>
+    if x < value then InsertBST(left, x, min, value - 1)
+    else if x > value then InsertBST(right, x, value + 1, max)
+    else {}
+}
+```
+   |
+46 |   reads t
+   |   ^
+
+ex.dfy(46,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define the ADT for a tree
+datatype Tree =
+ | Empty
+ | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Define the predicate for a binary search tree
+predicate IsBST(tree: Tree, lo: nat, hi: nat)
+ reads tree
+{
+ match tree
+ case Empty => true
+ case Node(left, value, right) =>
+   lo < value && value < hi &&
+   IsBST(left, lo, value) &&
+   IsBST(right, value, hi)
+}
+
+// (3) Define the insert function
+function Insert(tree: Tree, value: nat): Tree
+ reads tree
+ modifies tree
+{
+ if tree == Empty then
+   Node(Empty, value, Empty)
+ else
+   match tree
+   case Node(left, tvalue, right) =>
+     if value < tvalue then
+       Node(Insert(left, value), tvalue, right)
+     else if value == tvalue then
+       tree
+     else
+       Node(left, tvalue, Insert(right, value))
+}
+
+// (4) Define the predicate to check if a tree contains a value
+predicate Contains(tree: Tree, value: nat)
+ reads tree
+{
+ match tree
+ case Empty => false
+ case Node(left, tvalue, right) =>
+   value < tvalue ? Contains(left, value) :
+   value == tvalue ? true :
+   Contains(right, value)
+}
+
+// (5) Define the lemma for insertion
+lemma InsertPreservesValue(tree: Tree, value: nat, newTree: Tree)
+ ensures Contains(newTree, value) <==> Contains(tree, value) || value == tree.Node().value
+ reads tree
+{
+ match tree
+ case Empty =>
+ case Node(left, tvalue, right) =>
+   if value < tvalue then
+     InsertPreservesValue(left, value, newTree.Node().left)
+   else if value == tvalue then
+     newTree == tree
+   else
+     InsertPreservesValue(right, value, newTree.Node().right)
+}
+
+// (6) Define the lemma for BST property
+lemma InsertPreservesBST(tree: Tree, value: nat, newTree: Tree, lo: nat, hi: nat)
+ requires IsBST(tree, lo, hi)
+ ensures IsBST(newTree, lo, hi)
+ reads tree
+{
+ match tree
+ case Empty =>
+ case Node(left, tvalue, right) =>
+   if value < tvalue then
+     InsertPreservesBST(left, value, newTree.Node().left, lo, tvalue)
+   else if value == tvalue then
+     // nothing changes
+   else
+     InsertPreservesBST(right, value, newTree.Node().right, tvalue, hi)
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define the ADT for a tree
+datatype Tree =
+  | Empty
+  | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Define the predicate for a binary search tree
+predicate IsBST(tree: Tree, lo: nat, hi: nat)
+  reads tree
+{
+  match tree
+  case Empty => true
+  case Node(left, value, right) =>
+    lo < value && value < hi &&
+    IsBST(left, lo, value) &&
+    IsBST(right, value, hi)
+}
+
+// (3) Define the insert function
+function Insert(tree: Tree, value: nat): Tree
+  reads tree
+  modifies tree
+{
+  if tree == Empty then
+    Node(Empty, value, Empty)
+  else
+    match tree
+    case Node(left, tvalue, right) =>
+      if value < tvalue then
+        Node(Insert(left, value), tvalue, right)
+      else if value == tvalue then
+        tree
+      else
+        Node(left, tvalue, Insert(right, value))
+}
+
+// (4) Define the predicate to check if a tree contains a value
+predicate Contains(tree: Tree, value: nat)
+  reads tree
+{
+  match tree
+  case Empty => false
+  case Node(left, tvalue, right) =>
+    value < tvalue ? Contains(left, value) :
+    value == tvalue ? true :
+    Contains(right, value)
+}
+
+// (5) Define the lemma for insertion
+lemma InsertPreservesValue(tree: Tree, value: nat, newTree: Tree)
+  ensures Contains(newTree, value) <==> Contains(tree, value) || value == tree.Node().value
+  reads tree
+{
+  match tree
+  case Empty =>
+  case Node(left, tvalue, right) =>
+    if value < tvalue then
+      InsertPreservesValue(left, value, newTree.Node().left)
+    else if value == tvalue then
+      newTree == tree
+    else
+      InsertPreservesValue(right, value, newTree.Node().right)
+}
+
+// (6) Define the lemma for BST property
+lemma InsertPreservesBST(tree: Tree, value: nat, newTree: Tree, lo: nat, hi: nat)
+  requires IsBST(tree, lo, hi)
+  ensures IsBST(newTree, lo, hi)
+  reads tree
+{
+  match tree
+  case Empty =>
+  case Node(left, tvalue, right) =>
+    if value < tvalue then
+      InsertPreservesBST(left, value, newTree.Node().left, lo, tvalue)
+    else if value == tvalue then
+      // nothing changes
+    else
+      InsertPreservesBST(right, value, newTree.Node().right, tvalue, hi)
+}
+```
+   |
+21 |   modifies tree
+   |   ^
+
+ex.dfy(21,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree =
+ | Leaf(value: nat)
+ | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate for binary search tree (BST)
+predicate IsBST(t: Tree, min: nat, max: nat)
+ reads t
+{
+ match t
+ case Leaf(value) => true
+ case Node(left, value, right) =>
+   value <= max && value >= min &&
+   IsBST(left, min, value - 1) &&
+   IsBST(right, value + 1, max)
+}
+
+// (3) Insert function
+function Insert(t: Tree, value: nat): Tree
+ reads t
+ modifies nothing
+{
+ if t == Leaf(0) then
+   Leaf(value)
+ else
+   match t
+   case Leaf(v) =>
+     if value < v then Leaf(value) else Leaf(v)
+   case Node(left, v, right) =>
+     if value < v then Node(Insert(left, value), v, right)
+     else if value > v then Node(left, v, Insert(right, value))
+     else t
+}
+
+// (4) Contains function
+function Contains(t: Tree, value: nat): bool
+ reads t
+ modifies nothing
+{
+ match t
+ case Leaf(v) => v == value
+ case Node(left, v, right) =>
+   (value < v ? Contains(left, value) :
+    value > v ? Contains(right, value) :
+    true)
+}
+
+// (5) Lemma for the insert function that ensures the tree resulting from inserting an element contains that element
+lemma {:verify} InsertEnsuresContains(t: Tree, value: nat, t': Tree)
+ requires t' == Insert(t, value)
+ ensures Contains(t', value)
+{
+ // Proof by structural induction on t
+ match t
+ case Leaf(v) =>
+   assert t' == Leaf(value);
+   assert Contains(t', value);
+ case Node(left, v, right) =>
+   if value < v {
+     assert t' == Node(Insert(left, value), v, right);
+     InsertEnsuresContains(left, value, Insert(left, value));
+   } else if value > v {
+     assert t' == Node(left, v, Insert(right, value));
+     InsertEnsuresContains(right, value, Insert(right, value));
+   } else {
+     assert t' == t;
+     assert Contains(t', value);
+   }
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma {:induction} InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat, t': Tree)
+ requires IsBST(t, min, max) && t' == Insert(t, value)
+ ensures IsBST(t', min, max)
+{
+ // Proof by structural induction on t
+ match t
+ case Leaf(v) =>
+   assert t' == Leaf(value);
+   assert IsBST(t', min, max);
+ case Node(left, v, right) =>
+   if value < v {
+     assert t' == Node(Insert(left, value), v, right);
+     InsertPreservesBST(left, value, min, v - 1, Insert(left, value));
+   } else if value > v {
+     assert t' == Node(left, v, Insert(right, value));
+     InsertPreservesBST(right, value, v + 1, max, Insert(right, value));
+   } else {
+     assert t' == t;
+     assert IsBST(t', min, max);
+   }
+}
+```
+
+This Dafny code defines an ADT for a tree of natural numbers, a predicate for binary search trees, an insert function that preserves the BST property, a contains function to check if a tree contains a given element, and lemmas about the insert function that ensure the BST property holds and the element is contained in the resulting tree.</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree =
+  | Leaf(value: nat)
+  | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate for binary search tree (BST)
+predicate IsBST(t: Tree, min: nat, max: nat)
+  reads t
+{
+  match t
+  case Leaf(value) => true
+  case Node(left, value, right) =>
+    value <= max && value >= min &&
+    IsBST(left, min, value - 1) &&
+    IsBST(right, value + 1, max)
+}
+
+// (3) Insert function
+function Insert(t: Tree, value: nat): Tree
+  reads t
+  modifies nothing
+{
+  if t == Leaf(0) then
+    Leaf(value)
+  else
+    match t
+    case Leaf(v) =>
+      if value < v then Leaf(value) else Leaf(v)
+    case Node(left, v, right) =>
+      if value < v then Node(Insert(left, value), v, right)
+      else if value > v then Node(left, v, Insert(right, value))
+      else t
+}
+
+// (4) Contains function
+function Contains(t: Tree, value: nat): bool
+  reads t
+  modifies nothing
+{
+  match t
+  case Leaf(v) => v == value
+  case Node(left, v, right) =>
+    (value < v ? Contains(left, value) :
+     value > v ? Contains(right, value) :
+     true)
+}
+
+// (5) Lemma for the insert function that ensures the tree resulting from inserting an element contains that element
+lemma {:verify} InsertEnsuresContains(t: Tree, value: nat, t': Tree)
+  requires t' == Insert(t, value)
+  ensures Contains(t', value)
+{
+  // Proof by structural induction on t
+  match t
+  case Leaf(v) =>
+    assert t' == Leaf(value);
+    assert Contains(t', value);
+  case Node(left, v, right) =>
+    if value < v {
+      assert t' == Node(Insert(left, value), v, right);
+      InsertEnsuresContains(left, value, Insert(left, value));
+    } else if value > v {
+      assert t' == Node(left, v, Insert(right, value));
+      InsertEnsuresContains(right, value, Insert(right, value));
+    } else {
+      assert t' == t;
+      assert Contains(t', value);
+    }
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma {:induction} InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat, t': Tree)
+  requires IsBST(t, min, max) && t' == Insert(t, value)
+  ensures IsBST(t', min, max)
+{
+  // Proof by structural induction on t
+  match t
+  case Leaf(v) =>
+    assert t' == Leaf(value);
+    assert IsBST(t', min, max);
+  case Node(left, v, right) =>
+    if value < v {
+      assert t' == Node(Insert(left, value), v, right);
+      InsertPreservesBST(left, value, min, v - 1, Insert(left, value));
+    } else if value > v {
+      assert t' == Node(left, v, Insert(right, value));
+      InsertPreservesBST(right, value, v + 1, max, Insert(right, value));
+    } else {
+      assert t' == t;
+      assert IsBST(t', min, max);
+    }
+}
+```
+
+This Dafny code defines an ADT for a tree of natural numbers, a predicate for binary search trees, an insert function that preserves the BST property, a contains function to check if a tree contains a given element, and lemmas about the insert function that ensure the BST property holds and the element is contained in the resulting tree.
+   |
+21 |   modifies nothing
+   |   ^
+
+ex.dfy(21,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define an ADT for a tree of natural numbers.
+datatype Tree = Node(value: nat, left: Tree, right: Tree) | Nil
+
+// (2) Define a predicate to check if a given tree is a binary search tree.
+predicate IsBST(t: Tree, min: nat, max: nat)
+{
+ match t
+ case Node(value, left, right) =>
+   value <= max && value >= min &&
+   IsBST(left, min, value - 1) &&
+   IsBST(right, value + 1, max)
+ case Nil => true
+}
+
+// (3) Define a function to insert an element into a binary search tree.
+function Insert(t: Tree, value: nat): Tree
+ decreases t
+{
+ match t
+ case Node(v, left, right) =>
+   if value < v {
+     Node(v, Insert(left, value), right)
+   } else if value > v {
+     Node(v, left, Insert(right, value))
+   } else {
+     t
+   }
+ case Nil => Node(value, Nil, Nil)
+}
+
+// (4) Define a predicate to check if a given tree contains a given element.
+predicate Contains(t: Tree, value: nat)
+ decreases t
+{
+ match t
+ case Node(v, left, right) =>
+   value == v || (value < v ? Contains(left, value) : Contains(right, value))
+ case Nil => false
+}
+
+// (5) Define a lemma about the insert function that ensures the tree resulting from inserting an element contains that element.
+lemma InsertEnsuresContainment(t: Tree, value: nat)
+ ensures Contains(Insert(t, value), value)
+{
+ // Proof by structural induction on t.
+}
+
+// (6) Define a lemma about the insert function that checks the BST property continues to hold after insertion.
+lemma InsertEnsuresIsBST(t: Tree, value: nat, min: nat, max: nat)
+ requires IsBST(t, min, max)
+ ensures IsBST(Insert(t, value), min, max)
+{
+ // Proof by structural induction on t.
+}
+```
+
+Note that the proofs for the lemmas are omitted. The structure of the proofs would involve pattern matching on `t` and recursively calling the lemma for the `left` and `right` subtrees. The base cases would be proved by checking the properties of the `Node` and `Nil` constructors.</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define an ADT for a tree of natural numbers.
+datatype Tree = Node(value: nat, left: Tree, right: Tree) | Nil
+
+// (2) Define a predicate to check if a given tree is a binary search tree.
+predicate IsBST(t: Tree, min: nat, max: nat)
+{
+  match t
+  case Node(value, left, right) =>
+    value <= max && value >= min &&
+    IsBST(left, min, value - 1) &&
+    IsBST(right, value + 1, max)
+  case Nil => true
+}
+
+// (3) Define a function to insert an element into a binary search tree.
+function Insert(t: Tree, value: nat): Tree
+  decreases t
+{
+  match t
+  case Node(v, left, right) =>
+    if value < v {
+      Node(v, Insert(left, value), right)
+    } else if value > v {
+      Node(v, left, Insert(right, value))
+    } else {
+      t
+    }
+  case Nil => Node(value, Nil, Nil)
+}
+
+// (4) Define a predicate to check if a given tree contains a given element.
+predicate Contains(t: Tree, value: nat)
+  decreases t
+{
+  match t
+  case Node(v, left, right) =>
+    value == v || (value < v ? Contains(left, value) : Contains(right, value))
+  case Nil => false
+}
+
+// (5) Define a lemma about the insert function that ensures the tree resulting from inserting an element contains that element.
+lemma InsertEnsuresContainment(t: Tree, value: nat)
+  ensures Contains(Insert(t, value), value)
+{
+  // Proof by structural induction on t.
+}
+
+// (6) Define a lemma about the insert function that checks the BST property continues to hold after insertion.
+lemma InsertEnsuresIsBST(t: Tree, value: nat, min: nat, max: nat)
+  requires IsBST(t, min, max)
+  ensures IsBST(Insert(t, value), min, max)
+{
+  // Proof by structural induction on t.
+}
+```
+
+Note that the proofs for the lemmas are omitted. The structure of the proofs would involve pattern matching on `t` and recursively calling the lemma for the `left` and `right` subtrees. The base cases would be proved by checking the properties of the `Node` and `Nil` constructors.
+   |
+21 |     if value < v {
+   |                  ^
+
+ex.dfy(21,17): Error: then expected
+   |
+23 |     } else if value > v {
+   |                         ^
+
+ex.dfy(23,24): Error: then expected
+   |
+37 |     value == v || (value < v ? Contains(left, value) : Contains(right, value))
+   |                              ^
+
+ex.dfy(37,29): Error: closeparen expected
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define an ADT for a tree of natural numbers
+datatype Tree = Node(left: Tree, value: nat, right: Tree) | Leaf()
+
+// (2) Define a predicate for BST
+predicate IsBST(t: Tree, min: nat, max: nat)
+ reads t
+ reads min, max
+{
+ match t
+ case Node(l, v, r) =>
+   v >= min && v <= max &&
+   IsBST(l, min, v) &&
+   IsBST(r, v, max)
+ case Leaf() => true
+}
+
+// (3) Define a function to insert an element into a binary search tree
+function Insert(t: Tree, v: nat): Tree
+ reads t, v
+ modifies t
+{
+ if IsBST(t, 0, 2^32 - 1) {
+   if t == Leaf() {
+     Node(Leaf(), v, Leaf())
+   } else {
+     match t
+     case Node(l, value, r) =>
+       if v < value {
+         Node(Insert(l, v), value, r)
+       } else if v == value {
+         t
+       } else {
+         Node(l, value, Insert(r, v))
+       }
+     case Leaf() => Node(Leaf(), v, Leaf()) // unreachable
+   }
+ } else {
+   t // unreachable
+ }
+}
+
+// (4) Define a predicate to check whether a tree contains a given element
+predicate Contains(t: Tree, v: nat)
+ reads t, v
+{
+ match t
+ case Node(l, value, r) =>
+   (v == value) || Contains(l, v) || Contains(r, v)
+ case Leaf() => false
+}
+
+// (5) Define a lemma about the Insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat)
+ ensures Contains(Insert(t, v), v)
+{
+ // Proof by structural induction on t
+}
+
+// (6) Define a lemma about the Insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, min: nat, max: nat)
+ requires IsBST(t, min, max)
+ ensures IsBST(Insert(t, v), min, max)
+{
+ // Proof by structural induction on t
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) Define an ADT for a tree of natural numbers
+datatype Tree = Node(left: Tree, value: nat, right: Tree) | Leaf()
+
+// (2) Define a predicate for BST
+predicate IsBST(t: Tree, min: nat, max: nat)
+  reads t
+  reads min, max
+{
+  match t
+  case Node(l, v, r) =>
+    v >= min && v <= max &&
+    IsBST(l, min, v) &&
+    IsBST(r, v, max)
+  case Leaf() => true
+}
+
+// (3) Define a function to insert an element into a binary search tree
+function Insert(t: Tree, v: nat): Tree
+  reads t, v
+  modifies t
+{
+  if IsBST(t, 0, 2^32 - 1) {
+    if t == Leaf() {
+      Node(Leaf(), v, Leaf())
+    } else {
+      match t
+      case Node(l, value, r) =>
+        if v < value {
+          Node(Insert(l, v), value, r)
+        } else if v == value {
+          t
+        } else {
+          Node(l, value, Insert(r, v))
+        }
+      case Leaf() => Node(Leaf(), v, Leaf()) // unreachable
+    }
+  } else {
+    t // unreachable
+  }
+}
+
+// (4) Define a predicate to check whether a tree contains a given element
+predicate Contains(t: Tree, v: nat)
+  reads t, v
+{
+  match t
+  case Node(l, value, r) =>
+    (v == value) || Contains(l, v) || Contains(r, v)
+  case Leaf() => false
+}
+
+// (5) Define a lemma about the Insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat)
+  ensures Contains(Insert(t, v), v)
+{
+  // Proof by structural induction on t
+}
+
+// (6) Define a lemma about the Insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, min: nat, max: nat)
+  requires IsBST(t, min, max)
+  ensures IsBST(Insert(t, v), min, max)
+{
+  // Proof by structural induction on t
+}
+```
+   |
+20 |   modifies t
+   |   ^
+
+ex.dfy(20,2): Error: this symbol not expected in Dafny
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate that checks if a tree is a binary search tree
+predicate IsBST(t: Tree, lower: nat, upper: nat) 
+ reads t 
+{
+ match t
+ case Empty => true
+ case Node(l, v, r) => 
+   l == Empty || IsBST(l, lower, v)
+   && v <= upper 
+   && (r == Empty || IsBST(r, v, upper))
+}
+
+// (3) Function that inserts an element into a binary search tree
+function Insert(t: Tree, v: nat): Tree 
+ reads t
+ ensures IsBST(t, Min_nat, Max_nat) => IsBST(result, Min_nat, Max_nat)
+{
+ if t == Empty then Node(Empty, v, Empty)
+ else 
+   match t
+   case Node(l, w, r) =>
+     if v < w then Node(Insert(l, v), w, r)
+     else if v == w then t
+     else Node(l, w, Insert(r, v))
+}
+
+// (4) Predicate that checks if a tree contains a given element
+predicate Contains(t: Tree, v: nat) 
+ reads t 
+{
+ match t
+ case Empty => false
+ case Node(l, w, r) => 
+   v < w ? Contains(l, v)
+   : v == w ? true
+   : Contains(r, v)
+}
+
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat)
+ ensures Contains(Insert(t, v), v)
+{
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, lower: nat, upper: nat)
+ requires IsBST(t, lower, upper)
+ ensures IsBST(Insert(t, v), lower, upper)
+{
+}
+```</s>
+TEXT
+### Spec: In Dafny, (1) write an ADT for a tree of natural numbers.
+Then (2) write a predicate that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate that checks whether a given tree contains a given element.
+Then (5) write a lemma about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.
+### Hint: Recall that in Dafny, pattern match takes the form
+match e
+case Foo(x, y) => 1
+case Bar(x) => 2
+case _ => 3
+### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.
+
+```dafny
+// (1) ADT for a tree of natural numbers
+datatype Tree = Empty | Node(left: Tree, value: nat, right: Tree)
+
+// (2) Predicate that checks if a tree is a binary search tree
+predicate IsBST(t: Tree, lower: nat, upper: nat) 
+  reads t 
+{
+  match t
+  case Empty => true
+  case Node(l, v, r) => 
+    l == Empty || IsBST(l, lower, v)
+    && v <= upper 
+    && (r == Empty || IsBST(r, v, upper))
+}
+
+// (3) Function that inserts an element into a binary search tree
+function Insert(t: Tree, v: nat): Tree 
+  reads t
+  ensures IsBST(t, Min_nat, Max_nat) => IsBST(result, Min_nat, Max_nat)
+{
+  if t == Empty then Node(Empty, v, Empty)
+  else 
+    match t
+    case Node(l, w, r) =>
+      if v < w then Node(Insert(l, v), w, r)
+      else if v == w then t
+      else Node(l, w, Insert(r, v))
+}
+
+// (4) Predicate that checks if a tree contains a given element
+predicate Contains(t: Tree, v: nat) 
+  reads t 
+{
+  match t
+  case Empty => false
+  case Node(l, w, r) => 
+    v < w ? Contains(l, v)
+    : v == w ? true
+    : Contains(r, v)
+}
+
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma InsertEnsuresContains(t: Tree, v: nat)
+  ensures Contains(Insert(t, v), v)
+{
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma InsertPreservesIsBST(t: Tree, v: nat, lower: nat, upper: nat)
+  requires IsBST(t, lower, upper)
+  ensures IsBST(Insert(t, v), lower, upper)
+{
+}
+```
+   |
+12 |     && v <= upper 
+   |     ^^
+
+ex.dfy(12,4): Error: Ambiguous use of && and ||. Use parentheses to disambiguate.
+   |
+13 |     && (r == Empty || IsBST(r, v, upper))
+   |     ^^
+
+ex.dfy(13,4): Error: Ambiguous use of && and ||. Use parentheses to disambiguate.
+   |
+19 |   ensures IsBST(t, Min_nat, Max_nat) => IsBST(result, Min_nat, Max_nat)
+   |                                      ^
+
+ex.dfy(19,37): Error: this symbol not expected in Dafny
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+{'positive': 0, 'negative': 10, 'unknown': 0}
+{'yes': 0, 'no': 10}
+10 minutes and 55 seconds elapsed.
+
+
