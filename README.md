@@ -99,7 +99,7 @@ For a run that selects the next completion diversely, do:
 python run_diversity.py
 ```
 
-Note that `cmdline.py` handles the usage of command line arguments for the codebase. To see what arguments are available, simply execute `cmdline.py --help`. To run with specific arguments, simply add a `--[argument name] [desired argument value]` for each argument after the original command to run. For example, to execute `run.py` as before but with Coq instead of Dafny, simply execute:
+Note that `cmdline.py` handles the usage of command line arguments for the codebase. To see what arguments are available, simply execute `python cmdline.py --help`. To run with specific arguments, simply add a `--[argument name] [desired argument value]` for each argument after the original command to run. For example, to execute `run.py` as before but with Coq instead of Dafny, simply execute:
 
 ```
 python run.py --language "Coq"

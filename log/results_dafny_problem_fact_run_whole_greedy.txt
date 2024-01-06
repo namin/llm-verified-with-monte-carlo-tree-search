@@ -1,0 +1,73 @@
+
+
+========
+Experiment configuration: python run_whole.py --problem_name problem_fact 
+
+
+<s> ### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+   if n == 0 {
+       1
+   } else {
+       n * factorial(n - 1)
+   }
+}
+
+lemma FactorialPositive(n: nat)
+   ensures factorial(n) > 0
+{
+   if n == 0 {
+       // Base case: factorial(0) = 1, which is positive
+   } else {
+       // Inductive case: factorial(n) = n * factorial(n - 1)
+       // By induction hypothesis, factorial(n - 1) > 0
+       // So, n * factorial(n - 1) > 0
+       FactorialPositive(n - 1);
+   }
+}
+```</s>
+TEXT
+### Spec: In Dafny, write a factorial function and prove that the factorial is always strictly positive.
+### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+
+```dafny
+function factorial(n: nat): nat {
+    if n == 0 {
+        1
+    } else {
+        n * factorial(n - 1)
+    }
+}
+
+lemma FactorialPositive(n: nat)
+    ensures factorial(n) > 0
+{
+    if n == 0 {
+        // Base case: factorial(0) = 1, which is positive
+    } else {
+        // Inductive case: factorial(n) = n * factorial(n - 1)
+        // By induction hypothesis, factorial(n - 1) > 0
+        // So, n * factorial(n - 1) > 0
+        FactorialPositive(n - 1);
+    }
+}
+```
+  |
+2 |     if n == 0 {
+  |               ^
+
+ex.dfy(2,14): Error: then expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+{'positive': 0, 'negative': 1, 'unknown': 0}
+{'yes': 0, 'no': 1}
+0 minutes and 57 seconds elapsed.
+
+
