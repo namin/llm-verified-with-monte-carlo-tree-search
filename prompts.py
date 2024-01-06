@@ -327,6 +327,50 @@ ensures denotation(foo) % 2 == 0
     ['Dafny'],
 )
 
+problem_pattern_match_train_dafny2 = (("""In Dafny, we have the following ADT:
+
+```dafny
+datatype Foo = Bar(n: nat) | Baz(x: Foo)
+```
+
+Take the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.
+
+```dafny
+function denotation(foo: Foo): nat
+{
+""", [
+    """
+```dafny
+lemma ex1()
+ensures denotation(Baz(Bar(2))) == 4
+{}
+
+lemma denotationAlwaysEven(foo: Foo)
+ensures denotation(foo) % 2 == 0
+{
+  match foo
+  case Bar(n) =>
+  case Baz(x) =>
+    denotationAlwaysEven(x);
+}
+```
+""",
+    """
+A lemma that proves that the denotation of a Foo is always even.
+
+```dafny
+lemma denotationAlwaysEven(foo: Foo)
+ensures denotation(foo) % 2 == 0
+{
+"""]),
+    500,
+    None,
+    5,
+    15,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Dafny'],
+)
+
 problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
 ### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
 """+hint_match_dafny+"""
@@ -759,6 +803,7 @@ problems_dict = {
     "problem_bst" : problem_bst,
     "problem_bst_dafny_sanity_check" : problem_bst_dafny_sanity_check,
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
+    "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
 }
 
 # Set the right-hand side to the selected problem.
