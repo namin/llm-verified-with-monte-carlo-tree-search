@@ -1,6 +1,7 @@
 from cmdline import args
 
 GREEDY = args.greedy
+N_SAMPLES = args.n_samples
 
 # GREEDY = True
 
@@ -32,7 +33,7 @@ def attempt():
         solutions.append(text)
 
 def main():
-    for i in range(0, 1 if GREEDY else 10):
+    for i in range(0, 1 if GREEDY else N_SAMPLES):
         attempt()
     for solution in solutions:
         print("ONE SOLUTION")

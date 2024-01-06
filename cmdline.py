@@ -25,6 +25,7 @@ class CommonArguments:
     extract_lemma_depth: int = field(default=1, metadata={"help": "Depth for extracing lemma"})
     explore_many: bool = field(default=True, metadata={"help": "Explore multiple paths"})
     n_iter: int = field(default=10, metadata={"help": "Number of iterations to run ppo for"})
+    n_samples: int = field(default=10, metadata={"help": "Number of samples forwhole sampling"})
     greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
     remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"})
     show_hint_match_dafny: bool = field(default=True, metadata={"help": "Show Dafny hint about pattern matching syntax"})
