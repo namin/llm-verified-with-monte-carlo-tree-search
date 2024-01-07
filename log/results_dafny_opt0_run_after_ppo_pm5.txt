@@ -1,0 +1,2359 @@
+
+
+========
+Experiment configuration: python run.py --base_model_name ./my_dpo_model --remove_hints True 
+
+
+[2024-01-07 05:04:44,278] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+
+SCORE
+1.0
+['// ADT for arithmetic expressions\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+
+  |
+2 | datatype Expr =
+  |                ^
+
+ex.dfy(2,15): Error: invalid NoUSIdentOrDigits
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['datatype Expr = \n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+
+SCORE
+1.0
+['  | Const(v: int)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+
+SCORE
+1.0
+['  | Var(name: string)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+
+SCORE
+1.0
+['  | Add(e1: Expr, e2: Expr)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+SCORE
+1.0
+['```\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+
+SCORE
+1.0
+['```dafny\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+
+SCORE
+1.0
+['// Evaluator\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+
+SCORE
+1.0
+['function eval(e: Expr, env: string -> int): int\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+
+   |
+10 |   reads env
+   |         ^^^
+
+ex.dfy(10,8): Error: a reads-clause expression must denote an object, a set/iset/multiset/seq of objects, or a function to a set/iset/multiset/seq of objects (instead got string -> int)
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+['  reads env\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+
+   |
+11 | {
+   |  ^
+
+ex.dfy(11,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+  match e
+
+   |
+12 |   match e
+   |          ^
+
+ex.dfy(12,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+  match e
+  case Const(v) => v
+
+   |
+13 |   case Const(v) => v
+   |                     ^
+
+ex.dfy(13,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Const(v) => v\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+
+   |
+14 |   case Var(name) => env(name)
+   |                              ^
+
+ex.dfy(14,29): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Var(name) => env(name)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+
+   |
+15 |   case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+   |                                                    ^
+
+ex.dfy(15,51): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  reads env
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+
+   |
+10 |   reads env
+   |         ^^^
+
+ex.dfy(10,8): Error: a reads-clause expression must denote an object, a set/iset/multiset/seq of objects, or a function to a set/iset/multiset/seq of objects (instead got string -> int)
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  matches e
+
+   |
+10 |   matches e
+   |   ^
+
+ex.dfy(10,2): Error: this symbol not expected in FunctionSpec
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  matches e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  matches e
+  case Const(v) => v
+
+   |
+10 |   matches e
+   |   ^
+
+ex.dfy(10,2): Error: this symbol not expected in FunctionSpec
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Const(v) => v\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+  matches e
+  case Const(v) => v
+  case Var(name) => env(name)
+
+   |
+10 |   matches e
+   |   ^
+
+ex.dfy(10,2): Error: this symbol not expected in FunctionSpec
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  case Var(name) => env(name)\n']
+['function eval(e: Expr, env: string -> int): int\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+
+   |
+10 | {
+   |  ^
+
+ex.dfy(10,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+
+   |
+11 |   match e
+   |          ^
+
+ex.dfy(11,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+
+   |
+12 |   case Const(v) => v
+   |                     ^
+
+ex.dfy(12,20): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Const(v) => v\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+
+   |
+13 |   case Var(name) => env(name)
+   |                              ^
+
+ex.dfy(13,29): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Var(name) => env(name)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+
+   |
+14 |   case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+   |                                                    ^
+
+ex.dfy(14,51): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+SCORE
+1.0
+['```\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+
+SCORE
+1.0
+['```dafny\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+
+SCORE
+1.0
+['// Optimizer\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+
+SCORE
+1.0
+['function optimize(e: Expr): Expr\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+
+   |
+20 | {
+   |  ^
+
+ex.dfy(20,1): Error: invalid UnaryExpression
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+
+   |
+21 |   match e
+   |          ^
+
+ex.dfy(21,9): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+
+   |
+22 |   case Add(Const(0), e2) => e2
+   |                               ^
+
+ex.dfy(22,30): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(Const(0), e2) => e2\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+
+   |
+23 |   case Add(e1, Const(0)) => e1
+   |                               ^
+
+ex.dfy(23,30): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, Const(0)) => e1\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+
+   |
+24 |   case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+   |                                                      ^
+
+ex.dfy(24,53): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) => Add(optimize(e1), optimize(e2))\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+
+   |
+25 |   case _ => e
+   |              ^
+
+ex.dfy(25,13): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case _ => e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+SCORE
+1.0
+['```\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+
+SCORE
+1.0
+['\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+
+SCORE
+1.0
+['```dafny\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+
+SCORE
+1.0
+['// Lemma to prove that the optimizer preserves semantics\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+
+SCORE
+1.0
+['lemma OptimizerSemantics()\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+
+   |
+31 | {
+   |  ^
+
+ex.dfy(31,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int :: 
+
+   |
+32 |   forall e: Expr, env: string -> int ::
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  forall e: Expr, env: string -> int :: \n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int :: 
+    eval(optimize(e), env) == eval(e, env)
+
+   |
+32 |   forall e: Expr, env: string -> int :: 
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    eval(optimize(e), env) == eval(e, env)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int :: 
+    eval(optimize(e), env) == eval(e, env)
+}
+
+   |
+32 |   forall e: Expr, env: string -> int :: 
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int ::
+
+   |
+32 |   forall e: Expr, env: string -> int ::
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  forall e: Expr, env: string -> int ::\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int ::
+    eval(optimize(e), env) == eval(e, env)
+
+   |
+32 |   forall e: Expr, env: string -> int ::
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    eval(optimize(e), env) == eval(e, env)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerSemantics()
+{
+  forall e: Expr, env: string -> int ::
+    eval(optimize(e), env) == eval(e, env)
+}
+
+   |
+32 |   forall e: Expr, env: string -> int ::
+   |                                      ^
+
+ex.dfy(32,37): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+
+SCORE
+1.0
+['lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+
+SCORE
+1.0
+['  ensures eval(optimize(e), env) == eval(e, env)\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+
+   |
+32 | {
+   |  ^
+
+ex.dfy(32,1): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['{\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+
+   |
+33 |   match e
+   |          ^
+
+ex.dfy(33,9): Error: invalid MatchStmt
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  match e\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+
+   |
+34 |   case Add(Const(0), e2) =>
+   |                            ^
+
+ex.dfy(34,27): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(Const(0), e2) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+
+   |
+35 |   case Add(e1, Const(0)) =>
+   |                            ^
+
+ex.dfy(35,27): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, Const(0)) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+
+   |
+36 |   case Add(e1, e2) =>
+   |                      ^
+
+ex.dfy(36,21): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case Add(e1, e2) =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+
+   |
+37 |     OptimizerPreservesSemantics(e1, env);
+   |                                          ^
+
+ex.dfy(37,41): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerPreservesSemantics(e1, env);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+    OptimizerPreservesSemantics(e2, env);
+
+   |
+38 |     OptimizerPreservesSemantics(e2, env);
+   |                                          ^
+
+ex.dfy(38,41): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    OptimizerPreservesSemantics(e2, env);\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+    OptimizerPreservesSemantics(e2, env);
+  case _ =>
+
+   |
+39 |   case _ =>
+   |            ^
+
+ex.dfy(39,11): Error: rbrace expected
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  case _ =>\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+    OptimizerPreservesSemantics(e2, env);
+  case _ =>
+}
+
+SCORE
+1.0
+['}\n']
+TEXT
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+    OptimizerPreservesSemantics(e2, env);
+  case _ =>
+}
+```
+
+SCORE
+1.0
+['```\n']
+CHOSEN SOLUTION
+### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+
+
+
+```dafny
+// ADT for arithmetic expressions
+datatype Expr = 
+  | Const(v: int)
+  | Var(name: string)
+  | Add(e1: Expr, e2: Expr)
+```
+
+```dafny
+// Evaluator
+function eval(e: Expr, env: string -> int): int
+{
+  match e
+  case Const(v) => v
+  case Var(name) => env(name)
+  case Add(e1, e2) => eval(e1, env) + eval(e2, env)
+}
+```
+
+```dafny
+// Optimizer
+function optimize(e: Expr): Expr
+{
+  match e
+  case Add(Const(0), e2) => e2
+  case Add(e1, Const(0)) => e1
+  case Add(e1, e2) => Add(optimize(e1), optimize(e2))
+  case _ => e
+}
+```
+
+```dafny
+// Lemma to prove that the optimizer preserves semantics
+lemma OptimizerPreservesSemantics(e: Expr, env: string -> int)
+  ensures eval(optimize(e), env) == eval(e, env)
+{
+  match e
+  case Add(Const(0), e2) =>
+  case Add(e1, Const(0)) =>
+  case Add(e1, e2) =>
+    OptimizerPreservesSemantics(e1, env);
+    OptimizerPreservesSemantics(e2, env);
+  case _ =>
+}
+```
+
+
+STATS
+
+number of nodes: 53
+number of gen nodes: 27 (including leaves: 3)
+number of back nodes: 26 (including leaves: 24)
+
+expansion count: 30 (including failed: 4)
+
+cache stats {'hit': 2, 'miss': 62}
+3 minutes and 18 seconds elapsed.
+
+

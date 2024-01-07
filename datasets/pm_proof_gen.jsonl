@@ -12,3 +12,7 @@
 "chosen": "  match foo\n  case Bar(n) =>\n  case Baz(x) => denotationAlwaysEven(x);\n}\n```\n",
 "rejected": "  if foo == Const(_)\n  {\n  }\n  else\n  {\n    match foo\n    case Baz(x) => denotationAlwaysEven(x);\n  }\n```\n"
 }
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\nensures denotation(foo) % 2 == 0\n{\n",
+"chosen": "  match foo\n  case Bar(n) =>\n  case Baz(x) => denotationAlwaysEven(x);\n}\n```\n",
+"rejected": "  if foo is Const\n  {\n  }\n  else\n  {\n    match foo\n    case Baz(x) => denotationAlwaysEven(x);\n  }\n```\n"
+}
