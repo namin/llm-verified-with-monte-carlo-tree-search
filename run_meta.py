@@ -4,10 +4,6 @@ USE_HAMMER = args.use_hammer
 EXTRACT_LEMMA_DEPTH = args.extract_lemma_depth
 EXPLORE_MANY = args.explore_many
 
-# USE_HAMMER = True
-# EXTRACT_LEMMA_DEPTH = 1
-# EXPLORE_MANY = True
-
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 

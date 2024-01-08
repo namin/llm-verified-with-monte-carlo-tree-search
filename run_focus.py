@@ -3,9 +3,6 @@ from cmdline import args
 USE_HAMMER = args.use_hammer
 SHOW_MISTAKES = args.show_mistakes
 INTERACTIVE = args.interactive
-# USE_HAMMER = True
-# SHOW_MISTAKES = False
-# INTERACTIVE = False
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
