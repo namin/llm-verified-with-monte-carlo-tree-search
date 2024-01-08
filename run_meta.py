@@ -183,6 +183,10 @@ From Coq Require Import Arith.Arith.
 Require Import Coq.Strings.String.
 
 """ + prompt_code
+    else:
+        prompt_code = """From Coq Require Import Arith.Arith.
+Require Import Lia.
+""" + prompt_code
     montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)))
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
