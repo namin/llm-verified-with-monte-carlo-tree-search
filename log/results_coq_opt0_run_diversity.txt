@@ -1,0 +1,2714 @@
+
+
+========
+Experiment configuration: python run_diversity.py --language Coq 
+
+
+[2024-01-08 13:45:23,812] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.
+File "./ex.v", line 2, characters 0-19:
+Error: Cannot find a physical path bound to logical path Coq.
+
+
+SCORE
+None
+['Require Import Coq.', 'Require Import Coq.', 'Require Import Coq.', 'Require Import Coq.', 'Require Import Coq.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.
+File "./ex.v", line 2, characters 0-27:
+Error: Cannot find a physical path bound to logical path Coq.Strings.
+
+
+SCORE
+None
+['Strings.', 'Strings.', 'Strings.', 'Strings.', 'Strings.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+SCORE
+1.0
+['String.', 'String.', 'String.', 'String.', 'String.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Coq.
+File "./ex.v", line 3, characters 0-19:
+Error: Cannot find a physical path bound to logical path Coq.
+
+
+SCORE
+None
+['\nRequire Import Arith.', '\nRequire Import Coq.', '\nRequire Import Arith.', '\nRequire Import Coq.', '\nRequire Import Arith.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.
+Import ListNotations.
+File "./ex.v", line 4, characters 7-20:
+Error: Cannot find module ListNotations
+
+
+SCORE
+-1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+SCORE
+1.0
+['\nImport ListNotations.', 'PeanoNat.', '\nImport ListNotations.', '\nImport ListNotations.', '\nImport ListNotations.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive Expr : Type :=
+  | Const : nat -> Expr
+  | Var : string -> Expr
+  | Add : Expr -> Expr -> Expr.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive expr :=
+  | Const : nat -> expr
+  | Var : string -> expr
+  | Add : expr -> expr -> expr.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+Import ListNotations.
+File "./ex.v", line 4, characters 7-20:
+Error: Cannot find module ListNotations
+
+
+SCORE
+-1.0
+['\n\nInductive Expr : Type :=\n  | Const : nat -> Expr\n  | Var : string -> Expr\n  | Add : Expr -> Expr -> Expr.', '\n\nInductive expr :=\n  | Const : nat -> expr\n  | Var : string -> expr\n  | Add : expr -> expr -> expr.', '\n\nInductive AExp : Type :=\n  | Const : nat -> AExp\n  | Var : string -> AExp\n  | Add : AExp -> AExp -> AExp.', '\nImport ListNotations.', '\nImport ListNotations.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Definition eval (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.
+File "./ex.v", line 14, characters 25-26:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint eval (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.
+File "./ex.v", line 14, characters 25-26:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.
+File "./ex.v", line 14, characters 25-26:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Definition evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => PeanoNat.
+File "./ex.v", line 14, characters 27-28:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+    | Const n => n
+    | Var x => env x
+    | Add e1 e2 => PeanoNat.
+File "./ex.v", line 14, characters 27-28:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+['\n\nDefinition eval (e : AExp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => PeanoNat.', '\n\nFixpoint eval (e : AExp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => PeanoNat.', '\n\nFixpoint evaluate (e : AExp) (env : string -> nat) : nat :=\n  match e with\n  | Const n => n\n  | Var x => env x\n  | Add e1 e2 => PeanoNat.', '\n\nDefinition evaluate (e : AExp) (env : string -> nat) : nat :=\n  match e with\n    | Const n => n\n    | Var x => env x\n    | Add e1 e2 => PeanoNat.', '\n\nFixpoint evaluate (e : AExp) (env : string -> nat) : nat :=\n  match e with\n    | Const n => n\n    | Var x => env x\n    | Add e1 e2 => PeanoNat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.
+File "./ex.v", line 14, characters 29-30:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+['Nat.', 'Nat.', 'Nat.', 'Nat.', 'Nat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+SCORE
+1.0
+['add (evaluate e1 env) (evaluate e2 env)\n  end.', 'add (evaluate e1 env) (evaluate e2 env)\n  end.', 'add (evaluate e1 env) (evaluate e2 env)\n  end.', 'add (evaluate e1 env) (evaluate e2 env)\n  end.', 'add (evaluate e1 env) (evaluate e2 env)\n  end.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Add (Const 0) e2 => optimize e2
+  | Add e1 (Const 0) => optimize e1
+  | Add e1 e2 => Add (optimize e1) (optimize e2)
+  | _ => e
+  end.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const n => e
+  | Var x => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+
+File "./ex.v", line 27, characters 0-1:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+
+File "./ex.v", line 27, characters 0-1:
+Error: Syntax error: 'end' expected after [branches] (in [term_match]).
+
+
+SCORE
+None
+['\n\nFixpoint optimize (e : AExp) : AExp :=\n  match e with\n  | Add (Const 0) e2 => optimize e2\n  | Add e1 (Const 0) => optimize e1\n  | Add e1 e2 => Add (optimize e1) (optimize e2)\n  | _ => e\n  end.', "\n\nFixpoint optimize (e : AExp) : AExp :=\n  match e with\n  | Const n => e\n  | Var x => e\n  | Add e1 e2 =>\n    let e1' := optimize e1 in\n    let e2' := optimize e2 in\n    match e1', e2' with\n    | Const 0, _ => e2'\n    | _, Const 0 => e1'\n", '\n\nFixpoint optimize (e : AExp) : AExp :=\n  match e with\n  | Add (Const 0) e2 => optimize e2\n  | Add e1 (Const 0) => optimize e1\n  | Add e1 e2 => Add (optimize e1) (optimize e2)\n  | _ => e\n  end.', '\n\nFixpoint optimize (e : AExp) : AExp :=\n  match e with\n  | Add (Const 0) e2 => optimize e2\n  | Add e1 (Const 0) => optimize e1\n  | Add e1 e2 => Add (optimize e1) (optimize e2)\n  | _ => e\n  end.', "\n\nFixpoint optimize (e : AExp) : AExp :=\n  match e with\n  | Const _ => e\n  | Var _ => e\n  | Add e1 e2 =>\n    let e1' := optimize e1 in\n    let e2' := optimize e2 in\n    match e1', e2' with\n    | Const 0, _ => e2'\n    | _, Const 0 => e1'\n"]
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+SCORE
+1.0
+["    | _, _ => Add e1' e2'\n    end\n  end.", "    | _, _ => Add e1' e2'\n    end\n  end.", "    | _, _ => Add e1' e2'\n    end\n  end.", "    | _, _ => Add e1' e2'\n    end\n  end.", "    | _, _ => Add e1' e2'\n    end\n  end."]
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_preserves_semantics : forall e env,
+  evaluate (optimize e) env = evaluate e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_preserves_semantics :
+  forall e env, evaluate (optimize e) env = evaluate e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_semantics.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env,
+  evaluate (optimize e) env = evaluate e env.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_preserves_evaluate :
+  forall e env, evaluate (optimize e) env = evaluate e env.
+Error: There are pending proofs in file ./ex.v: optimize_preserves_evaluate.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n\nTheorem optimize_preserves_semantics : forall e env,\n  evaluate (optimize e) env = evaluate e env.', '\n\nTheorem optimize_preserves_semantics :\n  forall e env, evaluate (optimize e) env = evaluate e env.', '\n\nTheorem optimize_correct : forall e env,\n  evaluate (optimize e) env = evaluate e env.', '\n\nTheorem optimize_preserves_evaluate :\n  forall e env, evaluate (optimize e) env = evaluate e env.', '\n\nTheorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\nProof.', '\nProof.', '\nProof.', '\nProof.', '\nProof.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n  intros e env.', '\n  intros e env.', '\n  intros e env.', '\n  intros e env.', '\n  intros e env.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e as [|n |x |e1 e2]; simpl.
+File "./ex.v", line 34, characters 17-31:
+Error: Expects a disjunctive pattern with 3 branches.
+
+
+SCORE
+-1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl; try rewrite IHe1; try rewrite IHe2.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n  induction e.', '\n  induction e.', '\n  induction e as [|n |x |e1 e2]; simpl.', '\n  induction e; simpl; try rewrite IHe1; try rewrite IHe2.', '\n  induction e; simpl.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.', '\n  - reflexivity.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - simpl.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.
+File "./ex.v", line 37, characters 97-105:
+Error: The variable PeanoNat was not found in the current environment.
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct n; destruct n0.
+File "./ex.v", line 37, characters 13-14:
+Error: The variable n was not found in the current environment.
+
+
+SCORE
+-1.0
+['\n  - simpl.', '\n  - simpl.', '\n  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n  - simpl.', '\n  - destruct n; destruct n0.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.
+File "./ex.v", line 37, characters 97-109:
+Error: The reference PeanoNat.Nat was not found in the current environment.
+
+
+SCORE
+None
+['Nat.', 'Nat.', 'Nat.', 'Nat.', 'Nat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+File "./ex.v", line 38, characters 0-4:
+Error:  (in proof optimize_correct): Attempt to save an incomplete proof
+
+
+SCORE
+-1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.
+File "./ex.v", line 38, characters 2-3:
+Error: [Focus] Wrong bullet -: Current bullet - is not finished.
+
+
+SCORE
+-1.0
+['\nQed.', '\nQed.', '\n  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\nQed.', '\nQed.']
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - destruct IHexp1; destruct IHexp2; try destruct n; try destruct n0.
+File "./ex.v", line 37, characters 13-19:
+Error: The variable IHexp1 was not found in the current environment.
+
+
+SCORE
+-1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n  - destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n  - destruct IHexp1; destruct IHexp2; try destruct n; try destruct n0.', '\n  - rewrite <- IHe1.', '\n  - simpl.', '\n  - simpl.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1. rewrite <- IHe2.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n    rewrite <- IHe2.', ' rewrite <- IHe2.', ' rewrite <- IHe2.', '\n    rewrite <- IHe2.', ' rewrite <- IHe2.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.
+File "./ex.v", line 39, characters 97-105:
+Error: The variable PeanoNat was not found in the current environment.
+
+
+SCORE
+None
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.
+    eauto using PeanoNat.
+File "./ex.v", line 40, characters 16-24:
+Error: The variable PeanoNat was not found in the current environment.
+
+
+SCORE
+None
+['\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.
+    eauto using PeanoNat.Nat.
+File "./ex.v", line 40, characters 16-28:
+Error: The reference PeanoNat.Nat was not found in the current environment.
+
+
+SCORE
+None
+['Nat.', 'Nat.', 'Nat.', 'Nat.', 'Nat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.
+    eauto using PeanoNat.Nat.add_0_r.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.
+    eauto using PeanoNat.Nat.add_0_r.
+Qed.
+File "./ex.v", line 41, characters 0-4:
+Error:  (in proof optimize_correct): Attempt to save an incomplete proof
+
+
+SCORE
+-1.0
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+['\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.', '\n    eauto using PeanoNat.']
+['Nat.', 'Nat.', 'Nat.', 'Nat.', 'Nat.']
+['add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.']
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+['\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.', '\n    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.
+File "./ex.v", line 39, characters 97-109:
+Error: The reference PeanoNat.Nat was not found in the current environment.
+
+
+SCORE
+None
+['Nat.', 'Nat.', 'Nat.', 'Nat.', 'Nat.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Error: There are pending proofs in file ./ex.v: optimize_correct.
+
+SCORE
+1.0
+['add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.', 'add_0_r.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+SCORE
+1.0
+['\nQed.', '\nQed.', '\nQed.', '\nQed.', '\nQed.']
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+``` package com.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+```
+
+In this code, we first define an ADT for arithmetic expressions called `AExp` using the `Inductive` keyword.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+``` #include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <cstdio>
+
+using namespace std;
+
+class Solution {
+public:
+    int minSubArrayLen(int s, vector<int>& nums)
+    {
+        int n = nums.
+SCORE
+1.0
+TEXT
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+```
+
+This Coq script defines an ADT for arithmetic expressions, an evaluator, and an optimizer, and proves the correctness of the optimizer.
+SCORE
+1.0
+['\n``` package com.', '\n``` package com.', '\n```\n\nIn this code, we first define an ADT for arithmetic expressions called `AExp` using the `Inductive` keyword.', '\n``` #include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\n#include <cmath>\n#include <cstring>\n#include <cstdio>\n\nusing namespace std;\n\nclass Solution {\npublic:\n    int minSubArrayLen(int s, vector<int>& nums)\n    {\n        int n = nums.', '\n```\n\nThis Coq script defines an ADT for arithmetic expressions, an evaluator, and an optimizer, and proves the correctness of the optimizer.']
+CHOSEN SOLUTION
+### Spec: In Coq, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+### Hint: In the optimizer, recursively optimize the sub-expressions.
+### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+
+### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
+### Hint: The simple cases are by `simpl. reflexivity.`.
+### Hint: The addition case is by `simpl. rewrite <- IHe1. rewrite <- IHe2. destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.`.
+### Hint: You'll need `Require Import Arith`.
+
+```coq
+Require Import Coq.Strings.String.
+Require Import Arith.PeanoNat.
+
+Inductive AExp : Type :=
+  | Const : nat -> AExp
+  | Var : string -> AExp
+  | Add : AExp -> AExp -> AExp.
+
+Fixpoint evaluate (e : AExp) (env : string -> nat) : nat :=
+  match e with
+  | Const n => n
+  | Var x => env x
+  | Add e1 e2 => PeanoNat.Nat.add (evaluate e1 env) (evaluate e2 env)
+  end.
+
+Fixpoint optimize (e : AExp) : AExp :=
+  match e with
+  | Const _ => e
+  | Var _ => e
+  | Add e1 e2 =>
+    let e1' := optimize e1 in
+    let e2' := optimize e2 in
+    match e1', e2' with
+    | Const 0, _ => e2'
+    | _, Const 0 => e1'
+    | _, _ => Add e1' e2'
+    end
+  end.
+
+Theorem optimize_correct : forall e env, evaluate (optimize e) env = evaluate e env.
+Proof.
+  intros e env.
+  induction e; simpl.
+  - reflexivity.
+  - reflexivity.
+  - rewrite <- IHe1.
+    rewrite <- IHe2.
+    destruct (optimize e1); destruct (optimize e2); try destruct n; try destruct n0; eauto using PeanoNat.Nat.add_0_r.
+Qed.
+```
+
+This Coq script defines an ADT for arithmetic expressions, an evaluator, and an optimizer, and proves the correctness of the optimizer.
+
+STATS
+
+number of nodes: 43
+number of gen nodes: 22 (including leaves: 4)
+number of back nodes: 21 (including leaves: 18)
+
+expansion count: 27 (including failed: 6)
+
+cache stats {'hit': 141, 'miss': 59}
+calls to generate 40
+5 minutes and 27 seconds elapsed.
+
+
