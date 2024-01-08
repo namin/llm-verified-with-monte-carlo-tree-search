@@ -2,6 +2,10 @@ from cmdline import args
 
 USE_HAMMER = args.use_hammer
 SHOW_MISTAKES = args.show_mistakes
+if SHOW_MISTAKES:
+    REFLECT = args.reflect
+else:
+    REFLECT = False
 INTERACTIVE = args.interactive
 
 from montecarlo.node import Node
@@ -24,6 +28,9 @@ score_func, cache_stats = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
 
 import llm
+
+if REFLECT:
+    import reflection
 
 class FocusNode:
     def __init__(self, instructions, code, hint):
@@ -48,7 +55,12 @@ class FocusNode:
         return ""
 
     def prev_mistakes(self):
-        if SHOW_MISTAKES and mistakes:
+        if REFLECT and reflections:
+            reflections_text = "\n\n".join(reflections)
+            return f"""## Reflections from previous attempts
+{reflections_text}
+"""
+        elif SHOW_MISTAKES and mistakes:
             mistakes_text = "\n\n".join([f"Do NOT reproduce this snippet:\n{snippet.replace('```', '')}\nIt is wrong:\n{err}" for snippet,err in mistakes])
             return f"""## Previous Mistakes (NOT TO DO AGAIN)
 
@@ -128,6 +140,10 @@ def child_finder(node, montecarlo):
         hint = short_verifier_feedback(node.state.text(), text)
         if hint and hint not in mistakes:
             mistakes.append(hint)
+            if REFLECT:
+                snippet,err = hint
+                code = filter_code(text+"```")
+                reflections.append(reflection.reflect(code, snippet, err))
         node.update_win_value(-1)
     else:
         state = node.state.update(text) if hint is None else node.state.update_hint(hint)
@@ -143,6 +159,8 @@ def child_finder(node, montecarlo):
 def run(prompt = prompt):
     global mistakes
     mistakes = []
+    global reflections
+    reflections = []
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()

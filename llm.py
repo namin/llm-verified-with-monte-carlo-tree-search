@@ -61,14 +61,16 @@ elif MODEL_HOST == "huggingface":
 
     def generate_full(prompt: str, **kwargs) -> str:
         streamer = TextStreamer(tokenizer)
+        all_args = {
+            **(dict(streamer=streamer,
+                    max_new_tokens=1000)),
+            **kwargs}
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
         model.eval()
         r = None
         with torch.no_grad():
             r = tokenizer.decode(model.generate(**model_input,
-                                                streamer=streamer,
-                                                max_new_tokens=1000,
-                                                **kwargs
+                                                **all_args
                                                 )[0],
                                  skip_special_tokens=True)
         return r

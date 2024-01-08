@@ -21,6 +21,7 @@ class CommonArguments:
     n_success_goal: int = field(default=1, metadata={"help": "Number of success goals for `run_check` and `run_ppo`"})
     use_hammer: bool = field(default=False, metadata={"help": "Use hammer"})
     show_mistakes: bool = field(default=False, metadata={"help": "Show mistakes"})
+    reflect: bool = field(default=False, metadata={"help": "Reflect on mistakes"})
     interactive: bool = field(default=False, metadata={"help": "Run in interactive mode"})
     extract_lemma_depth: int = field(default=0, metadata={"help": "Depth for extracing lemma"})
     explore_many: bool = field(default=False, metadata={"help": "Explore multiple paths"})
