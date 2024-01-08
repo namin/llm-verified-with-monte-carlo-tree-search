@@ -25,4 +25,6 @@ in the snippet:
 [/INST]
 """
     r = generate_full(prompt)
-    return diffprompt(prompt, [r])[0]
+    r = diffprompt(prompt, [r])[0]
+    r = r.replace("```", "")
+    return r
