@@ -24,6 +24,8 @@ if REFLECT:
 montecarlo = MonteCarlo(Node(prompt))
 
 def place_reflection(r, text):
+    if r in text:
+        return None
     heading = "## Reflections on previous attempts"
     code_heading = "## Code"
     subreflection = "\n### Reflection\n\n"
