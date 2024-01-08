@@ -1,8 +1,15 @@
 from execute import execute, livecode
 import requests
 import re
-from typing import Optional
+from typing import Optional, Tuple
 
+def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
+    _, err = calculateScoreHelper(not_ok)
+    if err:
+        err = err.strip()
+        return (None, err)
+    return None
+    
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     msg = "Consider previous issue"
     if msg in ok:

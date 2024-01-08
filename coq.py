@@ -4,13 +4,13 @@ from contextlib import redirect_stderr
 import io
 from alectryon.serapi import annotate
 import re
-from typing import Optional
+from typing import Optional, Tuple
 
 def give_context(v: str) -> (str, str):
     r = checkCoq(v, giveDetails=True)
     return ((r["details"] or ""), r["out"])
 
-def short_verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
+def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
     try:
         not_ok_first = not_ok[0 : not_ok.index(".", len(ok))]
     except ValueError:

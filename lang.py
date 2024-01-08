@@ -4,6 +4,7 @@ if LANG == "Dafny":
     from dafny import (
         score_func,
         verifier_feedback,
+        short_verifier_feedback,
         filter_code,
         check_code,
     )
@@ -11,6 +12,7 @@ elif LANG == "Coq":
     from coq import (
         score_func,
         verifier_feedback,
+        short_verifier_feedback,
         filter_code,
         check_code,
     )

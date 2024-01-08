@@ -1,17 +1,35 @@
-import llm
+from cmdline import args
+
+REFLECT = args.reflect
 
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
-from lang import score_func, can_be_solution, verifier_feedback
+from lang import can_be_solution, verifier_feedback, filter_code
+
+from lang import score_func as uncached_score_func
+from common_cache import create_cached_func
+score_func, cache_stats = create_cached_func(uncached_score_func)
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_stats import stats
 
+import llm
+
+if REFLECT:
+    import reflection
+    from lang import short_verifier_feedback
+
 montecarlo = MonteCarlo(Node(prompt))
 
-
+def place_reflection(r, text):
+    heading = "## Reflections on previous attempts"
+    start = text.index("```")
+    if heading not in text:
+        return text[:start] + "\n" + heading + "\n" + r + "\n" + text[start:]
+    return text[:start] + "\n" + r + "\n" + text[start:]
+    
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
@@ -31,7 +49,16 @@ def child_finder(node, montecarlo):
 
     (text, score) = generate_complete(node.state, montecarlo)
     if score < 0:
-        hint = verifier_feedback(node.state, text)
+        if REFLECT:
+            (snippet, err) = short_verifier_feedback(node.state, text)
+            if err:
+                code = filter_code(text+"```")
+                r = reflection.reflect(code, snippet, err)
+                hint = place_reflection(r, node.state)
+            else:
+                hint = None
+        else:
+            hint = verifier_feedback(node.state, text)
         if not hint:
             node.update_win_value(-1)
             return
@@ -57,3 +84,4 @@ print("CHOSEN SOLUTION")
 print(montecarlo.solution)
 
 stats(montecarlo)
+print('cache stats', cache_stats)
