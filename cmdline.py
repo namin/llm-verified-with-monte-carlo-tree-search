@@ -3,7 +3,7 @@ from transformers import HfArgumentParser
 
 @dataclass
 class CommonArguments:
-    diversity: bool = field(default=True, metadata={"help": "Diversity flag for `common_diversity.py"})
+    diversity: bool = field(default=False, metadata={"help": "Diversity flag for `common_diversity.py"})
     max_completion_depth: int = field(default=30, metadata={"help": "Limit for the depth of the mcts"})
     livecode: bool = field(default=False, metadata={"help": "Use livecode API checker or local compiler"})
     language: str = field(default="Dafny", metadata={"help": "Choose language from 'Dafny', 'Coq', 'Lean4', 'Rust', 'Scala'"})
@@ -19,7 +19,7 @@ class CommonArguments:
     model_arg_temp: float = field(default=None, metadata={"help": "Specify temperature parameter for llm generation"})
     problem_name: str = field(default="problem_opt0", metadata={"help": "Choose which problem to solve from `prompts.py` "})
     n_success_goal: int = field(default=1, metadata={"help": "Number of success goals for `run_check` and `run_ppo`"})
-    use_hammer: bool = field(default=True, metadata={"help": "Use hammer"})
+    use_hammer: bool = field(default=False, metadata={"help": "Use hammer"})
     show_mistakes: bool = field(default=False, metadata={"help": "Show mistakes"})
     interactive: bool = field(default=False, metadata={"help": "Run in interactive mode"})
     extract_lemma_depth: int = field(default=1, metadata={"help": "Depth for extracing lemma"})
