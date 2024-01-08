@@ -178,6 +178,10 @@ def run(prompt = prompt):
     if USE_HAMMER:
         prompt_code = """From Hammer Require Import Tactics.
 From Hammer Require Import Hammer.
+
+From Coq Require Import Arith.Arith.
+Require Import Coq.Strings.String.
+
 """ + prompt_code
     montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)))
     montecarlo.global_features = None
