@@ -6,7 +6,7 @@ from typing import Optional
 import llm
 
 def generate_full(prompt: str, **kwargs) -> str:
-    return llm.generate_full(prompt, max_new_tokens=100, **kwargs)
+    return llm.generate_full(prompt, max_new_tokens=200, **kwargs)
 
 def reflect(code: str, snippet: Optional[str], err: str) -> str:
     snippet_text = f"""in the snippet:
