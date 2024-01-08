@@ -23,7 +23,7 @@ class CommonArguments:
     show_mistakes: bool = field(default=False, metadata={"help": "Show mistakes"})
     interactive: bool = field(default=False, metadata={"help": "Run in interactive mode"})
     extract_lemma_depth: int = field(default=1, metadata={"help": "Depth for extracing lemma"})
-    explore_many: bool = field(default=True, metadata={"help": "Explore multiple paths"})
+    explore_many: bool = field(default=False, metadata={"help": "Explore multiple paths"})
     n_iter: int = field(default=10, metadata={"help": "Number of iterations to run ppo for"})
     n_samples: int = field(default=10, metadata={"help": "Number of samples forwhole sampling"})
     greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
