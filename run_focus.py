@@ -4,6 +4,7 @@ USE_HAMMER = args.use_hammer
 SHOW_MISTAKES = args.show_mistakes
 if SHOW_MISTAKES:
     REFLECT = args.reflect
+    LIST_MISTAKE_IN_REFLECT = True
 else:
     REFLECT = False
 INTERACTIVE = args.interactive
@@ -56,7 +57,14 @@ class FocusNode:
 
     def prev_mistakes(self):
         if REFLECT and reflections:
-            reflections_text = "\n\n".join(reflections)
+            if LIST_MISTAKE_IN_REFLECT:
+                reflections_text = "\n\n".join([
+                    "### Snippet\n" + snippet.replace("```", "") + "\n\n" +
+                    "### Reflection\n" + r
+                    for (r,(snippet,err)) in zip(reflections,mistakes)
+                ])
+            else:
+                reflections_text = "\n\n".join(reflections)
             return f"""## Reflections from previous attempts
 {reflections_text}
 """
