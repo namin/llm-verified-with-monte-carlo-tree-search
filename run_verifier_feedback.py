@@ -25,10 +25,14 @@ montecarlo = MonteCarlo(Node(prompt))
 
 def place_reflection(r, text):
     heading = "## Reflections on previous attempts"
-    start = text.index("```")
+    code_heading = "## Code"
+    subreflection = "\n### Reflection\n\n"
     if heading not in text:
-        return text[:start] + "\n" + heading + "\n" + r + "\n" + text[start:]
-    return text[:start] + "\n" + r + "\n" + text[start:]
+        start = text.index("```")
+        return text[:start] + "\n" + heading + subreflection + r + "\n" + code_heading + "\n\n" + text[start:]
+    else:
+        start = text.index(code_heading)
+        return text[:start] + "\n" + subreflection + r + "\n\n" + text[start:]
     
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
