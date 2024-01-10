@@ -1,0 +1,9 @@
+Before cache reset:
+trial calls: [85, 85, 85]
+
+=====
+
+After calling cache reset:
+trial calls: [51, 0, 0]
+trial calls: [55, 0, 0]
+

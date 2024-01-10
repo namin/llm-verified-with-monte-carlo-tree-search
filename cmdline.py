@@ -30,6 +30,9 @@ class CommonArguments:
     greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
     remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"})
     show_hint_match_dafny: bool = field(default=True, metadata={"help": "Show Dafny hint about pattern matching syntax"})
+    n_trials: int = field(default=10, metadata={"help": "Number of trials to run on a specified experiment"})
+    experiment_name: str = field(default="run.py", metadata={"help": "Pick an experiment to run "})
+    mins_timeout: int = field(default=6, metadata={"help": "Set a default timeout for each trial "})
 
 
 def get_args():
