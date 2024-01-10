@@ -14,7 +14,7 @@ from common_stats import stats
 
 import llm
 
-montecarlo = MonteCarlo(Node(prompt))
+# montecarlo = MonteCarlo(Node(prompt))
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -53,6 +53,7 @@ def child_finder(node, montecarlo):
         child.update_policy_value(0.2)
 
 def main():
+    montecarlo = MonteCarlo(Node(prompt))
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
@@ -62,8 +63,8 @@ def main():
 
     stats(montecarlo)
     print('cache stats', cache_stats)
-    with open("graph.dot", "w") as f:
-        montecarlo.print_tree(f)
+    # with open("graph.dot", "w") as f:
+    #     montecarlo.print_tree(f)
 
     return cache_stats
 
