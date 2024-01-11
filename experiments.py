@@ -46,9 +46,29 @@ match experiment_name:
 trial_calls = []
 trial_times = []
 
-# running n+1 times so the time taken to load llm initially doesn't count from the 1st trial
-for i in range(n_trials + 1):
-    print("Trial ", i)
+def print_summary():
+    min_time = np.min(trial_times)
+    max_time = np.max(trial_times)
+    avg_time = np.mean(trial_times)
+    std_dev_time = np.std(trial_times)
+
+    min_calls = np.min(trial_calls)
+    max_calls = np.max(trial_calls)
+    avg_calls = np.mean(trial_calls)
+    std_dev_calls = np.std(trial_calls)
+
+    print("=====SUMMARY STATISTICS=====\n")
+    print(f"Experiment: {experiment_name} for {n_trials} trials\n")
+    print(f"Trial times: {trial_times}\n")
+    print(f"Trial calls: {trial_calls}\n\n")
+    print(f"Time Statistics:\n")
+    print(f"  Min: {min_time:.2f} sec, Max: {max_time:.2f} sec, Average: {avg_time:.2f} sec, Standard Deviation: {std_dev_time:.2f} sec\n")
+    print(f"Call Statistics:\n")
+    print(f"  Min: {min_calls} calls, Max: {max_calls} calls, Average: {avg_calls:.2f} calls, Standard Deviation: {std_dev_calls:.2f} calls\n")
+
+
+for i in range(n_trials):
+    print("Trial ", i+1)
     reset_cache()
     start_time = time.time()
     cache = main(mins_timeout)
@@ -60,27 +80,7 @@ for i in range(n_trials + 1):
     for key, value in cache.items():
         calls_made += value
 
-    if i > 0:
-        trial_calls.append(calls_made)
-        trial_times.append(duration)
+    trial_calls.append(calls_made)
+    trial_times.append(duration)
 
-
-min_time = np.min(trial_times)
-max_time = np.max(trial_times)
-avg_time = np.mean(trial_times)
-std_dev_time = np.std(trial_times)
-
-min_calls = np.min(trial_calls)
-max_calls = np.max(trial_calls)
-avg_calls = np.mean(trial_calls)
-std_dev_calls = np.std(trial_calls)
-
-print("=====SUMMARY STATISTICS=====\n")
-print(f"Experiment: {experiment_name} for {n_trials} trials\n")
-print(f"Trial times: {trial_times}\n")
-print(f"Trial calls: {trial_calls}\n\n")
-print(f"Time Statistics:\n")
-print(f"  Min: {min_time:.2f} sec, Max: {max_time:.2f} sec, Average: {avg_time:.2f} sec, Standard Deviation: {std_dev_time:.2f} sec\n")
-print(f"Call Statistics:\n")
-print(f"  Min: {min_calls} calls, Max: {max_calls} calls, Average: {avg_calls:.2f} calls, Standard Deviation: {std_dev_calls:.2f} calls\n")
-
+    print_summary()
