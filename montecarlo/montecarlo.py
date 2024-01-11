@@ -47,16 +47,16 @@ class MonteCarlo:
         while expansion_count is None or i < expansion_count:
             i += 1
 
+            if self.solution is not None:
+                return
+
             if self.mins_timeout is not None:
                 curr_time = time.time()
                 duration = curr_time - start_time
 
                 if duration > (self.mins_timeout * 60):
                     print("reached timelimit, stopping expansion on current node")
-                    break
-
-            if self.solution is not None:
-                return
+                    return
 
             current_node = self.root_node
 
