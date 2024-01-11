@@ -1,14 +1,16 @@
 import random
+import time
 
 
 class MonteCarlo:
-    def __init__(self, root_node):
+    def __init__(self, root_node, mins_timeout):
         self.root_node = root_node
         self.solution = None
         self.child_finder = None
         self.node_evaluator = lambda child, montecarlo: None
         self.stats_expansion_count = 0
         self.stats_failed_expansion_count = 0
+        self.mins_timeout = mins_timeout
 
     def make_choice(self):
         best_children = []
@@ -39,8 +41,19 @@ class MonteCarlo:
 
     def simulate(self, expansion_count=1):
         i = 0
+        
+        start_time = time.time()
+
         while expansion_count is None or i < expansion_count:
             i += 1
+
+            if self.mins_timeout is not None:
+                curr_time = time.time()
+                duration = curr_time - start_time
+
+                if duration > (self.mins_timeout * 60):
+                    print("reached timelimit, stopping expansion on current node")
+                    break
 
             if self.solution is not None:
                 return

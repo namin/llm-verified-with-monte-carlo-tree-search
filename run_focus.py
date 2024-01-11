@@ -164,7 +164,7 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
-def main(prompt = prompt):
+def main(prompt = prompt, mins_timeout = None):
     global mistakes
     mistakes = []
     global reflections
@@ -179,7 +179,7 @@ Require Import Coq.Strings.String.
 Require Import Arith.
 
 """ + prompt_code
-    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")), mins_timeout)
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 

@@ -32,7 +32,7 @@ def attempt():
     if solution_key == 'yes':
         solutions.append(text)
 
-def main():
+def main(mins_timeout = None):
     for i in range(0, 1 if GREEDY else N_SAMPLES):
         attempt()
     for solution in solutions:

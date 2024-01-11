@@ -46,10 +46,12 @@ match experiment_name:
 trial_calls = []
 trial_times = []
 
+# running n+1 times so the time taken to load llm initially doesn't count from the 1st trial
 for i in range(n_trials + 1):
+    print("Trial ", i)
     reset_cache()
     start_time = time.time()
-    cache = main()
+    cache = main(mins_timeout)
     end_time = time.time() 
 
     duration = end_time - start_time 
@@ -73,13 +75,12 @@ max_calls = np.max(trial_calls)
 avg_calls = np.mean(trial_calls)
 std_dev_calls = np.std(trial_calls)
 
-with open("test.txt", "a") as f:
-    f.write(f"Experiment: {experiment_name} for {n_trials}\n")
-    f.write(f"Trial times: {trial_times}\n")
-    f.write(f"Trial calls: {trial_calls}\n\n")
-    f.write(f"Time Statistics:\n")
-    f.write(f"  Min: {min_time:.2f} sec, Max: {max_time:.2f} sec, Average: {avg_time:.2f} sec, Standard Deviation: {std_dev_time:.2f} sec\n")
-    f.write(f"Call Statistics:\n")
-    f.write(f"  Min: {min_calls} calls, Max: {max_calls} calls, Average: {avg_calls:.2f} calls, Standard Deviation: {std_dev_calls:.2f} calls\n")
-
+print("=====SUMMARY STATISTICS=====\n")
+print(f"Experiment: {experiment_name} for {n_trials} trials\n")
+print(f"Trial times: {trial_times}\n")
+print(f"Trial calls: {trial_calls}\n\n")
+print(f"Time Statistics:\n")
+print(f"  Min: {min_time:.2f} sec, Max: {max_time:.2f} sec, Average: {avg_time:.2f} sec, Standard Deviation: {std_dev_time:.2f} sec\n")
+print(f"Call Statistics:\n")
+print(f"  Min: {min_calls} calls, Max: {max_calls} calls, Average: {avg_calls:.2f} calls, Standard Deviation: {std_dev_calls:.2f} calls\n")
 

@@ -16,9 +16,6 @@ from common_cache import create_score_predicate, create_cached_func
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
 
-# montecarlo = MonteCarlo(Node(prompt))
-# montecarlo.global_features = None
-
 calls_to_generate = 0
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -59,10 +56,10 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
-def main():
+def main(mins_timeout = None):
     global calls_to_generate
     calls_to_generate = 0
-    montecarlo = MonteCarlo(Node(prompt))
+    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 

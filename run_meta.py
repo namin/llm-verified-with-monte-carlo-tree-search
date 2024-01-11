@@ -171,7 +171,7 @@ def child_finder(node, montecarlo):
     node.add_child(child)
     child.update_policy_value(0.2)
 
-def main(prompt = prompt):
+def main(prompt = prompt, mins_timeout = None):
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
@@ -187,7 +187,7 @@ Require Import Coq.Strings.String.
         prompt_code = """From Coq Require Import Arith.Arith.
 Require Import Lia.
 """ + prompt_code
-    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)))
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)), mins_timeout)
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 

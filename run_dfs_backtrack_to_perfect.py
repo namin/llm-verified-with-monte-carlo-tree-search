@@ -34,7 +34,7 @@ def generate_complete(text, current_completion_depth=1):
     else:
         return generate_complete(text, current_completion_depth + 1)
 
-def main():
+def main(mins_timeout = None):
     prev_perfect = prompt
     text = prompt
     while solution is None:

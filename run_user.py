@@ -9,8 +9,6 @@ from lang import score_func, can_be_solution
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import max_completion_depth
 
-# montecarlo = MonteCarlo(Node(prompt))
-
 
 def user_input(text):
     inp = input("Keep it? [Y/n] ")

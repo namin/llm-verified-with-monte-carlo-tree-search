@@ -14,8 +14,6 @@ from common_stats import stats
 
 import llm
 
-# montecarlo = MonteCarlo(Node(prompt))
-
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None
@@ -53,8 +51,8 @@ def child_finder(node, montecarlo):
         child.update_policy_value(0.2)
 
 
-def main():
-    montecarlo = MonteCarlo(Node(prompt))
+def main(mins_timeout = None):
+    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
