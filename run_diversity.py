@@ -13,11 +13,8 @@ from common_diversity import select_diversely_with_scores
 from common_interactive import diffprompt
 from common_stats import stats
 from common_cache import create_score_predicate, create_cached_func
-score_func, cache_stats = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
-
-montecarlo = MonteCarlo(Node(prompt))
-montecarlo.global_features = None
 
 calls_to_generate = 0
 def generate_complete(text, montecarlo, current_completion_depth=1):
@@ -59,14 +56,23 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
+def main(mins_timeout = None):
+    global calls_to_generate
+    calls_to_generate = 0
+    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
+    montecarlo.global_features = None
+    montecarlo.child_finder = child_finder
 
-montecarlo.child_finder = child_finder
+    montecarlo.simulate(expansion_count)
 
-montecarlo.simulate(expansion_count)
+    print("CHOSEN SOLUTION")
+    print(montecarlo.solution)
 
-print("CHOSEN SOLUTION")
-print(montecarlo.solution)
+    stats(montecarlo)
+    print('cache stats', cache_stats)
+    print('calls to generate', calls_to_generate)
 
-stats(montecarlo)
-print('cache stats', cache_stats)
-print('calls to generate', calls_to_generate)
+    return cache_stats
+
+if __name__ == "__main__":
+    main()

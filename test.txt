@@ -1,0 +1,35 @@
+Before cache reset:
+trial calls: [85, 85, 85]
+
+=====
+
+After calling cache reset:
+
+run.py with 3 trials:
+
+trial times: [198.96251940727234, 138.44868397712708, 109.1140079498291]
+
+trial calls: [99, 67, 47]
+
+trial times: [232.83536171913147, 174.68363904953003, 116.56483387947083]
+
+trial calls: [117, 86, 44]
+
+Trial times: [146.76920866966248, 355.15261578559875, 224.06204080581665]
+Trial calls: [73, 170, 102]
+
+Time Statistics:
+  Min: 146.77 sec, Max: 355.15 sec, Average: 241.99 sec, Standard Deviation: 86.01 sec
+Call Statistics:
+  Min: 73 calls, Max: 170 calls, Average: 115.00 calls, Standard Deviation: 40.65 calls
+
+
+==========
+Experiment: run.py (only 1 trial)
+Trial times: [178.44999313354492]
+Trial calls: [85]
+
+Time Statistics:
+  Min: 178.45 sec, Max: 178.45 sec, Average: 178.45 sec, Standard Deviation: 0.00 sec
+Call Statistics:
+  Min: 85 calls, Max: 85 calls, Average: 85.00 calls, Standard Deviation: 0.00 calls

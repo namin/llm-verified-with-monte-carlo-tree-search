@@ -5,7 +5,7 @@ from lang import can_be_solution
 from lang import score_func as uncached_score_func
 
 from common_cache import create_cached_func
-score_func, cache_stats = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
 from prompts import prompt, expansion_count, min_lines, check_func
@@ -13,8 +13,6 @@ from common import limit_depth, max_completion_depth
 from common_stats import stats
 
 import llm
-
-montecarlo = MonteCarlo(Node(prompt))
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -52,15 +50,21 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
+def main(mins_timeout = None):
+    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
+    montecarlo.child_finder = child_finder
 
-montecarlo.child_finder = child_finder
+    montecarlo.simulate(expansion_count)
 
-montecarlo.simulate(expansion_count)
+    print("CHOSEN SOLUTION")
+    print(montecarlo.solution)
 
-print("CHOSEN SOLUTION")
-print(montecarlo.solution)
+    stats(montecarlo)
+    print('cache stats', cache_stats)
+    # with open("graph.dot", "w") as f:
+    #     montecarlo.print_tree(f)
 
-stats(montecarlo)
-print('cache stats', cache_stats)
-with open("graph.dot", "w") as f:
-    montecarlo.print_tree(f)
+    return cache_stats
+
+if __name__ == "__main__":
+    main()

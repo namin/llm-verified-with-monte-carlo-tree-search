@@ -27,4 +27,10 @@ def create_cached_func(f):
         else:
             stats['hit'] += 1
         return y
-    return fetch, stats
+
+    def reset_cache():
+        cache.clear()
+        stats['hit'] = 0
+        stats['miss'] = 0
+
+    return fetch, stats, reset_cache

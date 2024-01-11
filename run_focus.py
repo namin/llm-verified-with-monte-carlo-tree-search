@@ -25,7 +25,7 @@ from common_interactive import ask_keep, diffprompt
 from common_stats import stats
 from common_bad_words import bad_words_ids
 from common_cache import create_score_predicate, create_cached_func
-score_func, cache_stats = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate()
 
 import llm
@@ -164,7 +164,7 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
-def run(prompt = prompt):
+def main(prompt = prompt, mins_timeout = None):
     global mistakes
     mistakes = []
     global reflections
@@ -179,7 +179,7 @@ Require Import Coq.Strings.String.
 Require Import Arith.
 
 """ + prompt_code
-    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")))
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, "")), mins_timeout)
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 
@@ -191,7 +191,8 @@ Require Import Arith.
     stats(montecarlo)
     print('cache stats', cache_stats)
 
-    return filter_code(montecarlo.solution)
+    # return filter_code(montecarlo.solution)
+    return cache_stats
 
 if __name__ == '__main__':
-    run()
+    main()

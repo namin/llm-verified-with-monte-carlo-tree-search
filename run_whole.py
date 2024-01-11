@@ -9,7 +9,7 @@ from lang import can_be_solution
 from lang import score_func as uncached_score_func
 
 from common_cache import create_cached_func
-score_func, cache_stats = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 
 from prompts import prompt, min_lines, check_func
 
@@ -32,7 +32,7 @@ def attempt():
     if solution_key == 'yes':
         solutions.append(text)
 
-def main():
+def main(mins_timeout = None):
     for i in range(0, 1 if GREEDY else N_SAMPLES):
         attempt()
     for solution in solutions:
@@ -40,6 +40,7 @@ def main():
         print(solution)
     print(score_stats)
     print(solution_stats)
+    return solution_stats
 
 if __name__ == '__main__':
     main()

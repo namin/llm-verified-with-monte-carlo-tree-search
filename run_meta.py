@@ -17,7 +17,7 @@ from coq import score_func_code as uncached_score_func_code
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_cache import score_first, create_score_predicate, create_cached_func
-score_func_code, cache_stats = create_cached_func(uncached_score_func_code)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 score_predicate = create_score_predicate(score_first)
 from common_diversity import select_diversely_with_scores, DIVERSITY, limit
 from common_interactive import ask_keep, diffprompt
@@ -171,7 +171,7 @@ def child_finder(node, montecarlo):
     node.add_child(child)
     child.update_policy_value(0.2)
 
-def run(prompt = prompt):
+def main(prompt = prompt, mins_timeout = None):
     prompt_code_index = prompt.index("```")
     prompt_instructions = prompt[0:prompt_code_index].strip()
     prompt_code = filter_code(prompt[prompt_code_index:]+"```").strip()
@@ -187,7 +187,7 @@ Require Import Coq.Strings.String.
         prompt_code = """From Coq Require Import Arith.Arith.
 Require Import Lia.
 """ + prompt_code
-    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)))
+    montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)), mins_timeout)
     montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 
@@ -199,7 +199,8 @@ Require Import Lia.
     stats(montecarlo)
     print('cache stats', cache_stats)
     
-    return filter_code(montecarlo.solution)
+    # return filter_code(montecarlo.solution)
+    return cache_stats
 
 if __name__ == '__main__':
-    run()
+    main()

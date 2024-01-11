@@ -9,7 +9,7 @@ from lang import can_be_solution, verifier_feedback, filter_code
 
 from lang import score_func as uncached_score_func
 from common_cache import create_cached_func
-score_func, cache_stats = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
@@ -20,8 +20,6 @@ import llm
 if REFLECT:
     import reflection
     from lang import short_verifier_feedback
-
-montecarlo = MonteCarlo(Node(prompt))
 
 def place_reflection(r, text):
     if r in text:
@@ -81,13 +79,19 @@ def child_finder(node, montecarlo):
     node.add_child(child)
     child.update_policy_value(0.2)
 
+def main(mins_timeout = None):
+    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
+    montecarlo.child_finder = child_finder
 
-montecarlo.child_finder = child_finder
+    montecarlo.simulate(expansion_count)
 
-montecarlo.simulate(expansion_count)
+    print("CHOSEN SOLUTION")
+    print(montecarlo.solution)
 
-print("CHOSEN SOLUTION")
-print(montecarlo.solution)
+    stats(montecarlo)
+    print('cache stats', cache_stats)
 
-stats(montecarlo)
-print('cache stats', cache_stats)
+    return cache_stats
+
+if __name__ == '__main__':
+    main()

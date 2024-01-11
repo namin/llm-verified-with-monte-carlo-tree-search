@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from transformers import HfArgumentParser
+from transformers import HfArgumentParser, set_seed
 
 @dataclass
 class CommonArguments:
@@ -30,6 +30,10 @@ class CommonArguments:
     greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
     remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"})
     show_hint_match_dafny: bool = field(default=True, metadata={"help": "Show Dafny hint about pattern matching syntax"})
+    n_trials: int = field(default=10, metadata={"help": "Number of trials to run on a specified experiment"})
+    experiment_name: str = field(default="run.py", metadata={"help": "Pick an experiment to run "})
+    mins_timeout: float = field(default=None, metadata={"help": "Set a default timeout for each trial "})
+    seed: int = field(default=None, metadata={"help": "Set the seed for reproducible behavior"})
 
 
 def get_args():
@@ -38,3 +42,5 @@ def get_args():
     return args
 
 args = get_args()
+if args.seed is not None:
+    set_seed(args.seed)

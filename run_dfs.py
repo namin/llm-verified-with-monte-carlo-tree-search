@@ -30,20 +30,24 @@ def random_index(n):
             cs.append(i)
     return random.choice(cs)
 
-queue = [prompt]
-while solution is None and queue != []:
-    text = queue[0]
-    (text, score) = generate_complete(text)
-    not_cheat = not check_cheat_func(text)
-    if score > 0 and not_cheat:
-        queue = [text] + queue
-    else:
-        i = random_index(len(queue))
-        queue = queue[i:]
-        if not_cheat and i==0:
-            hint = verifier_feedback(queue[0], text)
-            if hint:
-                queue = [hint] + queue
+def main():
+    queue = [prompt]
+    while solution is None and queue != []:
+        text = queue[0]
+        (text, score) = generate_complete(text)
+        not_cheat = not check_cheat_func(text)
+        if score > 0 and not_cheat:
+            queue = [text] + queue
+        else:
+            i = random_index(len(queue))
+            queue = queue[i:]
+            if not_cheat and i==0:
+                hint = verifier_feedback(queue[0], text)
+                if hint:
+                    queue = [hint] + queue
 
-print('CHOSEN SOLUTION')
-print(solution)
+    print('CHOSEN SOLUTION')
+    print(solution)
+
+if __name__ == "__main__":
+    main()

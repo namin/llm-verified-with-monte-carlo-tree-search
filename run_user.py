@@ -9,8 +9,6 @@ from lang import score_func, can_be_solution
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import max_completion_depth
 
-montecarlo = MonteCarlo(Node(prompt))
-
 
 def user_input(text):
     inp = input("Keep it? [Y/n] ")
@@ -56,10 +54,14 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
+def main():
+    montecarlo = MonteCarlo(Node(prompt))
+    montecarlo.child_finder = child_finder
 
-montecarlo.child_finder = child_finder
+    montecarlo.simulate(expansion_count)
 
-montecarlo.simulate(expansion_count)
+    print("CHOSEN SOLUTION")
+    print(montecarlo.solution)
 
-print("CHOSEN SOLUTION")
-print(montecarlo.solution)
+if __name__ == '__main__':
+    main()
