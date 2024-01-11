@@ -2,8 +2,7 @@ from cmdline import args
 
 GREEDY = args.greedy
 N_SAMPLES = args.n_samples
-
-# GREEDY = True
+MAX_N_SAMPLES = args.max_n_samples
 
 from lang import can_be_solution
 from lang import score_func as uncached_score_func
@@ -31,16 +30,32 @@ def attempt():
     solution_stats[solution_key] += 1
     if solution_key == 'yes':
         solutions.append(text)
+        return text
+    return None
 
 def main(mins_timeout = None):
-    for i in range(0, 1 if GREEDY else N_SAMPLES):
-        attempt()
-    for solution in solutions:
-        print("ONE SOLUTION")
-        print(solution)
-    print(score_stats)
-    print(solution_stats)
-    return solution_stats
+    if MAX_N_SAMPLES is not None:
+        assert not GREEDY
+        n_calls = 0
+        solution = None
+        while solution is None and n_calls < MAX_N_SAMPLES:
+            n_calls += 1
+            solution = attempt()
+        if solution:
+            print("SOLUTION FOUND")
+            print(solution)
+        else:
+            print("SOLUTION is None")
+        return {"n_calls": n_calls}
+    else:
+        for i in range(0, 1 if GREEDY else N_SAMPLES):
+            attempt()
+        for solution in solutions:
+            print("ONE SOLUTION")
+            print(solution)
+        print(score_stats)
+        print(solution_stats)
+        return solution_stats
 
 if __name__ == '__main__':
     main()
