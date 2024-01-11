@@ -3,7 +3,7 @@ import time
 
 
 class MonteCarlo:
-    def __init__(self, root_node, mins_timeout):
+    def __init__(self, root_node, mins_timeout=None):
         self.root_node = root_node
         self.solution = None
         self.child_finder = None
