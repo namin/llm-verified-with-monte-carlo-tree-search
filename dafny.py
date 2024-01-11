@@ -37,7 +37,11 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
         return 1.0, None
     log = r["out"]
     print(log)
-    first = log[log.index("ex.dfy(") + 7 :]
+    try:
+        first = log[log.index("ex.dfy(") + 7 :]
+    except ValueError:
+        # might be a timeout
+        return -1.0, ""
     num_line_first = int(first[0 : first.index(",")])
     if filterDafny(msg).strip() != v and num_line_first >= v.count("\n"):
         return None, None
