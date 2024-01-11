@@ -875,3 +875,8 @@ elif LANG == "Lean4":
 ```lean4
 import Mathlib
 """
+
+if LANG == "Coq" and args.coq_import_lia:
+    prompt += """
+Require Import Lia.
+"""
