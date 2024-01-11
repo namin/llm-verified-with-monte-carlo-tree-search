@@ -7,6 +7,10 @@ n_trials = args.n_trials
 experiment_name = args.experiment_name
 mins_timeout = args.mins_timeout
 
+secs_timeout = None
+if mins_timeout is not None:
+    secs_timeout = mins_timeout * 60
+
 
 # probably use a switch statement to let the cli flag specify which experiment to run
 # note that some run*.py files have a main() to call and others have a run() to call 
@@ -43,10 +47,19 @@ match experiment_name:
         print('invalid program name')
         exit()
 
-trial_calls = []
-trial_times = []
+trial_calls_all = []
+trial_times_all = []
 
-def print_summary():
+trial_calls_no_timeout = []
+trial_times_no_timeout = []
+
+trial_calls_timeout = []
+trial_times_timeout = []
+
+def print_summary(trial_calls, trial_times, trial_type):
+    if trial_calls == []:
+        return
+
     min_time = np.min(trial_times)
     max_time = np.max(trial_times)
     avg_time = np.mean(trial_times)
@@ -57,7 +70,7 @@ def print_summary():
     avg_calls = np.mean(trial_calls)
     std_dev_calls = np.std(trial_calls)
 
-    print("=====SUMMARY STATISTICS=====\n")
+    print(f"=====SUMMARY STATISTICS FOR {trial_type} TRIALS=====\n")
     print(f"Experiment: {experiment_name} for {n_trials} trials\n")
     print(f"Trial times: {trial_times}\n")
     print(f"Trial calls: {trial_calls}\n\n")
@@ -74,13 +87,22 @@ for i in range(n_trials):
     cache = main(mins_timeout)
     end_time = time.time() 
 
-    duration = end_time - start_time 
+    duration_sec = round(end_time - start_time) 
 
     calls_made = 0
     for key, value in cache.items():
         calls_made += value
 
-    trial_calls.append(calls_made)
-    trial_times.append(duration)
+    trial_calls_all.append(calls_made)
+    trial_times_all.append(duration_sec)
 
-    print_summary()
+    if secs_timeout is not None and duration_sec > secs_timeout:
+        trial_calls_timeout.append(calls_made)
+        trial_times_timeout.append(duration_sec)
+    elif secs_timeout is not None:
+        trial_calls_no_timeout.append(calls_made)
+        trial_times_no_timeout.append(duration_sec)
+
+    print_summary(trial_calls_all, trial_times_all, "ALL")
+    print_summary(trial_calls_timeout, trial_times_timeout, "TIMED OUT")
+    print_summary(trial_calls_no_timeout, trial_times_no_timeout, "NON_TIMED OUT")
