@@ -16,7 +16,7 @@ def main():
 
     training_args = TrainingArguments(
         per_device_train_batch_size=1, #4
-        max_steps=20, #1000
+        max_steps=400, #1000
         remove_unused_columns=False,
         gradient_accumulation_steps=1,
         learning_rate=1e-3,
