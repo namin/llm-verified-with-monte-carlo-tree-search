@@ -96,7 +96,7 @@ for i in range(n_trials):
     trial_calls_all.append(calls_made)
     trial_times_all.append(duration_sec)
 
-    if secs_timeout is not None and duration_sec > secs_timeout:
+    if secs_timeout is not None and duration_sec >= secs_timeout:
         trial_calls_timeout.append(calls_made)
         trial_times_timeout.append(duration_sec)
     elif secs_timeout is not None:
