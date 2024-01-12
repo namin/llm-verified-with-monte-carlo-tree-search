@@ -17,7 +17,7 @@ from coq import score_func_code as uncached_score_func_code
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_cache import score_first, create_score_predicate, create_cached_func
-score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func_code)
 score_predicate = create_score_predicate(score_first)
 from common_diversity import select_diversely_with_scores, DIVERSITY, limit
 from common_interactive import ask_keep, diffprompt
