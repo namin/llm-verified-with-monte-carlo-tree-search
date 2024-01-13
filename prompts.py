@@ -20,6 +20,7 @@ if proof_marker:
     CHECK_PROOF2 = lambda v: v.count(proof_marker) >= 2
 else:
     CHECK_PROOF = NO_CHECK_PROOF
+    CHECK_PROOF2 = NO_CHECK_PROOF
 
 NO_CHECK_CHEAT = lambda v: False
 if cheat_marker:
