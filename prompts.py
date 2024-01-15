@@ -786,7 +786,7 @@ problem_repeat = (
 (1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
 (2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
 {'''### Hint: The length of a list or sequence `s` is `|s|`.
-### Hint: In a specication, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+### Hint: In a specification, you can write `forall i :: 0 <= i < n ==> CONDITION`.
 ''' if LANG == 'Dafny' else ''}""",
     1000,
     None,
@@ -802,6 +802,7 @@ problem_repeat2 = (
 (2) Write a lemma that checks that for any `x` and `n`, `repeat` returns a list of length `n`.
 (3) Write a lemma that checks that for any `x` and `n`, `repeat` returns a list where every elemenis `x`.
 {'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specification, you can write `forall VAR :: CONDITION1 ==> CONDITION2`.
 ''' if LANG == 'Dafny' else ''}""",
     1000,
     None,
