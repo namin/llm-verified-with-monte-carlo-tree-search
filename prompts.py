@@ -796,6 +796,19 @@ problem_repeat = (
     ALL_LANGS,
 )
 
+problem_reverse = (f"""### Spec: In {LANG}:
+(1) Write a function `reverse` that takes a list as input and reverses it.
+(2) Then write a lemma `reverse_permutes` that checks that for any list `l`, an element exists in `l` if and only if it exists in the result of calling reverse on `l`.
+(3) Then write a `lemma reverse_involutes` that checks that for any list `l`, calling `reverse` twice on `l` yields `l`.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ALL_LANGS
+)
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -821,6 +834,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
+    "problem_reverse" : problem_reverse,
 }
 
 # Set the right-hand side to the selected problem.
