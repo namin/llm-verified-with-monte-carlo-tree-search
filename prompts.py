@@ -781,6 +781,21 @@ lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
     ALL_LANGS
 )
 
+problem_repeat = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specication, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+)
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -805,6 +820,7 @@ problems_dict = {
     "problem_bst_dafny_sanity_check" : problem_bst_dafny_sanity_check,
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
+    "problem_repeat" : problem_repeat,
 }
 
 # Set the right-hand side to the selected problem.
