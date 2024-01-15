@@ -796,6 +796,21 @@ problem_repeat = (
     ALL_LANGS,
 )
 
+problem_repeat2 = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Write a lemma that checks that for any `x` and `n`, `repeat` returns a list of length `n`.
+(3) Write a lemma that checks that for any `x` and `n`, `repeat` returns a list where every elemenis `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ALL_LANGS,
+)
+
 problem_reverse = (f"""### Spec: In {LANG}:
 (1) Write a function `reverse` that takes a list as input and reverses it.
 (2) Then write a lemma `reverse_permutes` that checks that for any list `l`, an element exists in `l` if and only if it exists in the result of calling reverse on `l`.
@@ -834,6 +849,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
+    "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
 }
 
