@@ -803,7 +803,9 @@ problem_repeat2 = (
 (3) Write a lemma that checks that for any `x` and `n`, `repeat` returns a list where every elemenis `x`.
 {'''### Hint: The length of a list or sequence `s` is `|s|`.
 ### Hint: In a specification, you can write `forall VAR :: CONDITION1 ==> CONDITION2`.
-''' if LANG == 'Dafny' else ''}""",
+''' if LANG == 'Dafny' else ''
+}{'''### Hint: Import `Coq.Lists.List`.
+''' if LANG == 'Coq' else ''}""",
     1000,
     None,
     5,
