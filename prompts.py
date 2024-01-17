@@ -829,6 +829,23 @@ problem_reverse = (f"""### Spec: In {LANG}:
     ALL_LANGS
 )
 
+problem_append = (f"""### Spec: In {LANG}:
+(1) Write a function `app` that takes two lists of natural numbers as input and concatenates them.
+(2) Then write a function `nth_elt` that returns the `n`th element of a given list of natural numbers.
+(3) Then write a lemma `app_correct` that checks that for any two lists of natural numbers `l1` and `l2` and any natural number `n`,  the `n`th element of the result of calling app on `l1` and `l2` is either the nth element of `l1` or the `(n - length l1)`th element of `l2`.
+{'''### Hint: In Dafny, the length of a list `l` is `|l|`.
+''' if LANG == 'Dafny' else ''}{
+'''### Hint: Import `Coq.Lists.List`.
+''' if LANG == 'Coq' else ''}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS
+)
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -856,6 +873,7 @@ problems_dict = {
     "problem_repeat" : problem_repeat,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
+    "problem_append" : problem_append,
 }
 
 # Set the right-hand side to the selected problem.
