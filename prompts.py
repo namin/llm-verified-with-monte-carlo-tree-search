@@ -818,6 +818,8 @@ problem_reverse = (f"""### Spec: In {LANG}:
 (1) Write a function `reverse` that takes a list as input and reverses it.
 (2) Then write a lemma `reverse_permutes` that checks that for any list `l`, an element exists in `l` if and only if it exists in the result of calling `reverse` on `l`.
 (3) Then write a lemma `reverse_involutes` that checks that for any list `l`, calling `reverse` twice on `l` yields `l`.
+{'''### Hint: Import `Coq.Lists.List`.
+''' if LANG == 'Coq' else ''}
 """,
     1000,
     None,
