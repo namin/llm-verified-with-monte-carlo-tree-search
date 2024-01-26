@@ -4,8 +4,7 @@ This prototype synthesizes verified code with an LLM.
 
 Using Monte Carlo Tree Search (MCTS), it explores the space of possible generation of a verified program, and it checks at every step that it's on the right track by calling the verifier.
 
-This prototype uses Dafny, Coq, or Lean.
-To select the language, uncomment the corresponding line in [lang_config.py](lang_config.py).
+This prototype uses Dafny, Coq, Lean, Scala or Rust.
 
 Logs for example runs can be found in the [log](log) directory.
 Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
@@ -13,17 +12,9 @@ Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
 
-We can also reinforce the snippets that succeed positively and that fail negatively through [PPO training](https://huggingface.co/docs/trl/main/en/ppo_trainer).
-The model after PPO can solve the prompts without backtracking!
-For example, the [log](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/fact_run_after_ppo_opt0.txt) for solving the problem `fact` after PPO training on another problem, `opt0`.
-
-- [TODOs](TODO.md)
-
 ## Running
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
-
-If you don't have access to a GPU, you can run the project using an OpenAI model. Set `MODEL_HOST` to "openai" in [model_config.py](model_config.py).
 
 ### Setup
 
@@ -62,10 +53,6 @@ lake build
 ```
 
 in the `repl` directory.
-
-(If you want to use GPT-4) Set "OPENAI_API_KEY" in your environment variables to your OpenAI API key.
-
-Note: For both Dafny and Coq, the executables `dafny` and `coqc` need to be in your `PYTHONPATH`. Perhaps do `export PYTHONPATH=$PATH`.
 
 ### Execution
 
