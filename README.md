@@ -56,11 +56,27 @@ in the `repl` directory.
 
 ### Execution
 
+#### Baseline
+
 To run the default experiment configuration, which uses the `Phind-CodeLlama-34B-v2` LLM to solve the `problem_opt0` as specified in `prompts.py` in Dafny, do:
 
 ```
 python run.py
 ```
+
+Note that `cmdline.py` handles the usage of command line arguments for the codebase. To see what arguments are available, do:
+
+```
+python cmdline.py --help
+```
+
+To run with specific arguments, simply add a `--[argument name] [desired argument value]` for each argument after the original command to run. For example, to execute `run.py` as before but with Coq instead of Dafny, do:
+
+```
+python run.py --language Coq
+```
+
+#### Interactive
 
 For the run that interacts with the user, do:
 
@@ -68,11 +84,15 @@ For the run that interacts with the user, do:
 python run_user.py
 ```
 
+#### Verifier Feedback
+
 For the run that feeds back verifier info, do:
 
 ```
 python run_verifier_feedback.py
 ```
+
+#### PPO
 
 For the PPO trainer (slow!), do:
 
@@ -80,17 +100,37 @@ For the PPO trainer (slow!), do:
 python run_ppo.py
 ```
 
+#### DPO
+
+For the DPO trainer, have a set of triples in `datasets/gen.jsonl`.
+These can be obtained by concatenating existing triple files:
+
+```
+cd datasets
+cat pm_gen.jsonl pm_proof_gen.jsonl opt0.jsonl >gen.jsonl 
+```
+
+or by running the DPO triple generator on an existiting problem:
+```
+python run_dpo_gen.jsonl
+```
+
+Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with:
+```
+python run_dpo.py
+```
+
+The resulting model will be in `./my_dpo_model` and can be loaded with the command-line argument `--base_model_name ./my_dpo_model`.
+
+#### Diversity
+
 For a run that selects the next completion diversely, do:
 
 ```
 python run_diversity.py
 ```
 
-Note that `cmdline.py` handles the usage of command line arguments for the codebase. To see what arguments are available, simply execute `python cmdline.py --help`. To run with specific arguments, simply add a `--[argument name] [desired argument value]` for each argument after the original command to run. For example, to execute `run.py` as before but with Coq instead of Dafny, simply execute:
-
-```
-python run.py --language Coq
-```
+#### Coq-specific runs
 
 For a more extensive prompt populated with the goal to prove (Coq only) -- do:
 
@@ -104,10 +144,3 @@ For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
 python run_meta.py --language Coq
 ```
 
-## Credits
-
-- The [montecarlo](montecarlo) library is adapted from [ImparaAI/monte-carlo-tree-search](https://github.com/ImparaAI/monte-carlo-tree-search).
-- The [pySagredo](pySagredo) library is adapted from [zhangir-azerbayev/pySagredo](https://github.com/zhangir-azerbayev/pySagredo).
-- The [leanprover-community/repl](https://github.com/leanprover-community/repl) library is used as a clone.
-- The inspiration comes from [_Planning with Large Language Models for Code Generation_ (ICLR 2023)](https://codeaimcts.github.io/).
-- `run_meta.py` is inspired by [Tarun Prasad's coq-prover](https://github.com/mtarunpr/coq-prover), and some of the code snippets are adapted from there.
