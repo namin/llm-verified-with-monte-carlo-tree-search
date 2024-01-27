@@ -56,6 +56,8 @@ in the `repl` directory.
 
 ### Execution
 
+#### Baseline
+
 To run the default experiment configuration, which uses the `Phind-CodeLlama-34B-v2` LLM to solve the `problem_opt0` as specified in `prompts.py` in Dafny, do:
 
 ```
@@ -74,11 +76,15 @@ To run with specific arguments, simply add a `--[argument name] [desired argumen
 python run.py --language Coq
 ```
 
+#### Interactive
+
 For the run that interacts with the user, do:
 
 ```
 python run_user.py
 ```
+
+#### Verifier Feedback
 
 For the run that feeds back verifier info, do:
 
@@ -86,17 +92,45 @@ For the run that feeds back verifier info, do:
 python run_verifier_feedback.py
 ```
 
+#### PPO
+
 For the PPO trainer (slow!), do:
 
 ```
 python run_ppo.py
 ```
 
+#### DPO
+
+For the DPO trainer, have a set of triples in `datasets/gen.jsonl`.
+These can be obtained by concatenating existing triple files:
+
+```
+cd datasets
+cat pm_gen.jsonl pm_proof_gen.jsonl opt0.jsonl >gen.jsonl 
+```
+
+or by running the DPO triple generator on an existiting problem:
+```
+python run_dpo_gen.jsonl
+```
+
+Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with:
+```
+python run_dpo.py
+```
+
+The resulting model will be in `./my_dpo_model` and can be loaded with the command-line argument `--base_model_name ./my_dpo_model`.
+
+#### Diversity
+
 For a run that selects the next completion diversely, do:
 
 ```
 python run_diversity.py
 ```
+
+#### Coq-specific runs
 
 For a more extensive prompt populated with the goal to prove (Coq only) -- do:
 
