@@ -38,7 +38,7 @@ def execute(cmd, ext, v):
         outlog = f.read()
         f.close()
 
-        f = open(errfn, "r")
+        f = open(errfn, "r", encoding='utf-8')
         log = f.read()
         f.close()
 
