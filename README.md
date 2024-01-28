@@ -118,6 +118,7 @@ python run_dpo_gen.jsonl
 
 Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with:
 ```
+export CUDA_VISIBLE_DEVICES=1 [or whatever device number you want, check availability with nvidia-smi]
 python run_dpo.py
 ```
 
