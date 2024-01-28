@@ -853,6 +853,7 @@ problem_unzip = (f"""### Spec: In {LANG}:
 (1) Write a function `unzip` that takes a list of pairs and returns a pair of lists, where the first element is a list of all the first elements of the original list, and the second elemens is a list of all the second elements of the original list.
 (2) Then write a lemma that proves that the length of the lists in the returned pair of `unzip` are the same as the length of the original list.
 {'''### Hint: In Dafny, the length of a list `l` is `|l|`.
+### Hint: Write `unzip` as a `function`, not a `method`.
 ''' if LANG == 'Dafny' else ''}{
 '''### Hint: Import `Coq.Lists.List`.
 ''' if LANG == 'Coq' else ''}
