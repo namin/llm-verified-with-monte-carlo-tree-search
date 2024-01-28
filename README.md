@@ -24,6 +24,7 @@ Using `mamba` or equivalently `conda`:
 mamba create --name llm-verified python=3.10
 mamba activate llm-verified
 pip install -r requirements.txt
+huggingface-cli login [you will be prompted to paste your huggingface token]
 ```
 
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
