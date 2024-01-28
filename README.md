@@ -116,7 +116,7 @@ python run_dpo_gen.jsonl
 ```
 
 Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with the following.
-You can set the CUDA\_VISIBLE\_DEVICES environment variable to whichever device number you want, informed by availability from nvidia-smi.
+You can set the `CUDA_VISIBLE_DEVICES` environment variable to whichever device number you want, informed by availability from `nvidia-smi`.
 ```
 export CUDA_VISIBLE_DEVICES=1
 python run_dpo.py
