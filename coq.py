@@ -22,7 +22,10 @@ def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
     v = filterCoq(not_ok + "```")
     r = checkCoq(v)
     log = r["log"]
-    err = log[log.index(":")+1 :].strip()
+    try:
+        err = log[log.index(":")+1 :].strip()
+    except ValueError:
+        return None
     left = leftAfterError(v, log)
     rest = not_ok[len(ok.strip()) : len(not_ok)-len(left)].strip()
     if rest:
