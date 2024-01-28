@@ -19,11 +19,12 @@ This project relies on GPU access. It has been tested on a multi-GPU machine wit
 ### Setup
 
 Using `mamba` or equivalently `conda`:
-
+Note that you will be prompted to paste your huggingface authentication token.
 ```
 mamba create --name llm-verified python=3.10
 mamba activate llm-verified
 pip install -r requirements.txt
+huggingface-cli login
 ```
 
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
@@ -115,8 +116,10 @@ or by running the DPO triple generator on an existiting problem:
 python run_dpo_gen.jsonl
 ```
 
-Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with:
+Once you have the file `datasets/gen.jsonl`, you can run the DPO trainer with the following.
+You can set the `CUDA_VISIBLE_DEVICES` environment variable to whichever device number you want, informed by availability from `nvidia-smi`.
 ```
+export CUDA_VISIBLE_DEVICES=1
 python run_dpo.py
 ```
 
