@@ -1,0 +1,3 @@
+[submodule "Clover"]
+	path = Clover
+	url = git@github.com:ChuyueSun/Clover.git
