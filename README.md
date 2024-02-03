@@ -18,6 +18,11 @@ This project relies on GPU access. It has been tested on a multi-GPU machine wit
 
 ### Setup
 
+Clone the github repo. Note that it has linked submodules so it should be cloned with the following command:
+```
+git clone --recurse-submodules git@github.com:namin/llm-verified-with-monte-carlo-tree-search.git
+```
+
 Using `mamba` or equivalently `conda`:
 
 ```
