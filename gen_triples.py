@@ -145,6 +145,72 @@ def find_matching_pairs_half_method_names(positive_file_path, negative_file_path
 
     return matching_pairs, half_method_names
 
+def greatest_common_prefix(str1, str2):
+    """
+    Finds the greatest common prefix between two strings.
+    
+    Parameters:
+    str1 (str): First string.
+    str2 (str): Second string.
+    
+    Returns:
+    str: The greatest common prefix of str1 and str2.
+    """
+    # Find the minimum length between the two strings
+    min_length = min(len(str1), len(str2))
+    
+    # Initialize an empty string for the prefix
+    prefix = ""
+    
+    # Iterate through both strings up to the minimum length
+    for i in range(min_length):
+        # If the characters at the current position are the same
+        if str1[i] == str2[i]:
+            # Add the character to the prefix
+            prefix += str1[i]
+        else:
+            # If a mismatch is found, break out of the loop
+            break
+    
+    return prefix
+
+def split_string_into_n_groups(s, n):
+    """
+    Splits a string into a specified number of groups of complete lines.
+
+    Parameters:
+    s (str): The string to be split.
+    n (int): The desired number of groups.
+
+    Returns:
+    list of str: A list of string groups.
+    """
+    # Split the string into lines
+    lines = s.split('\n')
+
+    # Determine the total number of lines
+    total_lines = len(lines)
+
+    # Calculate the optimal number of lines per group to get as close as possible to n groups
+    lines_per_group = max(1, total_lines // n)  # Ensure at least 1 line per group
+
+    # Adjust the number of groups based on the actual division
+    actual_groups = (total_lines + lines_per_group - 1) // lines_per_group
+
+    # Initialize the list of groups
+    groups = []
+
+    # Distribute the lines into groups
+    for i in range(0, actual_groups):
+        # Calculate start and end indices for lines in the current group
+        start_index = i * lines_per_group
+        end_index = start_index + lines_per_group
+        # Join the lines for the current group and add to the list
+        group = '\n'.join(lines[start_index:end_index])
+        groups.append(group)
+
+    return groups
+
 
 
 if __name__ == "__main__":
@@ -156,4 +222,5 @@ if __name__ == "__main__":
     matching_pairs, method_names = find_matching_pairs_half_method_names(positive_file_path, negative_file_path)
     print(f"Found {len(matching_pairs)} matching pairs from {len(method_names)} method names.")
     print(f"Example matching pair: {matching_pairs[3]}")
+    print(f"Greatest common prefix: {greatest_common_prefix(matching_pairs[3][1]['negative'], matching_pairs[3][0]['positive'])}")
 
