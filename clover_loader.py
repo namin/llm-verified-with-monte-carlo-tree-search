@@ -12,12 +12,24 @@ def dfy_annotation_iterator(base_path="Clover/dataset/Dafny/textbook_algo/"):
                 with open(file_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                     to_trim = r'{[^{}]*}'
-                    #content = "### Spec: In Dafny, complete the following method. CanyonSearch method is focused on finding the minimum difference (distance) between elements of two sorted arrays, a and b. Both arrays are non-empty and sorted in non-decreasing order. The method returns the minimum difference as a natural number (nat), where nat includes all non-negative integers.\n```dafny\n" + re.sub(to_trim, '{', content)
                     content = "### Spec: In Dafny, complete the following method.\n```dafny\n" + re.sub(to_trim, '{', content)
                     # Clean whitespace from end of prompt:
                     content = content.rstrip()
                     # Yield the content of the file
                     yield content
 
+def get_groundtruth(base_path="Clover/dataset/Dafny/textbook_algo/"):
+    '''
+    Loads each ground-truth Dafny example.
+    '''
+    for root, dirs, files in os.walk(base_path):
+        for file in files:
+            if file.endswith('_strong.dfy'):
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    yield content.strip()
+
 if __name__ == "__main__":
-    print(next(dfy_annotation_iterator()))
+    #print(next(dfy_annotation_iterator()))
+    print(next(get_groundtruth()))
