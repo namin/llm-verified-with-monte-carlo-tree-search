@@ -213,7 +213,7 @@ def split_string_into_n_groups(s, n):
 
 def generate_triples(matching_pairs):
     count = 0
-    with open('datasets/clover_triples.jsonl', 'w') as outfile:
+    with open('datasets/clover_triples_symm.jsonl', 'w') as outfile:
         for (pos, neg) in matching_pairs:
             postext = pos['positive']
             negtext = neg['negative']
@@ -225,6 +225,11 @@ def generate_triples(matching_pairs):
                 posresp = postext[len(prompt):]
                 neglines = negresp.splitlines()
                 poslines = split_string_into_n_groups(posresp, len(neglines))
+                # make the dataset symmetrically anchored on negative and positive text chunks
+                poslines2 = posresp.splitlines()
+                neglines2 = split_string_into_n_groups(negresp, len(poslines2))
+                neglines += neglines2
+                poslines += poslines2
                 chosen = ""
                 rejected = ""
                 for (pl, nl) in zip(poslines, neglines):
