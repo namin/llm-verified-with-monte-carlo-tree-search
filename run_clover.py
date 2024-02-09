@@ -9,6 +9,7 @@ score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
 from clover_loader import dfy_annotation_iterator
+from clover_config import TRAIN_PROMPTS
 # from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_stats import stats
@@ -66,6 +67,16 @@ def main(mins_timeout = 10):
     num_solved = 0
     count = 0
     for prompt in dfy_annotation_iterator():
+        # check if prompt is in test or train set
+        method_name_start = prompt.find('method ') + len('method ')
+        method_name_end = method_name_start
+        while method_name_end < len(prompt) and prompt[method_name_end].isalnum():
+            method_name_end += 1
+        method_name = prompt[method_name_start:method_name_end]
+        
+        if method_name in TRAIN_PROMPTS:
+            continue
+
         print("----------Count={}---------".format(count))
         montecarlo = MonteCarlo(Node(prompt), mins_timeout)
         montecarlo.child_finder = child_finder
