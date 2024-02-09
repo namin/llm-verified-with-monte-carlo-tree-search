@@ -22,7 +22,7 @@ def extract_negative_texts(file_path):
         if section.strip().endswith('-1.0'):
             # Extracting text chunks between "TEXT" and "}\n\n" markers
             start_indices = [i + 5 for i in range(len(section)) if section.startswith('TEXT', i)]
-            end_indices = [i for i in range(len(section)) if section.startswith('}\n\n', i)]
+            end_indices = [i for i in range(len(section)) if section.startswith('}\n', i)]
             
             for start, end in zip(start_indices, end_indices):
                 if start < end:
@@ -64,7 +64,7 @@ def extract_positive_texts(file_path):
         if section.strip().endswith('1.0') and not section.strip().endswith('-1.0'):
             # Extracting text chunks between "TEXT" and "}\n\n" markers
             start_indices = [i + 5 for i in range(len(section)) if section.startswith('TEXT', i)]
-            end_indices = [i for i in range(len(section)) if section.startswith('}\n\n', i)]
+            end_indices = [i for i in range(len(section)) if section.startswith('}\n', i)]
 
             for start, end in zip(start_indices, end_indices):
                 if start < end:
@@ -73,7 +73,7 @@ def extract_positive_texts(file_path):
                     dafny_index = text_chunk.find('```dafny\n')
                     if dafny_index != -1:
                         # Extracting text after "```dafny\n"
-                        text_chunk = text_chunk[dafny_index + len('```dafny\n'):].strip()
+                        text_chunk = text_chunk[dafny_index + len('```dafny\n'):].strip() + "```\n"
                         method_name_start = text_chunk.find('method ') + len('method ')
                         method_name_end = method_name_start
                         while method_name_end < len(text_chunk) and text_chunk[method_name_end].isalnum():
@@ -94,7 +94,7 @@ def extract_positive_texts(file_path):
                 method_name_end += 1
             method_name = text_chunk[method_name_start:method_name_end]
             method_name = text_chunk[method_name_start:method_name_end]
-            item = {'method_name': method_name,'positive': text_chunk}
+            item = {'method_name': method_name,'positive': text_chunk + "```\n"}
             json.dump(item, outfile)
             outfile.write('\n')
 
@@ -211,16 +211,46 @@ def split_string_into_n_groups(s, n):
 
     return groups
 
+def generate_triples(matching_pairs):
+    count = 0
+    with open('datasets/clover_triples.jsonl', 'w') as outfile:
+        for (pos, neg) in matching_pairs:
+            postext = pos['positive']
+            negtext = neg['negative']
 
+            prompt = greatest_common_prefix(postext, negtext)
+            if prompt and (len(prompt) < len(postext) and len(prompt) < len(negtext)):
+                # proceed with creating triples out of this chunk
+                negresp = negtext[len(prompt):]
+                posresp = postext[len(prompt):]
+                neglines = negresp.splitlines()
+                poslines = split_string_into_n_groups(posresp, len(neglines))
+                chosen = ""
+                rejected = ""
+                for (pl, nl) in zip(poslines, neglines):
+                    chosen += pl
+                    rejected += nl
+                    json.dump({'prompt': prompt,'chosen': chosen,'rejected': rejected}, outfile)
+                    outfile.write('\n')
+                    chosen += "\n"
+                    rejected += "\n"
+                    count += 1
+    return count
 
 if __name__ == "__main__":
-    file_path = 'clover_logs02.txt'  # Replace this with the path to your data file
+    file_path = 'clover_logs04.txt'  # Replace this with the path to your data file
     extract_negative_texts(file_path)
     extract_positive_texts(file_path)
     positive_file_path = 'datasets/positive_tmps.jsonl'
     negative_file_path = 'datasets/negative_tmps.jsonl'
     matching_pairs, method_names = find_matching_pairs_half_method_names(positive_file_path, negative_file_path)
+    with open('gen_logs.txt', 'w') as file:
+      for n in method_names:
+          file.write(n)
+          file.write('\n')
     print(f"Found {len(matching_pairs)} matching pairs from {len(method_names)} method names.")
     print(f"Example matching pair: {matching_pairs[3]}")
     print(f"Greatest common prefix: {greatest_common_prefix(matching_pairs[3][1]['negative'], matching_pairs[3][0]['positive'])}")
+    print(f"Positive chunk: {matching_pairs[3][0]['positive']}")
+    print(f"Generated {generate_triples(matching_pairs)} clover triples.")
 

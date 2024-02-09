@@ -6,8 +6,8 @@ from trl import DPOTrainer
 
 def main():
 
-    data_files = "datasets/gen.jsonl"
-    eval_data_files = "datasets/opt0.jsonl"
+    data_files = "datasets/clover_triples.jsonl"
+    eval_data_files = "datasets/clover_triples.jsonl"
     train_dataset = load_dataset("json", data_files=data_files, split="train")
     eval_dataset = load_dataset("json", data_files={"test": eval_data_files}, split="test")
 
