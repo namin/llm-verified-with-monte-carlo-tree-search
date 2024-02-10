@@ -63,7 +63,7 @@ elif MODEL_HOST == "huggingface":
         streamer = TextStreamer(tokenizer)
         all_args = {
             **(dict(streamer=streamer,
-                    max_new_tokens=1000)),
+                max_new_tokens=10000)), # NOTE: used to be 1000
             **kwargs}
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
         model.eval()
