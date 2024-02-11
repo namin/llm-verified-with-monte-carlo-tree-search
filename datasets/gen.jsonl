@@ -1,0 +1,62 @@
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n","chosen":"  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n","rejected":"    if foo is Bar then 2 * foo.n\n    else if foo is Baz then denotation(foo.x)\n    else 0\n}\n"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n","chosen":"  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n","rejected":"  matches foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n","chosen":"  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n","rejected":"  match foo\n  case Bar(n): 2 * n\n  case Baz(x): denotation(x)\n}\n"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n","chosen":"  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n","rejected":"  match foo\n  case Bar(n): return 2 * n\n  case Baz(x): return denotation(x)\n}\n"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\n",
+"chosen": "ensures denotation(foo) % 2 == 0\n{\n}\n```",
+"rejected": "{\n  assert denotation(foo) % 2 == 0;\n}\n```"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\n",
+"chosen": "ensures denotation(foo) % 2 == 0\n{\n}\n```",
+"rejected": "{\n  ensures denotation(foo) % 2 == 0;\n}\n```"}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\nensures denotation(foo) % 2 == 0\n{\n",
+"chosen": "  match foo\n  case Bar(n) => \n    // Base case: denotation of Bar is 2n, which is even.\n  case Baz(x) => \n    // Inductive case: denotation of Baz is denotation of x.\n    denotationAlwaysEven(x);\n    // The denotation of x is even by the inductive hypothesis.\n    // Therefore, denotation of Baz is also even.\n}\n```\n",
+"rejected": "  if foo == Const(?n)\n  {\n  }\n  else\n  {\n    denotationAlwaysEven(foo.x);\n  }\n```\n"
+}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\nensures denotation(foo) % 2 == 0\n{\n",
+"chosen": "  match foo\n  case Bar(n) =>\n  case Baz(x) => denotationAlwaysEven(x);\n}\n```\n",
+"rejected": "  if foo == Const(_)\n  {\n  }\n  else\n  {\n    match foo\n    case Baz(x) => denotationAlwaysEven(x);\n  }\n```\n"
+}
+{"prompt":"In Dafny, we have the following ADT:\n\n```dafny\ndatatype Foo = Bar(n: nat) | Baz(x: Foo)\n```\n\nTake the denotation of a Foo to be 2 times n for a Bar, and the denotations of its Foo for a Baz.\n\n```dafny\nfunction denotation(foo: Foo): nat\n{\n  match foo\n  case Bar(n) => 2 * n\n  case Baz(x) => denotation(x)\n}\n```\n\n\nA lemma that proves that the denotation of a Foo is always even.\n\n```dafny\nlemma denotationAlwaysEven(foo: Foo)\nensures denotation(foo) % 2 == 0\n{\n",
+"chosen": "  match foo\n  case Bar(n) =>\n  case Baz(x) => denotationAlwaysEven(x);\n}\n```\n",
+"rejected": "  if foo is Const\n  {\n  }\n  else\n  {\n    match foo\n    case Baz(x) => denotationAlwaysEven(x);\n  }\n```\n"
+}
+{
+"prompt":
+"In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\n",
+"chosen":
+"function eval(e: Expr, env: string -> int): int\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```",
+"rejected":
+"function eval(e: Expr, env: string -> int): int\nreads env\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```"
+}
+{
+"prompt":
+"In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\nfunction eval(e: Expr, env: string -> int): int\n{\n",
+"chosen":
+"   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```",
+"rejected":
+"  match e\n  case Const(i): i\n  case Var(x): env(x)\n  case Add(e1, e2): eval(e1, env) + eval(e2, env)\n}\n```"
+}
+{
+"prompt":
+"In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\nfunction eval(e: Expr, env: string -> int): int\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```\n\n\n\nAn optimizer taking an expression and returning an expression with all additions by 0 removed.\nIn the addition case, the `optimize` function first recursively optimize the sub-expressions, then matches against the the optimized sub-expressions to check for constants 0.\n\n```dafny\nfunction optimize(e: Expr): Expr\n{\n",
+"chosen":
+"   match e\n   {\n      case Add(e1, e2) =>\n         var e1_opt := optimize(e1);\n         var e2_opt := optimize(e2);\n         if e1_opt == Const(0) then e2_opt\n         else if e2_opt == Const(0) then e1_opt\n         else Add(e1_opt, e2_opt)\n      case _ => e\n   }\n}\n```",
+"rejected":
+"   match e\n   {\n      case Add(Const(0), e2) => optimize(e2)\n      case Add(e1, Const(0)) => optimize(e1)\n      case Add(e1, e2) => Add(optimize(e1), optimize(e2))\n      case _ => e\n   }\n}\n```"
+}
+{
+"prompt":
+"In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.\n\n```dafny\ndatatype Expr = Const(i: int) | Var(x: string) | Add(e1: Expr, e2: Expr)\n```\n\nAn evaluator `eval` taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation.\n\n```dafny\nfunction eval(e: Expr, env: string -> int): int\n{\n   match e\n   {\n      case Const(i) => i\n      case Var(x) => env(x)\n      case Add(e1, e2) => eval(e1, env) + eval(e2, env)\n   }\n}\n```\n\n\n\nAn optimizer taking an expression and returning an expression with all additions by 0 removed.\nIn the addition case, the `optimize` function first recursively optimize the sub-expressions, then matches against the the optimized sub-expressions to check for constants 0.\n\n```dafny\nfunction optimize(e: Expr): Expr\n{\n",
+"chosen":
+"   match e\n   {\n      case Add(e1, e2) =>\n         match (optimize(e1), optimize(e2))\n         {\n            case (Const(0), o2) => o2\n            case (o1, Const(0)) => o1\n            case (o1, o2) => Add(o1, o2)\n         }\n      case _ => e\n   }\n}\n```",
+"rejected":
+"   match e\n   {\n      case Add(Const(0), e2) => optimize(e2)\n      case Add(e1, Const(0)) => optimize(e1)\n      case Add(e1, e2) => Add(optimize(e1), optimize(e2))\n      case _ => e\n   }\n}\n```"
+}
+{
+"prompt":
+"In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed. Then prove that the optimizer preserves the semantics as defined by the evaluation function.\n\n```dafny\ndatatype Expr = Const(val: int)\n              | Var(name: string)\n              | Add(lhs: Expr, rhs: Expr)\n\nfunction Evaluate(e: Expr, env: string -> int): int\n{\n  match e\n  case Const(val) => val\n  case Var(name) => env(name)\n  case Add(lhs, rhs) => Evaluate(lhs, env) + Evaluate(rhs, env)\n}\n\nfunction Optimize(e: Expr): Expr\n{\n  match e\n  case Add(Const(0), rhs) => rhs\n  case Add(lhs, Const(0)) => lhs\n  case Add(lhs, rhs) => Add(Optimize(lhs), Optimize(rhs))\n  case _ => e\n}\n\nlemma OptimizePreservesSemantics(e: Expr, env: string -> int)\n",
+"chosen":
+"  ensures Evaluate(Optimize(e), env) == Evaluate(e, env)\n{\n  match e\n  case Const(_) =>\n  case Var(_) =>\n  case Add(lhs, rhs) =>\n    OptimizePreservesSemantics(lhs, env);\n    OptimizePreservesSemantics(rhs, env);\n}\n```",
+"rejected":
+"{\n  assert Evaluate(Optimize(e), env) == Evaluate(e, env)\n}\n```"
+}
