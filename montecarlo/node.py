@@ -13,6 +13,7 @@ class Node:
         self.expanded = False
         self.player_number = None
         self.discovery_factor = 0.35
+        self.is_widen_node = False
 
     def update_win_value(self, value):
         self.win_value += value
@@ -53,11 +54,14 @@ class Node:
             * (self.policy_value or 1)
             * sqrt(log(self.parent.visits) / (self.visits or 1))
         )
-
-        win_multiplier = (
-            1 if self.parent.player_number == root_node.player_number else -1
-        )
-        win_operand = win_multiplier * self.win_value / (self.visits or 1)
+        
+        if self.is_widen_node:
+            win_operand = 0
+        else:
+            win_multiplier = (
+                1 if self.parent.player_number == root_node.player_number else -1
+            )
+            win_operand = win_multiplier * self.win_value / (self.visits or 1)
 
         self.score = win_operand + discovery_operand
 
