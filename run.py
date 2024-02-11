@@ -50,7 +50,7 @@ def child_finder(node, montecarlo):
         node.add_child(child)
         child.update_policy_value(0.2)
 
-def main(mins_timeout = None):
+def main(mins_timeout = None, prompt = prompt):
     montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.child_finder = child_finder
 
