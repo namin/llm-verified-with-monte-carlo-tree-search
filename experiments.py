@@ -42,6 +42,9 @@ match experiment_name:
 
     case "run_dfs_backtrack_to_perfect.py":
         from run_dfs_backtrack_to_perfect import main, reset_cache
+    
+    case "run_intermediate_expansion.py":
+        from run_intermediate_expansion import main, reset_cache
 
     case _:
         print('invalid program name')
