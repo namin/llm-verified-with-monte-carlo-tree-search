@@ -1,0 +1,17 @@
+accelerate
+alectryon
+bitsandbytes
+huggingface_hub
+joblib
+openai
+peft
+pexpect
+protobuf
+requests
+sentencepiece
+scipy
+tenacity
+torch
+transformers
+trl
+wandb
