@@ -18,7 +18,16 @@ score_stats = {'positive': 0, 'negative': 0, 'unknown': 0}
 solution_stats = {'yes': 0, 'no': 0}
 solutions = []
 
-def attempt():
+# TODO: this is not the right place to define check_func
+def check_func(v):
+    lines = v.split('\n')  # Split the string into lines
+    for line in lines:
+        # Strip leading and trailing whitespace and check if it starts with '//'
+        if not line.lstrip().startswith('//'):
+            return True  # Found a line that doesn't start with '//'
+    return False  # All lines start with '//'
+
+def attempt(prompt = prompt):
     if GREEDY:
         text = llm.generate_full(prompt)
     else:
@@ -33,29 +42,37 @@ def attempt():
         return text
     return None
 
-def main(mins_timeout = None):
+def main(mins_timeout = None, prompt = prompt):
     if MAX_N_SAMPLES is not None:
         assert not GREEDY
         n_calls = 0
         solution = None
         while solution is None and n_calls < MAX_N_SAMPLES:
             n_calls += 1
-            solution = attempt()
+            solution = attempt(prompt = prompt)
         if solution:
             print("SOLUTION FOUND")
             print(solution)
         else:
             print("SOLUTION is None")
         return {"n_calls": n_calls}
-    else:
+    elif mins_timeout is None:
         for i in range(0, 1 if GREEDY else N_SAMPLES):
-            attempt()
+            attempt(prompt = prompt)
         for solution in solutions:
             print("ONE SOLUTION")
             print(solution)
         print(score_stats)
         print(solution_stats)
         return solution_stats
+    else:
+        # make mins_timeout the stronger parameter
+        start_time = time.time()  # Save the start time when the loop begins
+        timeout = mins_timeout * 60  # Convert minutes to seconds
+        while (time.time() - start_time) < timeout:
+            sol = attempt(prompt = prompt)
+            if sol:
+                return solution_stats
 
 if __name__ == '__main__':
     main()
