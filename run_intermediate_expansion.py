@@ -17,6 +17,7 @@ import llm
 min_lines = 5
 expansion_count = None
 
+# TODO: this is not the right place to define check_func
 def check_func(v):
     lines = v.split('\n')  # Split the string into lines
     for line in lines:
