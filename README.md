@@ -12,6 +12,8 @@ Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
 
+[Draft](https://arxiv.org/abs/2402.08147)
+
 ## Running
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
@@ -144,6 +146,18 @@ For a more extensive prompt populated with the goal to prove (Coq only) -- do:
 
 ```
 python run_focus.py --language Coq
+```
+
+# Citation
+```
+@misc{brandfonbrener2024verified,
+      title={Verified Multi-Step Synthesis using Large Language Models and Monte Carlo Tree Search}, 
+      author={David Brandfonbrener and Sibi Raja and Tarun Prasad and Chloe Loughridge and Jianang Yang and Simon Henniger and William E. Byrd and Robert Zinkov and Nada Amin},
+      year={2024},
+      eprint={2402.08147},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE}
+}
 ```
 
 For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
