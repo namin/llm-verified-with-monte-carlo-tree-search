@@ -75,7 +75,7 @@ def main(mins_timeout = None, prompt = prompt):
             sol = attempt(prompt = prompt)
             if sol:
                 return solution_stats
-        return solution_statss
+        return solution_stats
 
 if __name__ == '__main__':
     main()
