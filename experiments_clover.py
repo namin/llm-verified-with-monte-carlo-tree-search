@@ -10,6 +10,8 @@ match experiment_name:
         from run import main as main_run, reset_cache
     case "run_intermediate_expansion.py":
         from run_intermediate_expansion import main as main_run, reset_cache
+    case "run_whole.py":
+        from run_whole import main as main_run, reset_cache
     case _:
         print('invalid program name')
         exit()
