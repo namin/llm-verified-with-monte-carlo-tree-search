@@ -1,5 +1,7 @@
 from cmdline import args
 
+import time
+
 GREEDY = args.greedy
 N_SAMPLES = args.n_samples
 MAX_N_SAMPLES = args.max_n_samples
