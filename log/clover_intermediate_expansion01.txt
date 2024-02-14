@@ -20144,3 +20144,4827 @@ method rotate(a: array<int>, offset:int) returns (b: array<int> )
   //complete the method body
 }
 
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(3,10): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures b.Length==a.Length
+  |           ^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'b', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 3 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i:=0; i<a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+}
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  //complete the method here\n']
+['}\n']
+['\n']
+['  // Complete the method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Complete the method
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(3,10): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures b.Length==a.Length
+  |           ^^^^^^^^^^^^^^^^^^
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'b', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 3 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete the method\n']
+['}\n']
+['\n']
+['  //complete the method\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete the method here\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete the method here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  //complete this method\n']
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method\n']
+['}\n']
+['\n']
+['  //complete the method here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // complete the method body\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i:=0; i<a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  b := new int[a.Length];
+  for(var i:=0; i<a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+}
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |      ^
+
+ex.dfy(8,26): Error: closeparen expected
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                           ^
+
+ex.dfy(8,20): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i:=0; i<a.Length; i++)
+  |                     ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['  var b := a;\n']
+['  return b;\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the built-in Dafny function "new" to create a new array
+
+ex.dfy(7,70): Error: rbrace expected
+  |
+7 |   // hint: use the built-in Dafny function "new" to create a new array
+  |                                                                       ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // hint: use the built-in Dafny function "new" to create a new array\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+
+ex.dfy(8,25): Error: rbrace expected
+  |
+8 |   b := new int[a.Length];
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+
+ex.dfy(9,6): Error: invalid Ident
+  |
+9 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(9,13): Error: closeparen expected
+  |
+9 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(9,6): Error: binding not allowed in parenthesized expression
+  |
+9 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(9,12): Error: Expected 'to' or 'downto'
+  |
+9 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+
+ex.dfy(9,6): Error: invalid Ident
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(9,13): Error: closeparen expected
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(9,6): Error: binding not allowed in parenthesized expression
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(9,12): Error: Expected 'to' or 'downto'
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(9,6): Error: invalid Ident
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(9,13): Error: closeparen expected
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(9,6): Error: binding not allowed in parenthesized expression
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(9,12): Error: Expected 'to' or 'downto'
+  |
+9 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  var b := new int[a.Length];
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   var b := new int[a.Length];
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+  {
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete the method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the array update operator
+
+ex.dfy(7,40): Error: rbrace expected
+  |
+7 |   // hint: use the array update operator
+  |                                         ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // hint: use the array update operator\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the array update operator
+  var b := a;
+
+ex.dfy(8,13): Error: rbrace expected
+  |
+8 |   var b := a;
+  |              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the array update operator
+  var b := a;
+  for i := 0 to a.Length - 1 do
+
+ex.dfy(9,31): Error: invalid UpdateStmt
+  |
+9 |   for i := 0 to a.Length - 1 do
+  |                                ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for i := 0 to a.Length - 1 do\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the array update operator
+  var b := a;
+  for i := 0 to a.Length - 1 do
+    b[i] := a[(i + offset) % a.Length];
+
+ex.dfy(9,29): Error: missing semicolon at end of statement
+  |
+9 |   for i := 0 to a.Length - 1 do
+  |                              ^^
+
+ex.dfy(10,39): Error: rbrace expected
+   |
+10 |     b[i] := a[(i + offset) % a.Length];
+   |                                        ^
+
+2 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[i] := a[(i + offset) % a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // hint: use the array update operator
+  var b := a;
+  for i := 0 to a.Length - 1 do
+    b[i] := a[(i + offset) % a.Length];
+  return b;
+
+ex.dfy(9,29): Error: missing semicolon at end of statement
+  |
+9 |   for i := 0 to a.Length - 1 do
+  |                              ^^
+
+ex.dfy(11,11): Error: rbrace expected
+   |
+11 |   return b;
+   |            ^
+
+2 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete the method body\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method here\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  //complete this method\n']
+['}\n']
+['\n']
+['  // complete the method body\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  var b := new int[a.Length];\n']
+['  for (i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  for (i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  for (i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  //complete the method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method
+  b := a;
+
+ex.dfy(7,9): Error: rbrace expected
+  |
+7 |   b := a;
+  |          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method
+  b := a;
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // complete the method body\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  var b := new int[a.Length];
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   var b := new int[a.Length];
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  //complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  //complete the method here\n']
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++)
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // Fill in the method body here\n']
+['  b := a;\n']
+['}\n']
+['\n']
+['  //complete the method\n']
+['}\n']
+['\n']
+['  // complete the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body here
+  b := a;
+
+ex.dfy(7,9): Error: rbrace expected
+  |
+7 |   b := a;
+  |          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body here
+  b := a;
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['  b := a;\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  //...
+
+ex.dfy(8,7): Error: rbrace expected
+  |
+8 |   //...
+  |        ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  //...\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := new int[a.Length];
+  //...
+}
+
+ex.dfy(7,6): Error: Duplicate local-variable name: b
+  |
+7 |   var b := new int[a.Length];
+  |       ^
+
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+
+ex.dfy(7,13): Error: rbrace expected
+  |
+7 |   var b := a;
+  |              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++)
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (var i := 0; i < offset; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++)
+    b[i] := a[(i+offset)%a.Length];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[i] := a[(i+offset)%a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++)
+    b[i] := a[(i+offset)%a.Length];
+  return b;
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++)
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // complete the method body here\n']
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++) 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++)
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (var i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++) 
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method body here
+  var b := new int[a.Length];
+  for (var i := 0; i < a.Length; i++) 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,31): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |                                ^
+
+ex.dfy(8,25): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < a.Length; i++) 
+  |                          ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Your code here\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // Fill in the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  var b := new int[a.Length];
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   var b := new int[a.Length];
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for(var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // Fill in the method body\n']
+['}\n']
+['\n']
+['  //complete this method\n']
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++) \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++) 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++) 
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Fill in the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := new int[a.Length];
+
+ex.dfy(7,25): Error: rbrace expected
+  |
+7 |   b := new int[a.Length];
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++)
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++)
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := new int[a.Length];
+  for (i := 0; i < a.Length; i++)
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^
+
+ex.dfy(8,13): Error: closeparen expected
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |              ^
+
+ex.dfy(8,6): Error: binding not allowed in parenthesized expression
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |       ^^^^^^^
+
+ex.dfy(8,12): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i := 0; i < a.Length; i++)
+  |             ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // complete the method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method
+  b := new int[a.Length];
+
+ex.dfy(7,25): Error: rbrace expected
+  |
+7 |   b := new int[a.Length];
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method
+  b := new int[a.Length];
+  for (i, j) in a 
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i, j) in a
+  |       ^
+
+ex.dfy(8,17): Error: ident expected
+  |
+8 |   for (i, j) in a
+  |                  ^
+
+ex.dfy(8,16): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i, j) in a
+  |                 ^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (i, j) in a \n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method
+  b := new int[a.Length];
+  for (i, j) in a 
+  {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i, j) in a 
+  |       ^
+
+ex.dfy(9,2): Error: ident expected
+  |
+9 |   {
+  |   ^
+
+ex.dfy(8,16): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i, j) in a 
+  |                 ^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete the method
+  b := new int[a.Length];
+  for (i, j) in a 
+  {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (i, j) in a 
+  |       ^
+
+ex.dfy(9,2): Error: ident expected
+  |
+9 |   {
+  |   ^
+
+ex.dfy(8,16): Error: Expected 'to' or 'downto'
+  |
+8 |   for (i, j) in a 
+  |                 ^
+
+ex.dfy(10,27): Error: rbrace expected
+   |
+10 |     b[(i+offset)%a.Length] := a[i];
+   |                            ^
+
+4 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['    b[(i+offset)%a.Length] := a[i];\n']
+['\n']
+['  // Fill in the body of the method here\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  var b := new int[a.Length];\n']
+['  for(var i:=0; i<a.Length; i++)\n']
+['    b[(i+offset)%a.Length] := a[i];\n']
+['  return b;\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+['}\n']
+['\n']
+['  // Your implementation here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete the method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['  b := a;\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['  var b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++) {
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for (var i := 0; i < offset; i++) {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++) {
+    b := rotate_helper(b);
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b := rotate_helper(b);\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  var b := a;
+  for (var i := 0; i < offset; i++) {
+    b := rotate_helper(b);
+  }
+
+ex.dfy(8,6): Error: invalid Ident
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |       ^
+
+ex.dfy(8,29): Error: closeparen expected
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                              ^
+
+ex.dfy(8,23): Error: Expected 'to' or 'downto'
+  |
+8 |   for (var i := 0; i < offset; i++) {
+  |                        ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  }\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['  var b := new int[a.Length];\n']
+['  for(var i := 0; i < a.Length; i++)\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Your code here
+  var b := new int[a.Length];
+  for(var i := 0; i < a.Length; i++)
+    b[(i+offset)%a.Length] := a[i];
+  return b;
+
+ex.dfy(8,5): Error: invalid Ident
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |      ^
+
+ex.dfy(8,30): Error: closeparen expected
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                               ^
+
+ex.dfy(8,24): Error: Expected 'to' or 'downto'
+  |
+8 |   for(var i := 0; i < a.Length; i++)
+  |                         ^^^^^^
+
+3 parse errors detected in ex.dfy
+
+SCORE
+-1.0
+['  return b;\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  //complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+
+ex.dfy(7,13): Error: rbrace expected
+  |
+7 |   var b := a;
+  |              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+
+ex.dfy(8,17): Error: rbrace expected
+  |
+8 |   if offset > 0 {
+  |                  ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  if offset > 0 {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+
+ex.dfy(9,28): Error: rbrace expected
+  |
+9 |     for i := 0 to offset-1 {
+  |                             ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    for i := 0 to offset-1 {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+      b[i] := a[i+offset];
+
+ex.dfy(10,26): Error: rbrace expected
+   |
+10 |       b[i] := a[i+offset];
+   |                           ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['      b[i] := a[i+offset];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+      b[i] := a[i+offset];
+    }
+
+ex.dfy(11,5): Error: rbrace expected
+   |
+11 |     }
+   |      ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    }\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+      b[i] := a[i+offset];
+    }
+  }
+
+ex.dfy(12,3): Error: rbrace expected
+   |
+12 |   }
+   |    ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+      b[i] := a[i+offset];
+    }
+  }
+  return b;
+
+ex.dfy(13,11): Error: rbrace expected
+   |
+13 |   return b;
+   |            ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  return b;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete this method
+  var b := a;
+  if offset > 0 {
+    for i := 0 to offset-1 {
+      b[i] := a[i+offset];
+    }
+  }
+  return b;
+}
+
+ex.dfy(7,6): Error: Duplicate local-variable name: b
+  |
+7 |   var b := a;
+  |       ^
+
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['}\n']
+reached timelimit, stopping expansion on current node
+CHOSEN SOLUTION
+None
+
+STATS
+
+number of nodes: 1
+number of gen nodes: 1 (including leaves: 1)
+number of back nodes: 0 (including leaves: 0)
+
+expansion count: 303 (including failed: 303)
+
+cache stats {'hit': 839, 'miss': 242}
+duration in seconds: 609
+------Prompt: 4
+---Solved so far: 1
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+
+ex.dfy(6,1): Error: rbrace expected
+  |
+6 | {
+  |  ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Complete this method
+
+ex.dfy(7,25): Error: rbrace expected
+  |
+7 |   // Complete this method
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Complete this method
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete this method
+
+ex.dfy(7,25): Error: rbrace expected
+  |
+7 |   // complete this method
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // complete this method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete this method
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body here
+
+ex.dfy(7,34): Error: rbrace expected
+  |
+7 |   // complete the method body here
+  |                                   ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // complete the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body here
+  var r := m1;
+
+ex.dfy(8,14): Error: rbrace expected
+  |
+8 |   var r := m1;
+  |               ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  var r := m1;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body here
+  var r := m1;
+}
+
+ex.dfy(8,6): Error: Duplicate local-variable name: r
+  |
+8 |   var r := m1;
+  |       ^
+
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+None
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body here
+  var r := m1;
+}
+```In Dafny, you can complete the method body as follows:
+
+ex.dfy(8,6): Error: Duplicate local-variable name: r
+  |
+8 |   var r := m1;
+  |       ^
+
+1 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+['```In Dafny, you can complete the method body as follows:\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // ...
+
+ex.dfy(7,8): Error: rbrace expected
+  |
+7 |   // ...
+  |         ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // ...\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // ...
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // method body goes here
+
+ex.dfy(7,26): Error: rbrace expected
+  |
+7 |   // method body goes here
+  |                           ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // method body goes here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // method body goes here
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // method body
+
+ex.dfy(7,16): Error: rbrace expected
+  |
+7 |   // method body
+  |                 ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // method body\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // method body
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Your code here
+
+ex.dfy(7,19): Error: rbrace expected
+  |
+7 |   // Your code here
+  |                    ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Your code here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Your code here
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body here
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Complete this method in Dafny
+
+ex.dfy(7,34): Error: rbrace expected
+  |
+7 |   // Complete this method in Dafny
+  |                                   ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Complete this method in Dafny\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Complete this method in Dafny
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method here
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   // complete the method here
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // complete the method here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method here
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+None
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```In Dafny, the update_map method can be completed using the following code:
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['```In Dafny, the update_map method can be completed using the following code:\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Your implementation here
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   // Your implementation here
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // Your implementation here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // Your implementation here
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```Here is the completed method in Dafny:
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['```Here is the completed method in Dafny:\n']
+['\n']
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```Here is a completed version of the method in Dafny. This method creates a new map, `r`, that is the union of `m1` and `m2`. It iterates over the keys in `m2` and adds them to `r` with the value from `m2`. Then it iterates over the keys in `m1` that are not in `m2` and adds them to `r` with the value from `m1`.
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['```Here is a completed version of the method in Dafny. This method creates a new map, `r`, that is the union of `m1` and `m2`. It iterates over the keys in `m2` and adds them to `r` with the value from `m2`. Then it iterates over the keys in `m1` that are not in `m2` and adds them to `r` with the value from `m1`.\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body
+
+ex.dfy(7,29): Error: rbrace expected
+  |
+7 |   // complete the method body
+  |                              ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // complete the method body\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method body
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```In the provided method, you are trying to combine two maps `m1` and `2` into a new map `r`. The new map should contain all the keys from both `m1` and `m2`. For the keys that are in both maps, the value in the new map should be the value from `m2`.
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['```In the provided method, you are trying to combine two maps `m1` and `2` into a new map `r`. The new map should contain all the keys from both `m1` and `m2`. For the keys that are in both maps, the value in the new map should be the value from `m2`.\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method
+
+ex.dfy(7,24): Error: rbrace expected
+  |
+7 |   // complete the method
+  |                         ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // complete the method\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+  // complete the method
+}
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(8,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+8 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['}\n']
+['```Here is the completed method in Dafny:\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```In the given problem, we are asked to complete the method 'update_map' in Dafny. The method takes two maps 'm1' and 'm2' as input and returns a new map 'r'. The post-conditions describe the properties that the returned map 'r' must satisfy.
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+["```In the given problem, we are asked to complete the method 'update_map' in Dafny. The method takes two maps 'm1' and 'm2' as input and returns a new map 'r'. The post-conditions describe the properties that the returned map 'r' must satisfy.\n"]
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['}\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method update_map<K(!new), V>(m1: map<K, V>, m2: map<K, V>) returns (r: map<K, V>)
+  ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+{
+}
+```Here is the completed method in Dafny. 
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(2,11): Related location: this is the postcondition that could not be proved
+  |
+2 |   ensures (forall k :: k in m1 || k in m2 ==> k in r)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(3,12): Related location: this is the postcondition that could not be proved
+  |
+3 |   ensures  (forall k :: k in m2 ==> r[k] == m2[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(4,12): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures  (forall k :: !(k in m2) && k in m1 ==> r[k] == m1[k])
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(6,0): Error: a postcondition could not be proved on this return path
+  |
+6 | {
+  | ^
+
+ex.dfy(5,12): Related location: this is the postcondition that could not be proved
+  |
+5 |   ensures  (forall k :: !(k in m2) && !(k in m1) ==> !(k in r))
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(7,0): Error: out-parameter 'r', which is subject to definite-assignment rules, might be uninitialized at this return point
+  |
+7 | }
+  | ^
+
+
+Dafny program verifier finished with 1 verified, 5 errors
+
+SCORE
+-1.0
+['```Here is the completed method in Dafny. \n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // ...\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['}\n']
+TEXT

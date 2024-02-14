@@ -162,3 +162,12 @@ To run a certain flavor of experiment on the Clover benchmark dataet, do somethi
 ```
 python experiments_clover.py --experiment_name run_intermediate_expansion.py
 ```
+
+To log the results of any experiment in the log/ directory, place the following before the experiment command:
+```
+./log.sh log/name_of_log_file.txt
+```
+For example, to log the results of the intermediate expansion experiment on `opt0` you could run:
+```
+./log.sh log/intermediate-expansion-01.txt python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
+```
