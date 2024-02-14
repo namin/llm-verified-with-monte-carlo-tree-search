@@ -148,6 +148,12 @@ For a more extensive prompt populated with the goal to prove (Coq only) -- do:
 python run_focus.py --language Coq
 ```
 
+For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
+
+```
+python run_meta.py --language Coq
+```
+
 # Citation
 ```
 @misc{brandfonbrener2024verified,
@@ -160,9 +166,4 @@ python run_focus.py --language Coq
 }
 ```
 
-For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
-
-```
-python run_meta.py --language Coq
-```
 
