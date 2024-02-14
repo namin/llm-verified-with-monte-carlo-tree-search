@@ -151,4 +151,14 @@ For a more extensive prompt which creates lemmas from failures (Coq only) -- do:
 ```
 python run_meta.py --language Coq
 ```
+#### Running any experiments on any supported data source
 
+To a run a certain flavor of experiment on one of the prompts used in the VMCTS paper, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on `opt0`, do:
+```
+python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
+```
+
+To run a certain flavor of experiment on the Clover benchmark dataet, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on Clover, do:
+```
+python experiments_clover.py --experiment_name run_intermediate_expansion.py
+```
