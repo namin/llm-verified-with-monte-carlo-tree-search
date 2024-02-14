@@ -19830,3 +19830,317 @@ SCORE
 ['\n']
 ['  // complete this method\n']
 TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+
+ex.dfy(7,78): Error: rbrace expected
+  |
+7 |   // HINT: You can use the built-in Dafny function "new" to create a new array
+  |                                                                               ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  // HINT: You can use the built-in Dafny function "new" to create a new array\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+
+ex.dfy(8,25): Error: rbrace expected
+  |
+8 |   b := new int[a.Length];
+  |                          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := new int[a.Length];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for i:= 0 to a.Length-1 {
+
+ex.dfy(9,27): Error: rbrace expected
+  |
+9 |   for i:= 0 to a.Length-1 {
+  |                            ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  for i:= 0 to a.Length-1 {\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for i:= 0 to a.Length-1 {
+    b[(i+offset)%a.Length] := a[i];
+
+ex.dfy(10,35): Error: rbrace expected
+   |
+10 |     b[(i+offset)%a.Length] := a[i];
+   |                                    ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['    b[(i+offset)%a.Length] := a[i];\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for i:= 0 to a.Length-1 {
+    b[(i+offset)%a.Length] := a[i];
+  }
+
+ex.dfy(11,3): Error: rbrace expected
+   |
+11 |   }
+   |    ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  }\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // complete this method
+  // HINT: You can use the built-in Dafny function "new" to create a new array
+  b := new int[a.Length];
+  for i:= 0 to a.Length-1 {
+    b[(i+offset)%a.Length] := a[i];
+  }
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ex.dfy(9,10): Error: lower bound must not exceed upper bound
+  |
+9 |   for i:= 0 to a.Length-1 {
+  |           ^
+
+
+Dafny program verifier finished with 1 verified, 2 errors
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Complete this method\n']
+['}\n']
+['\n']
+['  // method body goes here\n']
+['}\n']
+['\n']
+['  // Your code here\n']
+['}\n']
+['\n']
+['  // Fill in the method body here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := a;
+
+ex.dfy(7,9): Error: rbrace expected
+  |
+7 |   b := a;
+  |          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the method body here
+  b := a;
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  // method body goes here\n']
+['  var b := a;\n']
+['  return b;\n']
+['}\n']
+['\n']
+['  //complete the method\n']
+['}\n']
+['\n']
+['  // complete this method\n']
+['}\n']
+['\n']
+['  // Fill in the body of the method here\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  b := a;
+
+ex.dfy(7,9): Error: rbrace expected
+  |
+7 |   b := a;
+  |          ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  b := a;\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  // Fill in the body of the method here
+  b := a;
+}
+
+ex.dfy(5,0): Error: a postcondition could not be proved on this return path
+  |
+5 | {
+  | ^
+
+ex.dfy(4,10): Related location: this is the postcondition that could not be proved
+  |
+4 |   ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Dafny program verifier finished with 1 verified, 1 error
+
+SCORE
+-1.0
+['}\n']
+['\n']
+['  //complete here\n']
+['}\n']
+['\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method body
+
+ex.dfy(6,28): Error: rbrace expected
+  |
+6 |   //complete the method body
+  |                             ^
+
+1 parse errors detected in ex.dfy
+
+SCORE
+None
+['  //complete the method body\n']
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method rotate(a: array<int>, offset:int) returns (b: array<int> )
+  requires 0<=offset<=a.Length
+  ensures b.Length==a.Length
+  ensures forall i ::0<=i<a.Length ==>  b[(i+offset)%a.Length]==a[i]
+{
+  //complete the method body
+}
+
