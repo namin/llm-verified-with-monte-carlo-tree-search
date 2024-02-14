@@ -1,7 +1,7 @@
 
 
 ========
-Experiment configuration: python run_clover_parametric.py --experiment_name run_intermediate_expansion.py 
+Experiment configuration: python experiments_clover.py --experiment_name run_intermediate_expansion.py 
 
 
 ------Prompt: 0
