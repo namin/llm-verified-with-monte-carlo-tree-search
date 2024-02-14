@@ -1,0 +1,170 @@
+
+
+========
+Experiment configuration: python experiments_clover.py --experiment_name run_whole.py --mins_timeout 10 
+
+
+------Prompt: 0
+---Solved so far: 0
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.</s>
+TEXT
+### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+  // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length > 0
+  ensures a[1..] == c[..]
+{
+  var c := a[1..];
+  return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.
+ex.dfy(9,7): Error: Duplicate member name: remove_front
+  |
+9 | method remove_front(a:array<int>) returns (c:array<int>)
+  |        ^^^^^^^^^^^^
+
+ex.dfy(13,6): Error: Duplicate local-variable name: c
+   |
+13 |   var c := a[1..];
+   |       ^
+
+2 resolution/type errors detected in ex.dfy
+
+SCORE
+-1.0
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.</s>
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.</s>
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.</s>
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` as input, and returns a new array `c` as output. The requirement `a.Length > 0` ensures that the input array is not empty. The ensures clause `a[1..] == c[..]` states that all elements of the input array starting from index 1 are the same as the elements of the output array. The body of the method creates a new array `c` by slicing the input array `a` from index 1 to the end, and then returns this new array.</s>
+<s> ### Spec: In Dafny, complete the following method.
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+  requires a.Length>0
+  ensures  a[1..] == c[..]
+{
+ // complete this method
+}
+```Here is the completed method in Dafny:
+
+```dafny
+method remove_front(a:array<int>) returns (c:array<int>)
+ requires a.Length > 0
+ ensures a[1..] == c[..]
+{
+ var c := a[1..];
+ return c;
+}
+```
+
+This method takes an array `a` 
