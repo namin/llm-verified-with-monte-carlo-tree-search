@@ -8,11 +8,22 @@ from common_cache import create_cached_func
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
-from prompts import prompt, expansion_count, min_lines, check_func
+from prompts import prompt
 from common import limit_depth, max_completion_depth
 from common_stats import stats
 
 import llm
+
+min_lines = 5
+expansion_count = None
+
+def check_func(v):
+    lines = v.split('\n')  # Split the string into lines
+    for line in lines:
+        # Strip leading and trailing whitespace and check if it starts with '//'
+        if not line.lstrip().startswith('//'):
+            return True  # Found a line that doesn't start with '//'
+    return False  # All lines start with '//'
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -55,7 +66,7 @@ def child_finder(node, montecarlo):
         child.add_child(widen)
         widen.update_policy_value(0.2)
 
-def main(mins_timeout = None):
+def main(mins_timeout = None, prompt = prompt):
     montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.child_finder = child_finder
 
