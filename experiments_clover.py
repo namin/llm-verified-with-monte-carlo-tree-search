@@ -12,6 +12,8 @@ match experiment_name:
         from run_intermediate_expansion import main as main_run, reset_cache
     case "run_whole.py":
         from run_whole import main as main_run, reset_cache
+    case "run_verifier_feedback.py":
+        from run_verifier_feedback import main as main_run, reset_cache
     case _:
         print('invalid program name')
         exit()
