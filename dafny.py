@@ -81,6 +81,10 @@ def checkDafny(v: str) -> dict:
 def calculateScore_whole(msg: str) -> Optional[float]:
     score_whole, _ = calculateScoreHelper_whole(msg)
     score, _ = calculateScoreHelper(msg)
+    print("SCORE")
+    print(score)
+    print("SCORE_WHOLE")
+    print(score_whole)
     # always return the better of the two scores
     if score_whole:
         if score_whole == 1.0:
@@ -124,7 +128,7 @@ def score_func_whole(sentence: str) -> Optional[float]:
     print("TEXT")
     print(sentence)
     score = calculateScore_whole(sentence)
-    print("SCORE_WHOLE")
+    print("SCORE_FINAL")
     print(score)
     return score
 
