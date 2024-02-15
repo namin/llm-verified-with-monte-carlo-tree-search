@@ -3,6 +3,7 @@ from lang_config import LANG
 if LANG == "Dafny":
     from dafny import (
         score_func,
+        score_func_whole,
         verifier_feedback,
         short_verifier_feedback,
         filter_code,

@@ -17,15 +17,6 @@ from common_stats import stats
 
 import llm
 
-# TODO: this is not the right place to define check_func
-def check_func(v):
-    lines = v.split('\n')  # Split the string into lines
-    for line in lines:
-        # Strip leading and trailing whitespace and check if it starts with '//'
-        if not line.lstrip().startswith('//'):
-            return True  # Found a line that doesn't start with '//'
-    return False  # All lines start with '//'
-
 if REFLECT:
     import reflection
     from lang import short_verifier_feedback
@@ -88,7 +79,7 @@ def child_finder(node, montecarlo):
     node.add_child(child)
     child.update_policy_value(0.2)
 
-def main(mins_timeout = None, prompt = prompt):
+def main(mins_timeout = None):
     montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.child_finder = child_finder
 
