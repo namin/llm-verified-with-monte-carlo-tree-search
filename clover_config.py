@@ -29,6 +29,4 @@ TRAIN_PROMPTS = [
     "SwapBitvectors"
 ]
 
-TEST_PROMPTS = [
-    "UpdateElements"
-]
+TEST_PROMPTS = None

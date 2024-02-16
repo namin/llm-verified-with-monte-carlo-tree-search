@@ -78,8 +78,8 @@ def main(mins_timeout = None, prompt = prompt):
 
     stats(montecarlo)
     print('cache stats', cache_stats)
-    # with open("graph.dot", "w") as f:
-    #     montecarlo.print_tree(f)
+    with open("graph.dot", "w") as f:
+        montecarlo.print_tree(f)
 
     return cache_stats
 

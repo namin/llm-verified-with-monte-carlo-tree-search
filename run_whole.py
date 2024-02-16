@@ -16,6 +16,9 @@ from prompts import prompt, min_lines, check_func
 
 import llm
 
+min_lines = 5
+expansion_count = None
+
 score_stats = {'positive': 0, 'negative': 0, 'unknown': 0}
 solution_stats = {'yes': 0, 'no': 0}
 solutions = []
