@@ -1,7 +1,7 @@
 import time
 from cmdline import args
 from clover_loader import dfy_annotation_iterator
-from clover_config import TRAIN_PROMPTS
+from clover_config import TRAIN_PROMPTS, TEST_PROMPTS
 
 experiment_name = args.experiment_name
 
@@ -33,6 +33,8 @@ def main(mins_timeout = 10):
             method_name_end += 1
         method_name = prompt[method_name_start:method_name_end]
         
+        if TEST_PROMPTS and method_name not in TEST_PROMPTS:
+            continue
         if method_name in TRAIN_PROMPTS:
             continue
 

@@ -28,3 +28,7 @@ TRAIN_PROMPTS = [
     "SwapArithmetic",
     "SwapBitvectors"
 ]
+
+TEST_PROMPTS = [
+    "UpdateElements"
+]
