@@ -140,4 +140,5 @@ def filterDafny_whole(msg: str) -> List[str]:
 
 
 filter_code = filterDafny
+filter_code_whole = filterDafny_whole
 check_code = checkDafny

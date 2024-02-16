@@ -6,7 +6,7 @@ GREEDY = args.greedy
 N_SAMPLES = args.n_samples
 MAX_N_SAMPLES = args.max_n_samples
 
-from lang import can_be_solution
+from lang import can_be_solution_whole
 from lang import score_func_whole as uncached_score_func
 
 from common_cache import create_cached_func
@@ -16,6 +16,7 @@ from prompts import prompt, min_lines, check_func
 
 import llm
 
+# TODO: this is not the right place to define these things
 min_lines = 5
 expansion_count = None
 
@@ -40,7 +41,7 @@ def attempt(prompt = prompt):
     score = score_func(text)
     score_key = "unknown" if score is None else "positive" if score > 0 else "negative"
     score_stats[score_key] += 1
-    solution_key = 'yes' if score is not None and score > 0 and can_be_solution(text, min_lines, check_func) else 'no'
+    solution_key = 'yes' if score is not None and score > 0 and can_be_solution_whole(text, min_lines, check_func) else 'no'
     solution_stats[solution_key] += 1
     if solution_key == 'yes':
         solutions.append(text)

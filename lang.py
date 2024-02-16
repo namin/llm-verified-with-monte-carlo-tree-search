@@ -7,6 +7,7 @@ if LANG == "Dafny":
         verifier_feedback,
         short_verifier_feedback,
         filter_code,
+        filter_code_whole,
         check_code,
     )
 elif LANG == "Coq":
@@ -49,6 +50,15 @@ def can_be_solution(msg: str, min_lines: int, check_func=None) -> bool:
     if r and check_func:
         r = check_func(v)
     return r
+
+def can_be_solution_whole(msg: str, min_lines: int, check_func=None) -> bool:
+    if not (msg.count("```") % 2 == 0):
+        return False
+    vs = filter_code_whole(msg)
+    for v in vs:
+        if can_be_solution("```" + v + "```", min_lines, check_func):
+            return True
+    return False
 
 def find_largest_new_block(old_text: str, text: str) -> str:
     return find_largest_new_block_code(

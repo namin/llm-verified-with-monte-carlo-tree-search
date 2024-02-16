@@ -14,6 +14,10 @@ from common_stats import stats
 
 import llm
 
+# TODO: this is not the right place to define these things
+min_lines = 5
+expansion_count = None
+
 # TODO: this is not the right place to define check_func
 def check_func(v):
     lines = v.split('\n')  # Split the string into lines
@@ -70,8 +74,8 @@ def main(mins_timeout = None, prompt = prompt):
 
     stats(montecarlo)
     print('cache stats', cache_stats)
-    with open("graph.dot", "w") as f:
-        montecarlo.print_tree(f)
+    #with open("graph.dot", "w") as f:
+    #    montecarlo.print_tree(f)
 
     return cache_stats
 
