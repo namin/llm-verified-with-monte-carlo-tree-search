@@ -35,10 +35,12 @@ def braceScoreHelper(v: str) -> (Optional[float], Optional[str]):
         return None, None
     log = r["out"]
     print(log)
+    if "Error: rbrace expected" in log:
+        return braceScoreHelper(v+"\n}")
     hard_errors = ["parse errors detected", "resolution/type errors"]
     if any([x in log for x in hard_errors]):
         return -1.0, ""
-    ok_errors = ["Error: missing case in match"]
+    ok_errors = ["Error: missing case in match", "Error: a postcondition could not be proved on this return path", "loop invariant"]
     if any([x in log for x in ok_errors]):
         return None, None    
     inp = input('pause')
