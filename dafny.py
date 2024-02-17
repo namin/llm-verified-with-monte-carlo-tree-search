@@ -28,6 +28,22 @@ def calculateScore(msg: str) -> Optional[float]:
     return score
 
 
+
+def braceScoreHelper(v: str) -> (Optional[float], Optional[str]):
+    r = checkDafny(v+"\n}")
+    if r["status"] == 0:
+        return None, None
+    log = r["out"]
+    print(log)
+    hard_errors = ["parse errors detected", "resolution/type errors"]
+    if any([x in log for x in hard_errors]):
+        return -1.0, ""
+    ok_errors = ["Error: missing case in match"]
+    if any([x in log for x in ok_errors]):
+        return None, None    
+    inp = input('pause')
+    return None, None
+
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filterDafny(msg + "```").strip()
     if v == "":
@@ -37,6 +53,9 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
         return 1.0, None
     log = r["out"]
     print(log)
+    if "Error: rbrace expected" in log:
+        print("adding }")
+        return braceScoreHelper(v)
     try:
         first = log[log.index("ex.dfy(") + 7 :]
     except ValueError:
