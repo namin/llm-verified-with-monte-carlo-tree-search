@@ -30,7 +30,7 @@ def calculateScore(msg: str) -> Optional[float]:
 
 def lastBraceMissing(v, log):
     line = v.count("\n")+1
-    if line>=1:
+    if line>1:
         i = v.rindex("\n")
     else:
         i = 0
