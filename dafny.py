@@ -71,6 +71,8 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     if lastBraceMissing(v, log):
         print("adding }")
         return braceScoreHelper(v)
+    elif "Error: rbrace expected" in log:
+        return -1.0, ""
     try:
         first = log[log.index("ex.dfy(") + 7 :]
     except ValueError:
