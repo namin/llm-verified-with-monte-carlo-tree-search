@@ -29,15 +29,17 @@ def calculateScore(msg: str) -> Optional[float]:
 
 
 
-def braceScoreHelper(v: str) -> (Optional[float], Optional[str]):
+def braceScoreHelper(v: str, rec = 10) -> (Optional[float], Optional[str]):
+    if rec <= 0:
+        return None, None
     r = checkDafny(v+"\n}")
     if r["status"] == 0:
         return None, None
     log = r["out"]
     print(log)
     if "Error: rbrace expected" in log:
-        return braceScoreHelper(v+"\n}")
-    hard_errors = ["parse errors detected", "resolution/type errors"]
+        return braceScoreHelper(v+"\n}", rec-1)
+    hard_errors = ["parse errors detected", "resolution/type errors", "Error: destructor"]
     if any([x in log for x in hard_errors]):
         return -1.0, ""
     ok_errors = ["Error: missing case in match", "Error: a postcondition could not be proved on this return path", "loop invariant"]
