@@ -1,6 +1,11 @@
 from lang_config import LANG, ALL_LANGS
 from cmdline import args
 
+if args.clover:
+    from clover_prompts import prompt, min_lines, expansion_count, check_func
+    assert LANG == "Dafny"
+    return
+    
 if LANG == "Dafny":
     proof_marker = "ensures"
     cheat_marker = None

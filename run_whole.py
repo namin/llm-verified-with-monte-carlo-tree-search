@@ -16,22 +16,9 @@ from prompts import prompt, min_lines, check_func
 
 import llm
 
-# TODO: this is not the right place to define these things
-min_lines = 5
-expansion_count = None
-
 score_stats = {'positive': 0, 'negative': 0, 'unknown': 0}
 solution_stats = {'yes': 0, 'no': 0}
 solutions = []
-
-# TODO: this is not the right place to define check_func
-def check_func(v):
-    lines = v.split('\n')  # Split the string into lines
-    for line in lines:
-        # Strip leading and trailing whitespace and check if it starts with '//'
-        if not line.lstrip().startswith('//'):
-            return True  # Found a line that doesn't start with '//'
-    return False  # All lines start with '//'
 
 def attempt(prompt = prompt):
     if GREEDY:

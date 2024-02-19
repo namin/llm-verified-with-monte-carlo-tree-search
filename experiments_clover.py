@@ -3,6 +3,8 @@ from cmdline import args
 from clover_loader import dfy_annotation_iterator
 from clover_config import TRAIN_PROMPTS, TEST_PROMPTS
 
+args.clover = True
+
 experiment_name = args.experiment_name
 
 match experiment_name:
