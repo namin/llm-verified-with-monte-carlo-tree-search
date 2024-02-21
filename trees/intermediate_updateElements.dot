@@ -1,0 +1,12 @@
+graph
+{
+a [label="### Spec: In Dafny, complete the following method.\n```dafny\nmethod UpdateElements(a: array<int>)\n  requires a.Length >=9\n  modifies a\n  ensures old(a[4]) +3 == a[4]\n  ensures a[8] == old(a[8])\n  ensures a[7]==516\n{",shape=box]
+  a_0 [label="  // Your code here\n  a[4] := a[4] + 3;\n  a[7] := 516;\n}\n",shape=box]
+    a_0_0 [label="",shape=box]
+  a_0 -- a_0_0
+    a_0_1 [label="```Here is the completed method in Dafny:",shape=box]
+      a_0_1_0 [label="",shape=box]
+    a_0_1 -- a_0_1_0
+  a_0 -- a_0_1
+a -- a_0
+}
