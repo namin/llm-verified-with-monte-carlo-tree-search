@@ -8,7 +8,7 @@ from common_cache import create_cached_func
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
-from prompts import prompt
+from prompts import prompt, min_lines, expansion_count, check_func
 from common import limit_depth, max_completion_depth
 from common_stats import stats
 
