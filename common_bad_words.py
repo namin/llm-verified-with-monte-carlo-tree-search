@@ -1,4 +1,4 @@
-from prompts import cheat_marker
+from default_prompts import cheat_marker
 from transformers import AutoTokenizer
 from model_config import BASE_MODEL_NAME
 
