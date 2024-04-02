@@ -45,6 +45,10 @@ def child_finder(node, montecarlo):
             node.visits += 1
             node = node.parent
             
+        for c in node.children:
+            if c.state == text:
+                print("found string-duplicated node")
+
         child = Node(text)
         node.add_child(child)
         child.update_win_value(1)
