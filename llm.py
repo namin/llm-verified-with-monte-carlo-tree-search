@@ -1,13 +1,31 @@
 from model_config import MODEL_HOST
 from typing import List
+from cmdline import args
+import sys
+
+token_counter = 0
+
+def handle_token_limit(new_tokens):
+    if args.token_limit is not None:
+        global token_counter
+        token_counter += new_tokens
+        print("generated", new_tokens, "tokens, new count: ", token_counter, "/", args.token_limit)
+        if token_counter > args.token_limit:
+            print("Exceeded token limit.")
+            print("Ending the generation prematurely.")
+            sys.exit(1)
 
 if MODEL_HOST == "openai":
     import openai_generate
 
     def generate(prompt: str, num: int) -> List[str]:
+        if args.token_limit is not None:
+            print("WARN: Using OpenAI model, which does not support token limit.")
         return openai_generate.generate(prompt, num)
 
     def generate_full(prompt: str) -> str:
+        if args.token_limit is not None:
+            print("WARN: Using OpenAI model, which does not support token limit.")
         return generate(prompt, 1)[0]
     
 elif MODEL_HOST == "huggingface":
@@ -35,6 +53,8 @@ elif MODEL_HOST == "huggingface":
                 **args
             )
             ts = generate_dict.sequences
+            ntokens = ts.size(0) * ts.size(1)
+            handle_token_limit(ntokens)
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
@@ -69,10 +89,10 @@ elif MODEL_HOST == "huggingface":
         model.eval()
         r = None
         with torch.no_grad():
-            r = tokenizer.decode(model.generate(**model_input,
-                                                **all_args
-                                                )[0],
-                                 skip_special_tokens=True)
+            model_result = model.generate(**model_input, **all_args)
+            ntokens = ts.sequences.size(0) * ts.sequences.size(1)
+            handle_token_limit(ntokens)
+            r = tokenizer.decode(model_result[0], skip_special_tokens=True)
         return r
     
 else:

@@ -37,6 +37,7 @@ class CommonArguments:
     experiment_name: str = field(default="run.py", metadata={"help": "Pick an experiment to run "})
     mins_timeout: float = field(default=None, metadata={"help": "Set a default timeout for each trial "})
     seed: int = field(default=None, metadata={"help": "Set the seed for reproducible behavior"})
+    token_limit: int = field(default=None, metadata={"help": "Max amount of tokens before execution is stopped"})
 
 
 def get_args():
