@@ -35,6 +35,8 @@ elif MODEL_HOST == "huggingface":
                 **args
             )
             ts = generate_dict.sequences
+            ntokens = ts.size(0) * ts.size(1)
+            print("generated", ntokens, "tokens")
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
@@ -69,10 +71,9 @@ elif MODEL_HOST == "huggingface":
         model.eval()
         r = None
         with torch.no_grad():
-            r = tokenizer.decode(model.generate(**model_input,
-                                                **all_args
-                                                )[0],
-                                 skip_special_tokens=True)
+            model_result = model.generate(**model_input, **all_args)
+            ntokens = ts.sequences.size(0) * ts.sequences.size(1)
+            r = tokenizer.decode(model_result[0], skip_special_tokens=True)
         return r
     
 else:
