@@ -9,7 +9,7 @@ def handle_token_limit(new_tokens):
     if args.token_limit is not None:
         global token_counter
         token_counter += new_tokens
-        print("generated", ntokens, "tokens, new count: ", token_counter, "/", args.token_limit)
+        print("generated", new_tokens, "tokens, new count: ", token_counter, "/", args.token_limit)
         if token_counter > args.token_limit:
             print("Exceeded token limit.")
             print("Ending the generation prematurely.")
