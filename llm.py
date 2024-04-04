@@ -15,6 +15,10 @@ def handle_token_limit(new_tokens):
             print("Ending the generation prematurely.")
             sys.exit(1)
 
+def final_report():
+    if args.token_limit is not None:
+        print("Success with token_counter = ", token_counter)
+
 if MODEL_HOST == "openai":
     import openai_generate
 
