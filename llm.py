@@ -57,7 +57,7 @@ elif MODEL_HOST == "huggingface":
                 **args
             )
             ts = generate_dict.sequences
-            ntokens = ts.size(0) * ts.size(1)
+            ntokens = sum((t != tokenizer.pad_token_id).sum().item() for t in ts)
             handle_token_limit(ntokens)
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
@@ -94,7 +94,8 @@ elif MODEL_HOST == "huggingface":
         r = None
         with torch.no_grad():
             model_result = model.generate(**model_input, **all_args)
-            ntokens = ts.sequences.size(0) * ts.sequences.size(1)
+            ts = model_result.sequences
+            ntokens = sum((t != tokenizer.pad_token_id).sum().item() for t in ts)
             handle_token_limit(ntokens)
             r = tokenizer.decode(model_result[0], skip_special_tokens=True)
         return r
