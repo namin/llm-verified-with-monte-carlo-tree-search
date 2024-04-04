@@ -7,6 +7,7 @@ token_counter = 0
 
 def handle_token_limit(new_tokens):
     if args.token_limit is not None:
+        assert(new_tokens >= 0)
         global token_counter
         token_counter += new_tokens
         print("generated", new_tokens, "tokens, new count: ", token_counter, "/", args.token_limit)
@@ -14,6 +15,10 @@ def handle_token_limit(new_tokens):
             print("Exceeded token limit.")
             print("Ending the generation prematurely.")
             sys.exit(1)
+
+def final_report():
+    if args.token_limit is not None:
+        print("Success with token_counter = ", token_counter)
 
 if MODEL_HOST == "openai":
     import openai_generate
@@ -42,6 +47,7 @@ elif MODEL_HOST == "huggingface":
         args = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
+        input_ntokens = model_input['input_ids'].size(1)
         model.eval()
         with torch.no_grad():
             generate_dict = model.generate(
@@ -53,8 +59,10 @@ elif MODEL_HOST == "huggingface":
                 **args
             )
             ts = generate_dict.sequences
-            ntokens = ts.size(0) * ts.size(1)
-            handle_token_limit(ntokens)
+            def helper(tid):
+                return tid not in tokenizer.all_special_ids
+            ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
+            handle_token_limit(ntokens - input_ntokens)
             rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
@@ -86,12 +94,16 @@ elif MODEL_HOST == "huggingface":
                 max_new_tokens=10000)), # NOTE: used to be 1000
             **kwargs}
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
+        input_ntokens = model_input['input_ids'].size(1)
         model.eval()
         r = None
         with torch.no_grad():
             model_result = model.generate(**model_input, **all_args)
-            ntokens = ts.sequences.size(0) * ts.sequences.size(1)
-            handle_token_limit(ntokens)
+            ts = model_result.sequences
+            def helper(tid):
+                return tid not in tokenizer.all_special_ids
+            ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
+            handle_token_limit(ntokens - input_ntokens)
             r = tokenizer.decode(model_result[0], skip_special_tokens=True)
         return r
     
