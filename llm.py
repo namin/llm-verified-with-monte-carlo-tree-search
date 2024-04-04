@@ -7,9 +7,7 @@ token_counter = 0
 
 def handle_token_limit(new_tokens):
     if args.token_limit is not None:
-        if new_tokens < 0:
-            print("Token count error")
-            sys.exit(2)
+        assert(new_tokens >= 0)
         global token_counter
         token_counter += new_tokens
         print("generated", new_tokens, "tokens, new count: ", token_counter, "/", args.token_limit)
