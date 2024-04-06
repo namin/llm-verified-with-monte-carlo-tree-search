@@ -74,7 +74,7 @@ def main(mins_timeout = None, prompt = prompt):
     #with open("graph.dot", "w") as f:
     #    montecarlo.print_tree(f)
 
-    final_report()
+    llm.final_report()
 
     return cache_stats
 
