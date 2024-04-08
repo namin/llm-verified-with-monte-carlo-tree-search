@@ -10,63 +10,109 @@ from lang import can_be_solution_whole
 from lang import score_func_whole as uncached_score_func
 
 from common_cache import create_cached_func
+
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 
 from prompts import prompt, min_lines, check_func
 
 import llm
 
-score_stats = {'positive': 0, 'negative': 0, 'unknown': 0}
-solution_stats = {'yes': 0, 'no': 0}
-solutions = []
+import wandb
 
-def attempt(prompt = prompt):
+if args.use_wandb:
+    wandb.init(
+        entity=args.wandb_entity,
+        project=args.wandb_project,
+        group=args.wandb_group,
+        config=args.dict(),
+        name=args.wandb_name,
+    )
+
+
+def attempt(prompt=prompt, attempt_id=0):
+    attempt_stats = {"attempt_id": attempt_id}
+    init_n_tokens = llm.token_counter
     if GREEDY:
         text = llm.generate_full(prompt)
     else:
-        text = llm.generate_full(prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8)
+        text = llm.generate_full(
+            prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8
+        )
     score = score_func(text)
-    score_key = "unknown" if score is None else "positive" if score > 0 else "negative"
-    score_stats[score_key] += 1
-    solution_key = 'yes' if score is not None and score > 0 and can_be_solution_whole(text, min_lines, check_func) else 'no'
-    solution_stats[solution_key] += 1
-    if solution_key == 'yes':
-        solutions.append(text)
-        return text
-    return None
+    is_solution = (
+        score is not None
+        and score > 0
+        and can_be_solution_whole(text, min_lines, check_func)
+    )
+    score_sign = 0 if score is None else (1 if score > 0 else -1)
+    attempt_stats["text"] = text
+    attempt_stats["is_solution"] = 1 if is_solution else 0
+    attempt_stats["score_sign"] = score_sign
+    attempt_stats["n_tokens"] = llm.token_counter - init_n_tokens
+    return attempt_stats
 
-def main(mins_timeout = None, prompt = prompt):
+
+def summary(all_stats):
+    n_solutions = sum(stats["is_solution"] for stats in all_stats)
+    n_positive = sum(stats["score_sign"] > 0 for stats in all_stats)
+    n_negative = sum(stats["score_sign"] < 0 for stats in all_stats)
+    n_zero = sum(stats["score_sign"] == 0 for stats in all_stats)
+    n_tokens = sum(stats["n_tokens"] for stats in all_stats)
+    print(
+        {
+            "n_attempts": len(all_stats),
+            "n_solutions": n_solutions,
+            "n_positive": n_positive,
+            "n_negative": n_negative,
+            "n_zero": n_zero,
+            "n_tokens": n_tokens,
+        }
+    )
+
+
+def main(mins_timeout=None, prompt=prompt):
+    all_stats = []
     if MAX_N_SAMPLES is not None:
         assert not GREEDY
         n_calls = 0
-        solution = None
-        while solution is None and n_calls < MAX_N_SAMPLES:
+        solution = False
+        while not solution and n_calls < MAX_N_SAMPLES:
             n_calls += 1
-            solution = attempt(prompt = prompt)
-        if solution:
+            stats = attempt(prompt=prompt)
+            all_stats.append(stats)
+            solution = stats["is_solution"]
+        if stats["is_solution"]:
             print("SOLUTION FOUND")
-            print(solution)
+            print(stats["text"])
         else:
             print("SOLUTION is None")
-        return {"n_calls": n_calls}
+
     elif mins_timeout is None:
         for i in range(0, 1 if GREEDY else N_SAMPLES):
-            attempt(prompt = prompt)
-        for solution in solutions:
-            print("ONE SOLUTION")
-            print(solution)
-        print(score_stats)
-        print(solution_stats)
-        return solution_stats
+            stats = attempt(prompt=prompt)
+            all_stats.append(stats)
+            if args.use_wandb:
+                wandb.log(stats)
+        for stats in all_stats:
+            if stats["is_solution"]:
+                solution = stats["text"]
+                print("ONE SOLUTION")
+                print(solution)
     else:
         # make mins_timeout the stronger parameter
         start_time = time.time()  # Save the start time when the loop begins
         timeout = mins_timeout * 60  # Convert minutes to seconds
         while (time.time() - start_time) < timeout:
-            sol = attempt(prompt = prompt)
-            if sol:
-                return solution_stats
-        return solution_stats
+            stats = attempt(prompt=prompt)
+            all_stats.append(stats)
+            if args.use_wandb:
+                wandb.log(stats)
+            if stats["is_solution"]:
+                break
 
-if __name__ == '__main__':
+    summary(all_stats)
+    return all_stats
+
+
+if __name__ == "__main__":
     main()

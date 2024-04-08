@@ -1,5 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from transformers import HfArgumentParser, set_seed
+
+# fmt: off
 
 @dataclass
 class CommonArguments:
@@ -28,7 +30,7 @@ class CommonArguments:
     n_iter: int = field(default=10, metadata={"help": "Number of iterations to run ppo for"})
     n_samples: int = field(default=10, metadata={"help": "Number of samples for whole sampling"})
     max_n_samples: int = field(default=None, metadata={"help": "Max number of samples for whole sampling, when sampling until a solution is found"})
-    greedy: bool = field(default=True, metadata={"help": "Sample greedily"})
+    greedy: bool = field(default=False, metadata={"help": "Sample greedily"})
     remove_hints: bool = field(default=False, metadata={"help": "Remove hints from prompt"})
     show_hint_match_dafny: bool = field(default=True, metadata={"help": "Show Dafny hint about pattern matching syntax"})
     coq_import_lia: bool = field(default=False, metadata={"help": "Import Lia for Coq"})
@@ -38,6 +40,14 @@ class CommonArguments:
     mins_timeout: float = field(default=None, metadata={"help": "Set a default timeout for each trial "})
     seed: int = field(default=None, metadata={"help": "Set the seed for reproducible behavior"})
     token_limit: int = field(default=None, metadata={"help": "Max amount of tokens before execution is stopped"})
+    use_wandb: bool = field(default=False, metadata={"help": "Use wandb for logging"})
+    wandb_entity: str = field(default=None, metadata={"help": "Entity for the wandb run (e.g. your username)"})
+    wandb_project: str = field(default="vmcts", metadata={"help": "Project for the wandb run"})
+    wandb_group: str = field(default="debug", metadata={"help": "Group for the wandb run"})
+    wandb_name: str = field(default=None, metadata={"help": "Name the wandb run"})
+
+    def dict(self):
+        return {k: str(v) for k,v in asdict(self).items()}
 
 
 def get_args():
