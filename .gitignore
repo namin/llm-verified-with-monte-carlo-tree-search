@@ -5,3 +5,4 @@ __pycache__
 repl
 cache
 models/
+wandb/
