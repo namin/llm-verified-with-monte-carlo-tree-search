@@ -32,6 +32,7 @@ if args.use_wandb:
 def attempt(prompt=prompt, attempt_id=0):
     attempt_stats = {"attempt_id": attempt_id}
     init_n_tokens = llm.token_counter
+    init_time = time.time()
     if GREEDY:
         text = llm.generate_full(prompt)
     else:
@@ -45,6 +46,7 @@ def attempt(prompt=prompt, attempt_id=0):
         and can_be_solution_whole(text, min_lines, check_func)
     )
     score_sign = 0 if score is None else (1 if score > 0 else -1)
+    attempt_stats["time"] = time.time() - init_time
     attempt_stats["text"] = text
     attempt_stats["is_solution"] = 1 if is_solution else 0
     attempt_stats["score_sign"] = score_sign
@@ -58,6 +60,7 @@ def summary(all_stats):
     n_negative = sum(stats["score_sign"] < 0 for stats in all_stats)
     n_zero = sum(stats["score_sign"] == 0 for stats in all_stats)
     n_tokens = sum(stats["n_tokens"] for stats in all_stats)
+    total_time = sum(stats["time"] for stats in all_stats)
     print(
         {
             "n_attempts": len(all_stats),
@@ -66,6 +69,7 @@ def summary(all_stats):
             "n_negative": n_negative,
             "n_zero": n_zero,
             "n_tokens": n_tokens,
+            "total_time": total_time,
         }
     )
 
@@ -74,11 +78,9 @@ def main(mins_timeout=None, prompt=prompt):
     all_stats = []
     if MAX_N_SAMPLES is not None:
         assert not GREEDY
-        n_calls = 0
         solution = False
         while not solution and n_calls < MAX_N_SAMPLES:
-            n_calls += 1
-            stats = attempt(prompt=prompt)
+            stats = attempt(prompt=prompt, attempt_id=n_calls)
             all_stats.append(stats)
             solution = stats["is_solution"]
         if stats["is_solution"]:
@@ -89,7 +91,7 @@ def main(mins_timeout=None, prompt=prompt):
 
     elif mins_timeout is None:
         for i in range(0, 1 if GREEDY else N_SAMPLES):
-            stats = attempt(prompt=prompt)
+            stats = attempt(prompt=prompt, attempt_id=i)
             all_stats.append(stats)
             if args.use_wandb:
                 wandb.log(stats)
@@ -102,8 +104,10 @@ def main(mins_timeout=None, prompt=prompt):
         # make mins_timeout the stronger parameter
         start_time = time.time()  # Save the start time when the loop begins
         timeout = mins_timeout * 60  # Convert minutes to seconds
+        i = 0
         while (time.time() - start_time) < timeout:
-            stats = attempt(prompt=prompt)
+            stats = attempt(prompt=prompt, attempt_id=i)
+            i += 1
             all_stats.append(stats)
             if args.use_wandb:
                 wandb.log(stats)
