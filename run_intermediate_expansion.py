@@ -19,6 +19,8 @@ import time
 from cmdline import args
 import wandb
 
+node_dups_counter = 0
+
 if args.use_wandb:
     wandb.init(
         entity=args.wandb_entity,
@@ -69,6 +71,8 @@ def child_finder(node, montecarlo):
 
         for c in node.children:
             if c.state == text:
+                global node_dups_counter
+                node_dups_counter += 1
                 print("found string-duplicated node:")
                 print(text)
 
@@ -82,17 +86,24 @@ def child_finder(node, montecarlo):
         child.add_child(widen)
         widen.update_policy_value(0.2)
 
-    # Compute width and depth of current montecarlo tree
+    # TODO: Compute width and depth of current montecarlo tree
 
     if args.use_wandb:
         wandb.log(child_stats)
 
 
 def main(mins_timeout=None, prompt=prompt):
+    init_time = time.time()
     montecarlo = MonteCarlo(Node(prompt), mins_timeout)
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
+
+    stats["time"] = time.time() - init_time
+    stats["text"] = montecarlo.solution
+    stats["n_tokens"] = llm.token_counter
+    stats["node_dups"] = node_counter
+    wandb.log(stats)
 
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)
