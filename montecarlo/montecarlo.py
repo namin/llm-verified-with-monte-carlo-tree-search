@@ -41,7 +41,7 @@ class MonteCarlo:
 
     def simulate(self, expansion_count=1):
         i = 0
-        
+
         start_time = time.time()
 
         while expansion_count is None or i < expansion_count:
@@ -100,3 +100,41 @@ class MonteCarlo:
         f.write("graph\n{\n")
         self.root_node.print_node(f, 0, self.root_node, "a")
         f.write("}\n")
+
+    def get_widths(self):
+        widths = [1]
+        nodes = [self.root_node]
+        while any([len(n.children) > 0 for n in nodes]):
+            new_nodes = []
+            for node in nodes:
+                for child in node.children:
+                    new_nodes.append(child)
+            nodes = new_nodes
+            widths.append(len(nodes))
+        return widths
+
+    def get_child_counts(self):
+        counts = [1]
+        nodes = [self.root_node]
+        while any([len(n.children) > 0 for n in nodes]):
+            new_nodes = []
+            for node in nodes:
+                for child in node.children:
+                    new_nodes.append(child)
+            nodes = new_nodes
+            counts.extend([len(n.children) for n in nodes])
+        return counts
+
+    def get_values_and_visits(self):
+        values = [self.root_node.win_value]
+        visits = [self.root_node.visits]
+        nodes = [self.root_node]
+        while any([len(n.children) > 0 for n in nodes]):
+            new_nodes = []
+            for node in nodes:
+                for child in node.children:
+                    new_nodes.append(child)
+            nodes = new_nodes
+            values.extend([n.win_value for n in nodes])
+            visits.extend([n.visits for n in nodes])
+        return values, visits
