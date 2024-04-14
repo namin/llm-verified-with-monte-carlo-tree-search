@@ -99,11 +99,12 @@ def main(mins_timeout=None, prompt=prompt):
 
     montecarlo.simulate(expansion_count)
 
-    stats["time"] = time.time() - init_time
-    stats["text"] = montecarlo.solution
-    stats["n_tokens"] = llm.token_counter
-    stats["node_dups"] = node_counter
-    wandb.log(stats)
+    stat = {}
+    stat["time"] = time.time() - init_time
+    stat["text"] = montecarlo.solution
+    stat["n_tokens"] = llm.token_counter
+    stat["node_dups"] = node_dups_counter
+    wandb.log(stat)
 
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)
