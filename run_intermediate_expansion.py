@@ -33,7 +33,7 @@ if args.use_wandb:
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
-        return None
+        return None, current_completion_depth
     prev = text
     texts = llm.generate(text, 1)
     text = texts[0]
@@ -41,26 +41,31 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
     print(diffprompt(prev, texts))
     if score is not None:
         if score < 0:
-            return None
+            return None, current_completion_depth
         else:
             if can_be_solution(text, min_lines, check_func):
                 montecarlo.solution = text
-            return text
+            return text, current_completion_depth
     else:
         return generate_complete(text, montecarlo, current_completion_depth + 1)
 
 
 def child_finder(node, montecarlo):
-    child_stats = {}
     if limit_depth(node):
         return
 
     pre_gen_time = time.time()
     pre_gen_toks = llm.token_counter
-    text = generate_complete(node.state, montecarlo)
-    # Add in stats about generate_complete
-    child_stats["gen_time"] = time.time() - pre_gen_time
-    child_stats["gen_length"] = llm.token_counter - pre_gen_toks
+    text, depth = generate_complete(node.state, montecarlo)
+
+    if args.use_wandb:
+        # Compute stats about generate_complete
+        child_stats = {}
+        child_stats["child/gen_time"] = time.time() - pre_gen_time
+        child_stats["child/gen_length"] = llm.token_counter - pre_gen_toks
+        child_stats["child/score_sign"] = 2 * int(text is not None) - 1
+        child_stats["child/completion_depth"] = depth
+        wandb.log(child_stats)
 
     if text is None:
         node.update_win_value(-1)
@@ -86,11 +91,6 @@ def child_finder(node, montecarlo):
         child.add_child(widen)
         widen.update_policy_value(0.2)
 
-    # TODO: Compute width and depth of current montecarlo tree
-
-    if args.use_wandb:
-        wandb.log(child_stats)
-
 
 def main(mins_timeout=None, prompt=prompt):
     init_time = time.time()
@@ -99,12 +99,34 @@ def main(mins_timeout=None, prompt=prompt):
 
     montecarlo.simulate(expansion_count)
 
-    stat = {}
-    stat["time"] = time.time() - init_time
-    stat["text"] = montecarlo.solution
-    stat["n_tokens"] = llm.token_counter
-    stat["node_dups"] = node_dups_counter
-    wandb.log(stat)
+    # Compute summary stats
+    if args.use_wandb:
+        stat = {}
+        stat["time"] = time.time() - init_time
+        stat["solution"] = int(montecarlo.solution is not None)
+        stat["text"] = montecarlo.solution
+        stat["n_tokens"] = llm.token_counter
+        stat["node_dups"] = node_dups_counter
+
+        widths = montecarlo.get_widths()
+        stat["width"] = max(widths)
+        stat["depth"] = len(widths)
+        stat["total_nodes"] = sum(widths)
+        stat["widths"] = widths
+
+        child_counts = montecarlo.get_child_counts()
+        stat["mean_child_count"] = sum(child_counts) / len(child_counts)
+        stat["max_child_count"] = max(child_counts)
+        stat["leaf_node_count"] = len([1 for c in child_counts if c == 0])
+
+        values, visits = montecarlo.get_values_and_visits()
+        stat["mean_value"] = sum(values) / len(values)
+        stat["max_value"] = max(values)
+        stat["min_value"] = min(values)
+        stat["mean_visits"] = sum(visits) / len(visits)
+        stat["max_visits"] = max(visits)
+
+        wandb.log(stat)
 
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)

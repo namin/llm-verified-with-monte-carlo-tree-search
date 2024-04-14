@@ -79,10 +79,12 @@ def main(mins_timeout=None, prompt=prompt):
     if MAX_N_SAMPLES is not None:
         assert not GREEDY
         solution = False
+        n_calls = 0
         while not solution and n_calls < MAX_N_SAMPLES:
             stats = attempt(prompt=prompt, attempt_id=n_calls)
             all_stats.append(stats)
             solution = stats["is_solution"]
+            n_calls += 1
         if stats["is_solution"]:
             print("SOLUTION FOUND")
             print(stats["text"])
