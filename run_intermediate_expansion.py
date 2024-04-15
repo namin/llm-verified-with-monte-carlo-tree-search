@@ -10,7 +10,7 @@ score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
 from prompts import prompt, min_lines, expansion_count, check_func
-from common import limit_depth, max_completion_depth
+from common import limit_depth, max_completion_depth, count_depth
 from common_stats import stats
 
 import llm
@@ -60,12 +60,11 @@ def child_finder(node, montecarlo):
 
     if args.use_wandb:
         # Compute stats about generate_complete
-        child_stats = {}
-        child_stats["child/gen_time"] = time.time() - pre_gen_time
-        child_stats["child/gen_length"] = llm.token_counter - pre_gen_toks
-        child_stats["child/score_sign"] = 2 * int(text is not None) - 1
-        child_stats["child/completion_depth"] = depth
-        wandb.log(child_stats)
+        gen_stat = {}
+        gen_stat["generate/gen_time"] = time.time() - pre_gen_time
+        gen_stat["generate/gen_length"] = llm.token_counter - pre_gen_toks
+        gen_stat["generate/score_sign"] = 2 * int(text is not None) - 1
+        gen_stat["generate/completion_depth"] = depth
 
     if text is None:
         node.update_win_value(-1)
@@ -91,41 +90,49 @@ def child_finder(node, montecarlo):
         child.add_child(widen)
         widen.update_policy_value(0.2)
 
+    if args.use_wandb:
+        # Compute some tree stats over time
+        stat = montecarlo.get_stat_dict()
+        stat = {f"tree/{k}": v for k, v in stat.items()}
+        stat["tree/node_depth"] = count_depth(node)
+
+        # Final solution depth
+        if montecarlo.solution is not None:
+            solution_depth = 1
+            parent = node.parent
+            while parent is not None:
+                solution_depth += 1
+                parent = parent.parent
+            stat["final/solution_depth"] = solution_depth
+
+        wandb.log({**gen_stat, **stat})
+
 
 def main(mins_timeout=None, prompt=prompt):
     init_time = time.time()
     montecarlo = MonteCarlo(Node(prompt), mins_timeout)
+    # Add widen node to root
+    widen = Node(prompt)
+    widen.is_widen_node = True
+    montecarlo.root_node.add_child(widen)
+    widen.update_policy_value(0.2)
+    # Update child finder
     montecarlo.child_finder = child_finder
 
+    # Run search
     montecarlo.simulate(expansion_count)
 
     # Compute summary stats
     if args.use_wandb:
         stat = {}
-        stat["time"] = time.time() - init_time
-        stat["solution"] = int(montecarlo.solution is not None)
-        stat["text"] = montecarlo.solution
-        stat["n_tokens"] = llm.token_counter
-        stat["node_dups"] = node_dups_counter
-
-        widths = montecarlo.get_widths()
-        stat["width"] = max(widths)
-        stat["depth"] = len(widths)
-        stat["total_nodes"] = sum(widths)
-        stat["widths"] = widths
-
-        child_counts = montecarlo.get_child_counts()
-        stat["mean_child_count"] = sum(child_counts) / len(child_counts)
-        stat["max_child_count"] = max(child_counts)
-        stat["leaf_node_count"] = len([1 for c in child_counts if c == 0])
-
-        values, visits = montecarlo.get_values_and_visits()
-        stat["mean_value"] = sum(values) / len(values)
-        stat["max_value"] = max(values)
-        stat["min_value"] = min(values)
-        stat["mean_visits"] = sum(visits) / len(visits)
-        stat["max_visits"] = max(visits)
-
+        stat["final/time"] = time.time() - init_time
+        stat["final/solution"] = int(montecarlo.solution is not None)
+        stat["final/text"] = montecarlo.solution
+        stat["final/n_tokens"] = llm.token_counter
+        stat["final/node_dups"] = node_dups_counter
+        final_stat = montecarlo.get_stat_dict()
+        final_stat = {f"final/{k}": v for k, v in final_stat.items()}
+        stat = {**stat, **final_stat}
         wandb.log(stat)
 
     print("CHOSEN SOLUTION")

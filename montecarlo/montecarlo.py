@@ -138,3 +138,37 @@ class MonteCarlo:
             values.extend([n.win_value for n in nodes])
             visits.extend([n.visits for n in nodes])
         return values, visits
+
+    def get_widen_count(self):
+        count = 0
+        nodes = [self.root_node]
+        while any([len(n.children) > 0 for n in nodes]):
+            new_nodes = []
+            for node in nodes:
+                for child in node.children:
+                    new_nodes.append(child)
+            nodes = new_nodes
+            count += len([n for n in nodes if n.is_widen_node])
+        return count
+
+    def get_stat_dict(self):
+        stat = {}
+        widths = self.get_widths()
+        stat["width"] = max(widths)
+        stat["depth"] = len(widths)
+        stat["total_nodes"] = sum(widths)
+
+        child_counts = self.get_child_counts()
+        stat["mean_child_count"] = sum(child_counts) / len(child_counts)
+        stat["max_child_count"] = max(child_counts)
+        stat["leaf_node_count"] = len([1 for c in child_counts if c == 0])
+        stat["widen_count"] = self.get_widen_count()
+
+        values, visits = self.get_values_and_visits()
+        stat["mean_value"] = sum(values) / len(values)
+        stat["max_value"] = max(values)
+        stat["min_value"] = min(values)
+        stat["mean_visits"] = sum(visits) / len(visits)
+        stat["max_visits"] = max(visits)
+
+        return stat
