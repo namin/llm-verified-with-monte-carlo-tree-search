@@ -22,6 +22,6 @@ def limit_depth(node, f=lambda x: x):
     if max_depth is not None:
         depth = count_depth(node, f)
         if depth >= max_depth:
-            node.update_win_value(-max_completion_depth)
+            node.update_win_value(-max_depth)
             return True
     return False
