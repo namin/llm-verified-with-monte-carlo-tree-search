@@ -1,3 +1,5 @@
+import time
+from common import limit_depth, max_completion_depth, count_depth
 import llm
 from cmdline import args
 import wandb
@@ -11,7 +13,7 @@ if args.use_wandb:
         name=args.wandb_name,
     )
 
-def compute_gen_stat(pre_gen_time, pre_gen_toks, text):
+def compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth):
     if args.use_wandb:
         # Compute stats about generate_complete
         gen_stat = {}

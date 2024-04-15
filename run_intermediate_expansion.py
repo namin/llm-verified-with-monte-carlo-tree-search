@@ -49,7 +49,7 @@ def child_finder(node, montecarlo):
     
     text, depth = generate_complete(node.state, montecarlo)
 
-    gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text)
+    gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth)
 
     if text is None:
         node.update_win_value(-1)
