@@ -16,20 +16,10 @@ from common_stats import stats
 import llm
 
 import time
-from cmdline import args
-import wandb
+
+import common_wandb
 
 node_dups_counter = 0
-
-if args.use_wandb:
-    wandb.init(
-        entity=args.wandb_entity,
-        project=args.wandb_project,
-        group=args.wandb_group,
-        config=args.dict(),
-        name=args.wandb_name,
-    )
-
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
@@ -56,15 +46,10 @@ def child_finder(node, montecarlo):
 
     pre_gen_time = time.time()
     pre_gen_toks = llm.token_counter
+    
     text, depth = generate_complete(node.state, montecarlo)
 
-    if args.use_wandb:
-        # Compute stats about generate_complete
-        gen_stat = {}
-        gen_stat["generate/gen_time"] = time.time() - pre_gen_time
-        gen_stat["generate/gen_length"] = llm.token_counter - pre_gen_toks
-        gen_stat["generate/score_sign"] = 2 * int(text is not None) - 1
-        gen_stat["generate/completion_depth"] = depth
+    gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text)
 
     if text is None:
         node.update_win_value(-1)
@@ -90,22 +75,7 @@ def child_finder(node, montecarlo):
         child.add_child(widen)
         widen.update_policy_value(0.2)
 
-    if args.use_wandb:
-        # Compute some tree stats over time
-        stat = montecarlo.get_stat_dict()
-        stat = {f"tree/{k}": v for k, v in stat.items()}
-        stat["tree/node_depth"] = count_depth(node)
-
-        # Final solution depth
-        if montecarlo.solution is not None:
-            solution_depth = 1
-            parent = node.parent
-            while parent is not None:
-                solution_depth += 1
-                parent = parent.parent
-            stat["final/solution_depth"] = solution_depth
-
-        wandb.log({**gen_stat, **stat})
+    common_wandb.log_tree(montecarlo, gen_stat, node)
 
 
 def main(mins_timeout=None, prompt=prompt):
@@ -122,19 +92,8 @@ def main(mins_timeout=None, prompt=prompt):
     # Run search
     montecarlo.simulate(expansion_count)
 
-    # Compute summary stats
-    if args.use_wandb:
-        stat = {}
-        stat["final/time"] = time.time() - init_time
-        stat["final/solution"] = int(montecarlo.solution is not None)
-        stat["final/text"] = montecarlo.solution
-        stat["final/n_tokens"] = llm.token_counter
-        stat["final/node_dups"] = node_dups_counter
-        final_stat = montecarlo.get_stat_dict()
-        final_stat = {f"final/{k}": v for k, v in final_stat.items()}
-        stat = {**stat, **final_stat}
-        wandb.log(stat)
-
+    common_wandb.compute_summary(montecarlo, node_dups_counter, final_state)
+    
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)
 
