@@ -92,7 +92,7 @@ def main(mins_timeout=None, prompt=prompt):
     # Run search
     montecarlo.simulate(expansion_count)
 
-    common_wandb.compute_summary(montecarlo, node_dups_counter, final_state)
+    common_wandb.compute_summary(montecarlo, node_dups_counter, init_time)
     
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)

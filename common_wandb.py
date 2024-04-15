@@ -43,7 +43,7 @@ def log_tree(montecarlo, gen_stat, node):
 
         wandb.log({**gen_stat, **stat})
 
-def compute_summary(montecarlo, node_dups_counter, final_state):
+def compute_summary(montecarlo, node_dups_counter, init_time):
     # Compute summary stats
     if args.use_wandb:
         stat = {}
