@@ -2,7 +2,6 @@ from model_config import MODEL_HOST
 from typing import List
 from cmdline import args
 import sys
-from lang_config import STOP_WORD
 
 token_counter = 0
 
@@ -57,10 +56,12 @@ elif MODEL_HOST == "huggingface":
     def gen(
         prompt, model_generation_args, num=1, return_hiddens=False, **kwargs
     ) -> List[str]:
-        modelArgs = {**model_generation_args, **kwargs}
+        args = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
-        input_ntokens = model_input["input_ids"].size(1) * model_input["input_ids"].size(0)
+        def helper(tid):
+            return tid not in tokenizer.all_special_ids
+        input_ntokens = sum(sum(helper(tid) for tid in t) for t in model_input["input_ids"])
         model.eval()
         with torch.no_grad():
             generate_dict = model.generate(
@@ -68,42 +69,15 @@ elif MODEL_HOST == "huggingface":
                 num_return_sequences=num,
                 output_hidden_states=return_hiddens,
                 return_dict_in_generate=True,
+                stopping_criteria=huggingface_generate.get_stopping_criteria(tokenizer, model_input["input_ids"].size(1)),
                 use_cache=True,
-                **modelArgs
+                **args
             )
             ts = generate_dict.sequences
 
-            def helper(tid):
-                return tid in tokenizer.all_special_ids
-            # This code uses the token count in two different contexts:
-            # 1. for measuring the amount of generated tokens (as a proxy for time)
-            # 2. (as a workaround for StarCoder) for knowing where the newly-generated
-            # response begins (the model always returns both prompt and response).
-            #
-            # For (1), we ideally do not want (too many) special tokens, especially
-            # no filler tokens.
-            # For (2), we need to count all tokens.
-            #
-            # As a compromise, this code assumes that there will be barely any special
-            # tokens, and checks this below.
-            specialtok = sum(sum(helper(tid) for tid in t) for t in ts)
-            assert(specialtok < 2) # just to confirm there is no need to count special tok
-
-            ntokens = ts.size(1) * ts.size(0)
-            if args.stop_token_workaround:
-                tokens = [token for t in ts for token in t.tolist()]
-                stop = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)[1]
-                i = input_ntokens + 1
-                while i < len(tokens):
-                    if STOP_WORD in tokenizer.decode(tokens[i]):
-                        break
-                    i = i + 1
-                tokens = tokens[:i + 1]
-                ntokens = len(tokens)
-                rs = [tokenizer.decode(tokens, skip_special_tokens=True)]
-            else:
-                rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
+            ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
             handle_token_limit(ntokens - input_ntokens)
+            rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
             eos_idxs = []
