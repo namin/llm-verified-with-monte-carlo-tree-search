@@ -73,6 +73,11 @@ elif MODEL_HOST == "huggingface":
             )
             ts = generate_dict.sequences
 
+            def helper(tid):
+                return tid in tokenizer.all_special_ids
+            specialtok = sum(sum(helper(tid) for tid in t) for t in ts)
+            assert(specialtok < 2) # just to confirm there is no need to count special tok
+
             ntokens = ts.size(1) * ts.size(0)
             if args.stop_token_workaround:
                 tokens = [token for t in ts for token in t.tolist()]
