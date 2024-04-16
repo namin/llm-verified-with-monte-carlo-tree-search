@@ -59,7 +59,9 @@ elif MODEL_HOST == "huggingface":
         args = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
-        input_ntokens = model_input["input_ids"].size(1)
+        def helper(tid):
+            return tid not in tokenizer.all_special_ids
+        input_ntokens = sum(sum(helper(tid) for tid in t) for t in model_input["input_ids"])
         model.eval()
         with torch.no_grad():
             generate_dict = model.generate(
@@ -67,13 +69,11 @@ elif MODEL_HOST == "huggingface":
                 num_return_sequences=num,
                 output_hidden_states=return_hiddens,
                 return_dict_in_generate=True,
+                stopping_criteria=huggingface_generate.get_stopping_criteria(tokenizer, model_input["input_ids"].size(1)),
                 use_cache=True,
                 **args
             )
             ts = generate_dict.sequences
-
-            def helper(tid):
-                return tid not in tokenizer.all_special_ids
 
             ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
             handle_token_limit(ntokens - input_ntokens)

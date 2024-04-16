@@ -1,5 +1,5 @@
 import torch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer
+from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, StoppingCriteria, StoppingCriteriaList
 from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
 from lang_config import STOP_WORD
@@ -15,6 +15,24 @@ from model_config import (
     MODEL_ARG_TEMP,
 )
 from typing import List, Tuple
+from cmdline import args
+
+class StopWordCriteria(StoppingCriteria):
+    def __init__(self, tokenizer, custom_stop, stop_word, l):
+        self.custom_stop = custom_stop
+        self.stop_word = stop_word
+        self.tokenizer = tokenizer
+        self.l = l
+
+    def __call__(self, input_ids, scores, **kwargs):
+        if not self.custom_stop:
+            return False
+        if input_ids.size(1) > self.l + 1:
+            for token_id in input_ids[0, self.l + 1:]:
+                token = self.tokenizer.decode(token_id)
+                if self.stop_word in token or "```" in token:
+                    return True
+        return False
 
 
 def load_model(
@@ -52,25 +70,18 @@ def load_model(
     return (base_model, model, tokenizer)
 
 
-def stop_words_ids(tokenizer: AutoTokenizer) -> List[int]:
-    # Hack: we want the stop word as it is encoded glued to another word.
-    stop_word_id = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)[-1]
-    quote_word_id = tokenizer.encode("```", add_special_tokens=False)[-1]
-    return [stop_word_id, quote_word_id]
-
-
 def get_model_generation_token_args(
     tokenizer: AutoTokenizer, custom_stop: bool = CUSTOM_STOP
 ):
     return dict(
         min_length=5,
         max_new_tokens=100,
-        eos_token_id=(
-            stop_words_ids(tokenizer) if custom_stop else tokenizer.eos_token_id
-        ),
+        eos_token_id=tokenizer.eos_token_id,
         pad_token_id=tokenizer.eos_token_id,
     )
 
+def get_stopping_criteria(tokenizer: AutoTokenizer, input_len):
+    return StoppingCriteriaList([StopWordCriteria(tokenizer, CUSTOM_STOP, STOP_WORD, input_len)]),
 
 def get_model_generation_search_args(num: int, beam_search: bool = BEAM_SEARCH):
     if beam_search:
