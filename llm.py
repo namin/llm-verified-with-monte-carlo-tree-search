@@ -75,6 +75,17 @@ elif MODEL_HOST == "huggingface":
 
             def helper(tid):
                 return tid in tokenizer.all_special_ids
+            # This code needs uses the token count in two different contexts:
+            # 1. for measuring the amount of generated tokens (as a proxy for time)
+            # 2. (as a workaround for StarCoder) for knowing where the newly-generated
+            # response begins (the model always returns both prompt and response).
+            #
+            # For (1), we ideally do not want (too many) special tokens, especially
+            # no filler tokens.
+            # For (2), we need to count all tokens.
+            #
+            # As a compromise, this code assumes that there will be barely any special
+            # tokens, and checks this below.
             specialtok = sum(sum(helper(tid) for tid in t) for t in ts)
             assert(specialtok < 2) # just to confirm there is no need to count special tok
 
