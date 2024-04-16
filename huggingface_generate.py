@@ -15,6 +15,7 @@ from model_config import (
     MODEL_ARG_TEMP,
 )
 from typing import List, Tuple
+from cmdline import args
 
 
 def load_model(
@@ -54,9 +55,14 @@ def load_model(
 
 def stop_words_ids(tokenizer: AutoTokenizer) -> List[int]:
     # Hack: we want the stop word as it is encoded glued to another word.
-    stop_word_id = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)[-1]
+    stop = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)
+    stop_word_id = stop[-1]
+    assert(len(stop) == 2)
     quote_word_id = tokenizer.encode("```", add_special_tokens=False)[-1]
-    return [stop_word_id, quote_word_id]
+    if args.stop_token_workaround:
+        return [quote_word_id]
+    else:
+        return [stop_word_id, quote_word_id]
 
 
 def get_model_generation_token_args(

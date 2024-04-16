@@ -2,6 +2,7 @@ from model_config import MODEL_HOST
 from typing import List
 from cmdline import args
 import sys
+from lang_config import STOP_WORD
 
 token_counter = 0
 
@@ -56,10 +57,10 @@ elif MODEL_HOST == "huggingface":
     def gen(
         prompt, model_generation_args, num=1, return_hiddens=False, **kwargs
     ) -> List[str]:
-        args = {**model_generation_args, **kwargs}
+        modelArgs = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
-        input_ntokens = model_input["input_ids"].size(1)
+        input_ntokens = model_input["input_ids"].size(1) * model_input["input_ids"].size(0)
         model.eval()
         with torch.no_grad():
             generate_dict = model.generate(
@@ -68,16 +69,25 @@ elif MODEL_HOST == "huggingface":
                 output_hidden_states=return_hiddens,
                 return_dict_in_generate=True,
                 use_cache=True,
-                **args
+                **modelArgs
             )
             ts = generate_dict.sequences
 
-            def helper(tid):
-                return tid not in tokenizer.all_special_ids
-
-            ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
+            ntokens = ts.size(1) * ts.size(0)
+            if args.stop_token_workaround:
+                tokens = [token for t in ts for token in t.tolist()]
+                stop = tokenizer.encode("hello" + STOP_WORD, add_special_tokens=False)[1]
+                i = input_ntokens + 1
+                while i < len(tokens):
+                    if STOP_WORD in tokenizer.decode(tokens[i]):
+                        break
+                    i = i + 1
+                tokens = tokens[:i + 1]
+                ntokens = len(tokens)
+                rs = [tokenizer.decode(tokens, skip_special_tokens=True)]
+            else:
+                rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
             handle_token_limit(ntokens - input_ntokens)
-            rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
             eos_idxs = []

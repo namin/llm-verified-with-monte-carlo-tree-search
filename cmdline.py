@@ -45,6 +45,7 @@ class CommonArguments:
     wandb_project: str = field(default="vmcts", metadata={"help": "Project for the wandb run"})
     wandb_group: str = field(default="debug", metadata={"help": "Group for the wandb run"})
     wandb_name: str = field(default=None, metadata={"help": "Name the wandb run"})
+    stop_token_workaround: bool = field(default=False, metadata={"help": "Does not use the external library to impose stop token (this is a workaround for StarCoder)"})
 
     def dict(self):
         return {k: str(v) for k,v in asdict(self).items()}
