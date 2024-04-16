@@ -75,7 +75,7 @@ elif MODEL_HOST == "huggingface":
 
             def helper(tid):
                 return tid in tokenizer.all_special_ids
-            # This code needs uses the token count in two different contexts:
+            # This code uses the token count in two different contexts:
             # 1. for measuring the amount of generated tokens (as a proxy for time)
             # 2. (as a workaround for StarCoder) for knowing where the newly-generated
             # response begins (the model always returns both prompt and response).
