@@ -13,13 +13,14 @@ import llm
 
 def buildPrompt(prompt, text, err):
     r = reflect(filter_code(text), None, err)
-    print('Reflection', r)
-    prompt += "\nTurn:\n"
+    prompt += "\nTURN:\n"
     prompt += r
+    prompt += "\nCODE:\n"
+    prompt += "\n\n```dafny\n"
     return prompt
     
     
-def trial(prompt=prompt):
+def trial(prompt):
     print('PROMPT', prompt)
     text = llm.generate_full(
         prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8
@@ -36,4 +37,7 @@ def trial(prompt=prompt):
     else:
         trial(buildPrompt(prompt, text, err))
 
-trial()
+def initialPrompt():
+    return prompt.replace("```dafny", "")
+
+trial(initialPrompt())
