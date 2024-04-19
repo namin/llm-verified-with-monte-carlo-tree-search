@@ -19,6 +19,8 @@ import time
 
 import common_wandb
 
+from cmdline import args
+
 node_dups_counter = 0
 
 def generate_complete(text, montecarlo, current_completion_depth=1):
@@ -85,7 +87,7 @@ def main(mins_timeout=None, prompt=prompt):
     widen = Node(prompt)
     widen.is_widen_node = True
     montecarlo.root_node.add_child(widen)
-    widen.update_policy_value(0.2)
+    widen.update_policy_value(args.widen_policy_value)
     # Update child finder
     montecarlo.child_finder = child_finder
 

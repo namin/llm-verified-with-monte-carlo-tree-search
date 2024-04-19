@@ -18,8 +18,8 @@ conda activate llm-verified
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-export discovery_factors=(0.1, 0.3, 1.0)
-export widen_policy_values=(0.1, 0.2, 0.5)
+export discovery_factors=(0.1 0.3 1.0)
+export widen_policy_values=(0.1 0.2 0.5)
 
 export run_number=$[$SLURM_ARRAY_TASK_ID/9]
 export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%9]
