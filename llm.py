@@ -53,15 +53,22 @@ elif MODEL_HOST == "huggingface":
         tokenizer
     )
 
+    # Needed to find end of sequence
+    eos_token = tokenizer.eos_token
+
     def gen(
         prompt, model_generation_args, num=1, return_hiddens=False, **kwargs
     ) -> List[str]:
         args = {**model_generation_args, **kwargs}
         num = num or 1
         model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
+
         def helper(tid):
             return tid not in tokenizer.all_special_ids
-        input_ntokens = sum(sum(helper(tid) for tid in t) for t in model_input["input_ids"])
+
+        input_ntokens = sum(
+            sum(helper(tid) for tid in t) for t in model_input["input_ids"]
+        )
         model.eval()
         with torch.no_grad():
             generate_dict = model.generate(
@@ -69,7 +76,9 @@ elif MODEL_HOST == "huggingface":
                 num_return_sequences=num,
                 output_hidden_states=return_hiddens,
                 return_dict_in_generate=True,
-                stopping_criteria=huggingface_generate.get_stopping_criteria(tokenizer, model_input["input_ids"].size(1)),
+                stopping_criteria=huggingface_generate.get_stopping_criteria(
+                    tokenizer, model_input["input_ids"].size(1)
+                ),
                 use_cache=True,
                 **args
             )
@@ -77,7 +86,7 @@ elif MODEL_HOST == "huggingface":
 
             ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
             handle_token_limit(ntokens - input_ntokens)
-            rs = [tokenizer.decode(t, skip_special_tokens=True) for t in ts]
+            rs = [tokenizer.decode(t, skip_special_tokens=False) for t in ts]
         if return_hiddens:
             # Select features for last token by ignoring padding tokens
             eos_idxs = []
@@ -126,7 +135,7 @@ elif MODEL_HOST == "huggingface":
 
             ntokens = sum(sum(helper(tid) for tid in t) for t in ts)
             handle_token_limit(ntokens - input_ntokens)
-            r = tokenizer.decode(ts[0], skip_special_tokens=True)
+            r = tokenizer.decode(ts[0], skip_special_tokens=False)
         return r
 
 else:
