@@ -45,6 +45,8 @@ class CommonArguments:
     wandb_project: str = field(default="vmcts", metadata={"help": "Project for the wandb run"})
     wandb_group: str = field(default="debug", metadata={"help": "Group for the wandb run"})
     wandb_name: str = field(default=None, metadata={"help": "Name the wandb run"})
+    discovery_factor: float = field(default=0.35, metadata={"help": "Hyperparameter: discovery factor"})
+    widen_policy_value: float = field(default=0.2, metadata={"help": "Hyperparameter: widen policy value"})
 
     def dict(self):
         return {k: str(v) for k,v in asdict(self).items()}

@@ -1,6 +1,7 @@
 import random
 import json
 from math import log, sqrt
+from cmdline import args
 
 class Node:
     def __init__(self, state):
@@ -12,7 +13,7 @@ class Node:
         self.children = []
         self.expanded = False
         self.player_number = None
-        self.discovery_factor = 0.35
+        self.discovery_factor = args.discovery_factor
         self.is_widen_node = False
 
     def update_win_value(self, value):
