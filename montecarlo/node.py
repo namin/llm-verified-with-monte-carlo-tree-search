@@ -3,6 +3,7 @@ import json
 from math import log, sqrt
 from cmdline import args
 
+
 class Node:
     def __init__(self, state):
         self.state = state
@@ -55,7 +56,7 @@ class Node:
             * (self.policy_value or 1)
             * sqrt(log(self.parent.visits) / (self.visits or 1))
         )
-        
+
         if self.is_widen_node:
             win_operand = 0
         else:
@@ -69,19 +70,27 @@ class Node:
         return self.score
 
     def is_scorable(self):
-        return self.visits or self.policy_value != None
-    
+        return (self.visits or self.policy_value != None) and not self.is_widen_node
+
     def print_node(self, f, i, root, st):
-        escape = lambda x : json.dumps(x).strip('"')
+        escape = lambda x: json.dumps(x).strip('"')
         if self.parent is None:
-            f.write((' ' * i) + st + " [label=\"" + escape(self.state) + "\",shape=box]\n")
+            f.write(
+                (" " * i) + st + ' [label="' + escape(self.state) + '",shape=box]\n'
+            )
         else:
-            diff = '\n'.join([x for x in self.state.split("\n") if x not in self.parent.state.split("\n")])
-            f.write((' ' * i) + st + " [label=\"" + escape(diff) + "\",shape=box]\n")
+            diff = "\n".join(
+                [
+                    x
+                    for x in self.state.split("\n")
+                    if x not in self.parent.state.split("\n")
+                ]
+            )
+            f.write((" " * i) + st + ' [label="' + escape(diff) + '",shape=box]\n')
 
         num = 0
         for child in self.children:
             new_st = st + "_" + str(num)
             child.print_node(f, i + 2, root, new_st)
-            f.write(' ' * i + st + " -- " + new_st + "\n")
+            f.write(" " * i + st + " -- " + new_st + "\n")
             num = num + 1

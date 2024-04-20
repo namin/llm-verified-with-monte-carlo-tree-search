@@ -23,6 +23,7 @@ from cmdline import args
 
 node_dups_counter = 0
 
+
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None, current_completion_depth
@@ -48,7 +49,7 @@ def child_finder(node, montecarlo):
 
     pre_gen_time = time.time()
     pre_gen_toks = llm.token_counter
-    
+
     text, depth = generate_complete(node.state, montecarlo)
 
     gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth)
@@ -56,26 +57,29 @@ def child_finder(node, montecarlo):
     if text is None:
         node.update_win_value(-1)
     else:
+        child = Node(text)
         if node.is_widen_node:
             node.visits += 1
-            node = node.parent
+            node.parent.add_child(child)
+            # Check siblings for duplicates
+            for c in node.parent.children:
+                if c.state == text:
+                    global node_dups_counter
+                    node_dups_counter += 1
+                    print("found string-duplicated node:")
+                    print(text)
+        else:
+            node.add_child(child)
 
-        for c in node.children:
-            if c.state == text:
-                global node_dups_counter
-                node_dups_counter += 1
-                print("found string-duplicated node:")
-                print(text)
-
-        child = Node(text)
-        node.add_child(child)
+        # Update values
         child.update_win_value(1)
         child.update_policy_value(1)
 
+        # Add widen node
         widen = Node(text)
         widen.is_widen_node = True
         child.add_child(widen)
-        widen.update_policy_value(0.2)
+        widen.update_policy_value(args.widen_policy_value)
 
     common_wandb.log_tree(montecarlo, gen_stat, node)
 
@@ -95,7 +99,7 @@ def main(mins_timeout=None, prompt=prompt):
     montecarlo.simulate(expansion_count)
 
     common_wandb.compute_summary(montecarlo, node_dups_counter, init_time)
-    
+
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)
 
