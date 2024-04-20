@@ -70,6 +70,8 @@ class Node:
         return self.score
 
     def is_scorable(self):
+        # Nodes that are not scorable will trigger a random_rollout
+        # Prevent visited nodes, nodes with policy_value, and widen nodes from rolling out
         return self.visits or self.policy_value != None or self.is_widen_node
 
     def print_node(self, f, i, root, st):
