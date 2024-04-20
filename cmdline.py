@@ -16,7 +16,7 @@ class CommonArguments:
     custom_stop: bool = field(default=True, metadata={"help": "Set to True to use custom stop words"})
     same_for_many_samples: bool = field(default=True, metadata={"help": "Sample the same whether generating one or many samples"})
     beam_search: bool = field(default=False, metadata={"help": "Set to True to use beam search instead of sampling"})
-    model_arg_topk: float = field(default=None, metadata={"help": "Specify top k parameter for llm generation"})
+    model_arg_topk: int = field(default=None, metadata={"help": "Specify top k parameter for llm generation"})
     model_arg_topp: float = field(default=None, metadata={"help": "Specify top p parameter for llm generation"})
     model_arg_temp: float = field(default=None, metadata={"help": "Specify temperature parameter for llm generation"})
     problem_name: str = field(default="problem_opt0", metadata={"help": "Choose which problem to solve from `prompts.py` "})

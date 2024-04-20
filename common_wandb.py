@@ -13,6 +13,7 @@ if args.use_wandb:
         name=args.wandb_name,
     )
 
+
 def compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth):
     if args.use_wandb:
         # Compute stats about generate_complete
@@ -24,6 +25,7 @@ def compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth):
         return gen_stat
     else:
         return {}
+
 
 def log_tree(montecarlo, gen_stat, node):
     if args.use_wandb:
@@ -43,15 +45,23 @@ def log_tree(montecarlo, gen_stat, node):
 
         wandb.log({**gen_stat, **stat})
 
+
 def compute_summary(montecarlo, node_dups_counter, init_time):
     # Compute summary stats
     if args.use_wandb:
         stat = {}
         stat["final/time"] = time.time() - init_time
-        stat["final/solution"] = int(montecarlo.solution is not None)
+        token_limit_reached = montecarlo.solution == "Token limit reached"
+        solved = int(montecarlo.solution is not None and not token_limit_reached)
+        stat["final/solved"] = solved
         stat["final/text"] = montecarlo.solution
         stat["final/n_tokens"] = llm.token_counter
         stat["final/node_dups"] = node_dups_counter
+        # Log pass at t
+        ts = [500, 1000, 2000, 5000]
+        for t in ts:
+            pass_at_t = llm.token_counter <= t and solved
+            stat[f"final/pass_at_{t}"] = int(pass_at_t)
         final_stat = montecarlo.get_stat_dict()
         final_stat = {f"final/{k}": v for k, v in final_stat.items()}
         stat = {**stat, **final_stat}

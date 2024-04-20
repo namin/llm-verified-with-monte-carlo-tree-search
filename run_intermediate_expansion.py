@@ -10,7 +10,7 @@ score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
 from prompts import prompt, min_lines, expansion_count, check_func
-from common import limit_depth, max_completion_depth, count_depth
+from common import limit_depth, max_completion_depth, limit_tokens
 from common_stats import stats
 
 import llm
@@ -83,6 +83,9 @@ def child_finder(node, montecarlo):
 
     common_wandb.log_tree(montecarlo, gen_stat, node)
 
+    # Check on token limit after this generation
+    limit_tokens(montecarlo)
+
 
 def main(mins_timeout=None, prompt=prompt):
     init_time = time.time()
@@ -105,10 +108,6 @@ def main(mins_timeout=None, prompt=prompt):
 
     stats(montecarlo)
     print("cache stats", cache_stats)
-    # with open("graph.dot", "w") as f:
-    #    montecarlo.print_tree(f)
-
-    llm.final_report()
 
     return cache_stats
 
