@@ -70,7 +70,7 @@ class Node:
         return self.score
 
     def is_scorable(self):
-        return (self.visits or self.policy_value != None) and not self.is_widen_node
+        return self.visits or self.policy_value != None or self.is_widen_node
 
     def print_node(self, f, i, root, st):
         escape = lambda x: json.dumps(x).strip('"')
