@@ -1,5 +1,5 @@
 import time
-from common import limit_depth, max_completion_depth, count_depth
+from common import limit_depth, max_completion_depth, count_depth, limit_tokens
 import llm
 from cmdline import args
 import wandb
@@ -51,16 +51,15 @@ def compute_summary(montecarlo, node_dups_counter, init_time):
     if args.use_wandb:
         stat = {}
         stat["final/time"] = time.time() - init_time
-        token_limit_reached = montecarlo.solution == "Token limit reached"
-        solved = int(montecarlo.solution is not None and not token_limit_reached)
-        stat["final/solved"] = solved
+        token_limit_reached = limit_tokens(montecarlo)
+        stat["final/solved"] = token_limit_reached
         stat["final/text"] = montecarlo.solution
         stat["final/n_tokens"] = llm.token_counter
         stat["final/node_dups"] = node_dups_counter
         # Log pass at t
         ts = [500, 1000, 2000, 5000]
         for t in ts:
-            pass_at_t = llm.token_counter <= t and solved
+            pass_at_t = llm.token_counter <= t
             stat[f"final/pass_at_{t}"] = int(pass_at_t)
         final_stat = montecarlo.get_stat_dict()
         final_stat = {f"final/{k}": v for k, v in final_stat.items()}

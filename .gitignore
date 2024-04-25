@@ -6,3 +6,4 @@ repl
 cache
 models/
 wandb
+notebooks/
