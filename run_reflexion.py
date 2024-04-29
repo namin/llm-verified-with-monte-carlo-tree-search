@@ -11,9 +11,10 @@ from reflection import reflect
 
 import llm
 
-def buildPrompt(text, err):
+def buildPrompt(prompt, text, err):
     r = reflect(filter_code(text), None, err)
-    prompt = initialPrompt()
+    if 'CODE' in prompt:
+        prompt = prompt.split('CODE')[0]
     prompt += "\nTURN:\n"
     prompt += r
     prompt += "\nCODE:\n"
@@ -36,7 +37,7 @@ def trial(prompt):
         print('DONE')
         return None
     else:
-        trial(buildPrompt(text, err))
+        trial(buildPrompt(prompt, text, err))
 
 def initialPrompt():
     return prompt.replace("```dafny", "")
