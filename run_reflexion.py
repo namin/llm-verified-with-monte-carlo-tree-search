@@ -11,8 +11,9 @@ from reflection import reflect
 
 import llm
 
-def buildPrompt(prompt, text, err):
+def buildPrompt(text, err):
     r = reflect(filter_code(text), None, err)
+    prompt = initialPrompt()
     prompt += "\nTURN:\n"
     prompt += r
     prompt += "\nCODE:\n"
@@ -21,13 +22,13 @@ def buildPrompt(prompt, text, err):
     
     
 def trial(prompt):
-    print('PROMPT', prompt)
+    print('PROMPT:', prompt)
     text = llm.generate_full(
         prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8
     )
     score, err = calculateScoreHelper_whole(text)
     is_solution = (
-        score is not None
+            score is not None
         and score > 0
         and can_be_solution_whole(text, min_lines, check_func)
     )
@@ -35,7 +36,7 @@ def trial(prompt):
         print('DONE')
         return None
     else:
-        trial(buildPrompt(prompt, text, err))
+        trial(buildPrompt(text, err))
 
 def initialPrompt():
     return prompt.replace("```dafny", "")
