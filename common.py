@@ -1,5 +1,5 @@
 from prompts import max_depth
-from llm import eos_token
+from llm import eos_token, token_counter
 
 from cmdline import args
 
@@ -30,3 +30,15 @@ def limit_depth(node, f=lambda x: x):
             node.update_win_value(-max_depth)
             return True
     return False
+
+
+def limit_tokens(montecarlo):
+    # Force montecarlo to exit if token limit is reached by setting solution
+    # Note: call this at the end of child finder
+    if args.token_limit is not None and token_counter > args.token_limit:
+        if montecarlo.solution is None:
+            montecarlo.solution = "Token limit reached"
+            print("Token limit reached, no solution found")
+        return True
+    else:
+        return False
