@@ -106,13 +106,20 @@ elif MODEL_HOST == "huggingface":
 
     def generate_full(prompt: str, **kwargs) -> str:
         streamer = TextStreamer(tokenizer)
+        model_generation_search_args = (
+            huggingface_generate.get_model_generation_search_args(1)
+        )
+        model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
+        input_ntokens = model_input["input_ids"].size(1)
         all_args = {
             **(dict(streamer=streamer, max_new_tokens=10000)),  # NOTE: used to be 1000
             "return_dict_in_generate": True,
+            "stopping_criteria": huggingface_generate.get_stopping_criteria_full(
+                tokenizer, model_input["input_ids"].size(1)
+            ),
+            **model_generation_search_args,
             **kwargs,
         }
-        model_input = tokenizer(prompt, return_tensors="pt").to("cuda")
-        input_ntokens = model_input["input_ids"].size(1)
         model.eval()
         r = None
         with torch.no_grad():

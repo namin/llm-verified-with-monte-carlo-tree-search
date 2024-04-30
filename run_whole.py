@@ -33,12 +33,14 @@ def attempt(prompt=prompt, attempt_id=0):
     attempt_stats = {"attempt_id": attempt_id}
     init_n_tokens = llm.token_counter
     init_time = time.time()
-    if GREEDY:
-        text = llm.generate_full(prompt)
-    else:
-        text = llm.generate_full(
-            prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8
-        )
+    text = llm.generate_full(prompt)
+    # Args are handled inside of llm.py
+    # if GREEDY:
+    #     text = llm.generate_full(prompt)
+    # else:
+    #     text = llm.generate_full(
+    #         prompt, do_sample=True, top_p=0.9, top_k=7, temperature=0.8
+    #     )
     score = score_func(text)
     is_solution = (
         score is not None

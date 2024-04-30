@@ -1,5 +1,11 @@
 import torch
-from transformers import AutoModelForCausalLM, BitsAndBytesConfig, AutoTokenizer, StoppingCriteria, StoppingCriteriaList
+from transformers import (
+    AutoModelForCausalLM,
+    BitsAndBytesConfig,
+    AutoTokenizer,
+    StoppingCriteria,
+    StoppingCriteriaList,
+)
 from trl import AutoModelForCausalLMWithValueHead
 from peft import PeftModel
 from lang_config import STOP_WORD
@@ -17,6 +23,7 @@ from model_config import (
 from typing import List, Tuple
 from cmdline import args
 
+
 class StopWordCriteria(StoppingCriteria):
     def __init__(self, tokenizer, custom_stop, stop_word, l):
         self.custom_stop = custom_stop
@@ -28,7 +35,7 @@ class StopWordCriteria(StoppingCriteria):
         if not self.custom_stop:
             return False
         if input_ids.size(1) > self.l + 1:
-            for token_id in input_ids[0, self.l + 1:]:
+            for token_id in input_ids[0, self.l + 1 :]:
                 token = self.tokenizer.decode(token_id)
                 if self.stop_word in token or "```" in token:
                     return True
@@ -80,8 +87,22 @@ def get_model_generation_token_args(
         pad_token_id=tokenizer.eos_token_id,
     )
 
+
 def get_stopping_criteria(tokenizer: AutoTokenizer, input_len):
-    return StoppingCriteriaList([StopWordCriteria(tokenizer, CUSTOM_STOP, STOP_WORD, input_len)]),
+    return (
+        StoppingCriteriaList(
+            [StopWordCriteria(tokenizer, CUSTOM_STOP, STOP_WORD, input_len)]
+        ),
+    )
+
+
+def get_stopping_criteria_full(tokenizer: AutoTokenizer, input_len):
+    return (
+        StoppingCriteriaList(
+            [StopWordCriteria(tokenizer, True, tokenizer.eos_token, input_len)]
+        ),
+    )
+
 
 def get_model_generation_search_args(num: int, beam_search: bool = BEAM_SEARCH):
     if beam_search:
@@ -91,12 +112,17 @@ def get_model_generation_search_args(num: int, beam_search: bool = BEAM_SEARCH):
             diversity_penalty=0.9,
         )
     else:
+        if MODEL_ARG_TOP_K is not None:
+            if MODEL_ARG_TOP_K == 0:
+                top_k = None
+            else:
+                top_k = MODEL_ARG_TOP_K
+        elif num > 1 and not SAME_FOR_MANY_SAMPLES:
+            top_k = 50
+        else:
+            top_k = 7
         return dict(
-            top_k=(
-                MODEL_ARG_TOP_K
-                if MODEL_ARG_TOP_K is not None
-                else 50 if num > 1 and not SAME_FOR_MANY_SAMPLES else 7
-            ),
+            top_k=top_k,
             top_p=MODEL_ARG_TOP_P if MODEL_ARG_TOP_P is not None else 0.9,
             do_sample=True,
             temperature=(

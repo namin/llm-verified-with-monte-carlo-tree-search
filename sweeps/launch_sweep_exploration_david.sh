@@ -8,8 +8,9 @@
 #SBATCH --time=1:00:00
 #SBATCH --mem=250GB		
 #SBATCH --account=kempner_fellows
-#SBATCH --partition=kempner
-#SBATCH --array=0-899%12
+#SBATCH --partition=kempner_requeue
+#SBATCH --constraint=a100
+#SBATCH --array=0-1599%20
 
 # Custom environment
 source ~/.bashrc
@@ -18,26 +19,25 @@ conda activate verify
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-# Grid of size 9
-export discovery_factors=(0.1 0.3 1.0)
-export widen_policy_values=(0.1 0.2 0.5)
+# Grid of size 16
+export discovery_factors=(1.0 3.0 10.0 30.0)
+export widen_policy_values=(0.05 0.1 0.2 0.5)
 
-export model_arg_temp=0.8
-# TODO: change topp and topk? 
-export model_arg_topp=0.9
-export model_arg_topk=7
+export model_arg_temp=1.0
+export model_arg_topp=0.95
+export model_arg_topk=0
 export token_limit=5000
 
-export run_number=$[$SLURM_ARRAY_TASK_ID/9] # 100 runs per hyperparameter
-export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%9]
-export discovery_here_idx=$[$hyperparam_number%3]
-export widen_here_idx=$[$hyperparam_number/3]
+export run_number=$[$SLURM_ARRAY_TASK_ID/16] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%16]
+export discovery_here_idx=$[$hyperparam_number%4]
+export widen_here_idx=$[$hyperparam_number/4]
 export discovery_here=${discovery_factors[$discovery_here_idx]}
 export widen_here=${widen_policy_values[$widen_here_idx]}
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=debug # exploration-sweep-2
+export WANDB_GROUP=exploration-sweep-5
 export WANDB_NAME=$run_number/$discovery_here/$widen_here
 
 SEED=$run_number
