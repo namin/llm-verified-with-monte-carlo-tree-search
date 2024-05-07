@@ -21,9 +21,35 @@ import common_wandb
 
 from cmdline import args
 
+if args.use_wandb:
+    import wandb
+
 node_dups_counter = 0
 
 
+def generate_rollout(text, montecarlo):
+    pre_gen_time = time.time()
+    pre_gen_toks = llm.token_counter
+
+    text = llm.generate_full(text)
+    score = score_func(text)
+    if score is not None:
+        if score >= 0 and can_be_solution(text, min_lines, check_func):
+            montecarlo.solution = text
+    else:
+        score = -1  # Note: we can only score -1 or find a successful solution
+
+    gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, 0)
+    if args.use_wandb:
+        gen_stat = {f"rollout/{k}": v for k, v in gen_stat.items()}
+        wandb.log(gen_stat)
+    return score
+
+
+# TODO: maybe this makes more sense if we use a fixed number of children instead of widen nodes
+# The issue now is that widen nodes have v=0 wich is always better than other children
+# As a result, the tree search is never really used unless the exploration bonus is very large
+# and the widen value is very small.
 def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None, current_completion_depth
@@ -33,14 +59,9 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
     score = score_func(text)
     print(diffprompt(prev, texts))
     if score is not None:
-        if score < 0:
-            return None, current_completion_depth
-        else:
-            if can_be_solution(text, min_lines, check_func):
-                montecarlo.solution = text
-            return text, current_completion_depth
-    else:
-        return generate_complete(text, montecarlo, current_completion_depth + 1)
+        if score >= 0 and can_be_solution(text, min_lines, check_func):
+            montecarlo.solution = text
+    return text, current_completion_depth
 
 
 def child_finder(node, montecarlo):
@@ -54,32 +75,30 @@ def child_finder(node, montecarlo):
 
     gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth)
 
-    if text is None:
-        node.update_win_value(-1)
+    child = Node(text)
+    if node.is_widen_node:
+        node.visits += 1
+        node.parent.add_child(child)
+        # Check siblings for duplicates
+        for c in node.parent.children:
+            if c.state == text:
+                global node_dups_counter
+                node_dups_counter += 1
+                print("found string-duplicated node:")
+                print(text)
     else:
-        child = Node(text)
-        if node.is_widen_node:
-            node.visits += 1
-            node.parent.add_child(child)
-            # Check siblings for duplicates
-            for c in node.parent.children:
-                if c.state == text:
-                    global node_dups_counter
-                    node_dups_counter += 1
-                    print("found string-duplicated node:")
-                    print(text)
-        else:
-            node.add_child(child)
+        node.add_child(child)
 
-        # Update values
-        child.update_win_value(1)
-        child.update_policy_value(1)
+    # Update values from rollout
+    value = generate_rollout(text, montecarlo)
+    child.update_win_value(value)
+    child.update_policy_value(1)
 
-        # Add widen node
-        widen = Node(text)
-        widen.is_widen_node = True
-        child.add_child(widen)
-        widen.update_policy_value(args.widen_policy_value)
+    # Add widen node
+    widen = Node(text)
+    widen.is_widen_node = True
+    child.add_child(widen)
+    widen.update_policy_value(args.widen_policy_value)
 
     common_wandb.log_tree(montecarlo, gen_stat, node)
 
