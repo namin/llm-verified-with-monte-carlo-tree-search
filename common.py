@@ -27,18 +27,16 @@ def limit_depth(node, f=lambda x: x):
     if max_depth is not None:
         depth = count_depth(node, f)
         if depth >= max_depth or string_contains_eos(node, f):
-            node.update_win_value(-max_depth)
+            node.update_win_value(-1)  # Penalize node as a loss
             return True
     return False
 
 
-def limit_tokens(montecarlo=None):
+def limit_tokens():
+    print("Token limit: ", args.token_limit, " Token count: ", llm.token_counter)
     # Force montecarlo to exit if token limit is reached by setting solution
     # Note: call this at the end of child finder
     if args.token_limit is not None and llm.token_counter > args.token_limit:
-        if montecarlo is not None and montecarlo.solution is None:
-            montecarlo.solution = "Token limit reached"
-        print("Token limit reached, no solution found")
         return True
     else:
         return False

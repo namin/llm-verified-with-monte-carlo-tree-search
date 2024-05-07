@@ -51,8 +51,7 @@ def compute_summary(montecarlo, node_dups_counter, init_time):
     if args.use_wandb:
         stat = {}
         stat["final/time"] = time.time() - init_time
-        token_limit_reached = limit_tokens(montecarlo)
-        stat["final/solved"] = token_limit_reached
+        stat["final/solved"] = limit_tokens()
         stat["final/text"] = montecarlo.solution
         stat["final/n_tokens"] = llm.token_counter
         stat["final/node_dups"] = node_dups_counter
