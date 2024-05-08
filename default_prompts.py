@@ -254,6 +254,24 @@ problem_opt0 = (
     ALL_LANGS,
 )
 
+problem_opt0_dafny_sanity = (
+    (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions (called `Expr`) comprising constants, variables and binary additions. Then write an evaluator (called `Eval`) taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer (called `Optimize`) taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+{hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
+}""", ["Prove that the optimizer above preserves the semantics as defined by the evaluation function.\n```dafny\nlemma OptimizationPreservesSemantics(e: Expr, env: string -> int) ensures Eval(Optimize(e), env) == Eval(e, env) {"]),
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+)
+
 problem_opt0_opt_dafny = ("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 ### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
 ### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
@@ -880,6 +898,7 @@ problems_dict = {
     "problem_opt0_opt_dafny_sanity_check" : problem_opt0_opt_dafny_sanity_check,
     "problem_opt0_dafny_sanity_check" : problem_opt0_dafny_sanity_check,
     "problem_opt0_opt" : problem_opt0_opt,
+    "problem_opt0_dafny_sanity": problem_opt0_dafny_sanity,
     "problem_mult" : problem_mult,
     "problem_max_dafny" : problem_max_dafny,
     "problem_rolling_max_dafny" : problem_rolling_max_dafny,
