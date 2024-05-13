@@ -884,6 +884,21 @@ problem_unzip = (f"""### Spec: In {LANG}:
     ALL_LANGS
 )
 
+problem_days = (f"""### Spec: In {LANG}:
+(1) Write an ADT for the days of the week: Sunday to Saturday.
+(2) Write a function that gives the next business day.
+(3) Write a function that iterates the next business day function, for an arbitrary number n of business days.
+(4) Write a lemma that ensures that starting with a business day, taking the next five business days is idempotent.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS
+)
+
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -914,6 +929,7 @@ problems_dict = {
     "problem_reverse" : problem_reverse,
     "problem_append" : problem_append,
     "problem_unzip" : problem_unzip,
+    "problem_days" : problem_days,
 }
 
 # Set the right-hand side to the selected problem.
