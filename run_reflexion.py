@@ -2,7 +2,7 @@ import time
 from cmdline import args
 from lang import can_be_solution_whole
 from lang import filter_code
-from prompts import prompt, min_lines, check_func
+from prompts import prompt, min_lines, check_func, check_string
 from dafny import calculateScoreHelper_whole
 from reflection import reflect
 import llm
@@ -42,7 +42,7 @@ def trial(prompt, trial_id=0):
     is_solution = (
         score is not None
         and score > 0
-        and can_be_solution_whole(text, min_lines, check_func)
+        and can_be_solution_whole(text, min_lines, check_func, check_string)
     )
 
     score_sign = 0 if score is None else (1 if score > 0 else -1)

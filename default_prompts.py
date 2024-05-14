@@ -41,6 +41,7 @@ Example: "1" evaluates to 1. "1+1" evaluates to 2. "100+3" evaluates to 103. "1+
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 problem_parser_data = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition and multiplication.
@@ -55,6 +56,7 @@ No characters other than digits and '+', '*' may be in the string.
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
 problem_fact = (
@@ -73,6 +75,7 @@ problem_fact = (
     15,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
 problem_mult_proof_coq = (
@@ -87,7 +90,8 @@ Proof.
     4,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ['Coq'])
+    ['Coq'],
+    None)
 
 problem_1_divides_n_proof_coq = (
     """
@@ -108,7 +112,8 @@ Proof.
     22,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ['Coq'])
+    ['Coq'],
+    None)
 
 problem_partial_maps_proof_coq = (
     """
@@ -175,7 +180,8 @@ Proof.
     22,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ['Coq'])
+    ['Coq'],
+    None)
 
 problem_opt0_proof_coq = (
     """
@@ -216,7 +222,8 @@ Proof.
     22,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ['Coq'])
+    ['Coq'],
+    None)
 
 problem_opt0_coq_proof_hints = """
 ### Hint: For the proof, do `induction e.`. Do NOT name the hypotheses with `as`.
@@ -252,10 +259,11 @@ problem_opt0 = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
-problem_opt0_dafny_sanity = (
-    (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions (called `Expr`) comprising constants, variables and binary additions. Then write an evaluator (called `Eval`) taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer (called `Optimize`) taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+problem_opt0_dafny_check = (
+    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions (called `Expr`) comprising constants, variables and binary additions. Then write an evaluator (called `Eval`) taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer (called `Optimize`) taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function. Do so by proving the lemma `OptimizePreservesSemantics(e: Expr, env: string -> int) ensures Eval(Optimize(e), env) == Eval(e, env)`.
 {hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
 {'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
 ''' if LANG=='Dafny' else ''
@@ -263,13 +271,21 @@ problem_opt0_dafny_sanity = (
 ### Hint: Use Fixpoint instead of Definition for recursive functions.
 ### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
 ''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
-}""", ["Prove that the optimizer above preserves the semantics as defined by the evaluation function.\n```dafny\nlemma OptimizationPreservesSemantics(e: Expr, env: string -> int) ensures Eval(Optimize(e), env) == Eval(e, env) {"]),
+}""",
     1000,
     None,
     22,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS,
+    ["Dafny"],
+    """
+    lemma CHECK_OPS(e: Expr, env: string -> int)
+    requires true
+    ensures Eval(Optimize(e), env) == Eval(e, env)
+{
+    OptimizePreservesSemantics(e, env);
+}
+"""
 )
 
 problem_opt0_opt_dafny = ("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
@@ -299,6 +315,7 @@ predicate optimal(e: Expr) {
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ['Dafny'],
+    None
 )
 
 problem_pattern_match_train_dafny = (("""In Dafny, we have the following ADT:
@@ -344,6 +361,7 @@ ensures denotation(foo) % 2 == 0
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None
 )
 
 problem_pattern_match_train_dafny2 = (("""In Dafny, we have the following ADT:
@@ -388,6 +406,7 @@ ensures denotation(foo) % 2 == 0
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None
 )
 
 problem_opt0_opt_dafny_sanity_check = (("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write an optimizer `optimize` that removes all additions by 0.
@@ -427,6 +446,7 @@ lemma OptimizerOptimal(e: Expr)
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None
 )
 
 problem_opt0_dafny_sanity_check = (("""In Dafny, an ADT for arithmetic expressions comprising constants, variables and binary addition.
@@ -488,6 +508,7 @@ ensures eval(optimize(e), env) == eval(e, env)
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None
 )
 
 problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
@@ -522,6 +543,7 @@ lemma OptimizerOptimal(e: Expr)
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ALL_LANGS,
+    None
 )
 
 problem_mult = (
@@ -535,6 +557,7 @@ problem_mult = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
 problem_max_dafny = (
@@ -558,6 +581,7 @@ ensures isMax(result, numbers)
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None
 )
 
 
@@ -614,6 +638,7 @@ ensures forall i :: 0 < i < |result| ==> isMax(result[i], numbers[0..(i+1)])
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None
 )
 
 
@@ -658,6 +683,7 @@ at that point function should return true. Otherwise it should return false.
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None
 )
 
 
@@ -700,6 +726,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None
 )
 
 
@@ -726,6 +753,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None
 )
 
 problem_bst = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers.
@@ -744,7 +772,8 @@ Then (6) write another lemma about the insert function that checks the BST prope
     5,
     40,
     CHECK_PROOF2, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 problem_bst_dafny_sanity_check = ((hint_match_dafny+"""
@@ -796,7 +825,8 @@ lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
     5,
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 problem_repeat = (
@@ -812,6 +842,7 @@ problem_repeat = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
 problem_repeat2 = (
@@ -830,6 +861,7 @@ problem_repeat2 = (
     40,
     CHECK_PROOF2, CHECK_CHEAT,
     ALL_LANGS,
+    None
 )
 
 problem_reverse = (f"""### Spec: In {LANG}:
@@ -847,7 +879,8 @@ problem_reverse = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF2, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 problem_append = (f"""### Spec: In {LANG}:
@@ -864,7 +897,8 @@ problem_append = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 problem_unzip = (f"""### Spec: In {LANG}:
@@ -881,7 +915,8 @@ problem_unzip = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 problem_days = (f"""### Spec: In {LANG}:
@@ -895,7 +930,8 @@ problem_days = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 
@@ -913,7 +949,7 @@ problems_dict = {
     "problem_opt0_opt_dafny_sanity_check" : problem_opt0_opt_dafny_sanity_check,
     "problem_opt0_dafny_sanity_check" : problem_opt0_dafny_sanity_check,
     "problem_opt0_opt" : problem_opt0_opt,
-    "problem_opt0_dafny_sanity": problem_opt0_dafny_sanity,
+    "problem_opt0_dafny_check": problem_opt0_dafny_check,
     "problem_mult" : problem_mult,
     "problem_max_dafny" : problem_max_dafny,
     "problem_rolling_max_dafny" : problem_rolling_max_dafny,
@@ -942,6 +978,7 @@ problems_dict = {
     check_func,
     check_cheat_func,
     supported_langs,
+    check_string,
 ) = problems_dict[args.problem_name]
 
 if type(prompt) is tuple:
