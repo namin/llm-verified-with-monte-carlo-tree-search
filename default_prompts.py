@@ -934,6 +934,19 @@ problem_days = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_food = (f"""### Spec: In {LANG}:
+(1) Write a datatype for food: Pasta or Pizza. Each Pasta or Pizza has a list of toppings. Each topping is one of: tomato, cheese, olive, broccoli, mushroom, pepper.
+(2) Write a predicate that accepts any pizza with five toppings or fewer, and any pasta with two toppings or fewer.
+(3) Write a lemma that proves that an accepted food with more than three toppings must be a pizza.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS
+)
+
 
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
@@ -966,6 +979,7 @@ problems_dict = {
     "problem_append" : problem_append,
     "problem_unzip" : problem_unzip,
     "problem_days" : problem_days,
+    "problem_food" : problem_food,
 }
 
 # Set the right-hand side to the selected problem.
