@@ -36,7 +36,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
         if score < 0:
             return None, current_completion_depth
         else:
-            if can_be_solution(text, min_lines, check_func, check_string)
+            if can_be_solution(text, min_lines, check_func, check_string):
                 montecarlo.solution = text
             return text, current_completion_depth
     else:
