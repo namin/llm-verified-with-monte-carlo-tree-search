@@ -948,6 +948,19 @@ problem_food = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_lights = (f"""### Spec: In {LANG}:
+(1) Write a datatype for traffic lights with cases red, yellow, green.
+(2) Write a function which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
+(3) Write a lemma to prove that a returned list never has adjacent elements that are distinct and red or green.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
 
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
@@ -981,6 +994,7 @@ problems_dict = {
     "problem_unzip" : problem_unzip,
     "problem_days" : problem_days,
     "problem_food" : problem_food,
+    "problem_lights" : problem_lights,
 }
 
 # Set the right-hand side to the selected problem.
