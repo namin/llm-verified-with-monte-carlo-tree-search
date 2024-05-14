@@ -944,7 +944,8 @@ problem_food = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS
+    ALL_LANGS,
+    None
 )
 
 
