@@ -962,6 +962,19 @@ problem_lights = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_max_and_lists = (f"""### Spec: In {LANG}:
+(1) Write a function that takes three number lists of the same length, and compute the element-by-element max resulting in a new list.
+(2) Prove that using the previous function, then a max on the resulting list, vs using the max on each list, then the max on three maxes, result in the same max.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
@@ -995,6 +1008,7 @@ problems_dict = {
     "problem_days" : problem_days,
     "problem_food" : problem_food,
     "problem_lights" : problem_lights,
+    "problem_max_and_lists" : problem_max_and_lists,
 }
 
 # Set the right-hand side to the selected problem.
