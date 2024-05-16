@@ -1161,7 +1161,7 @@ problems_dict = {
     "problem_max_and_lists" : problem_max_and_lists,
     "problem_fact_dafny_check": problem_fact_dafny_check,
     "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
-    "problem_mult_dafny_check": problem_mult_dafny_check
+    "problem_mult_dafny_check": problem_mult_dafny_check,
     "problem_bst_dafny_check" : problem_bst_dafny_check,
 }
 
