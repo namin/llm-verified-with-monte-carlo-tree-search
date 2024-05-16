@@ -850,6 +850,41 @@ Then (6) write another lemma about the insert function that checks the BST prope
     None
 )
 
+problem_bst_dafny_check = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers. Call it `Tree`.
+Then (2) write a predicate `IsBST` that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function `insert` that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate `Contains` that checks whether a given tree contains a given element.
+Then (5) write a lemma `InsertContains` about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma `InsertPreservesBST` about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+{'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
+{hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+}{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
+}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ALL_LANGS,
+    """
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma CHECK_InsertContains(t: Tree, x: nat)
+  ensures Contains(insert(t, x), x)
+{
+  InsertContains(t, x);
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma CHECK_InsertPreservesBST(t: Tree, x: nat, min: nat, max: nat)
+  requires IsBST(t, min, max) && min <= x <= max
+  ensures IsBST(insert(t, x), min, max)
+{
+    InsertPreservesBST(t, x, min, max);
+}
+    """
+)
+
 problem_bst_dafny_sanity_check = ((hint_match_dafny+"""
 In Dafny, an ADT for a tree of natural numbers.
 
@@ -917,6 +952,29 @@ problem_repeat = (
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None
+)
+
+problem_repeat_dafny_check = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specification, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+    lemma CHECK_repeat_correct(x: int, n: nat)
+      ensures |repeat(x, n)| == n
+      ensures forall i :: 0 <= i < n ==> repeat(x, n)[i] == x
+    {
+      repeat_correct_lemma(x, n)
+    }
+    """
 )
 
 problem_repeat2 = (
@@ -1092,6 +1150,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
+    "problem_repeat_dafny_check" : problem_repeat_dafny_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
     "problem_append" : problem_append,
@@ -1104,6 +1163,7 @@ problems_dict = {
     "problem_fact_dafny_check": problem_fact_dafny_check,
     "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
     "problem_mult_dafny_check": problem_mult_dafny_check
+    "problem_bst_dafny_check" : problem_bst_dafny_check,
 }
 
 # Set the right-hand side to the selected problem.
