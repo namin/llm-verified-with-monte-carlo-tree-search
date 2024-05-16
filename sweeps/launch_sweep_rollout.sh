@@ -21,7 +21,6 @@ export PYTHONPATH=.:${PYTHONPATH}
 
 export discovery_factor=3.0
 export widen_policy_value=0.1
-
 export model_arg_temp=1.0
 export model_arg_topp=0.95
 export model_arg_topk=0
@@ -48,7 +47,7 @@ fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-dafny5-1
+export WANDB_GROUP=rollout-dafny5-1
 export WANDB_NAME=$run_number/$model_arg_temp
 
 SEED=$run_number
@@ -58,5 +57,5 @@ echo Run number: $run_number
 echo Problem: $problem_here
 echo Temp: $model_arg_temp
 
-python run_intermediate_expansion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --widen_policy_value=$widen_policy_value --discovery_factor=$discovery_factor --remove_hints=$remove_hints --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here
+python run_rollout_no_widen.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --widen_policy_value=$widen_policy_value --discovery_factor=$discovery_factor --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints
 

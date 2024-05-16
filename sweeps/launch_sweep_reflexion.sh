@@ -10,7 +10,7 @@
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner_requeue
 #SBATCH --constraint=a100
-#SBATCH --array=0-500%20
+#SBATCH --array=0-499
 
 # Custom environment
 source ~/.bashrc
@@ -19,28 +19,42 @@ conda activate verify
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-export model_arg_temps=(0.2 0.4 0.6 0.8 1.0)
+export model_arg_temp=0.4
 export model_arg_topp=0.95
 export model_arg_topk=0
 
 export token_limit=5000
 
+# Single problem for debugging
+# export problem_here=problem_opt0
+# export remove_hints=True
+# export run_number=$[$SLURM_ARRAY_TASK_ID]
+
+# Sweep across problems
 export run_number=$[$SLURM_ARRAY_TASK_ID/5] # 100 runs per hyperparameter
 export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%5]
-export model_arg_temp_idx=$[$hyperparam_number]
-export model_arg_temp=${model_arg_temps[$model_arg_temp_idx]}
+
+export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
+export problem_here=${problem_names[$hyperparam_number]}
+
+if [ $problem_here == "problem_opt0" ] || [ $problem_here == "problem_fact" ];
+then
+    export remove_hints=True
+else
+    export remove_hints=False
+fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=reflexion-sweep-1
+export WANDB_GROUP=reflexion-dafny5-1
 export WANDB_NAME=$run_number/$model_arg_temp
 
 SEED=$run_number
 
 echo Using seed: $SEED
 echo Run number: $run_number
+echo Problem: $problem_here
 echo Temp: $model_arg_temp
-echo Top p: $model_arg_topp
 
-python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --remove_hints=True --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit
+python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints
 
