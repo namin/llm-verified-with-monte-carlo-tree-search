@@ -962,6 +962,23 @@ problem_lights = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_lights_more = (f"""### Spec: In {LANG}:
+(1) Write a datatype `light` for traffic lights with cases `Red`, `Yellow`, `Green`.
+(2) Write a function `activation` which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
+(3) Write a helper `adjacent_ok` that checks that takes two lights, and checks that they are either the same, or not one red, one green.
+(4) Write a helper `all_adjacent_ok` that takes a list of lights, and checks that all adjacent elements are `adjacent_ok`.
+
+(5) Write a lemma `check_activation(source: light, target: light)` to prove that a returned list never has adjacent elements that are distinct and red or green. The `ensures` clause should be `all_adjacent_ok(activation(source, target))`.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
 problem_max_and_lists = (f"""### Spec: In {LANG}:
 (1) Write a function that takes three number lists of the same length, and compute the element-by-element max resulting in a new list.
 (2) Prove that using the previous function, then a max on the resulting list, vs using the max on each list, then the max on three maxes, result in the same max.
@@ -1008,6 +1025,7 @@ problems_dict = {
     "problem_days" : problem_days,
     "problem_food" : problem_food,
     "problem_lights" : problem_lights,
+    "problem_lights_more" : problem_lights_more,
     "problem_max_and_lists" : problem_max_and_lists,
 }
 
