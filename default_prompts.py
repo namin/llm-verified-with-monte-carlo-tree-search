@@ -78,6 +78,27 @@ problem_fact = (
     None
 )
 
+problem_fact_dafny_check = (
+    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma called `FacPositive(int i)`) that the factorial is always strictly positive.
+{'''### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+''' if LANG=='Coq' else ''
+}""",
+    500,
+    None,
+    5,
+    15,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+lemma CHECK_FacPositive(int i) ensures fac(i) > 0 { FacPositive(i); }
+    """
+)
+
 problem_mult_proof_coq = (
     """
 ```Coq
@@ -546,6 +567,41 @@ lemma OptimizerOptimal(e: Expr)
     None
 )
 
+problem_opt0_opt_dafny_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+{'''### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+''' if LANG=='Dafny' else ''
+}### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+{'''### Hint: Do NOT use `requires` anywhere.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+''' if LANG=='Dafny' else ''
+}{hint_match_dafny
+}{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+''' if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
+    ["Dafny"],
+    "lemma CHECK_OptimizerOptimal(e: Expr) ensures optimal(optimize(e)) { OptimizerOptimal(e); }"
+)
+
 problem_mult = (
     f"""### Spec: In {LANG}, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
 {'''### Hint: Define the lemma only once and prove it right there, don't leave a TODO, don't explain the proof beforehand, just prove it.
@@ -558,6 +614,24 @@ problem_mult = (
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None
+)
+
+problem_mult_dafny_check = (
+    f"""### Spec: In {LANG}, prove the lemma `Mult(a: nat, b: nat, n: nat)`. It states that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
+{'''### Hint: Define the lemma only once and prove it right there, don't leave a TODO, don't explain the proof beforehand, just prove it.
+''' if LANG=='Dafny' else ''
+}""",
+    1000,
+    None,
+    8,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+    lemma {:autocontract} CHECK_Mult(a: nat, b: nat, n: nat)
+    requires n > 0 && n*a == n*b
+    ensures a == b { Mult(a, b, n); }
+    """
 )
 
 problem_max_dafny = (
@@ -776,6 +850,41 @@ Then (6) write another lemma about the insert function that checks the BST prope
     None
 )
 
+problem_bst_dafny_check = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers. Call it `Tree`.
+Then (2) write a predicate `IsBST` that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function `insert` that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate `Contains` that checks whether a given tree contains a given element.
+Then (5) write a lemma `InsertContains` about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma `InsertPreservesBST` about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+{'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
+{hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+}{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
+}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ALL_LANGS,
+    """
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+lemma CHECK_InsertContains(t: Tree, x: nat)
+  ensures Contains(insert(t, x), x)
+{
+  InsertContains(t, x);
+}
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma CHECK_InsertPreservesBST(t: Tree, x: nat, min: nat, max: nat)
+  requires IsBST(t, min, max) && min <= x <= max
+  ensures IsBST(insert(t, x), min, max)
+{
+    InsertPreservesBST(t, x, min, max);
+}
+    """
+)
+
 problem_bst_dafny_sanity_check = ((hint_match_dafny+"""
 In Dafny, an ADT for a tree of natural numbers.
 
@@ -843,6 +952,29 @@ problem_repeat = (
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None
+)
+
+problem_repeat_dafny_check = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specification, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+    lemma CHECK_repeat_correct(x: int, n: nat)
+      ensures |repeat(x, n)| == n
+      ensures forall i :: 0 <= i < n ==> repeat(x, n)[i] == x
+    {
+      repeat_correct_lemma(x, n)
+    }
+    """
 )
 
 problem_repeat2 = (
@@ -1017,6 +1149,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny" : problem_pattern_match_train_dafny,
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
+    "problem_repeat_dafny_check" : problem_repeat_dafny_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
     "problem_append" : problem_append,
@@ -1026,6 +1159,10 @@ problems_dict = {
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
     "problem_max_and_lists" : problem_max_and_lists,
+    "problem_fact_dafny_check": problem_fact_dafny_check,
+    "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
+    "problem_mult_dafny_check": problem_mult_dafny_check
+    "problem_bst_dafny_check" : problem_bst_dafny_check,
 }
 
 # Set the right-hand side to the selected problem.
