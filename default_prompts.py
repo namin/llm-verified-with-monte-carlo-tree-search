@@ -965,9 +965,8 @@ problem_lights = (f"""### Spec: In {LANG}:
 problem_lights_more = (f"""### Spec: In {LANG}:
 (1) Write a datatype `light` for traffic lights with cases `Red`, `Yellow`, `Green`.
 (2) Write a function `activation` which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
-(3) Write a helper `adjacent_ok` that checks that takes two lights, and checks that they are either the same, or not one red, one green.
+(3) Write a helper `adjacent_ok` that takes two lights, and checks that they are not one red and the other green.
 (4) Write a helper `all_adjacent_ok` that takes a list of lights, and checks that all adjacent elements are `adjacent_ok`.
-
 (5) Write a lemma `check_activation(source: light, target: light)` to prove that a returned list never has adjacent elements that are distinct and red or green. The `ensures` clause should be `all_adjacent_ok(activation(source, target))`.
 """,
     1000,
