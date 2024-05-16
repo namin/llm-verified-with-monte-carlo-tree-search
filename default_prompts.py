@@ -1110,6 +1110,23 @@ problem_lights_more = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_lights_more_check = (
+    problem_lights_more[0],
+    problem_lights_more[1],
+    problem_lights_more[2],
+    problem_lights_more[3],
+    problem_lights_more[4],
+    problem_lights_more[5],
+    problem_lights_more[6],
+    ['Dafny'],
+    """lemma CHECK__check_activation(source: light, target: light)
+    ensures all_adjacent_ok(activation(source, target))
+    {
+      check_activation(source, target);
+    }
+    """)
+    
+
 problem_max_and_lists = (f"""### Spec: In {LANG}:
 (1) Write a function that takes three number lists of the same length, and compute the element-by-element max resulting in a new list.
 (2) Prove that using the previous function, then a max on the resulting list, vs using the max on each list, then the max on three maxes, result in the same max.
@@ -1158,6 +1175,7 @@ problems_dict = {
     "problem_food" : problem_food,
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
+    "problem_lights_more_check" : problem_lights_more_check,
     "problem_max_and_lists" : problem_max_and_lists,
     "problem_fact_dafny_check": problem_fact_dafny_check,
     "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
