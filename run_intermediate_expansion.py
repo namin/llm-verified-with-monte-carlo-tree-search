@@ -9,7 +9,7 @@ from common_cache import create_cached_func
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
-from prompts import prompt, min_lines, expansion_count, check_func
+from prompts import prompt, min_lines, expansion_count, check_func, check_string
 from common import limit_depth, max_completion_depth, limit_tokens
 from common_stats import stats
 
@@ -36,7 +36,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
         if score < 0:
             return None, current_completion_depth
         else:
-            if can_be_solution(text, min_lines, check_func):
+            if can_be_solution(text, min_lines, check_func, check_string):
                 montecarlo.solution = text
             return text, current_completion_depth
     else:
