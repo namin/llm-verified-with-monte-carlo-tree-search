@@ -9,8 +9,7 @@
 #SBATCH --mem=250GB		
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner_requeue
-#SBATCH --constraint=a100
-#SBATCH --array=0-499
+#SBATCH --array=0-699
 
 # Custom environment
 source ~/.bashrc
@@ -33,22 +32,25 @@ export token_limit=5000
 # export run_number=$[$SLURM_ARRAY_TASK_ID]
 
 # Sweep across problems
-export run_number=$[$SLURM_ARRAY_TASK_ID/5] # 100 runs per hyperparameter
-export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%5]
+export run_number=$[$SLURM_ARRAY_TASK_ID/7] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%7]
 
-export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
+# export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
+# export problem_names=(problem_unzip problem_days problem_food problem_lights problem_max_and_lists)
+export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_mult_dafny_check problem_repeat_dafny_check problem_bst_dafny_check)
 export problem_here=${problem_names[$hyperparam_number]}
 
-if [ $problem_here == "problem_opt0" ] || [ $problem_here == "problem_fact" ];
-then
-    export remove_hints=True
-else
-    export remove_hints=False
-fi
+export remove_hints=True
+# if [ $problem_here == "problem_opt0" ] || [ $problem_here == "problem_fact" ];
+# then
+#     export remove_hints=True
+# else
+#     export remove_hints=False
+# fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-dafny5-1
+export WANDB_GROUP=vmcts-checks7-1
 export WANDB_NAME=$run_number/$model_arg_temp
 
 SEED=$run_number
