@@ -99,6 +99,27 @@ lemma CHECK_FacPositive(n: nat) ensures fac(n) > 0 { FacPositive(n); }
     """
 )
 
+problem_fact_coq_check = (
+    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma `FacPositive: forall (n: nat), fac n > 0`) that the factorial is always strictly positive.
+{'''### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+''' if LANG=='Coq' else ''
+}""",
+    500,
+    None,
+    5,
+    15,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """
+Lemma CHECK_FacPositive: forall (n: nat), fac n > 0. Proof. intros. apply FacPositive; eauto. Qed.
+    """
+)
+
 problem_mult_proof_coq = (
     """
 ```Coq
@@ -1204,6 +1225,7 @@ problems_dict = {
     "problem_lights_more_check" : problem_lights_more_check,
     "problem_max_and_lists" : problem_max_and_lists,
     "problem_fact_dafny_check": problem_fact_dafny_check,
+    "problem_fact_coq_check": problem_fact_coq_check,
     "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
     "problem_mult_dafny_check": problem_mult_dafny_check,
     "problem_bst_dafny_check" : problem_bst_dafny_check,
