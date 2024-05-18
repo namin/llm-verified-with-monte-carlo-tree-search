@@ -947,7 +947,7 @@ Then (6) write another lemma `InsertPreservesBST` about the insert function that
     5,
     40,
     CHECK_PROOF2, CHECK_CHEAT,
-    ALL_LANGS,
+    ['Dafny'],
     """
 // (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
 lemma CHECK_InsertContains(t: Tree, x: nat)
@@ -963,6 +963,43 @@ lemma CHECK_InsertPreservesBST(t: Tree, x: nat, min: nat, max: nat)
 {
     InsertPreservesBST(t, x, min, max);
 }
+    """
+)
+
+problem_bst_coq_check = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers. Call it `Tree`.
+Then (2) write a predicate `IsBST` that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function `insert` that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate `Contains` that checks whether a given tree contains a given element.
+Then (5) write a lemma `InsertContains` about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma `InsertPreservesBST` about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+{'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
+{hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+}{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
+}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ['Coq'],
+    """
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+Lemma CHECK_InsertContains: forall (t: Tree) (x: nat),
+  Contains (insert t  x) x.
+Proof.
+  intros.
+  eapply InsertContains; eauto.
+Qed.
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma CHECK_InsertPreservesBST: forall (t: Tree) (x: nat) (min: nat) (max: nat),
+  (IsBST t min max) -> min <= x <= max ->
+  IsBST (insert t x) min max.
+Proof.
+    intros.
+    eapply InsertPreservesBST; eauto.
+Qed.
     """
 )
 
@@ -1265,6 +1302,7 @@ problems_dict = {
     "problem_opt0_opt_coq_check": problem_opt0_opt_coq_check,
     "problem_mult_dafny_check": problem_mult_dafny_check,
     "problem_bst_dafny_check" : problem_bst_dafny_check,
+    "problem_bst_coq_check" : problem_bst_coq_check,
 }
 
 # Set the right-hand side to the selected problem.
