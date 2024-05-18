@@ -1095,6 +1095,30 @@ problem_repeat_dafny_check = (
     """
 )
 
+problem_repeat_coq_check = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specification, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """
+    Lemma CHECK_repeat_correct: forall (x: int) (n: nat),
+      length (repeat x n) == n /\
+      forall i, 0 <= i -> i < n -> nth (repeat x n) i = x.
+    Proof.
+      intros.
+      eapply repeat_correct; eauto.
+    Qed.
+    """
+)
+
 problem_repeat2 = (
     f"""### Spec: In {LANG}:
 (1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
@@ -1286,6 +1310,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
     "problem_repeat_dafny_check" : problem_repeat_dafny_check,
+    "problem_repeat_coq_check" : problem_repeat_coq_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
     "problem_append" : problem_append,
