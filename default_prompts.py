@@ -79,7 +79,7 @@ problem_fact = (
 )
 
 problem_fact_dafny_check = (
-    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma called `FacPositive(int i)`) that the factorial is always strictly positive.
+    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma called `FacPositive(n: nat)`) that the factorial is always strictly positive.
 {'''### Hint: Use a plain function, NOT a function method.
 ### Hint: Use a nat, NOT an int.
 ''' if LANG=='Dafny' else ''
@@ -95,7 +95,7 @@ problem_fact_dafny_check = (
     CHECK_PROOF, CHECK_CHEAT,
     ['Dafny'],
     """
-lemma CHECK_FacPositive(int i) ensures fac(i) > 0 { FacPositive(i); }
+lemma CHECK_FacPositive(n: nat) ensures fac(n) > 0 { FacPositive(n); }
     """
 )
 
@@ -306,6 +306,32 @@ problem_opt0_dafny_check = (
 {
     OptimizePreservesSemantics(e, env);
 }
+"""
+)
+
+problem_opt0_coq_check = (
+    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions (called `Expr`) comprising constants, variables and binary additions. Then write an evaluator (called `Eval`) taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer (called `Optimize`) taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function. Do so by proving the lemma `OptimizePreservesSemantics: forall (e: Expr) (env: string -> nat), Eval(Optimize(e), env) = Eval(e, env)`.
+{hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Coq"],
+    """
+    Lemma CHECK_OPS: forall (e: Expr) (env: string -> nat), Eval(Optimize(e), env) = Eval(e, env).
+
+    Proof.
+    intros.
+    apply OptimizePreservesSemantics; eauto.
+    Qed.
 """
 )
 
@@ -972,7 +998,7 @@ problem_repeat_dafny_check = (
       ensures |repeat(x, n)| == n
       ensures forall i :: 0 <= i < n ==> repeat(x, n)[i] == x
     {
-      repeat_correct_lemma(x, n)
+      repeat_correct(x, n)
     }
     """
 )
@@ -1155,6 +1181,7 @@ problems_dict = {
     "problem_opt0_dafny_sanity_check" : problem_opt0_dafny_sanity_check,
     "problem_opt0_opt" : problem_opt0_opt,
     "problem_opt0_dafny_check": problem_opt0_dafny_check,
+    "problem_opt0_coq_check": problem_opt0_coq_check,
     "problem_mult" : problem_mult,
     "problem_max_dafny" : problem_max_dafny,
     "problem_rolling_max_dafny" : problem_rolling_max_dafny,
