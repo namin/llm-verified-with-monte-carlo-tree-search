@@ -326,8 +326,7 @@ problem_opt0_coq_check = (
     CHECK_PROOF, CHECK_CHEAT,
     ["Coq"],
     """
-    Lemma CHECK_OPS: forall (e: Expr) (env: string -> nat), Eval(Optimize(e), env) = Eval(e, env).
-
+    Lemma CHECK_OPS: forall (e: Expr) (env: string -> nat), Eval (Optimize e) env = Eval e env.
     Proof.
     intros.
     apply OptimizePreservesSemantics; eauto.
