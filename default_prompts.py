@@ -1248,7 +1248,7 @@ problem_lights_more = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS,
+    ['Dafny'],
     None
 )
 
@@ -1268,6 +1268,29 @@ problem_lights_more_check = (
     }
     """)
     
+
+problem_lights_more_coq_check = (f"""### Spec: In {LANG}:
+(1) Write a datatype `light` for traffic lights with cases `Red`, `Yellow`, `Green`.
+(2) Write a function `activation` which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
+(3) Write a helper `adjacent_ok` that takes two lights, and checks that they are not one red and the other green.
+(4) Write a helper `all_adjacent_ok` that takes a list of lights, and checks that all adjacent elements are `adjacent_ok`.
+(5) Write a lemma `check_activation` to prove that forall source and target lights, a returned list never has adjacent elements that are distinct and red or green. The proposition should be `all_adjacent_ok (activation source target)`.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """Lemma CHECK__check_activation: forall (source: light) (target: light),
+    all_adjacent_ok(activation(source  target).
+    Proof.
+      intros.
+      eapply check_activation; eauto.
+    Qed.
+    """
+)
+
 
 problem_max_and_lists = (f"""### Spec: In {LANG}:
 (1) Write a function that takes three number lists of the same length, and compute the element-by-element max resulting in a new list.
@@ -1320,6 +1343,7 @@ problems_dict = {
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
     "problem_lights_more_check" : problem_lights_more_check,
+    "problem_lights_more_coq_check": problem_lights_more_coq_check,
     "problem_max_and_lists" : problem_max_and_lists,
     "problem_fact_dafny_check": problem_fact_dafny_check,
     "problem_fact_coq_check": problem_fact_coq_check,
