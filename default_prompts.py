@@ -1110,7 +1110,7 @@ problem_repeat_coq_check = (
     ['Coq'],
     """
     Lemma CHECK_repeat_correct: forall (x: int) (n: nat),
-      length (repeat x n) == n /\
+      length (repeat x n) = n /\
       forall i, 0 <= i -> i < n -> nth (repeat x n) i = x.
     Proof.
       intros.
