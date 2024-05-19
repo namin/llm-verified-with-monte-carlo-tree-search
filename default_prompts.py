@@ -1090,7 +1090,7 @@ problem_repeat_dafny_check = (
       ensures |repeat(x, n)| == n
       ensures forall i :: 0 <= i < n ==> repeat(x, n)[i] == x
     {
-      repeat_correct(x, n)
+      repeat_correct(x, n);
     }
     """
 )
