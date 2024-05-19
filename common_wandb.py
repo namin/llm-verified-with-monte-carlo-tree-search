@@ -33,6 +33,7 @@ def log_tree(montecarlo, gen_stat, node):
         stat = montecarlo.get_stat_dict()
         stat = {f"tree/{k}": v for k, v in stat.items()}
         stat["tree/node_depth"] = count_depth(node)
+        stat["tree/n_tokens"] = llm.token_counter
 
         # Final solution depth
         if montecarlo.solution is not None:

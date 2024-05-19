@@ -9,8 +9,7 @@
 #SBATCH --mem=250GB		
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner_requeue
-#SBATCH --constraint=a100
-#SBATCH --array=0-499
+#SBATCH --array=0-99
 
 # Custom environment
 source ~/.bashrc
@@ -31,30 +30,32 @@ export token_limit=5000
 # export run_number=$[$SLURM_ARRAY_TASK_ID]
 
 # Sweep across problems
-export run_number=$[$SLURM_ARRAY_TASK_ID/5] # 100 runs per hyperparameter
-export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%5]
+export run_number=$[$SLURM_ARRAY_TASK_ID/1] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%1]
 
-export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
+# export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_repeat_dafny_check problem_bst_dafny_check)
+export problem_names=(problem_lights_more_check)
 export problem_here=${problem_names[$hyperparam_number]}
 
-if [ $problem_here == "problem_opt0" ] || [ $problem_here == "problem_fact" ];
+export language=Dafny
+
+if [ $problem_here == "problem_lights_more_check" ];
 then
-    export remove_hints=True
-else
     export remove_hints=False
+else
+    export remove_hints=True
 fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=reflexion-dafny5-1
-export WANDB_NAME=$run_number/$model_arg_temp
+export WANDB_GROUP=reflexion-dafnychecks6-1
+export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number
 
 echo Using seed: $SEED
 echo Run number: $run_number
 echo Problem: $problem_here
-echo Temp: $model_arg_temp
 
-python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints
+python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints --language=$language
 
