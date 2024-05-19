@@ -79,7 +79,7 @@ problem_fact = (
 )
 
 problem_fact_dafny_check = (
-    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma called `FacPositive(int i)`) that the factorial is always strictly positive.
+    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma called `FacPositive(n: nat)`) that the factorial is always strictly positive.
 {'''### Hint: Use a plain function, NOT a function method.
 ### Hint: Use a nat, NOT an int.
 ''' if LANG=='Dafny' else ''
@@ -95,7 +95,28 @@ problem_fact_dafny_check = (
     CHECK_PROOF, CHECK_CHEAT,
     ['Dafny'],
     """
-lemma CHECK_FacPositive(int i) ensures fac(i) > 0 { FacPositive(i); }
+lemma CHECK_FacPositive(n: nat) ensures fac(n) > 0 { FacPositive(n); }
+    """
+)
+
+problem_fact_coq_check = (
+    f"""### Spec: In {LANG}, write a factorial function, called `fac`, and prove (in a lemma `FacPositive: forall (n: nat), fac n > 0`) that the factorial is always strictly positive.
+{'''### Hint: Use a plain function, NOT a function method.
+### Hint: Use a nat, NOT an int.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Don't forget to import the Arith module.
+### Hint: use `Nat.lt_0_1` in the base case of the proof.
+### Hint: use `Nat.lt_lt_add_r` in the inductive case of the proof.
+''' if LANG=='Coq' else ''
+}""",
+    500,
+    None,
+    5,
+    15,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """
+Lemma CHECK_FacPositive: forall (n: nat), fac n > 0. Proof. intros. apply FacPositive; eauto. Qed.
     """
 )
 
@@ -306,6 +327,31 @@ problem_opt0_dafny_check = (
 {
     OptimizePreservesSemantics(e, env);
 }
+"""
+)
+
+problem_opt0_coq_check = (
+    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions (called `Expr`) comprising constants, variables and binary additions. Then write an evaluator (called `Eval`) taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer (called `Optimize`) taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function. Do so by proving the lemma `OptimizePreservesSemantics: forall (e: Expr) (env: string -> nat), Eval(Optimize(e), env) = Eval(e, env)`.
+{hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Coq"],
+    """
+    Lemma CHECK_OPS: forall (e: Expr) (env: string -> nat), Eval (Optimize e) env = Eval e env.
+    Proof.
+    intros.
+    apply OptimizePreservesSemantics; eauto.
+    Qed.
 """
 )
 
@@ -602,6 +648,41 @@ lemma OptimizerOptimal(e: Expr)
     "lemma CHECK_OptimizerOptimal(e: Expr) ensures optimal(optimize(e)) { OptimizerOptimal(e); }"
 )
 
+problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
+{'''### Hint: This is the definiton of the `optimal` predicate:
+predicate optimal(e: Expr) {
+  match e
+  case Add(Const(0), _) => false
+  case Add(_, Const(0)) => false
+  case Add(e1, e2) => optimal(e1) && optimal(e2)
+  case _ => true
+}
+### Hint: Don't use the same structure for `optimize` as for `optimal`. Instead, follow the next hint.
+''' if LANG=='Dafny' else ''
+}### Hint: In the addition case, the `optimize` function should recursively optimize the sub-expressions and then match on the optimized sub-expressions.
+{'''### Hint: Do NOT use `requires` anywhere.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: Write the lemma as
+lemma OptimizerOptimal(e: Expr)
+  ensures optimal(optimize(e))
+''' if LANG=='Dafny' else ''
+}{hint_match_dafny
+}{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: If you do induction on `e` with sub-expressions `e1` and `e2`, the two inductive hypotheses are called `IHe1` and `IHe2`.
+''' if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
+    ["Coq"],
+    "Lemma CHECK_OptimizerOptimal: forall (e: Expr), optimal(optimize(e)). Proof. intros. apply OptimizerOptimal; eauto. Qed."
+)
+
 problem_mult = (
     f"""### Spec: In {LANG}, prove that for all natural numbers `a`, `b`, `n`, if `n` is not zero, then `n*a` equals `n*b` implies `a` equals `b`.
 {'''### Hint: Define the lemma only once and prove it right there, don't leave a TODO, don't explain the proof beforehand, just prove it.
@@ -866,7 +947,7 @@ Then (6) write another lemma `InsertPreservesBST` about the insert function that
     5,
     40,
     CHECK_PROOF2, CHECK_CHEAT,
-    ALL_LANGS,
+    ['Dafny'],
     """
 // (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
 lemma CHECK_InsertContains(t: Tree, x: nat)
@@ -882,6 +963,43 @@ lemma CHECK_InsertPreservesBST(t: Tree, x: nat, min: nat, max: nat)
 {
     InsertPreservesBST(t, x, min, max);
 }
+    """
+)
+
+problem_bst_coq_check = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers. Call it `Tree`.
+Then (2) write a predicate `IsBST` that checks whether a given tree is a binary search tree (BST).
+Then (3) write a function `insert` that inserts an element into a binary search tree while preserving the BST property.
+Then (4) write a predicate `Contains` that checks whether a given tree contains a given element.
+Then (5) write a lemma `InsertContains` about the insert function that ensures that the tree resulting from inserting an element contains that element (without requiring nor ensuring the BST property).
+Then (6) write another lemma `InsertPreservesBST` about the insert function that checks the BST property continues to hold after insertion. This lemma should take bounds on the BST, and require that the element to be inserted is within those bounds.
+{'### Hint: For each proof, do not use assertions. Just analyze the structure based on the insert function, and recursively call the lemma to match the recursive calls in the function.' if LANG=='Dafny' else ''}
+{hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
+}{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
+}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ['Coq'],
+    """
+// (5) Lemma about the insert function that ensures the tree resulting from inserting an element contains that element
+Lemma CHECK_InsertContains: forall (t: Tree) (x: nat),
+  Contains (insert t  x) x.
+Proof.
+  intros.
+  eapply InsertContains; eauto.
+Qed.
+
+// (6) Lemma about the insert function that checks the BST property continues to hold after insertion
+lemma CHECK_InsertPreservesBST: forall (t: Tree) (x: nat) (min: nat) (max: nat),
+  (IsBST t min max) -> min <= x <= max ->
+  IsBST (insert t x) min max.
+Proof.
+    intros.
+    eapply InsertPreservesBST; eauto.
+Qed.
     """
 )
 
@@ -972,8 +1090,32 @@ problem_repeat_dafny_check = (
       ensures |repeat(x, n)| == n
       ensures forall i :: 0 <= i < n ==> repeat(x, n)[i] == x
     {
-      repeat_correct_lemma(x, n)
+      repeat_correct(x, n)
     }
+    """
+)
+
+problem_repeat_coq_check = (
+    f"""### Spec: In {LANG}:
+(1) Write a function `repeat` that takes an integer `x` and a natural number `n` as inputs, and returns a list of length `n` in which every element is `x`.
+(2) Then write a lemma `repeat_correct` that checks that for any `x` and `n`, `repeat` returns a list of length `n` and that every element of the list is `x`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: In a specification, you can write `forall i :: 0 <= i < n ==> CONDITION`.
+''' if LANG == 'Dafny' else ''}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """
+    Lemma CHECK_repeat_correct: forall (x: int) (n: nat),
+      length (repeat x n) == n /\
+      forall i, 0 <= i -> i < n -> nth (repeat x n) i = x.
+    Proof.
+      intros.
+      eapply repeat_correct; eauto.
+    Qed.
     """
 )
 
@@ -1106,7 +1248,7 @@ problem_lights_more = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS,
+    ['Dafny'],
     None
 )
 
@@ -1126,6 +1268,29 @@ problem_lights_more_check = (
     }
     """)
     
+
+problem_lights_more_coq_check = (f"""### Spec: In {LANG}:
+(1) Write a datatype `light` for traffic lights with cases `Red`, `Yellow`, `Green`.
+(2) Write a function `activation` which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
+(3) Write a helper `adjacent_ok` that takes two lights, and checks that they are not one red and the other green.
+(4) Write a helper `all_adjacent_ok` that takes a list of lights, and checks that all adjacent elements are `adjacent_ok`.
+(5) Write a lemma `check_activation` to prove that forall source and target lights, a returned list never has adjacent elements that are distinct and red or green. The proposition should be `all_adjacent_ok (activation source target)`.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Coq'],
+    """Lemma CHECK__check_activation: forall (source: light) (target: light),
+    all_adjacent_ok(activation(source  target).
+    Proof.
+      intros.
+      eapply check_activation; eauto.
+    Qed.
+    """
+)
+
 
 problem_max_and_lists = (f"""### Spec: In {LANG}:
 (1) Write a function that takes three number lists of the same length, and compute the element-by-element max resulting in a new list.
@@ -1155,6 +1320,7 @@ problems_dict = {
     "problem_opt0_dafny_sanity_check" : problem_opt0_dafny_sanity_check,
     "problem_opt0_opt" : problem_opt0_opt,
     "problem_opt0_dafny_check": problem_opt0_dafny_check,
+    "problem_opt0_coq_check": problem_opt0_coq_check,
     "problem_mult" : problem_mult,
     "problem_max_dafny" : problem_max_dafny,
     "problem_rolling_max_dafny" : problem_rolling_max_dafny,
@@ -1167,6 +1333,7 @@ problems_dict = {
     "problem_pattern_match_train_dafny2" : problem_pattern_match_train_dafny2,
     "problem_repeat" : problem_repeat,
     "problem_repeat_dafny_check" : problem_repeat_dafny_check,
+    "problem_repeat_coq_check" : problem_repeat_coq_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
     "problem_append" : problem_append,
@@ -1176,11 +1343,15 @@ problems_dict = {
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
     "problem_lights_more_check" : problem_lights_more_check,
+    "problem_lights_more_coq_check": problem_lights_more_coq_check,
     "problem_max_and_lists" : problem_max_and_lists,
     "problem_fact_dafny_check": problem_fact_dafny_check,
+    "problem_fact_coq_check": problem_fact_coq_check,
     "problem_opt0_opt_dafny_check": problem_opt0_opt_dafny_check,
+    "problem_opt0_opt_coq_check": problem_opt0_opt_coq_check,
     "problem_mult_dafny_check": problem_mult_dafny_check,
     "problem_bst_dafny_check" : problem_bst_dafny_check,
+    "problem_bst_coq_check" : problem_bst_coq_check,
 }
 
 # Set the right-hand side to the selected problem.
