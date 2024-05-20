@@ -1276,7 +1276,7 @@ problem_food = (f"""### Spec: In {LANG}:
 )
 
 problem_food_dafny_check = (f"""### Spec: In {LANG}:
-(1) Write a datatype for `food`: `Pasta` or `Pizza`. Each Pasta or Pizza has a list of `toppings`. Each topping is one of: `tomato`, `cheese`, `olive`, `broccoli`, `mushroom`, `pepper`.
+(1) Write a datatype for `Food`: `Pasta` or `Pizza`. Each Pasta or Pizza has a list of toppings. Each `Topping` is one of: `tomato`, `cheese`, `olive`, `broccoli`, `mushroom`, `pepper`.
 (2) Write a predicate `ok` that accepts any pizza with five toppings or fewer, and any pasta with two toppings or fewer.
 (3) Write a lemma `ok3_pizza` that proves that an accepted food with three or more toppings must be a pizza.
 ### Hint: The length of a list or sequence `s` is `|s|`.
@@ -1288,7 +1288,7 @@ problem_food_dafny_check = (f"""### Spec: In {LANG}:
     CHECK_PROOF, CHECK_CHEAT,
     ['Dafny'],
     """
-    lemma CHECK_ok3_pizza(x: food)
+    lemma CHECK_ok3_pizza(x: Food)
     requires ok(x)
     requires |x.toppings| >= 3
     ensures match x { case Pizza(_) => true case _ => false }
