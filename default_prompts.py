@@ -1172,7 +1172,7 @@ problem_reverse_dafny_check = (f"""### Spec: In {LANG}:
     5,
     40,
     CHECK_PROOF2, CHECK_CHEAT,
-    ALL_LANGS,
+    ["Dafny"],
     """
     lemma CHECK__reverse_permutes(l: seq<int>)
     // TODO
@@ -1235,6 +1235,29 @@ problem_days = (f"""### Spec: In {LANG}:
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None
+)
+
+problem_days_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write an ADT `Day` for the days of the week: `Sunday` to `Saturday`.
+(2) Write a function `next_biz_day` that gives the next business day.
+(3) Write a function`iter_biz_day(d: Day, n: nat): Day` that iterates the next business day function, for an arbitrary number n of business days.
+(4) Write a lemma `iter5_biz_day_idempotent` that ensures that starting with a business day, taking the next five business days is idempotent.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Dafny"],
+    """
+    lemma CHECK_iter5_biz_day_idempotent(d: Day)
+    requires d != Saturday
+    requires d != Sunday
+    ensures iter_biz_day(d, 5) == d
+    {
+      iter5_biz_day_idempotent(d);
+    }
+    """
 )
 
 problem_food = (f"""### Spec: In {LANG}:
@@ -1369,6 +1392,7 @@ problems_dict = {
     "problem_append" : problem_append,
     "problem_unzip" : problem_unzip,
     "problem_days" : problem_days,
+    "problem_days_dafny_check" : problem_days_dafny_check,
     "problem_food" : problem_food,
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
