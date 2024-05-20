@@ -44,7 +44,7 @@ export problem_here=${problem_names[$hyperparam_number]}
 
 export language=Dafny
 
-if [ $problem_here == "problem_lights_more_check" ] || [ $problem_here == "problem_repeat_dafny_check" ];
+if [ $problem_here == "problem_lights_more_check" ];
 then
     export remove_hints=False
 else
@@ -53,7 +53,7 @@ fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-repeat-1
+export WANDB_GROUP=vmcts-repeat-2
 export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number

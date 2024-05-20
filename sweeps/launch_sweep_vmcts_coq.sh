@@ -26,34 +26,24 @@ export model_arg_topp=0.95
 export model_arg_topk=0
 export token_limit=5000
 
-# Single problem for debugging
-# export problem_here=problem_opt0
-# export remove_hints=True
-# export run_number=$[$SLURM_ARRAY_TASK_ID]
+
 
 # Sweep across problems
 export run_number=$[$SLURM_ARRAY_TASK_ID/6] # 100 runs per hyperparameter
 export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%6]
 
-# export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
-# export problem_names=(problem_unzip problem_days problem_food problem_max_and_lists)
-# export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_repeat_dafny_check problem_bst_dafny_check)
+
 export problem_names=(problem_fact_coq_check problem_opt0_coq_check problem_opt0_opt_coq_check problem_bst_coq_check problem_repeat_coq_check problem_lights_more_coq_check)
+
 
 export problem_here=${problem_names[$hyperparam_number]}
 
 export language=Coq
 export remove_hints=False
-# if [ $problem_here == "problem_opt0" ] || [ $problem_here == "problem_fact" ];
-# then
-#     export remove_hints=True
-# else
-#     export remove_hints=False
-# fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-coq6-2
+export WANDB_GROUP=vmcts-coqchecks6-3
 export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number
