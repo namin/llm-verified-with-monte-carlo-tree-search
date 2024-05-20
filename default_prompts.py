@@ -1157,6 +1157,35 @@ problem_reverse = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_reverse_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write a function `reverse` that takes a list as input and reverses it.
+(2) Then write a lemma `reverse_permutes` that checks that for any list `l`, an element exists in `l` if and only if it exists in the result of calling `reverse` on `l`.
+(3) Then write a lemma `reverse_involutes` that checks that for any list `l`, calling `reverse` twice on `l` yields `l`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: Use a plain `function` to define `reverse`, not a `function method` or a `method`.
+''' if LANG == 'Dafny' else ''
+}{'''### Hint: Import `Coq.Lists.List`.
+''' if LANG == 'Coq' else ''}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ["Dafny"],
+    """
+    lemma CHECK__reverse_permutes(l: seq<int>)
+    // TODO
+    {
+    }
+    lemma CHECK__reverse_involutes(l: seq<int>)
+    ensures reverse(reverse(l)) == l;
+    {
+      reverse_involutes(l);
+    }
+    """
+)
+
 problem_append = (f"""### Spec: In {LANG}:
 (1) Write a function `app` that takes two lists of natural numbers as input and concatenates them.
 (2) Then write a function `nth_elt` that returns the `n`th element of a given list of natural numbers.
@@ -1208,6 +1237,29 @@ problem_days = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_days_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write an ADT `Day` for the days of the week: `Sunday` to `Saturday`.
+(2) Write a function `next_biz_day` that gives the next business day.
+(3) Write a function`iter_biz_day(d: Day, n: nat): Day` that iterates the next business day function, for an arbitrary number n of business days.
+(4) Write a lemma `iter5_biz_day_idempotent` that ensures that starting with a business day, taking the next five business days is idempotent.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Dafny"],
+    """
+    lemma CHECK_iter5_biz_day_idempotent(d: Day)
+    requires d != Saturday
+    requires d != Sunday
+    ensures iter_biz_day(d, 5) == d
+    {
+      iter5_biz_day_idempotent(d);
+    }
+    """
+)
+
 problem_food = (f"""### Spec: In {LANG}:
 (1) Write a datatype for food: Pasta or Pizza. Each Pasta or Pizza has a list of toppings. Each topping is one of: tomato, cheese, olive, broccoli, mushroom, pepper.
 (2) Write a predicate that accepts any pizza with five toppings or fewer, and any pasta with two toppings or fewer.
@@ -1220,6 +1272,28 @@ problem_food = (f"""### Spec: In {LANG}:
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None
+)
+
+problem_food_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write a datatype for `food`: `Pasta` or `Pizza`. Each Pasta or Pizza has a list of `toppings`. Each topping is one of: `tomato`, `cheese`, `olive`, `broccoli`, `mushroom`, `pepper`.
+(2) Write a predicate `ok` that accepts any pizza with five toppings or fewer, and any pasta with two toppings or fewer.
+(3) Write a lemma `ok3_pizza` that proves that an accepted food with three or more toppings must be a pizza.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+    lemma CHECK_ok3_pizza(x: food)
+    requires ok(x)
+    requires |x.toppings| >= 3
+    ensures match x { case Pizza(_) => true case _ => false }
+    {
+      ok3_pizza(x);
+    }
+    """
 )
 
 problem_lights = (f"""### Spec: In {LANG}:
@@ -1336,10 +1410,13 @@ problems_dict = {
     "problem_repeat_coq_check" : problem_repeat_coq_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
+    "problem_reverse_dafny_check" : problem_reverse_dafny_check,
     "problem_append" : problem_append,
     "problem_unzip" : problem_unzip,
     "problem_days" : problem_days,
+    "problem_days_dafny_check" : problem_days_dafny_check,
     "problem_food" : problem_food,
+    "problem_food_dafny_check" : problem_food_dafny_check,
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
     "problem_lights_more_check" : problem_lights_more_check,
