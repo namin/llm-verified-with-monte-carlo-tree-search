@@ -1157,6 +1157,35 @@ problem_reverse = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_reverse_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write a function `reverse` that takes a list as input and reverses it.
+(2) Then write a lemma `reverse_permutes` that checks that for any list `l`, an element exists in `l` if and only if it exists in the result of calling `reverse` on `l`.
+(3) Then write a lemma `reverse_involutes` that checks that for any list `l`, calling `reverse` twice on `l` yields `l`.
+{'''### Hint: The length of a list or sequence `s` is `|s|`.
+### Hint: Use a plain `function` to define `reverse`, not a `function method` or a `method`.
+''' if LANG == 'Dafny' else ''
+}{'''### Hint: Import `Coq.Lists.List`.
+''' if LANG == 'Coq' else ''}
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF2, CHECK_CHEAT,
+    ALL_LANGS,
+    """
+    lemma CHECK__reverse_permutes(l: seq<int>)
+    // TODO
+    {
+    }
+    lemma CHECK__reverse_involutes(l: seq<int>)
+    ensures reverse(reverse(l)) == l;
+    {
+      reverse_involutes(l);
+    }
+    """
+)
+
 problem_append = (f"""### Spec: In {LANG}:
 (1) Write a function `app` that takes two lists of natural numbers as input and concatenates them.
 (2) Then write a function `nth_elt` that returns the `n`th element of a given list of natural numbers.
@@ -1336,6 +1365,7 @@ problems_dict = {
     "problem_repeat_coq_check" : problem_repeat_coq_check,
     "problem_repeat2" : problem_repeat2,
     "problem_reverse" : problem_reverse,
+    "problem_reverse_dafny_check" : problem_reverse_dafny_check,
     "problem_append" : problem_append,
     "problem_unzip" : problem_unzip,
     "problem_days" : problem_days,
