@@ -223,4 +223,5 @@ def new_conclusion(goal, code):
     return conclusion not in code
 
 filter_code = filterCoq
+filter_code_whole = filterCoq
 check_code = checkCoq
