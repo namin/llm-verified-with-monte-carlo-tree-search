@@ -1274,6 +1274,28 @@ problem_food = (f"""### Spec: In {LANG}:
     None
 )
 
+problem_food_dafny_check = (f"""### Spec: In {LANG}:
+(1) Write a datatype for `food`: `Pasta` or `Pizza`. Each Pasta or Pizza has a list of `toppings`. Each topping is one of: `tomato`, `cheese`, `olive`, `broccoli`, `mushroom`, `pepper`.
+(2) Write a predicate `ok` that accepts any pizza with five toppings or fewer, and any pasta with two toppings or fewer.
+(3) Write a lemma `ok3_pizza` that proves that an accepted food with three or more toppings must be a pizza.
+""",
+    1000,
+    None,
+    5,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ['Dafny'],
+    """
+    lemma CHECK_ok3_pizza(x: food)
+    requires ok(x)
+    requires |x.toppings| >= 3
+    ensures match x { case Pizza(_) => true case _ => false }
+    {
+      ok3_pizza(x);
+    }
+    """
+)
+
 problem_lights = (f"""### Spec: In {LANG}:
 (1) Write a datatype for traffic lights with cases red, yellow, green.
 (2) Write a function which takes two lights, source and target, and returns a list of lights, the first element being the source and the last element being the target. If the source and target are not yellow and are distinct, then the returned list has a middle element of yellow.
@@ -1394,6 +1416,7 @@ problems_dict = {
     "problem_days" : problem_days,
     "problem_days_dafny_check" : problem_days_dafny_check,
     "problem_food" : problem_food,
+    "problem_food_dafny_check" : problem_food_dafny_check,
     "problem_lights" : problem_lights,
     "problem_lights_more" : problem_lights_more,
     "problem_lights_more_check" : problem_lights_more_check,
