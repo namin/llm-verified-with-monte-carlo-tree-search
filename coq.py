@@ -117,6 +117,8 @@ def score_func(sentence: str) -> Optional[float]:
     print(score)
     return score
 
+score_func_whole = score_func
+
 def score_func_code(sentence: str) -> (Optional[float], Optional[str]):
     print("TEXT")
     print(sentence)
