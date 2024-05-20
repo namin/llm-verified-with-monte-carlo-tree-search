@@ -977,6 +977,7 @@ Then (6) write another lemma `InsertPreservesBST` about the insert function that
 {hint_match_dafny}{'### Hint: do not have `requires` nor `ensures` clauses in the insert function. The lemmas will be proved after the definition; in those lemmas, have `requires` and `ensures` clauses.' if LANG=='Dafny' else ''
 }{'### Hint: Use Fixpoint instead of Definition for recursive functions.' if LANG=='Coq' else ''
 }
+### Hint: Use `l` and `r` for variable names instead of `left` and `right` to avoid name clashes.
 """,
     1000,
     None,
