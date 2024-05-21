@@ -12,8 +12,6 @@ Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
 
-[Draft](https://arxiv.org/abs/2402.08147)
-
 ## Running
 
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
@@ -162,7 +160,7 @@ To a run a certain flavor of experiment on one of the prompts used in the VMCTS 
 python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
 ```
 
-To run a certain flavor of experiment on the Clover benchmark dataet, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on Clover, do:
+To run a certain flavor of experiment on the Clover benchmark dataset, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on Clover, do:
 ```
 python experiments_clover.py --experiment_name run_intermediate_expansion.py
 ```
@@ -174,15 +172,4 @@ To log the results of any experiment in the log/ directory, place the following 
 For example, to log the results of the intermediate expansion experiment on `opt0` you could run:
 ```
 ./log.sh log/intermediate-expansion-01.txt python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
-```
-# Citation
-```
-@misc{brandfonbrener2024verified,
-      title={Verified Multi-Step Synthesis using Large Language Models and Monte Carlo Tree Search}, 
-      author={David Brandfonbrener and Sibi Raja and Tarun Prasad and Chloe Loughridge and Jianang Yang and Simon Henniger and William E. Byrd and Robert Zinkov and Nada Amin},
-      year={2024},
-      eprint={2402.08147},
-      archivePrefix={arXiv},
-      primaryClass={cs.SE}
-}
 ```
