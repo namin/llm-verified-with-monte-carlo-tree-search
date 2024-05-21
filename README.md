@@ -7,7 +7,7 @@ Using Monte Carlo Tree Search (MCTS), it explores the space of possible generati
 This prototype uses Dafny, Coq, Lean, Scala or Rust.
 
 Logs for example runs can be found in the [log](log) directory.
-Scroll to the very end of a log to see [a chosen solution](https://github.com/namin/llm-verified-with-monte-carlo-tree-search/blob/main/log/opt0_alt.txt#L7661).
+Scroll to the very end of a log to see [a chosen solution](log/opt0_alt.txt#L7661).
 Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
@@ -17,11 +17,6 @@ By using this technique, weaker models that might not even know the generated la
 This project relies on GPU access. It has been tested on a multi-GPU machine with two NVIDIA A100s.
 
 ### Setup
-
-Clone the github repo. Note that it has linked submodules so it should be cloned with the following command:
-```
-git clone --recurse-submodules git@github.com:namin/llm-verified-with-monte-carlo-tree-search.git
-```
 
 Using `mamba` or equivalently `conda`:
 Note that you will be prompted to paste your huggingface authentication token.
