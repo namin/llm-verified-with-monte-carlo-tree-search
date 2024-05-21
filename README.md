@@ -36,6 +36,8 @@ huggingface-cli login
 
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
 
+Please confirm that Dafny verification works before running verMCTS. We have sometimes run into issues where z3 was not set up correctly, and Dafny skipped the verification process without returning an error code. Should you run into these problems, compile z3 from source and place the executable into your PATH.
+
 (If you want to use Coq) Install Coq: [Install opam](https://opam.ocaml.org/doc/Install.html), then:
 
 ```
