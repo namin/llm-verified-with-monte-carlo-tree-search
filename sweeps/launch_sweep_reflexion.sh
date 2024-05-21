@@ -9,7 +9,7 @@
 #SBATCH --mem=250GB		
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner_requeue
-#SBATCH --array=0-299
+#SBATCH --array=0-899
 
 # Custom environment
 source ~/.bashrc
@@ -30,12 +30,10 @@ export token_limit=5000
 # export run_number=$[$SLURM_ARRAY_TASK_ID]
 
 # Sweep across problems
-export run_number=$[$SLURM_ARRAY_TASK_ID/3] # 100 runs per hyperparameter
-export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%3]
+export run_number=$[$SLURM_ARRAY_TASK_ID/9] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%9]
 
-# export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_repeat_dafny_check problem_bst_dafny_check)
-export problem_names=(problem_days_dafny_check problem_food_dafny_check problem_reverse_dafny_check)
-
+export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_repeat_dafny_check problem_bst_dafny_check problem_days_dafny_check problem_food_dafny_check problem_reverse_dafny_check)
 
 export problem_here=${problem_names[$hyperparam_number]}
 
@@ -53,7 +51,7 @@ fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=reflexion-dafnychecks3-1
+export WANDB_GROUP=reflexion-dafnychecks9-1
 export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number
