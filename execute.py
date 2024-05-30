@@ -34,7 +34,7 @@ def execute(cmd, ext, v, use_sandbox=False):
 
 
         if use_sandbox:
-            pre_llm_command = "singularity exec --no-mount=/n --no-mount=/net --no-mount=/scratch --no-mount=/cvmfs ~/singularity/python_latest.sif"
+            pre_llm_command = "singularity exec --no-mount=/n --no-mount=/net --no-mount=/scratch --no-mount=/cvmfs ~/singularity/llm-verified_latest.sif"
             status = os.system("SINGULARITY_HOME=/ timeout 10 %s %s %s >%s 2>%s" % (pre_llm_command, cmd, fn, outfn, errfn))
         else:
             status = os.system("timeout 10 %s %s >%s 2>%s" % (cmd, fn, outfn, errfn))
