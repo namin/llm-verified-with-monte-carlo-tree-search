@@ -39,6 +39,13 @@ elif LANG == "Scala":
         filter_code,
         check_code,
     )
+elif LANG == "Python":
+    from python import (
+        score_func,
+        verifier_feedback,
+        filter_code,
+        check_code,
+    )
 else:
     assert False
 

@@ -10,7 +10,7 @@ elif LANG == "Coq":
 elif LANG == "Lean4":
     proof_marker = "theorem"
     cheat_marker = "sorry"
-elif LANG == "Rust" or LANG == "Scala":
+elif LANG == "Rust" or LANG == "Scala" or LANG == "Python":
     proof_marker = None
     cheat_marker = None
 

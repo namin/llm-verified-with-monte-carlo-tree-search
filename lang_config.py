@@ -2,7 +2,7 @@ from cmdline import args
 
 LANG = args.language
 
-ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala"]
+ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala", "Python"]
 
 # Pick a language:
 # LANG = 'Coq'
@@ -14,6 +14,10 @@ ALL_LANGS = ["Dafny", "Coq", "Lean4", "Rust", "Scala"]
 # Set features for the language:
 if LANG == "Dafny":
     COMMENT = lambda inp: "\n// " + inp + "\n"
+    STOP_WORD = "\n"
+
+elif LANG == "Python":
+    COMMENT = lambda inp: "\n# " + inp + "\n"
     STOP_WORD = "\n"
 
 elif LANG == "Coq":
