@@ -22,16 +22,22 @@ This project relies on GPU access. It has been tested on a multi-GPU machine wit
 
 Clone the github repo. Note that it has linked submodules so it should be cloned with the following command:
 ```
-git clone --recurse-submodules git@github.com:namin/llm-verified-with-monte-carlo-tree-search.git
+git clone --recurse-submodules https://github.com/namin/llm-verified-with-monte-carlo-tree-search.git
 ```
 
-Using `mamba` or equivalently `conda`:
 Note that you will be prompted to paste your huggingface authentication token.
 ```
-mamba create --name llm-verified python=3.10
-mamba activate llm-verified
+conda create --name llm-verified python=3.10
+conda activate llm-verified
 pip install -r requirements.txt
 huggingface-cli login
+```
+
+(If you want to use the singularity sandbox) Download the `llm-verified` docker image (created by the Dockerfile here and pushed to the [hub](https://hub.docker.com/r/namin/llm-verified)) and put it in `~/singularity`.
+```
+mkdir -p ~/singularity
+cd ~/singularity
+singularity pull docker://namin/llm-verified
 ```
 
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
