@@ -13,7 +13,7 @@ if livecode:
 
 
 # todo: variable names and types
-def execute(cmd, ext, v):
+def execute(cmd, ext, v, use_sandbox=False):
     HOME = os.environ["HOME"]
     TMP_DIR = f"{HOME}/tmp/llm-verified/{ext}/"
     key = hashlib.md5(v.encode("utf-8")).hexdigest()
@@ -32,7 +32,14 @@ def execute(cmd, ext, v):
         f.write(v)
         f.close()
 
-        status = os.system("timeout 10 %s %s >%s 2>%s" % (cmd, fn, outfn, errfn))
+
+        if use_sandbox:
+            pre_llm_command = "singularity exec --no-mount=/n --no-mount=/net --no-mount=/scratch --no-mount=/cvmfs ~/singularity/python_latest.sif"
+            status = os.system("SINGULARITY_HOME=/ timeout 10 %s %s %s >%s 2>%s" % (pre_llm_command, cmd, fn, outfn, errfn))
+        else:
+            status = os.system("timeout 10 %s %s >%s 2>%s" % (cmd, fn, outfn, errfn))
+
+
 
         f = open(outfn, "r")
         outlog = f.read()
