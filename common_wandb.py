@@ -64,3 +64,18 @@ def compute_summary(montecarlo, node_dups_counter, init_time):
         final_stat = {f"final/{k}": v for k, v in final_stat.items()}
         stat = {**stat, **final_stat}
         wandb.log(stat)
+
+def compute_summary_nomc(solution, init_time):
+    # Compute summary stats
+    if args.use_wandb:
+        stat = {}
+        stat["final/time"] = time.time() - init_time
+        stat["final/solved"] = limit_tokens()
+        stat["final/text"] = solution
+        stat["final/n_tokens"] = llm.token_counter
+        # Log pass at t
+        ts = [500, 1000, 2000, 5000]
+        for t in ts:
+            pass_at_t = llm.token_counter <= t
+            stat[f"final/pass_at_{t}"] = int(pass_at_t)
+        wandb.log(stat)
