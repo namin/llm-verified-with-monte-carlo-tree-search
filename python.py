@@ -52,13 +52,22 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     err = log
     return -1.0, err
 
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore(sentence)
-    print("SCORE")
-    print(score)
-    return score
+def runUnittests(msg: str) -> (Optional[float], Optional[str]):
+    v = filter_code(msg + "```").strip()
+    if v == "":
+        return None, None
+    r = check_code(v)
+    if r["status"] == 0:
+        return 1.0, None
+    log = r["log"]
+    print(log)
+    marker = "ex.py\", line "
+    first = log[log.rindex(marker) + len(marker):]
+    num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
+    if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
+        return None, None
+    err = log
+    return -1.0, err
 
 def filter_code(msg: str) -> str:
     m = re.findall("```([Pp]ython)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
@@ -67,3 +76,54 @@ def filter_code(msg: str) -> str:
 
 def check_code(v: str) -> dict:
     return execute("python3", "py", v, use_sandbox=True)
+
+test_fwk = """
+import sys
+runningAllTests = False
+def test(x):
+	if not x:
+		print('FALSE')
+		sys.exit(1)
+def finalReport():
+	global runningAllTests
+	if not runningAllTests:
+		print('INCONCLUSIVE')
+		sys.exit(0)
+	else:
+		print('TRUE')
+		sys.exit(0)
+"""
+def run_unittests(msg: str, unittest=None):
+    v = filter_code(msg + "```").strip()
+    file = v
+    file += test_fwk
+    foundAll = True
+    for key, value in unittest.items():
+        if v.find(key) != -1:
+            file += value + "\n"
+        else:
+            file += "runningAllTests = True\n"
+    file += "\nfinalReport()\n"
+    print(file)
+    return check_code(file)["status"]
+
+def score_func(sentence: str, unittest) -> Optional[float]:
+    print("TEXT")
+    print(sentence)
+    score = calculateScore(sentence)
+    if unittest is None or score != 1:
+        print("SCORE")
+        print(score)
+        return score
+    else:
+        print("Preliminary SCORE")
+        print(score)
+        tscore = run_unittests(sentence, unittest)
+        if tscore != 0:
+            print("Unittest tscore ", tscore, "FAILED. Lowering score.")
+            print("NEW SCORE")
+            print("-1")
+            return -1
+        else:
+            print("Unittest succeeded, tscore = ", tscore, "and score remains", score)
+            return score
