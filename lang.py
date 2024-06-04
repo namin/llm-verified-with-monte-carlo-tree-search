@@ -1,5 +1,6 @@
 from lang_config import LANG
 
+run_tests = False
 if LANG == "Dafny":
     from dafny import (
         score_func,
@@ -47,6 +48,7 @@ elif LANG == "Python":
         check_code,
         run_unittests
     )
+    run_tests = True
 else:
     assert False
 
