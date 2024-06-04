@@ -28,6 +28,20 @@ if cheat_marker:
 else:
     CHECK_CHEAT = NO_CHECK_CHEAT
 
+problem_multistep_python = (
+    f"""### Spec: In {LANG}, write a function  that returns the sum of the unique prime factors of 
+a given natural number. Example: if the input number was 28, the function would return 9 (2 + 7), 
+if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would return 97, as 97 is prime. 
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    None
+)
 
 problem_parser_res = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition.
@@ -1437,6 +1451,7 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
 )
 
 problems_dict = {
+    "problem_multistep_python" : problem_multistep_python,
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
     "problem_fact" : problem_fact,

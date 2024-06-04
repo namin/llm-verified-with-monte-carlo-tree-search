@@ -36,9 +36,11 @@ def find_first_index(string, char1, char2):
         return min(index1, index2)  # Return the minimum index
 
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filter_code(msg + "```").strip()
-    if v == "":
+    v = filter_code(msg + "```")
+    # If the last line starts with a tab, consider the program is still goind
+    if v == "" or v.splitlines()[-1].startswith('\t') or v.splitlines()[-1].startswith(' '): 
         return None, None
+    v = v.strip()
     r = check_code(v)
     if r["status"] == 0:
         return 1.0, None
