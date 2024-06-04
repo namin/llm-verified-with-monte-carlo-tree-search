@@ -2,14 +2,19 @@ from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
 from lang import can_be_solution
+
 from lang import score_func as uncached_score_func
 
-from common_cache import create_cached_func
-
-score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 from common_interactive import diffprompt
 
-from prompts import prompt, min_lines, expansion_count, check_func, check_string
+from prompts import prompt, min_lines, expansion_count, check_func, check_string, test_dict
+from lang import run_tests
+if test_dict and run_tests:
+    uncached_score_func_before_dict = uncached_score_func
+    uncached_score_func = lambda x: uncached_score_func_before_dict(x, test_dict)
+from common_cache import create_cached_func
+score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
+
 from common import limit_depth, max_completion_depth, limit_tokens
 from common_stats import stats
 
@@ -36,7 +41,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
         if score < 0:
             return None, current_completion_depth
         else:
-            if can_be_solution(text, min_lines, check_func, check_string):
+            if can_be_solution(text, min_lines, check_func, check_string, test_dict):
                 montecarlo.solution = text
             return text, current_completion_depth
     else:

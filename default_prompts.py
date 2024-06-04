@@ -28,6 +28,20 @@ if cheat_marker:
 else:
     CHECK_CHEAT = NO_CHECK_CHEAT
 
+problem_multistep_python = (
+    f"""### Spec: In {LANG}, write a function  that returns the sum of the unique prime factors of 
+a given natural number. Example: if the input number was 28, the function would return 9 (2 + 7), 
+if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would return 97, as 97 is prime. 
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    None
+)
 
 problem_parser_res = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition.
@@ -41,6 +55,7 @@ Example: "1" evaluates to 1. "1+1" evaluates to 2. "100+3" evaluates to 103. "1+
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 problem_parser_data = (
@@ -56,6 +71,7 @@ No characters other than digits and '+', '*' may be in the string.
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -75,6 +91,7 @@ problem_fact = (
     15,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -96,7 +113,8 @@ problem_fact_dafny_check = (
     ['Dafny'],
     """
 lemma CHECK_FacPositive(n: nat) ensures fac(n) > 0 { FacPositive(n); }
-    """
+    """,
+    None
 )
 
 problem_fact_coq_check = (
@@ -117,7 +135,8 @@ problem_fact_coq_check = (
     ['Coq'],
     """
 Lemma CHECK_FacPositive: forall (n: nat), fac n > 0. Proof. intros. apply FacPositive; eauto. Qed.
-    """
+    """,
+    None
 )
 
 problem_mult_proof_coq = (
@@ -133,7 +152,9 @@ Proof.
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ['Coq'],
-    None)
+    None,
+    None
+    )
 
 problem_1_divides_n_proof_coq = (
     """
@@ -155,6 +176,7 @@ Proof.
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ['Coq'],
+    None,
     None)
 
 problem_partial_maps_proof_coq = (
@@ -223,6 +245,7 @@ Proof.
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ['Coq'],
+    None,
     None)
 
 problem_opt0_proof_coq = (
@@ -265,6 +288,7 @@ Proof.
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ['Coq'],
+    None,
     None)
 
 problem_opt0_coq_proof_hints = """
@@ -301,7 +325,10 @@ problem_opt0 = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
-    None
+    None,
+    {
+        "\ndef optimize": "test(optimize(Const(5)).evaluate() == 5)"
+    }
 )
 
 problem_opt0_dafny_check = (
@@ -327,7 +354,8 @@ problem_opt0_dafny_check = (
 {
     OptimizePreservesSemantics(e, env);
 }
-"""
+""",
+None
 )
 
 problem_opt0_coq_check = (
@@ -352,7 +380,8 @@ problem_opt0_coq_check = (
     intros.
     apply OptimizePreservesSemantics; eauto.
     Qed.
-"""
+""",
+None
 )
 
 problem_opt0_opt_dafny = ("""### Spec: In Dafny, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
@@ -382,6 +411,7 @@ predicate optimal(e: Expr) {
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ['Dafny'],
+    None,
     None
 )
 
@@ -428,6 +458,7 @@ ensures denotation(foo) % 2 == 0
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None,
     None
 )
 
@@ -473,6 +504,7 @@ ensures denotation(foo) % 2 == 0
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None,
     None
 )
 
@@ -513,6 +545,7 @@ lemma OptimizerOptimal(e: Expr)
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None,
     None
 )
 
@@ -575,6 +608,7 @@ ensures eval(optimize(e), env) == eval(e, env)
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Dafny'],
+    None,
     None
 )
 
@@ -610,6 +644,7 @@ lemma OptimizerOptimal(e: Expr)
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ALL_LANGS,
+    None,
     None
 )
 
@@ -645,7 +680,8 @@ lemma OptimizerOptimal(e: Expr)
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ["Dafny"],
-    "lemma CHECK_OptimizerOptimal(e: Expr) ensures optimal(optimize(e)) { OptimizerOptimal(e); }"
+    "lemma CHECK_OptimizerOptimal(e: Expr) ensures optimal(optimize(e)) { OptimizerOptimal(e); }",
+    None
 )
 
 problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
@@ -680,7 +716,8 @@ lemma OptimizerOptimal(e: Expr)
     40,
     CHECK_PROOF, CHECK_CHEAT,# if LANG != 'Dafny' else (lambda v: CHECK_CHEAT(v) or "requires" not in v or "==>" not in v),
     ["Coq"],
-    "Lemma CHECK_OptimizerOptimal: forall (e: Expr), optimal(optimize(e)). Proof. intros. apply OptimizerOptimal; eauto. Qed."
+    "Lemma CHECK_OptimizerOptimal: forall (e: Expr), optimal(optimize(e)). Proof. intros. apply OptimizerOptimal; eauto. Qed.",
+    None
 )
 
 problem_mult = (
@@ -694,6 +731,7 @@ problem_mult = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -712,7 +750,8 @@ problem_mult_dafny_check = (
     lemma {:autocontract} CHECK_Mult(a: nat, b: nat, n: nat)
     requires n > 0 && n*a == n*b
     ensures a == b { Mult(a, b, n); }
-    """
+    """,
+    None
 )
 
 problem_max_dafny = (
@@ -736,6 +775,7 @@ ensures isMax(result, numbers)
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None,
     None
 )
 
@@ -793,6 +833,7 @@ ensures forall i :: 0 < i < |result| ==> isMax(result[i], numbers[0..(i+1)])
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None,
     None
 )
 
@@ -838,6 +879,7 @@ at that point function should return true. Otherwise it should return false.
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None,
     None
 )
 
@@ -881,6 +923,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None,
     None
 )
 
@@ -908,6 +951,7 @@ Insert a number 'delimeter' between every two consecutive elements of input list
     20,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
+    None,
     None
 )
 
@@ -928,6 +972,7 @@ Then (6) write another lemma about the insert function that checks the BST prope
     40,
     CHECK_PROOF2, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -963,7 +1008,8 @@ lemma CHECK_InsertPreservesBST(t: Tree, x: nat, min: nat, max: nat)
 {
     InsertPreservesBST(t, x, min, max);
 }
-    """
+    """,
+    None
 )
 
 problem_bst_coq_check = (f"""### Spec: In {LANG}, (1) write an ADT for a tree of natural numbers. Call it `Tree`.
@@ -1002,7 +1048,8 @@ Proof.
     intros.
     eapply InsertPreservesBST; eauto.
 Qed.
-    """
+    """,
+    None
 )
 
 problem_bst_dafny_sanity_check = ((hint_match_dafny+"""
@@ -1055,6 +1102,7 @@ lemma InsertPreservesBST(t: Tree, value: nat, min: nat, max: nat)
     15,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1071,6 +1119,7 @@ problem_repeat = (
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1094,7 +1143,8 @@ problem_repeat_dafny_check = (
     {
       repeat_correct(x, n);
     }
-    """
+    """,
+    None
 )
 
 problem_repeat_coq_check = (
@@ -1119,7 +1169,8 @@ problem_repeat_coq_check = (
       intros.
       eapply repeat_correct; eauto.
     Qed.
-    """
+    """,
+    None
 )
 
 problem_repeat2 = (
@@ -1138,6 +1189,7 @@ problem_repeat2 = (
     40,
     CHECK_PROOF2, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1157,6 +1209,7 @@ problem_reverse = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF2, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1186,7 +1239,8 @@ problem_reverse_dafny_check = (f"""### Spec: In {LANG}:
     {
       reverse_involutes(l);
     }
-    """
+    """,
+    None
 )
 
 problem_append = (f"""### Spec: In {LANG}:
@@ -1204,6 +1258,7 @@ problem_append = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1222,6 +1277,7 @@ problem_unzip = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1237,6 +1293,7 @@ problem_days = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1260,7 +1317,8 @@ problem_days_dafny_check = (f"""### Spec: In {LANG}:
     {
       iter5_biz_day_idempotent(d);
     }
-    """
+    """,
+    None
 )
 
 problem_food = (f"""### Spec: In {LANG}:
@@ -1275,6 +1333,7 @@ problem_food = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1298,7 +1357,8 @@ problem_food_dafny_check = (f"""### Spec: In {LANG}:
     {
       ok3_pizza(x);
     }
-    """
+    """,
+    None
 )
 
 problem_lights = (f"""### Spec: In {LANG}:
@@ -1312,6 +1372,7 @@ problem_lights = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -1328,6 +1389,7 @@ problem_lights_more = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ['Dafny'],
+    None,
     None
 )
 
@@ -1345,7 +1407,8 @@ problem_lights_more_check = (
     {
       check_activation(source, target);
     }
-    """)
+    """,
+    None)
     
 
 problem_lights_more_coq_check = (f"""### Spec: In {LANG}:
@@ -1368,7 +1431,8 @@ problem_lights_more_coq_check = (f"""### Spec: In {LANG}:
       intros.
       eapply check_activation; eauto.
     Qed.
-    """
+    """,
+    None
 )
 
 
@@ -1382,10 +1446,12 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
 problems_dict = {
+    "problem_multistep_python" : problem_multistep_python,
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,
     "problem_fact" : problem_fact,
@@ -1448,6 +1514,7 @@ problems_dict = {
     check_cheat_func,
     supported_langs,
     check_string,
+    test_dict
 ) = problems_dict[args.problem_name]
 
 if type(prompt) is tuple:
