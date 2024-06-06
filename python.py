@@ -109,7 +109,7 @@ def run_unittests(msg: str, unittest=None):
     print(file)
     return check_code(file)["status"]
 
-def score_func(sentence: str, unittest) -> Optional[float]:
+def score_func(sentence: str, unittest: Optional[str] = None) -> Optional[float]:
     print("TEXT")
     print(sentence)
     score = calculateScore(sentence)
