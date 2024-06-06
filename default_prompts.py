@@ -437,7 +437,7 @@ problem_opt0_python = (
     22,
     40,
     CHECK_PROOF, CHECK_CHEAT,
-    ALL_LANGS,
+    ["Python"],
     None,
     {
         "\ndef optimize": "test(optimize(Const(5)).evaluate() == 5)"
