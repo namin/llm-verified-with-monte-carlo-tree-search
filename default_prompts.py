@@ -59,8 +59,8 @@ Example: "1" evaluates to 1. "1+1" evaluates to 2. "100+3" evaluates to 103. "1+
     None
 )
 
-problem_parser_fib = (
-    f"""### Spec: In {LANG}, write a function that generates the number of factors for the n-th Fibonacci number, 
+problem_parser_myfib = (
+    f"""### Spec: In {LANG}, write a function called fib that generates the number of factors for the n-th Fibonacci number, 
     where n is the input. The function should take an integer n and return its result. Fibonacci numbers are defined 
     as the first term being 0, the second term being 1, and the third term being the sum of the first two terms, which
     is 1. The fourth term is the sum of the two prior terms, which equals 2. The fifth term is the sum of the third and 
@@ -74,9 +74,11 @@ Example: The function should take in 3, which gives Fibonacci number 1, and eval
     5,
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
-    ALL_LANGS,
+    ['Python'],
     None,
-    None
+    {
+        "def fib": "test(fib(3) == 1)"
+    }
 )
 
 problem_parser_race = (
@@ -1546,7 +1548,7 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
 problems_dict = {
     "problem_multistep_python" : problem_multistep_python,
     "problem_parser_res" : problem_parser_res,
-    "problem_parser_fib" : problem_parser_fib,
+    "problem_parser_myfib" : problem_parser_myfib,
     "problem_parser_race" : problem_parser_race,
     "problem_parser_quad" : problem_parser_quad,
     "problem_parser_word" : problem_parser_word,
