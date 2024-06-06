@@ -75,6 +75,7 @@ Example: The function should take in 3, which gives Fibonacci number 1, and eval
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -91,6 +92,7 @@ come in 100th place, the function takes in 100, and it returns 99.
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -106,6 +108,7 @@ function's results are -3 and 2.
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -124,6 +127,7 @@ to process and analyze large amounts of natural language data." and 5 results in
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
@@ -141,7 +145,7 @@ No characters other than digits and '+', '*' may be in the string.
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
     None,
-    None
+    None,
 )
 
 problem_parser_interest = (
@@ -159,6 +163,7 @@ Tom will have approximately $23,580.79 in his account. This means that the funct
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
+    None,
     None
 )
 
