@@ -43,6 +43,75 @@ Example: "1" evaluates to 1. "1+1" evaluates to 2. "100+3" evaluates to 103. "1+
     ALL_LANGS,
     None
 )
+
+problem_parser_fib = (
+    f"""### Spec: In {LANG}, write a function that generates the number of factors for the n-th Fibonacci number, 
+    where n is the input. The function should take an integer n and return its result. Fibonacci numbers are defined 
+    as the first term being 0, the second term being 1, and the third term being the sum of the first two terms, which
+    is 1. The fourth term is the sum of the two prior terms, which equals 2. The fifth term is the sum of the third and 
+    fourth term, which is 3. Every succeeding term is equal to the sum of the two preceding terms. Let the first term
+    in the series be 0, and let the second term in the series be 1.
+Example: The function should take in 3, which gives Fibonacci number 1, and evaluate to 1. 
+7 evaluates to 4. 9 evaluates to 4. 144 evaluates to 15.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
+problem_parser_race = (
+    f"""### Spec: In {LANG}, write a function that takes can solve the problem: if I came in the n-th person to finish a race
+    how many people crossed the finish line before me? 
+
+Example: If I came in 5th place, 4 people crossed the finished line before me. So the function takes in 5 and returns 4. If I 
+come in 100th place, the function takes in 100, and it returns 99. 
+""",
+    2000,
+    None,
+    2,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
+problem_parser_quad = (
+    f"""### Spec: In {LANG}, write a function that calculates the roots of a quadratic equation ax^2 + bx + c,
+where the coefficients a, b, c, are provided by the user. 
+Example: if the inputs are 1, 2, 1, then the function's result is -1. If the inputs are 1, 1, -6, then the 
+function's results are -3 and 2.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
+
+problem_parser_word = (
+    f"""### Spec: In {LANG}, write a function that extracts the top N most frequent words in the paragraph. The function
+    should take in a paragraph and an integer N, and return the N words that appear the most in the paragraph and their 
+    respective counts.
+Example: "Natural language processing (NLP) is a subfield of linguistics, computer science, and artificial intelligence
+concerned with the interactions between computers and human language, in particular how to program computers
+to process and analyze large amounts of natural language data." and 5 results in "language: 2, natural: 2, processing: 1, nlp: 1, is: 1".
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
 problem_parser_data = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition and multiplication.
 First, create a data structure that stores expressions.
@@ -58,6 +127,25 @@ No characters other than digits and '+', '*' may be in the string.
     ALL_LANGS,
     None
 )
+
+problem_parser_interest = (
+    f"""### Spec: Tom decides to invest some money in a bank. He deposits D dollars into the account, which pays an annual interest rate of r%. 
+    However, he also plans to deposit an additional A dollars every year into the same account. The interest is compounded annually.
+    In {LANG}, write a function that will calculate the total amount of money Tom will have in his account after n years.
+
+Example: if the initial deposit is 5000 dollars, the annual interest rate is 5%, and the yearly deposit is 1200 dollars, then after 10 years, 
+Tom will have approximately $23,580.79 in his account. This means that the function takes in its inputs 5000 and 5 and 1200 and 10 and returns
+23,580.79. 
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ALL_LANGS,
+    None
+)
+
 
 problem_fact = (
     f"""### Spec: In {LANG}, write a factorial function and prove that the factorial is always strictly positive.
@@ -1387,6 +1475,11 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
 
 problems_dict = {
     "problem_parser_res" : problem_parser_res,
+    "problem_parser_fib" : problem_parser_fib,
+    "problem_parser_race" : problem_parser_race,
+    "problem_parser_quad" : problem_parser_quad,
+    "problem_parser_word" : problem_parser_word,
+    "problem_parser_interest" : problem_parser_interest,
     "problem_parser_data" : problem_parser_data,
     "problem_fact" : problem_fact,
     "problem_mult_proof_coq" : problem_mult_proof_coq,
