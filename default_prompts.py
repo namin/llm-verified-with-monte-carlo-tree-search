@@ -326,6 +326,26 @@ problem_opt0 = (
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None,
+    None
+)
+
+problem_opt0_python = (
+    f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
+{hint_match_dafny}### Hint: In the optimizer, recursively optimize the sub-expressions.
+{'''### Hint: For the proof, just do a simple pattern match (match not if) and call the lemma recursively without adding asserts.
+''' if LANG=='Dafny' else ''
+}{'''### Hint: You can import the `string` datatype with the line `Require Import Coq.Strings.String.`.
+### Hint: Use Fixpoint instead of Definition for recursive functions.
+### Hint: With tactics like `induction` and `destruct`, _avoid_ naming with `as` and let Coq pick the names for you. For example, use `induction e.` but _not_ `induction e as [...]`.
+''' + problem_opt0_coq_proof_hints if LANG=='Coq' else ''
+}""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ALL_LANGS,
+    None,
     {
         "\ndef optimize": "test(optimize(Const(5)).evaluate() == 5)"
     }
