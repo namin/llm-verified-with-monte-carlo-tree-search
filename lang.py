@@ -1,5 +1,6 @@
 from lang_config import LANG
 
+run_tests = False
 if LANG == "Dafny":
     from dafny import (
         score_func,
@@ -45,11 +46,13 @@ elif LANG == "Python":
         verifier_feedback,
         filter_code,
         check_code,
+        run_unittests
     )
+    run_tests = True
 else:
     assert False
 
-def can_be_solution(msg: str, min_lines: int, check_func=None, check_string=None) -> bool:
+def can_be_solution(msg: str, min_lines: int, check_func=None, check_string=None, unittests=None) -> bool:
     if not (msg.count("```") % 2 == 0):
         return False
     v = filter_code(msg)
@@ -60,6 +63,9 @@ def can_be_solution(msg: str, min_lines: int, check_func=None, check_string=None
         print("FINAL CHECK")
         print(v + check_string)
         r = check_code(v + check_string)["status"] == 0
+    if r and unittests:
+        print("FINAL UNITTEST")
+        r = run_unittests(v, unittests) == 0
     return r
 
 def can_be_solution_whole(msg: str, min_lines: int, check_func=None, check_string=None) -> bool:
