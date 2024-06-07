@@ -29,7 +29,7 @@ else:
     CHECK_CHEAT = NO_CHECK_CHEAT
 
 problem_multistep_python = (
-    f"""### Spec: In {LANG}, write a function  that returns the sum of the unique prime factors of 
+    f"""### Spec: In {LANG}, write a function sum_unique_prime_factors(n) that returns the sum of the unique prime factors of 
 a given natural number. Example: if the input number was 28, the function would return 9 (2 + 7), 
 if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would return 97, as 97 is prime. 
 """,
@@ -40,7 +40,52 @@ if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Python'],
     None,
-    None
+    {
+        "def sum_unique_prime_factors(n):": "test(sum_unique_prime_factors(28) == 9)\ntest(sum_unique_prime_factors(45) == 8)\ntest(sum_unique_prime_factors(60) == 10)"
+    }
+)
+
+problem_python_2_oneshot = (
+    f"""### Spec: In {LANG}, write a 'magic(s)' function that: given a string, it finds all the characters that repeat an odd 
+    number of times in the string and remove them from it. Then, for every pair of the same character next to each other, 
+    you should remove one of them. Then, it should rotate any letters in the string by the length of the resulting string 
+    (rotate A two times would result in a C, rotating H once would result in an I and rotating F 26 times would result back in F). 
+    It should return this final function.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def magic(s):": "test(magic('vvbbbsszzzzcc  kklllccffzzrr!!') == 'hello world!')"
+    }
+)
+
+problem_python_2_steps = (
+    f"""### Spec: In {LANG}, write a function 'remove_odd(s)', that given a string, it removes the characters that 
+    appear on it an odd number of times. Then, write a function 'remove_pairs(s)', that given a string, for every 
+    pair of the same character next to each other, it removes one of them ('hheelllloo' would become 'hello'). Then, 
+    write another function 'rotate_letters(s, n)', that given a string and a number, it rotates the letters of the alfabet 
+    by n (rotating A once gives B, rotating D twice gives F and so on). Then, write a final function 'magic(s)' that, 
+    using the previous functions, removes the odd appearing characters, remove pairs of characters, and after all these
+    changes, it rotates the letters of this final string by the its final number of characters.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def remove_odd(s):" : "test(remove_odd('kkkppoottaiiiattoojjj') == 'ppoottaattoo')",
+        "def remove_pairs(s):" : "test(remove_pairs('ppoottaattoo') == 'potato')\ntest(remove_pairs('hheelllloo') == 'hello')",
+        "def rotate_letters(s, n):" : "test(remove_odd('abc', 1) == 'bcd')",
+        "def magic(s):" : "test(magic('vvbbbsszzzzcc  kklllccffzzrr!!') == 'hello world!')"
+    }
 )
 
 problem_parser_res = (
@@ -1451,6 +1496,8 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
 )
 
 problems_dict = {
+    "problem_python_2_steps" : problem_python_2_steps,
+    "problem_python_2_oneshot" : problem_python_2_oneshot,
     "problem_multistep_python" : problem_multistep_python,
     "problem_parser_res" : problem_parser_res,
     "problem_parser_data" : problem_parser_data,

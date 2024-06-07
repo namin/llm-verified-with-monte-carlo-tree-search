@@ -38,7 +38,7 @@ def find_first_index(string, char1, char2):
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filter_code(msg + "```")
     # If the last line starts with a tab, consider the program is still goind
-    if v == "" or v.splitlines()[-1].startswith('\t') or v.splitlines()[-1].startswith(' '): 
+    if v == "" or ((not v.splitlines()[-1].strip().startswith('return')) and (v.splitlines()[-1].startswith('\t') or v.splitlines()[-1].startswith(' '))): 
         return None, None
     v = v.strip()
     r = check_code(v)
@@ -81,7 +81,7 @@ def check_code(v: str) -> dict:
 
 test_fwk = """
 import sys
-runningAllTests = False
+runningAllTests = True
 def test(x):
 	if not x:
 		print('FALSE')
@@ -104,7 +104,7 @@ def run_unittests(msg: str, unittest=None):
         if v.find(key) != -1:
             file += value + "\n"
         else:
-            file += "runningAllTests = True\n"
+            file += "runningAllTests = False\n"
     file += "\nfinalReport()\n"
     print(file)
     return check_code(file)["status"]
