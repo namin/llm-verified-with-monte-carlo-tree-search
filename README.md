@@ -22,19 +22,27 @@ This project relies on GPU access. It has been tested on a multi-GPU machine wit
 
 Clone the github repo. Note that it has linked submodules so it should be cloned with the following command:
 ```
-git clone --recurse-submodules git@github.com:namin/llm-verified-with-monte-carlo-tree-search.git
+git clone --recurse-submodules https://github.com/namin/llm-verified-with-monte-carlo-tree-search.git
 ```
 
-Using `mamba` or equivalently `conda`:
 Note that you will be prompted to paste your huggingface authentication token.
 ```
-mamba create --name llm-verified python=3.10
-mamba activate llm-verified
+conda create --name llm-verified python=3.10
+conda activate llm-verified
 pip install -r requirements.txt
 huggingface-cli login
 ```
 
+(If you want to use the singularity sandbox) Download the `llm-verified` docker image (created by the Dockerfile here and pushed to the [hub](https://hub.docker.com/r/namin/llm-verified)) and put it in `~/singularity`.
+```
+mkdir -p ~/singularity
+cd ~/singularity
+singularity pull docker://namin/llm-verified
+```
+
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
+
+Please confirm that Dafny verification works before experimenting, for example by using the `okdafny.py` script we provide.  We have sometimes run into issues where z3 was not set up correctly, and Dafny skipped the verification process without returning an error code. Should you run into these problems, compile z3 from source and place the executable into your PATH.
 
 (If you want to use Coq) Install Coq: [Install opam](https://opam.ocaml.org/doc/Install.html), then:
 
@@ -160,7 +168,7 @@ To a run a certain flavor of experiment on one of the prompts used in the VMCTS 
 python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
 ```
 
-To run a certain flavor of experiment on the Clover benchmark dataet, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on Clover, do:
+To run a certain flavor of experiment on the Clover benchmark dataset, do something like the following. For example, to run the logic in `run_intermediate_expansion.py` on Clover, do:
 ```
 python experiments_clover.py --experiment_name run_intermediate_expansion.py
 ```
@@ -173,6 +181,16 @@ For example, to log the results of the intermediate expansion experiment on `opt
 ```
 ./log.sh log/intermediate-expansion-01.txt python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
 ```
+
+### Adding unit tests
+Add your unit tests to the `test_dict`, the final element of the prompt tuple.
+Each key-value pair in this dictionary represents one or more unit tests. The key is some
+string that has to occur in the generated code for the tests to run. The value is
+a set of tests (think of assertions) that make up the test. Within the value string,
+use the `test(bool)` function. Example: `{'evaluate': "test(fac(5) == 120)"}`.
+You can either put each single assertion on its own line (`test(fac(5) == 120)\ntest(fac(4) == 30)`),
+in its own key-value-pair, or `and` all of them together (`test(fac(5) == 120 and fac(4) == 30)`).
+
 # Citation
 ```
 @misc{brandfonbrener2024verified,
