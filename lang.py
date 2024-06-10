@@ -14,9 +14,11 @@ if LANG == "Dafny":
 elif LANG == "Coq":
     from coq import (
         score_func,
+        score_func_whole,
         verifier_feedback,
         short_verifier_feedback,
         filter_code,
+        filter_code_whole,
         check_code,
     )
 elif LANG == "Lean4":
@@ -46,13 +48,17 @@ elif LANG == "Python":
         verifier_feedback,
         filter_code,
         check_code,
-        run_unittests
+        run_unittests,
     )
+
     run_tests = True
 else:
     assert False
 
-def can_be_solution(msg: str, min_lines: int, check_func=None, check_string=None, unittests=None) -> bool:
+
+def can_be_solution(
+    msg: str, min_lines: int, check_func=None, check_string=None, unittests=None
+) -> bool:
     if not (msg.count("```") % 2 == 0):
         return False
     v = filter_code(msg)
@@ -68,7 +74,10 @@ def can_be_solution(msg: str, min_lines: int, check_func=None, check_string=None
         r = run_unittests(v, unittests) == 0
     return r
 
-def can_be_solution_whole(msg: str, min_lines: int, check_func=None, check_string=None) -> bool:
+
+def can_be_solution_whole(
+    msg: str, min_lines: int, check_func=None, check_string=None
+) -> bool:
     if not (msg.count("```") % 2 == 0):
         return False
     vs = filter_code_whole(msg)
@@ -76,6 +85,7 @@ def can_be_solution_whole(msg: str, min_lines: int, check_func=None, check_strin
         if can_be_solution("```" + v + "```", min_lines, check_func, check_string):
             return True
     return False
+
 
 def find_largest_new_block(old_text: str, text: str) -> str:
     return find_largest_new_block_code(

@@ -18,18 +18,12 @@ conda activate verify
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-export model_arg_temp=0.4
+export discovery_factor=1.0
+export model_arg_temp=0.8
 export model_arg_topp=0.95
 export model_arg_topk=0
-
 export token_limit=5000
 
-# Single problem for debugging
-# export problem_here=problem_opt0
-# export remove_hints=True
-# export run_number=$[$SLURM_ARRAY_TASK_ID]
-
-# Sweep across problems
 export run_number=$[$SLURM_ARRAY_TASK_ID/9] # 100 runs per hyperparameter
 export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%9]
 
@@ -49,16 +43,16 @@ else
     export remove_hints=True
 fi
 
+
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=reflexion-dafnychecks9-1
+export WANDB_GROUP=rollout-dafnychecks9-1
 export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number
 
 echo Using seed: $SEED
 echo Run number: $run_number
-echo Problem: $problem_here
+echo Temp: $model_arg_temp
 
-python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints --language=$language --base_model_name=$base_model_name
-
+python run_rollout_no_widen.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --discovery_factor=$discovery_factor --remove_hints=True --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit --problem_name=$problem_here --remove_hints=$remove_hints --language=$language --base_model_name=$base_model_name

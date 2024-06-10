@@ -9,8 +9,7 @@
 #SBATCH --mem=250GB		
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner
-#SBATCH --constraint=a100
-#SBATCH --array=0-4
+#SBATCH --array=0-8
 
 # Custom environment
 source ~/.bashrc
@@ -19,28 +18,51 @@ conda activate verify
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-export model_arg_temps=(0.2 0.4 0.6 0.8 1.0)
+export model_arg_temp=0.6
 export model_arg_topp=0.95
 export model_arg_topk=0
 
-export n_samples=1000 # probably will hit time limit before this
+export n_samples=1000 # may hit time limit before this
 
-export run_number=$[$SLURM_ARRAY_TASK_ID/5] # 100 runs per hyperparameter
-export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%5]
-export model_arg_temp_idx=$[$hyperparam_number]
-export model_arg_temp=${model_arg_temps[$model_arg_temp_idx]}
+
+# Single problem for debugging
+# export problem_here=problem_opt0
+# export remove_hints=True
+# export run_number=$[$SLURM_ARRAY_TASK_ID]
+
+# Sweep across problems
+export run_number=$[$SLURM_ARRAY_TASK_ID/9] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%9]
+
+# export problem_names=(problem_opt0 problem_fact problem_opt0_opt problem_bst problem_repeat)
+# export problem_names=(problem_unzip problem_days problem_food problem_lights problem_max_and_lists)
+
+export problem_names=(problem_opt0_dafny_check problem_lights_more_check problem_fact_dafny_check problem_opt0_opt_dafny_check problem_repeat_dafny_check problem_bst_dafny_check problem_days_dafny_check problem_food_dafny_check problem_reverse_dafny_check)
+
+export problem_here=${problem_names[$hyperparam_number]}
+
+export language=Dafny
+
+export base_model_name=Phind/Phind-CodeLlama-34B-v2
+# export base_model_name=bigcode/starcoder2-15b-instruct-v0.1
+
+if [ $problem_here == "problem_lights_more_check" ] || [ $problem_here == "problem_days_dafny_check" ] || [ $problem_here == "problem_food_dafny_check" ];
+then
+    export remove_hints=False # Note: these probs do not have hints anyways
+else
+    export remove_hints=True
+fi
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=whole-sweep-3
-export WANDB_NAME=$run_number/$model_arg_temp
+export WANDB_GROUP=whole-dafnychecks9-1
+export WANDB_NAME=$problem_here/$run_number
 
 SEED=$run_number
 
 echo Using seed: $SEED
 echo Run number: $run_number
-echo Temp: $model_arg_temp
-echo Top p: $model_arg_topp
+echo Problem: $problem_here
 
-python run_whole.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --remove_hints=True --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --n_samples=$n_samples
+python run_whole.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --n_samples=$n_samples --problem_name=$problem_here --remove_hints=$remove_hints --language=$language --base_model_name=$base_model_name
 
