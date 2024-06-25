@@ -5,15 +5,21 @@ import time
 GREEDY = args.greedy
 N_SAMPLES = args.n_samples
 MAX_N_SAMPLES = args.max_n_samples
+MINS_TIMEOUT = args.mins_timeout
 
 from lang import can_be_solution_whole
 from lang import score_func_whole as uncached_score_func
+
+
+from prompts import prompt, min_lines, check_func, check_string, test_dict
+if test_dict:
+    uncached_score_func_before_dict = uncached_score_func
+    uncached_score_func = lambda x: uncached_score_func_before_dict(x, test_dict)
 
 from common_cache import create_cached_func
 
 score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
 
-from prompts import prompt, min_lines, check_func, check_string
 
 import llm
 
@@ -76,7 +82,7 @@ def summary(all_stats):
     )
 
 
-def main(mins_timeout=None, prompt=prompt):
+def main(mins_timeout=MINS_TIMEOUT, prompt=prompt):
     all_stats = []
     if MAX_N_SAMPLES is not None:
         assert not GREEDY

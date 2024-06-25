@@ -31,14 +31,14 @@ def find_first_index(string, char1, char2):
         index2 = float('inf')  # If char2 is not found, set to infinity
 
     if index1 == float('inf') and index2 == float('inf'):
-        return -1  # If neither character is found
+        return -1  # If neither character is founds
     else:
         return min(index1, index2)  # Return the minimum index
 
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filter_code(msg + "```")
-    # If the last line starts with a tab, consider the program is still goind
-    if v == "" or ((not v.splitlines()[-1].strip().startswith('return')) and (v.splitlines()[-1].startswith('\t') or v.splitlines()[-1].startswith(' '))): 
+    # If the last line is not return, we should keep generating code
+    if v == "" or (not v.splitlines()[-1].strip().startswith('return')): 
         return None, None
     v = v.strip()
     r = check_code(v)
@@ -129,3 +129,8 @@ def score_func(sentence: str, unittest) -> Optional[float]:
         else:
             print("Unittest succeeded, tscore = ", tscore, "and score remains", score)
             return score
+
+score_func_whole = score_func
+filter_code_whole = filter_code
+
+
