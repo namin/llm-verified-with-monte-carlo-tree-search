@@ -31,7 +31,7 @@ def find_first_index(string, char1, char2):
         index2 = float('inf')  # If char2 is not found, set to infinity
 
     if index1 == float('inf') and index2 == float('inf'):
-        return -1  # If neither character is founds
+        return -1  # If neither character is found
     else:
         return min(index1, index2)  # Return the minimum index
 
