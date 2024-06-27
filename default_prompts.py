@@ -74,7 +74,7 @@ Example: The function should take in 3, which gives Fibonacci number 1, and eval
     5,
     25,
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
-    ['Python'],
+    ['Dafny'],
     None,
     {
         "def fib": "test(fib(3) == 1)"
