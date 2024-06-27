@@ -30,7 +30,7 @@ else:
 
 problem_multistep_python = (
     f"""### Spec: In {LANG}, write a function sum_unique_prime_factors(n) that returns the sum of the unique prime factors of 
-a given natural number. Example: if the input number was 28, the function would return 9 (2 + 7), 
+the natural number n. Example: if the input number was 28, the function would return 9 (2 + 7), 
 if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would return 97, as 97 is prime. 
 """,
     2000,
@@ -46,7 +46,7 @@ if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would
 )
 
 problem_python_2_oneshot = (
-    f"""### Spec: In {LANG}, write a 'magic(s)' function that: given a string, it finds all the characters that repeat an odd 
+    f"""### Spec: In {LANG}, write a magic(s) function that: given a string s, it finds all the characters that repeat an odd 
     number of times in the string and remove them from it. Then, for every pair of the same character next to each other, 
     you should remove one of them. Then, it should rotate any letters in the string by the length of the resulting string 
     (rotate A two times would result in a C, rotating H once would result in an I and rotating F 26 times would result back in F). 
@@ -65,7 +65,7 @@ problem_python_2_oneshot = (
 )
 
 problem_python_2_steps = (
-    f"""### Spec: In {LANG}, write a function 'remove_odd(s)', that given a string, it removes the characters that 
+    f"""### Spec: In {LANG}, write a function remove_odd(s), that given a string s, it removes the characters that 
     appear on it an odd number of times. Then, write a function 'remove_pairs(s)', that given a string, for every 
     pair of the same character next to each other, it removes one of them ('hheelllloo' would become 'hello'). Then, 
     write another function 'rotate_letters(s, n)', that given a string and a number, it rotates the letters of the alfabet 
@@ -89,7 +89,7 @@ problem_python_2_steps = (
 )
 
 problem_python_3_oneshot = (
-    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a tring s, converts each of its alpha numeric characters into numbers. The convesion
+    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a string s, converts each of its alpha numeric characters into numbers. The convesion
     is as follows: a or A is coverted to 1, b or B is converted to 2 and so on until z or Z is converted to 26. Characters that represent
     digits should be converted to themselves, and all other characters should be converted to 0. The function string_to_numbers(s) should
     return the sum of the converted list. Then, write a function sum_unique_prime_factors(n) that given a number n, returns the sum of the unique prime factors of n.
@@ -109,7 +109,7 @@ problem_python_3_oneshot = (
 )
 
 problem_python_3_steps = (
-    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a tring s, converts each of its alpha numeric characters into numbers. The convesion
+    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a string s, converts each of its alpha numeric characters into numbers. The convesion
     is as follows: a or A is coverted to 1, b or B is converted to 2 and so on until z or Z is converted to 26. Characters that represent
     digits should be converted to themselves, and all other characters should be converted to 0. The function string_to_numbers(s) should
     return the sum of the converted list. Then, write a function sum_unique_prime_factors(n) that given a number n, returns the sum of the unique prime factors of n.
