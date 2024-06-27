@@ -29,8 +29,8 @@ else:
     CHECK_CHEAT = NO_CHECK_CHEAT
 
 problem_multistep_python = (
-    f"""### Spec: In {LANG}, write a function  that returns the sum of the unique prime factors of 
-a given natural number. Example: if the input number was 28, the function would return 9 (2 + 7), 
+    f"""### Spec: In {LANG}, write a function sum_unique_prime_factors(n) that returns the sum of the unique prime factors of 
+the natural number n. Example: if the input number was 28, the function would return 9 (2 + 7), 
 if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would return 97, as 97 is prime. 
 """,
     2000,
@@ -40,8 +40,141 @@ if the input was 45, it would return 8 (3 + 5) and if the input was 97, it would
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ['Python'],
     None,
-    None
+    {
+        "def sum_unique_prime_factors(n):": "test(sum_unique_prime_factors(28) == 9)\ntest(sum_unique_prime_factors(45) == 8)\ntest(sum_unique_prime_factors(60) == 10)"
+    }
 )
+
+problem_python_2_oneshot = (
+    f"""### Spec: In {LANG}, write a magic(s) function that: given a string s, it finds all the characters that repeat an odd 
+    number of times in the string and remove them from it. Then, for every pair of the same character next to each other, 
+    you should remove one of them. Then, it should rotate any letters in the string by the length of the resulting string 
+    (rotate A two times would result in a C, rotating H once would result in an I and rotating F 26 times would result back in F). 
+    It should return this final function.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def magic(s):": "test(magic('vvbbbsszzzzcc  kklllccffzzrr!!') == 'hello world!')"
+    }
+)
+
+problem_python_2_steps = (
+    f"""### Spec: In {LANG}, write a function remove_odd(s), that given a string s, it removes the characters that 
+    appear on it an odd number of times. Then, write a function 'remove_pairs(s)', that given a string, for every 
+    pair of the same character next to each other, it removes one of them ('hheelllloo' would become 'hello'). Then, 
+    write another function 'rotate_letters(s, n)', that given a string and a number, it rotates the letters of the alfabet 
+    by n (rotating A once gives B, rotating D twice gives F and so on). Then, write a final function 'magic(s)' that, 
+    using the previous functions, removes the odd appearing characters, remove pairs of characters, and after all these
+    changes, it rotates the letters of this final string by the its final number of characters.
+""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def remove_odd(s):" : "test(remove_odd('kkkppoottaiiiattoojjj') == 'ppoottaattoo')",
+        "def remove_pairs(s):" : "test(remove_pairs('ppoottaattoo') == 'potato')\ntest(remove_pairs('hheelllloo') == 'hello')",
+        "def rotate_letters(s, n):" : "test(rotate_letters('abc', 1) == 'bcd')",
+        "def magic(s):" : "test(magic('vvbbbsszzzzcc  kklllccffzzrr!!') == 'hello world!')"
+    }
+)
+
+problem_python_3_oneshot = (
+    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a string s, converts each of its alpha numeric characters into numbers. The convesion
+    is as follows: a or A is coverted to 1, b or B is converted to 2 and so on until z or Z is converted to 26. Characters that represent
+    digits should be converted to themselves, and all other characters should be converted to 0. The function string_to_numbers(s) should
+    return the sum of the converted list. Then, write a function sum_unique_prime_factors(n) that given a number n, returns the sum of the unique prime factors of n.
+    After, write a function magic(n) that calculates and returns the magic number of a string. The magic number of a string is obtained by 
+    converting the string to a number using the string_to_number function, then using sum_unique_prime_factors in such number. Finally, 
+    write a function best_string(t) that, given a text t, returns the string in such test that yields the highest magic number""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def best_string(t):": "test(best_string('Hello world! A quick example with numbers 123 and special characters $%#.') == 'quick')"
+    }
+)
+
+problem_python_3_steps = (
+    f"""### Spec: In {LANG}, Write a function string_to_number(s) that given a string s, converts each of its alpha numeric characters into numbers. The convesion
+    is as follows: a or A is coverted to 1, b or B is converted to 2 and so on until z or Z is converted to 26. Characters that represent
+    digits should be converted to themselves, and all other characters should be converted to 0. The function string_to_numbers(s) should
+    return the sum of the converted list. Then, write a function sum_unique_prime_factors(n) that given a number n, returns the sum of the unique prime factors of n.
+    After, write a function magic(n) that calculates and returns the magic number of a string. The magic number of a string is obtained by 
+    converting the string to a number using the string_to_number function, then using sum_unique_prime_factors in such number. Finally, 
+    write a function best_string(t) that, given a text t, returns the string in such test that yields the highest magic number""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def string_to_number(s):" : "test(string_to_number('quick!') == 61)",
+        "def sum_unique_prime_factors(n):" : "test(sum_unique_prime_factors(51) == 20)",
+        "def magic(s):" : "test(magic('Hello') == 15)",
+        "def best_string(t):" : "test(best_string('Hello world! A quick example with numbers 123 and special characters $%#.') == 'quick')"
+    }
+)
+
+problem_python_4_oneshot = (
+    f"""### Spec: In {LANG}, 
+    First, write a function palindrome(s) that checks whether a string as is a palindrome, returning True or False accordingly. Then,
+    write a function find_palindrome(t), that given a text, returns the last palindrome word of the text. If no palindromes are found, it 
+    should simply return the last word of the text. Then, write a function vowel_count(s) that given a word, count the number of vowels in it (vowels are only
+    a, e, i, o, u). Then, write a function find_char(s, n), that given a string s and a number n, finds the nth character of the string modulo
+    the length. Finally, write function process_palindrome(t) using the previous functions that given a text t, returns the nth character of 
+    the last palindrome of a text where n is the number of vowels in such palindrome.""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def process_palindrome(t):": "test(process_palindrome('Madam, Anna went to the market. She also met Civic in Nevada.') == 'v')"
+    }
+)
+
+problem_python_4_steps = (
+    f"""### Spec: In {LANG}, 
+    First, write a function palindrome(s) that checks whether a string as is a palindrome, returning True or False accordingly. Then,
+    write a function find_palindrome(t), that given a text, returns the last palindrome word of the text. If no palindromes are found, it 
+    should simply return the last word of the text. Then, write a function vowel_count(s) that given a word, count the number of vowels in it (vowels are only
+    a, e, i, o, u). Then, write a function find_char(s, n), that given a string s and a number n, finds the nth character of the string modulo
+    the length. Finally, write function process_palindrome(t) using the previous functions that given a text t, returns the nth character of 
+    the last palindrome of a text where n is the number of vowels in such palindrome.""",
+    2000,
+    None,
+    5,
+    25,
+    NO_CHECK_PROOF, NO_CHECK_CHEAT,
+    ['Python'],
+    None,
+    {
+        "def palindrome(s):" : "test(palindrome('Anna') == True) \ntest(palindrome('hannah') == True \npalindrome(trevor) == False)",
+        "def find_palindrome(t):" : "test(find_palindrome('Madam, Anna went to the market. She also met Civic in Nevada.') == 'Civic')\n test(find_palindrome('Madam, Anna went to the market. She also met Civic in Nevada.') == 'Civic')",
+        "def vowel_count(s):" : "test(vowel_count(anna) == 2) \ntest(vowel_count(PotAto) == 3)",
+        "def find_char(s, n):" : "find_char('Civic', 2) == 'v'",
+        "def process_palindrome(t):" : "test(process_palindrome('Madam, Anna went to the market. She also met Civic in Nevada.') == 'v')"
+    }
+)
+
 
 problem_parser_res = (
     f"""### Spec: In {LANG}, write a parser function for arithmetic expressions that contain only addition.
@@ -1564,6 +1697,12 @@ problem_max_and_lists = (f"""### Spec: In {LANG}:
 )
 
 problems_dict = {
+    "problem_python_2_steps" : problem_python_2_steps,
+    "problem_python_2_oneshot" : problem_python_2_oneshot,
+    "problem_python_3_steps" : problem_python_3_steps,
+    "problem_python_3_oneshot" : problem_python_3_oneshot,
+    "problem_python_4_steps" : problem_python_4_steps,
+    "problem_python_4_oneshot" : problem_python_4_oneshot,
     "problem_multistep_python" : problem_multistep_python,
     "problem_parser_res" : problem_parser_res,
     "problem_parser_fib" : problem_parser_fib,

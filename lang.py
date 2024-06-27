@@ -45,8 +45,10 @@ elif LANG == "Scala":
 elif LANG == "Python":
     from python import (
         score_func,
+        score_func_whole,
         verifier_feedback,
         filter_code,
+        filter_code_whole,
         check_code,
         run_unittests,
     )
