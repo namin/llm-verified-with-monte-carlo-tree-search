@@ -47,10 +47,13 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     log = r["log"]
     print(log)
     marker = "ex.py\", line "
-    first = log[log.rindex(marker) + len(marker):]
-    num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
-    if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
-        return None, None
+    try:
+        first = log[log.rindex(marker) + len(marker):]
+        num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
+        if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
+            return None, None
+    except:
+        pass
     err = log
     return -1.0, err
 
@@ -63,11 +66,11 @@ def runUnittests(msg: str) -> (Optional[float], Optional[str]):
         return 1.0, None
     log = r["log"]
     print(log)
-    marker = "ex.py\", line "
+    '''marker = "ex.py\", line "
     first = log[log.rindex(marker) + len(marker):]
     num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
     if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
-        return None, None
+        return None, None'''
     err = log
     return -1.0, err
 
