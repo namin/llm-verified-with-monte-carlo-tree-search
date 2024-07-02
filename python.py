@@ -133,4 +133,3 @@ def score_func(sentence: str, unittest: Optional[str] = None) -> Optional[float]
 score_func_whole = score_func
 filter_code_whole = filter_code
 
-

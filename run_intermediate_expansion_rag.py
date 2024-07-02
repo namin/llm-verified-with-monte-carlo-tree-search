@@ -26,6 +26,7 @@ import common_wandb
 
 from cmdline import args
 
+
 node_dups_counter = 0
 
 
@@ -51,7 +52,7 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
 def child_finder(node, montecarlo):
     if limit_depth(node):
         return
-
+    
     pre_gen_time = time.time()
     pre_gen_toks = llm.token_counter
 
@@ -95,11 +96,25 @@ def child_finder(node, montecarlo):
         print("Token limit reached, no solution found")
 
 
+# RAG modified def main
+from call_rag import augment
+from llama_index.core import StorageContext, load_index_from_storage
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from settings_rag import settings_embed
+
 def main(mins_timeout=None, prompt=prompt):
+    # embed model
+    settings_embed()
+    # rebuild storage context
+    storage_context = StorageContext.from_defaults(persist_dir="./storage")
+    # load index
+    index = load_index_from_storage(storage_context)
+
+    aug_prompt = prompt + augment(index, prompt)
     init_time = time.time()
-    montecarlo = MonteCarlo(Node(prompt), mins_timeout)
+    montecarlo = MonteCarlo(Node(aug_prompt), mins_timeout)
     # Add widen node to root
-    widen = Node(prompt)
+    widen = Node(aug_prompt)
     widen.is_widen_node = True
     montecarlo.root_node.add_child(widen)
     widen.update_policy_value(args.widen_policy_value)
@@ -110,7 +125,7 @@ def main(mins_timeout=None, prompt=prompt):
     montecarlo.simulate(expansion_count)
 
     common_wandb.compute_summary(montecarlo, node_dups_counter, init_time)
-
+    print(aug_prompt)
     print("CHOSEN SOLUTION")
     print(montecarlo.solution)
 
