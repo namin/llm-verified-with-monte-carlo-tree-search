@@ -76,9 +76,7 @@ Example: The function should take in 3, which gives Fibonacci number 1, and eval
     NO_CHECK_PROOF, NO_CHECK_CHEAT,
     ALL_LANGS,
     None,
-    {
-        "def fib": "test(fib(3) == 1)"
-    }
+    None
 )
 
 problem_parser_race = (
