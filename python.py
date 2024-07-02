@@ -37,8 +37,8 @@ def find_first_index(string, char1, char2):
 
 def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     v = filter_code(msg + "```")
-    # If the last line starts with a tab, consider the program is still goind
-    if v == "" or v.splitlines()[-1].startswith('\t') or v.splitlines()[-1].startswith(' '): 
+    # If the last line is not return, we should keep generating code
+    if v == "" or (not v.splitlines()[-1].strip().startswith('return')): 
         return None, None
     v = v.strip()
     r = check_code(v)
@@ -47,13 +47,10 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     log = r["log"]
     print(log)
     marker = "ex.py\", line "
-    try:
-        first = log[log.rindex(marker) + len(marker):]
-        num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
-        if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
-            return None, None
-    except:
-        pass
+    first = log[log.rindex(marker) + len(marker):]
+    num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
+    if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
+        return None, None
     err = log
     return -1.0, err
 
@@ -66,11 +63,11 @@ def runUnittests(msg: str) -> (Optional[float], Optional[str]):
         return 1.0, None
     log = r["log"]
     print(log)
-    '''marker = "ex.py\", line "
+    marker = "ex.py\", line "
     first = log[log.rindex(marker) + len(marker):]
     num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
     if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
-        return None, None'''
+        return None, None
     err = log
     return -1.0, err
 
@@ -84,7 +81,7 @@ def check_code(v: str) -> dict:
 
 test_fwk = """
 import sys
-runningAllTests = False
+runningAllTests = True
 def test(x):
 	if not x:
 		print('FALSE')
@@ -107,7 +104,7 @@ def run_unittests(msg: str, unittest=None):
         if v.find(key) != -1:
             file += value + "\n"
         else:
-            file += "runningAllTests = True\n"
+            file += "runningAllTests = False\n"
     file += "\nfinalReport()\n"
     print(file)
     return check_code(file)["status"]
@@ -132,3 +129,7 @@ def score_func(sentence: str, unittest: Optional[str] = None) -> Optional[float]
         else:
             print("Unittest succeeded, tscore = ", tscore, "and score remains", score)
             return score
+
+score_func_whole = score_func
+filter_code_whole = filter_code
+
