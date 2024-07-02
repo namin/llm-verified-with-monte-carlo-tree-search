@@ -128,6 +128,7 @@ class MonteCarlo:
     def get_values_and_visits(self):
         values = [self.root_node.win_value]
         visits = [self.root_node.visits]
+        expected_values = [self.root_node.win_value / self.root_node.visits]
         nodes = [self.root_node]
         while any([len(n.children) > 0 for n in nodes]):
             new_nodes = []
@@ -137,7 +138,8 @@ class MonteCarlo:
             nodes = new_nodes
             values.extend([n.win_value for n in nodes])
             visits.extend([n.visits for n in nodes])
-        return values, visits
+            expected_values.extend([n.win_value / (n.visits or 1) for n in nodes])
+        return values, visits, expected_values
 
     def get_widen_count(self):
         count = 0
@@ -164,11 +166,15 @@ class MonteCarlo:
         stat["leaf_node_count"] = len([1 for c in child_counts if c == 0])
         stat["widen_count"] = self.get_widen_count()
 
-        values, visits = self.get_values_and_visits()
+        values, visits, expected_values = self.get_values_and_visits()
         stat["mean_value"] = sum(values) / len(values)
         stat["max_value"] = max(values)
         stat["min_value"] = min(values)
         stat["mean_visits"] = sum(visits) / len(visits)
         stat["max_visits"] = max(visits)
+        stat["min_visits"] = min(visits)
+        stat["mean_expected_value"] = sum(expected_values) / len(expected_values)
+        stat["max_expected_value"] = max(expected_values)
+        stat["min_expected_value"] = min(expected_values)
 
         return stat

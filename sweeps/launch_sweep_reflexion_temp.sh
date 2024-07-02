@@ -10,7 +10,7 @@
 #SBATCH --account=kempner_fellows
 #SBATCH --partition=kempner_requeue
 #SBATCH --constraint=a100
-#SBATCH --array=0-99%12
+#SBATCH --array=0-500%20
 
 # Custom environment
 source ~/.bashrc
@@ -19,21 +19,20 @@ conda activate verify
 
 export PYTHONPATH=.:${PYTHONPATH}
 
-export discovery_factor=3.0
-export widen_policy_value=0.1
-export model_arg_temp=1.0
+export model_arg_temps=(0.2 0.4 0.6 0.8 1.0)
 export model_arg_topp=0.95
 export model_arg_topk=0
+
 export token_limit=5000
 
-export run_number=$[$SLURM_ARRAY_TASK_ID/1] # 100 runs per hyperparameter
-# export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%1]
-# export model_arg_temp_idx=$[$hyperparam_number]
-# export model_arg_temp=${model_arg_temps[$model_arg_temp_idx]}
+export run_number=$[$SLURM_ARRAY_TASK_ID/5] # 100 runs per hyperparameter
+export hyperparam_number=$[$SLURM_ARRAY_TASK_ID%5]
+export model_arg_temp_idx=$[$hyperparam_number]
+export model_arg_temp=${model_arg_temps[$model_arg_temp_idx]}
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=rollout-1
+export WANDB_GROUP=reflexion-sweep-1
 export WANDB_NAME=$run_number/$model_arg_temp
 
 SEED=$run_number
@@ -41,6 +40,7 @@ SEED=$run_number
 echo Using seed: $SEED
 echo Run number: $run_number
 echo Temp: $model_arg_temp
+echo Top p: $model_arg_topp
 
-python run_rollout_no_widen.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --widen_policy_value=$widen_policy_value --discovery_factor=$discovery_factor --remove_hints=True --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit
+python run_reflexion.py --seed=$SEED --use_wandb=True --wandb_entity=$WANDB_USERNAME --wandb_project=$WANDB_PROJECT --wandb_group=$WANDB_GROUP --wandb_name=$WANDB_NAME --remove_hints=True --model_arg_temp=$model_arg_temp --model_arg_topp=$model_arg_topp --model_arg_topk=$model_arg_topk --token_limit=$token_limit
 

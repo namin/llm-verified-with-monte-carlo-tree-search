@@ -33,6 +33,7 @@ def log_tree(montecarlo, gen_stat, node):
         stat = montecarlo.get_stat_dict()
         stat = {f"tree/{k}": v for k, v in stat.items()}
         stat["tree/node_depth"] = count_depth(node)
+        stat["tree/n_tokens"] = llm.token_counter
 
         # Final solution depth
         if montecarlo.solution is not None:
@@ -51,7 +52,7 @@ def compute_summary(montecarlo, node_dups_counter, init_time):
     if args.use_wandb:
         stat = {}
         stat["final/time"] = time.time() - init_time
-        stat["final/solved"] = limit_tokens()
+        stat["final/solved"] = not limit_tokens()
         stat["final/text"] = montecarlo.solution
         stat["final/n_tokens"] = llm.token_counter
         stat["final/node_dups"] = node_dups_counter

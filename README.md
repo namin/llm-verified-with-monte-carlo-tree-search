@@ -181,6 +181,16 @@ For example, to log the results of the intermediate expansion experiment on `opt
 ```
 ./log.sh log/intermediate-expansion-01.txt python experiments.py --experiment_name run_intermediate_expansion.py --n_trials 10 --mins_timeout 10 --language Dafny --problem_name problem_opt0 --seed 42 --remove_hints True
 ```
+
+### Adding unit tests
+Add your unit tests to the `test_dict`, the final element of the prompt tuple.
+Each key-value pair in this dictionary represents one or more unit tests. The key is some
+string that has to occur in the generated code for the tests to run. The value is
+a set of tests (think of assertions) that make up the test. Within the value string,
+use the `test(bool)` function. Example: `{'evaluate': "test(fac(5) == 120)"}`.
+You can either put each single assertion on its own line (`test(fac(5) == 120)\ntest(fac(4) == 30)`),
+in its own key-value-pair, or `and` all of them together (`test(fac(5) == 120 and fac(4) == 30)`).
+
 # Citation
 ```
 @misc{brandfonbrener2024verified,
