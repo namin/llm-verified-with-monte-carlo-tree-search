@@ -193,12 +193,13 @@ in its own key-value-pair, or `and` all of them together (`test(fac(5) == 120 an
 
 # Citation
 ```
-@misc{brandfonbrener2024verified,
-      title={Verified Multi-Step Synthesis using Large Language Models and Monte Carlo Tree Search}, 
-      author={David Brandfonbrener and Sibi Raja and Tarun Prasad and Chloe Loughridge and Jianang Yang and Simon Henniger and William E. Byrd and Robert Zinkov and Nada Amin},
+@misc{brandfonbrener2024vermctssynthesizingmultistepprograms,
+      title={VerMCTS: Synthesizing Multi-Step Programs using a Verifier, a Large Language Model, and Tree Search}, 
+      author={David Brandfonbrener and Simon Henniger and Sibi Raja and Tarun Prasad and Chloe Loughridge and Federico Cassano and Sabrina Ruixin Hu and Jianang Yang and William E. Byrd and Robert Zinkov and Nada Amin},
       year={2024},
       eprint={2402.08147},
       archivePrefix={arXiv},
-      primaryClass={cs.SE}
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2402.08147}, 
 }
 ```
