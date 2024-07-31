@@ -49,7 +49,7 @@ def augment(index, prompt, code):
   # bge-base embedding model
     settings_embed()
     query_engine = index.as_query_engine()
-    response = query_engine.query("Hint for what the next line should be in the given in-progress solution: " + code + " to answer the problem: " + prompt + "Put response in the format of '### Hint: '. Type the code plain text: do not use '''dafny to indicate code. ")
+    response = query_engine.query("Hint for what the next line should be in the given in-progress solution: " + code + " to answer the problem: " + prompt + "Put response in the format of '### Hint: '.")
     response_str = str(response)
     cleaned_response = response_str.replace("```", "")
-    return str(cleaned_response)
+    return cleaned_response

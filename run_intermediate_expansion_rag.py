@@ -117,7 +117,7 @@ def child_finder(node, montecarlo):
             node.parent.add_child(child)
             for c in node.parent.children:
                 if c.state == text:
-                    global node_dupps_counter
+                    global node_dups_counter
                     node_dups_counter += 1
                     print("found string-duplicated node:")
                     print(text)
