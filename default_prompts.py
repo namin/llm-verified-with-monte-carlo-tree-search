@@ -528,36 +528,6 @@ EXTRA_CONSTANT_FOLDING = " and performs all additions by constants"
 EXTRA_CONSTANT_FOLDING = ""
 
 
-# RAG generated hint
-'''### Hint: To answer the query, let's assume that the ADT for arithmetic expressions is already defined. Here's an example implementation:
-
-```dafny
-// Arithmetic expressions
-newtype Expr =
-  | Const of int
-  | Var of string
-  | Add of Expr * Expr
-
-// Evaluator function
-fun evalExpr (expr: Expr, env: (string -> int)) : int =
-  match expr with
-  | Const(c) => c
-  | Var(v) => env(v)
-  | Add(e1, e2) => evalExpr(e1, env) + evalExpr(e2, env)
-
-// Optimizer function
-fun optimizeExpr (expr: Expr) : Expr =
-  match expr with
-  | Const(c) => expr
-  | Var(_) => expr
-  | Add(e1, e0) =>
-    if e0 is Const(0) then optimizeExpr(e1)
-    else Add(optimizeExpr(e1), e0)
-
-// Proof of semantic preservation
-lemma optimizeExpr_'''
-
-# original hint
 hint_match_dafny = '''### Hint: Recall that in Dafny, pattern match takes the form
 match e
 case Foo(x, y) => 1
@@ -580,7 +550,7 @@ problem_opt0 = (
     1000,
     None,
     22,
-    1, # waas 40
+    40,
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None,
