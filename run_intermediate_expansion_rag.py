@@ -27,7 +27,6 @@ import common_wandb
 
 from cmdline import args
 
-
 node_dups_counter = 0
 # RAG modified def main
 from call_rag import augment
@@ -104,19 +103,10 @@ def child_finder(node, montecarlo):
     hint = augment(index, node.state.instructions, node.state.code)
     gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth)
 
-
     if text is None:
-        # changing here
-        mistakes.append(hint)
         node.update_win_value(-1)
     else:
-        # changing here
-
-
         parts = text.split("```dafny", 1)
-
-        # Extract the parts before and after 'dafny'
-        instructions = parts[0]
         code = parts[1] if len(parts) > 1 else ""
         clean_code = code.replace("```", "")
         updated_code = node.state.update(clean_code)
@@ -152,16 +142,11 @@ def child_finder(node, montecarlo):
         print("Token limit reached, no solution found")
 
 def main(mins_timeout = None, prompt = prompt):
-    global mistakes
-    mistakes = []
-    global reflections
-    reflections = []
     montecarlo = MonteCarlo(Node(FocusNode(prompt, "", "")), mins_timeout)
     widen = Node(FocusNode(prompt, "", ""))
     widen.is_widen_node = True
     montecarlo.root_node.add_child(widen)
     widen.update_policy_value(args.widen_policy_value)
-    # montecarlo.global_features = None
     montecarlo.child_finder = child_finder
 
     montecarlo.simulate(expansion_count)
