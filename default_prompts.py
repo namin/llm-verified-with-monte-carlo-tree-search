@@ -527,6 +527,37 @@ problem_opt0_coq_proof_hints = """
 EXTRA_CONSTANT_FOLDING = " and performs all additions by constants"
 EXTRA_CONSTANT_FOLDING = ""
 
+
+# RAG generated hint
+'''### Hint: To answer the query, let's assume that the ADT for arithmetic expressions is already defined. Here's an example implementation:
+
+```dafny
+// Arithmetic expressions
+newtype Expr =
+  | Const of int
+  | Var of string
+  | Add of Expr * Expr
+
+// Evaluator function
+fun evalExpr (expr: Expr, env: (string -> int)) : int =
+  match expr with
+  | Const(c) => c
+  | Var(v) => env(v)
+  | Add(e1, e2) => evalExpr(e1, env) + evalExpr(e2, env)
+
+// Optimizer function
+fun optimizeExpr (expr: Expr) : Expr =
+  match expr with
+  | Const(c) => expr
+  | Var(_) => expr
+  | Add(e1, e0) =>
+    if e0 is Const(0) then optimizeExpr(e1)
+    else Add(optimizeExpr(e1), e0)
+
+// Proof of semantic preservation
+lemma optimizeExpr_'''
+
+# original hint
 hint_match_dafny = '''### Hint: Recall that in Dafny, pattern match takes the form
 match e
 case Foo(x, y) => 1
@@ -534,6 +565,7 @@ case Bar(x) => 2
 case _ => 3
 ''' if LANG=='Dafny' else ''
 hint_match_dafny = hint_match_dafny if args.show_hint_match_dafny else ''
+
 
 problem_opt0 = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.
@@ -548,12 +580,13 @@ problem_opt0 = (
     1000,
     None,
     22,
-    40,
+    1, # waas 40
     CHECK_PROOF, CHECK_CHEAT,
     ALL_LANGS,
     None,
     None
 )
+
 
 problem_opt0_python = (
     f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary additions. Then write an evaluator taking an expression and an environment (a function that takes a variable name and returns a number) and returning the number resulting from evaluation. Then write an optimizer taking an expression and returning an expression with all additions by 0 removed{EXTRA_CONSTANT_FOLDING}. Then prove that the optimizer preserves the semantics as defined by the evaluation function.

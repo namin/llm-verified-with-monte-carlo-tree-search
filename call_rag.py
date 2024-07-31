@@ -5,7 +5,7 @@ from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from settings_rag import settings_embed
 
-def messages_to_prompt(messages):
+'''def messages_to_prompt(messages):
     prompt = ""
     for message in messages:
         if message.role == 'system':
@@ -14,6 +14,7 @@ def messages_to_prompt(messages):
             prompt += f"<|user|>\n{message.content}</s>\n"
         elif message.role == 'assistant':
             prompt += f"<|assistant|>\n{message.content}</s>\n"
+        print("augmenting")
 
     # ensure we start with a system prompt, insert blank if needed
     if not prompt.startswith("<|system|>\n"):
@@ -21,8 +22,27 @@ def messages_to_prompt(messages):
 
     # add final assistant prompt
     prompt = prompt + "<|assistant|>\n"
+    return prompt '''
 
+def messages_to_prompt(messages):
+    prompt = ""
+    for message in messages:
+        if message.role == 'system':
+            prompt += f"\n{message.content}</s>\n"
+        elif message.role == 'user':
+            prompt += f"\n{message.content}</s>\n"
+        elif message.role == 'assistant':
+            prompt += f"\n{message.content}</s>\n"
+        print("augmenting")
+
+    # ensure we start with a system prompt, insert blank if needed
+    if not prompt.startswith("\n"):
+        prompt = "\n</s>\n" + prompt
+
+    # add final assistant prompt
+    prompt = prompt + "\n"
     return prompt
+
 
 quantization_config = BitsAndBytesConfig(
     load_in_4bit=True,
@@ -45,9 +65,11 @@ Settings.llm = HuggingFaceLLM(
     )
 
 
-def augment(index, prompt):
+def augment(index, prompt, code):
   # bge-base embedding model
     settings_embed()
     query_engine = index.as_query_engine()
-    response = query_engine.query(prompt)
-    return str(response)
+    response = query_engine.query("Hint for what the next line should be in the given in-progress solution: " + code + " to answer the problem: " + prompt + "Put response in the format of '### Hint: '. Type the code plain text: do not use '''dafny to indicate code. ")
+    response_str = str(response)
+    cleaned_response = response_str.replace("```", "")
+    return str(cleaned_response)
