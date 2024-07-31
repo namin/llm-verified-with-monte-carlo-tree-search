@@ -14,7 +14,6 @@ def messages_to_prompt(messages):
             prompt += f"<|user|>\n{message.content}</s>\n"
         elif message.role == 'assistant':
             prompt += f"<|assistant|>\n{message.content}</s>\n"
-        print("augmenting")
 
     # ensure we start with a system prompt, insert blank if needed
     if not prompt.startswith("<|system|>\n"):
