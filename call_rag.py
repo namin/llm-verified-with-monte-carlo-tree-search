@@ -5,7 +5,7 @@ from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
 from settings_rag import settings_embed
 
-'''def messages_to_prompt(messages):
+def messages_to_prompt(messages):
     prompt = ""
     for message in messages:
         if message.role == 'system':
@@ -22,26 +22,7 @@ from settings_rag import settings_embed
 
     # add final assistant prompt
     prompt = prompt + "<|assistant|>\n"
-    return prompt '''
-
-def messages_to_prompt(messages):
-    prompt = ""
-    for message in messages:
-        if message.role == 'system':
-            prompt += f"\n{message.content}</s>\n"
-        elif message.role == 'user':
-            prompt += f"\n{message.content}</s>\n"
-        elif message.role == 'assistant':
-            prompt += f"\n{message.content}</s>\n"
-        print("augmenting")
-
-    # ensure we start with a system prompt, insert blank if needed
-    if not prompt.startswith("\n"):
-        prompt = "\n</s>\n" + prompt
-
-    # add final assistant prompt
-    prompt = prompt + "\n"
-    return prompt
+    return prompt 
 
 
 quantization_config = BitsAndBytesConfig(
