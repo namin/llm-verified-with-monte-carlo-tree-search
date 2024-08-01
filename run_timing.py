@@ -1,3 +1,5 @@
+import time
+
 from montecarlo.node import Node
 from montecarlo.montecarlo import MonteCarlo
 
@@ -12,15 +14,45 @@ from lang import run_tests
 if test_dict and run_tests:
     uncached_score_func_before_dict = uncached_score_func
     uncached_score_func = lambda x: uncached_score_func_before_dict(x, test_dict)
+
+ver_count = 0
+ver_avg = 0
+def timed_uncached_score_func(x):
+    global ver_count
+    global ver_avg
+    import time
+    start = time.time()
+    result = uncached_score_func(x)
+    end = time.time()
+    elapsed = (end - start)
+    ver_count += 1
+    ver_avg += elapsed / llm_count
+    return result
+
 from common_cache import create_cached_func
-score_func, cache_stats, reset_cache = create_cached_func(uncached_score_func)
+score_func, cache_stats, reset_cache = create_cached_func(timed_uncached_score_func)
 
 from common import limit_depth, max_completion_depth, limit_tokens
 from common_stats import stats
 
 import llm
+llm_count = 0
+llm_avg = 0
+def timed_generate(prompt, num, **kwargs):
+    global llm_count
+    global llm_avg
+    import time
+    start = time.time()
+    result = llm.generate(prompt, num, **kwargs)
+    end = time.time()
+    elapsed = (end - start)
+    llm_count += 1
+    llm_avg += elapsed / llm_count
+    return result
 
-import time
+def print_timing():
+    t = "%.2f s (%d)"
+    print(("verifier:"+t+", llm:"+t) % (ver_avg, ver_count, llm_avg, llm_count))
 
 import common_wandb
 
@@ -33,10 +65,11 @@ def generate_complete(text, montecarlo, current_completion_depth=1):
     if current_completion_depth >= max_completion_depth:
         return None, current_completion_depth
     prev = text
-    texts = llm.generate(text, 1)
+    texts = timed_generate(text, 1)
     text = texts[0]
     score = score_func(text)
     print(diffprompt(prev, texts))
+    print_timing()
     if score is not None:
         if score < 0:
             return None, current_completion_depth
@@ -117,6 +150,8 @@ def main(mins_timeout=None, prompt=prompt):
     stats(montecarlo)
     print("cache stats", cache_stats)
 
+    print_timing()
+    
     return cache_stats
 
 
