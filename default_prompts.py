@@ -931,6 +931,7 @@ lemma OptimizerOptimal(e: Expr)
 )
 
 problem_sorting_dafny_check = (f"""### Spec: In {LANG}, write a function `sort` that takes a sequence of integers `seq<int>` and returns a sorted sequence with the same elements. Then write a lemma `SortSorted` that ensures `sorted(sort(s))` for all sequences of integers `s`.
+
 ```dafny
 predicate sorted(s: seq<int>)
 {{
@@ -948,7 +949,32 @@ predicate sorted(s: seq<int>)
     None
 )
 
+problem_insertion_sort_dafny_check = (f"""### Spec: In {LANG},
+(1) Write a recursive function `insert` that takes an `int` element and a sorted `seq<int>` and returns a `seq<int>` like the given list with additionally the given element inserted in its sorted place.
+(2) Using the function `insert`, implement `sort`, a function that takes a `seq<int>` and sorts it.
+(3) Prove the lemma `insert_sorted` that states that given `sorted(s)` then `sorted(insert(a,s))` for all `int` element `a` and all `seq<int>` s.
+(4) Prove the lemma `sort_sorted` that states that `sorted(sort(s))` for all `seq<int>` s.
+
+```dafny
+predicate sorted(s: seq<int>)
+{{
+   forall i,j :: 0 <= i < j < |s| ==> s[i] <= s[j]
+}}
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Dafny"],
+    "lemma CHECK_insert_sorted(a: int, s: seq<int>) requires sorted(s); ensures sorted(insert(a, s)) { insert_sorted(a, s); }" +
+    "lemma CHECK_sort_sorted(s: seq<int>) ensures sorted(sort(s)) { sort_sorted(s); }",
+    None
+)
+
 problem_sorting_coq_check = (f"""### Spec: In {LANG}, write a function `sort` that takes a list of natural numbers `list nat` and returns a sorted list with the same elements. Then write a lemma `SortSorted` that ensures `StronglySorted (sort s)` for all list of natural numbers `l`.
+
 ```coq
 Require Import Coq.Lists.List.
 Require Import Coq.Sorting.Sorted.
@@ -1818,6 +1844,7 @@ problems_dict = {
     "problem_bst_coq_check" : problem_bst_coq_check,
     "problem_sorting_dafny_check" : problem_sorting_dafny_check,
     "problem_sorting_coq_check" : problem_sorting_coq_check,
+    "problem_insertion_sort_dafny_check" : problem_insertion_sort_dafny_check,
     "problem_insertion_sort_coq_check" : problem_insertion_sort_coq_check,
 }
 
