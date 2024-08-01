@@ -948,6 +948,23 @@ predicate sorted(s: seq<int>)
     None
 )
 
+problem_sorting_coq_check = (f"""### Spec: In {LANG}, write a function `sort` that takes a list of natural numbers `list nat` and returns a sorted list with the same elements. Then write a lemma `SortSorted` that ensures `StronglySorted (sort s)` for all list of natural numbers `l`.
+```coq
+Require Import Coq.Lists.List.
+Require Import Coq.Sorting.Sorted.
+
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Coq"],
+    "lemma CHECK_SortSorted: forall (l: list nat), StronglySorted (sort l). Proof. intros. apply SortSorted; eauto. Qed.",
+    None
+)
+
 problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
@@ -1777,6 +1794,7 @@ problems_dict = {
     "problem_bst_dafny_check" : problem_bst_dafny_check,
     "problem_bst_coq_check" : problem_bst_coq_check,
     "problem_sorting_dafny_check" : problem_sorting_dafny_check,
+    "problem_sorting_coq_check" : problem_sorting_coq_check,
 }
 
 # Set the right-hand side to the selected problem.
