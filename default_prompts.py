@@ -965,6 +965,29 @@ Require Import Coq.Sorting.Sorted.
     None
 )
 
+problem_insertion_sort_coq_check = (f"""### Spec: In {LANG},
+(1) Write a recursive function `insert` that takes a `nat` element and a sorted `list nat` and returns a `list nat` like the given list with additionally the given element inserted in its sorted place.
+(2) Using the function `insert`, implement `sort`, a function that takes a `list nat` and sorts it.
+(3) Prove the lemma `insert_sorted` that states that `StronglySorted l -> StronglySorted (insert a l)` for all `nat` element `a` and all `list nat` l.
+(4) Prove the lemma `sort_sorted` that states that `StronglySorted (sort l)` for all `list nat` l.
+
+```coq
+Require Import Coq.Lists.List.
+Require Import Coq.Sorting.Sorted.
+
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Coq"],
+    "lemma CHECK_insert_sorted: forall (a: nat) (l: list nat), StronglySorted l -> StronglySorted (insert_sort a l). Proof. intros. apply insert_sorted; eauto. Qed.\n" +
+    "lemma CHECK_sort_sorted: forall (l: list nat), StronglySorted (sort l). Proof. intros. apply sort_sorted; eauto. Qed.",
+    None
+)
+
 problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
@@ -1795,6 +1818,7 @@ problems_dict = {
     "problem_bst_coq_check" : problem_bst_coq_check,
     "problem_sorting_dafny_check" : problem_sorting_dafny_check,
     "problem_sorting_coq_check" : problem_sorting_coq_check,
+    "problem_insertion_sort_coq_check" : problem_insertion_sort_coq_check,
 }
 
 # Set the right-hand side to the selected problem.
