@@ -930,6 +930,24 @@ lemma OptimizerOptimal(e: Expr)
     None
 )
 
+problem_sorting_dafny_check = (f"""### Spec: In {LANG}, write a function `sort` that takes a sequence of integers `seq<int>` and returns a sorted sequence with the same elements. Then write a lemma `SortSorted` that ensures `sorted(sort(s))` for all sequences of integers `s`.
+```dafny
+predicate sorted(s: seq<int>)
+{{
+   forall i,j :: 0 <= i < j < |s| ==> s[i] <= s[j]
+}}
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Dafny"],
+    "lemma CHECK_SortSorted(s: seq<int>) ensures sorted(sort(s)) { SortSorted(s); }",
+    None
+)
+
 problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
 {'''### Hint: This is the definiton of the `optimal` predicate:
 predicate optimal(e: Expr) {
@@ -1758,6 +1776,7 @@ problems_dict = {
     "problem_mult_dafny_check": problem_mult_dafny_check,
     "problem_bst_dafny_check" : problem_bst_dafny_check,
     "problem_bst_coq_check" : problem_bst_coq_check,
+    "problem_sorting_dafny_check" : problem_sorting_dafny_check,
 }
 
 # Set the right-hand side to the selected problem.
@@ -1822,9 +1841,11 @@ elif LANG == "Coq" and "Proof." in prompt:
     pass
 
 elif LANG != "Lean4":
-    prompt += f"""
+    code_begin = f"""
 ```{LANG.lower()}
 """
+    if prompt.count("```") % 2 == 0:
+        prompt += code_begin
 
 elif LANG == "Lean4":
     prompt += """
