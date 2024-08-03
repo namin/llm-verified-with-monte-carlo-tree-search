@@ -968,7 +968,7 @@ predicate sorted(s: seq<int>)
     40,
     CHECK_PROOF, CHECK_CHEAT,
     ["Dafny"],
-    "lemma CHECK_insert_sorted(a: int, s: seq<int>) requires sorted(s); ensures sorted(insert(a, s)) { insert_sorted(a, s); }" +
+    "lemma CHECK_insert_sorted(a: int, s: seq<int>) requires sorted(s) ensures sorted(insert(a, s)) { insert_sorted(a, s); }\n" +
     "lemma CHECK_sort_sorted(s: seq<int>) ensures sorted(sort(s)) { sort_sorted(s); }",
     None
 )
