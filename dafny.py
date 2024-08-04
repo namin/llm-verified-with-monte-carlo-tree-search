@@ -33,6 +33,8 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     if v == "":
         return None, None
     r = checkDafny(v)
+    if "This ensures clause is part of a bodyless function" in r["out"]:
+        return None, "axioms are forbidden"
     if r["status"] == 0:
         return 1.0, None
     log = r["out"]
@@ -97,10 +99,13 @@ def calculateScore_whole(msg: str) -> Optional[float]:
 
 def calculateScoreHelper_whole(msg: str) -> (Optional[float], Optional[str]):
     v = [s.strip() for s in filterDafny_whole(msg + "```")]
+    err = ""
     for vs in v:
         if vs == "":
             return None, None
         r = checkDafny(vs)
+        if "This ensures clause is part of a bodyless function" in r["log"]:
+            return -1.0, "axioms are forbidden"
         if r["status"] == 0:
             return 1.0, None
         log = r["out"]

@@ -3,7 +3,7 @@ from cmdline import args
    
 if LANG == "Dafny":
     proof_marker = "ensures"
-    cheat_marker = None
+    cheat_marker = "{:axiom}"
 elif LANG == "Coq":
     proof_marker = "Qed"
     cheat_marker = "Admitted"

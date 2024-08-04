@@ -47,7 +47,7 @@ def log_tree(montecarlo, gen_stat, node):
         wandb.log({**gen_stat, **stat})
 
 
-def compute_summary(montecarlo, node_dups_counter, init_time):
+def compute_summary(montecarlo, node_dups_counter, init_time, ver_avg = 0, ver_count = 0, llm_avg = 0,  llm_count = 0):
     # Compute summary stats
     if args.use_wandb:
         stat = {}
@@ -56,6 +56,10 @@ def compute_summary(montecarlo, node_dups_counter, init_time):
         stat["final/text"] = montecarlo.solution
         stat["final/n_tokens"] = llm.token_counter
         stat["final/node_dups"] = node_dups_counter
+        stat["final/ver_avg"] = ver_avg
+        stat["final/ver_count"] = ver_count
+        stat["final/llm_avg"] = llm_avg
+        stat["final/llm_count"] = llm_count
         # Log pass at t
         ts = [500, 1000, 2000, 5000]
         for t in ts:
