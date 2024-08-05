@@ -973,6 +973,41 @@ predicate sorted(s: seq<int>)
     None
 )
 
+problem_insertion_sort_dafny_full_spec_check = (f"""### Spec: In {LANG},
+(1) Write a recursive function `insert` that takes an `int` element and a sorted `seq<int>` and returns a `seq<int>` like the given list with additionally the given element inserted in its sorted place.
+(2) Prove the lemma `element_inserted` that states that `a in insert(a, s)` for all `int` element `a` and all `seq<int>` s.
+(3) Prove the lemma `insert_increases_size` that states that `|insert(a, s)| == |s| + 1` for all `int` element `a` and all `seq<int>` s.
+(4) Prove the lemma `insert_sorted` that states that given `sorted(s)` then `sorted(insert(a ,s))` for all `int` element `a` and all `seq<int>` s.
+(5) Using the function `insert`, implement `sort`, a function that takes a `seq<int>` and sorts it.
+(6) Prove the lemma `sort_sorted` that states that `sorted(sort(s))` for all `seq<int>` s. Use the lemma `insert_sorted` in the recursive case.
+(7) Prove the lemma `sort_permutation` that states that `permutation(sort(s), s)` for all `seq<int>` s.
+
+```dafny
+predicate sorted(s: seq<int>)
+{{
+   forall i,j :: 0 <= i < j < |s| ==> s[i] <= s[j]
+}}
+
+predicate permutation(s: seq<int>, t: seq<int>) {{
+  multiset(s) == multiset(t)
+}}
+
+""",
+    1000,
+    None,
+    22,
+    40,
+    CHECK_PROOF, CHECK_CHEAT,
+    ["Dafny"],
+    "lemma CHECK_element_inserted(a: int, s: seq<int>) ensures a in insert(a, s) { element_inserted(a, s); }\n" +
+    "lemma CHECK_insert_increases_size(a: int, s: seq<int>) ensures |insert(a, s)| == |s| + 1 { insert_increases_size(a, s); }\n" +
+    "lemma CHECK_insert_sorted(a: int, s: seq<int>) requires sorted(s) ensures sorted(insert(a, s)) { insert_sorted(a, s); }\n" +
+    "lemma CHECK_sort_sorted(s: seq<int>) ensures sorted(sort(s)) { sort_sorted(s); }\n" +
+    "lemma CHECK_sort_permutation(s: seq<int>) ensures permutation(sort(s), s) { sort_permutation(sort(s), s); }",
+    None
+)
+
+
 problem_sorting_coq_check = (f"""### Spec: In {LANG}, write a function `sort` that takes a list of natural numbers `list nat` and returns a sorted list with the same elements. Then write a lemma `SortSorted` that ensures `StronglySorted (sort s)` for all list of natural numbers `l`.
 
 ```coq
@@ -1845,6 +1880,7 @@ problems_dict = {
     "problem_sorting_dafny_check" : problem_sorting_dafny_check,
     "problem_sorting_coq_check" : problem_sorting_coq_check,
     "problem_insertion_sort_dafny_check" : problem_insertion_sort_dafny_check,
+    "problem_insertion_sort_dafny_full_spec_check" : problem_insertion_sort_dafny_full_spec_check,
     "problem_insertion_sort_coq_check" : problem_insertion_sort_coq_check,
 }
 
