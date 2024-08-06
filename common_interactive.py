@@ -16,10 +16,12 @@ def find_assistant(prompt):
     except ValueError:
         print("Warning: discarding a result because cannot parse "+prompt)
         return "(no answer)"
-    return prompt[start_index+len(tag):end_index]
+    r = prompt[start_index+len(tag):end_index]
+    r = r.replace("assistant<|end_header_id|>", "")
+    return r
     
 def diffprompt_llama31(prompt, results):
-    print("PROMPTS:"+prompt)
+    print("BEGIN DEBUG PROMPT:"+prompt+"\nEND DEBUG PROMPT")
     print("RESULTS:"+str(results))
     return [find_assistant(r) for r in results]
 
