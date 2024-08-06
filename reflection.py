@@ -69,7 +69,7 @@ You are a {LANG} programming assistant. You will be given some code and an error
 {code}
 ```
 
-{"The error is:" if err or snippet_tex else ""}
+{"The error is:" if err or snippet_text else ""}
 {err}
 {snippet_text}
 <|eot_id|>
