@@ -1,6 +1,6 @@
 from lang_config import LANG
 from lang import filter_code
-from common_interactive import diffprompt
+from common_interactive import diffprompt, diffprompt_llama31 # sigh
 
 from typing import Optional
 
@@ -69,12 +69,13 @@ You are a {LANG} programming assistant. You will be given some code and an error
 {code}
 ```
 
-The error is:
+{"The error is:" if err or snippet_tex else ""}
 {err}
 {snippet_text}
 <|eot_id|>
 """
     r = generate_full(prompt)
-    r = diffprompt(prompt, [r])[0]
+    r = diffprompt_llama31(prompt, [r])[0]
     r = r.replace("```", "")
     return r
+
