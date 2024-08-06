@@ -10,12 +10,12 @@ def diffprompt(prompt, results):
 
 def find_assistant(prompt):
     tag = "<|eot_id|>"
-    #try:
-    end_index = prompt.rindex(tag)
-    start_index = prompt[:end_index].rindex(tag)
-    #except ValueError:
-    #    print("Warning: discarding a result because cannot parse "+prompt)
-    #    return ""
+    try:
+        end_index = prompt.rindex(tag)
+        start_index = prompt[:end_index].rindex(tag)
+    except ValueError:
+        print("Warning: discarding a result because cannot parse "+prompt)
+        return "(no answer)"
     return prompt[start_index+len(tag):end_index]
     
 def diffprompt_llama31(prompt, results):

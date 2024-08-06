@@ -37,7 +37,7 @@ def trial(prompt, trial_id=0):
     init_n_tokens = llm.token_counter
     init_time = time.time()
 
-    text = llm.generate_full(prompt, max_new_tokens=100)
+    text = llm.generate_full(prompt)#, max_new_tokens=100)
     score, err = calculateScoreHelper_whole(text)
     is_solution = (
         score is not None
