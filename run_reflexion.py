@@ -4,7 +4,7 @@ from lang import can_be_solution_whole
 from lang import filter_code
 from prompts import prompt, min_lines, check_func, check_string
 from dafny import calculateScoreHelper_whole
-from reflection import reflect
+from reflection import reflect_llama31 as reflect # TODO: dynamically choose
 import llm
 from common import limit_tokens
 
