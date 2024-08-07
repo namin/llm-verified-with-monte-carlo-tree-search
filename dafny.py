@@ -109,13 +109,13 @@ def calculateScoreHelper_whole(msg: str) -> (Optional[float], Optional[str]):
         if r["status"] == 0:
             return 1.0, None
         log = r["out"]
-        print(log)
+        print("LOG begin\n", log, "\nLOG ends")
         try:
             first = log[log.index("ex.dfy(") + 7 :]
         except ValueError:
             # might be a timeout
             #return -1.0, ""
-            pass
+            continue
         num_line_first = int(first[0 : first.index(",")])
         #if filterDafny_whole(msg).strip() != v and num_line_first >= v.count("\n"):
         #    return None, None
