@@ -27,9 +27,7 @@ def calculateScore(msg: str) -> Optional[float]:
     score, _ = calculateScoreHelper(msg)
     return score
 
-
-def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filterDafny(msg + "```").strip()
+def calculate_code_score(msg: str) -> (Optional[float], Optional[str]):
     if v == "":
         return None, None
     r = checkDafny(v)
@@ -56,6 +54,10 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
         return -1.0, err
 
 
+def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
+    v = filterDafny(msg + "```").strip()
+    return calculate_code_score(v)
+
 def score_func(sentence: str) -> Optional[float]:
     print("TEXT")
     print(sentence)
@@ -65,9 +67,14 @@ def score_func(sentence: str) -> Optional[float]:
     return score
 
 
+re_dafny = "```([Dd]afny)?(.*?)```"
+
+def findall_code(msg, re_code):
+    re.findall(re_code, msg, re.MULTILINE | re.DOTALL)
+    return [x[1] for x in m]
+
 def filterDafny(msg: str) -> str:
-    m = re.findall("```([Dd]afny)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
-    r = "\n".join([x[1] for x in m])
+    r = "\n".join(findall_code(msg, re_dafny)))
     return r
 
 
@@ -98,34 +105,12 @@ def calculateScore_whole(msg: str) -> Optional[float]:
 
 
 def calculateScoreHelper_whole(msg: str) -> (Optional[float], Optional[str]):
-    v = [s.strip() for s in filterDafny_whole(msg + "```")]
+    vs = [s.strip() for s in filterDafny_whole(msg + "```")]
+    for v in vs:
+        score, score_err = calcuate_code_score(v)
+        if score is not None and score > 0.5:
+            return score, score_err
     err = ""
-    for vs in v:
-        if vs == "":
-            return None, None
-        r = checkDafny(vs)
-        if "This ensures clause is part of a bodyless function" in r["log"]:
-            return -1.0, "axioms are forbidden"
-        if r["status"] == 0:
-            return 1.0, None
-        log = r["out"]
-        print("LOG begin\n", log, "\nLOG ends")
-        try:
-            first = log[log.index("ex.dfy(") + 7 :]
-        except ValueError:
-            # might be a timeout
-            #return -1.0, ""
-            continue
-        num_line_first = int(first[0 : first.index(",")])
-        #if filterDafny_whole(msg).strip() != v and num_line_first >= v.count("\n"):
-        #    return None, None
-    #else:
-        err = first[first.index(":") :]
-        try:
-            err = err[: err.index("ex.dfy")]
-        except ValueError:
-            pass
-    # return error sign only if all attempts fail
     return -1.0, err
 
 
@@ -139,9 +124,7 @@ def score_func_whole(sentence: str) -> Optional[float]:
 
 
 def filterDafny_whole(msg: str) -> List[str]:
-    m = re.findall("```([Dd]afny)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
-    r = [x[1] for x in m]
-    return r
+    return findall_code(msg, re_dafny)
 
 
 filter_code = filterDafny
