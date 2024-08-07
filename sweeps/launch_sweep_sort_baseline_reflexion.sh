@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=vmcts
-#SBATCH --output=/n/home08/shenniger/llm-verified-with-monte-carlo-tree-search/sweeps/vmcts/logs_new/%A_%a.out
+#SBATCH --output=/n/home08/shenniger/llm-verified-with-monte-carlo-tree-search/sweeps/vmcts/logs_new_reflexion/%A_%a.out
 #SBATCH --nodes=1              
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-node=2
 #SBATCH --cpus-per-task=16
-#SBATCH --time=1:00:00
+#SBATCH --time=2:30:00
 #SBATCH --mem=250GB		
 #SBATCH --partition=gpu_requeue
-#SBATCH --array=0-399%20
+#SBATCH --array=0-49%30
 
 cd ~/llm-verified-with-monte-carlo-tree-search
 
@@ -17,7 +17,7 @@ cd ~/llm-verified-with-monte-carlo-tree-search
 # Custom environment
 source ~/.bashrc
 conda deactivate
-conda activate verify
+conda activate llm-verified
 
 export PYTHONPATH=.:${PYTHONPATH}
 
@@ -35,26 +35,26 @@ export token_limit=20000
 # export run_number=$[$SLURM_ARRAY_TASK_ID]
 
 # Sweep across problems
-export run_number=$[$SLURM_ARRAY_TASK_ID/4] # 100 runs per hyperparameter
-export script=$[$SLURM_ARRAY_TASK_ID%4] # 100 runs per hyperparameter
+export run_number=$[$SLURM_ARRAY_TASK_ID] # 100 runs per hyperparameterbb
+export script=$[$SLURM_ARRAY_TASK_ID] # 100 runs per hyperparameter
 
-export script_names=(run_timing.py run_reflexion.py run_rollout_no_widen.py run_whole.py)
+export script_names=(run_reflexion.py)
 # export problem_names=(problem_unzip problem_days problem_food problem_max_and_lists)
-# TODO: change this to the new script
 
-export problem_here=problem_insertion_sort_dafny_check
-export script_here=${script_names[$script]}
+
+export problem_here=problem_insertion_sort_dafny_full_spec_check
+export script_here=run_reflexion.py
 
 export language=Dafny
 
-export base_model_name=meta-llama/Meta-Llama-3.1-70B
+export base_model_name=meta-llama/Meta-Llama-3.1-70B-Instruct
 # export base_model_name=bigcode/starcoder2-15b-instruct-v0.1
 
 export remove_hints=False
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-sorting
+export WANDB_GROUP=vmcts-sorting-final-instruct
 export WANDB_NAME=$script_here/$run_number
 
 SEED=$run_number
