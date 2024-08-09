@@ -110,10 +110,13 @@ def score_func(sentence: str) -> Optional[float]:
 def filter_code_whole(msg: str) -> list[str]:
     return findall_code(msg, re_code_lang)
 
+def code_is_complete(x):
+    return False # code_maybe_incomplete is False
+
 def calculate_score_with_err_whole(msg: str) -> (Optional[float], Optional[str]):
     vs = [s.strip() for s in filter_code_whole(msg + "```")]
     for v in vs:
-        score, score_err = calcuate_code_score(v)
+        score, score_err = calculate_code_score_with_err(v, code_is_complete)
         if score is not None and score > 0.5:
             return score, score_err
     err = ""
