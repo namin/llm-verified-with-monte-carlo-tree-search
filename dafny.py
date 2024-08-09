@@ -1,36 +1,15 @@
 from execute import execute, livecode
 import requests
-import re
 from typing import Optional, Tuple, List
+from collections.abc import Callable
 
-def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
-    _, err = calculateScoreHelper(not_ok)
-    if err:
-        err = err.strip()
-        return (None, err)
-    return None
-    
-def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
-    msg = "Consider previous issue"
-    if msg in ok:
-        return None
-    _, err = calculateScoreHelper(not_ok)
-    if err:
-        err = err.strip()
-        hint = f"\n/* {msg}: {err} */\n"
-        text = ok + hint
-        return text
-    return None
+def create_comment(msg: str) -> str:
+    return f"\n/* {msg} */\n"
 
-
-def calculateScore(msg: str) -> Optional[float]:
-    score, _ = calculateScoreHelper(msg)
-    return score
-
-def calculate_code_score(msg: str) -> (Optional[float], Optional[str]):
+def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
     if v == "":
         return None, None
-    r = checkDafny(v)
+    r = check_code(v)
     if "This ensures clause is part of a bodyless function" in r["out"]:
         return None, "axioms are forbidden"
     if r["status"] == 0:
@@ -43,7 +22,7 @@ def calculate_code_score(msg: str) -> (Optional[float], Optional[str]):
         # might be a timeout
         return -1.0, ""
     num_line_first = int(first[0 : first.index(",")])
-    if filterDafny(msg).strip() != v and num_line_first >= v.count("\n"):
+    if code_maybe_incomplete(num_line_first):
         return None, None
     else:
         err = first[first.index(":") :]
@@ -53,80 +32,12 @@ def calculate_code_score(msg: str) -> (Optional[float], Optional[str]):
             pass
         return -1.0, err
 
+re_code_lang = "```([Dd]afny)?(.*?)```"
 
-def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filterDafny(msg + "```").strip()
-    return calculate_code_score(v)
-
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore(sentence)
-    print("SCORE")
-    print(score)
-    return score
-
-
-re_dafny = "```([Dd]afny)?(.*?)```"
-
-def findall_code(msg, re_code):
-    re.findall(re_code, msg, re.MULTILINE | re.DOTALL)
-    return [x[1] for x in m]
-
-def filterDafny(msg: str) -> str:
-    r = "\n".join(findall_code(msg, re_dafny)))
-    return r
-
-
-def checkDafny(v: str) -> dict:
+def check_code(v: str) -> dict:
     if livecode:
         r = requests.post("https://dafny.livecode.ch/check", data={"v": v})
         r.raise_for_status()
         return r.json()
     return execute("dafny verify", "dfy", v)
 
-### Functions to work specifically with text output from run_whole.py
-
-def calculateScore_whole(msg: str) -> Optional[float]:
-    score_whole, _ = calculateScoreHelper_whole(msg)
-    score, _ = calculateScoreHelper(msg)
-    print("SCORE")
-    print(score)
-    print("SCORE_WHOLE")
-    print(score_whole)
-    # always return the better of the two scores
-    if score_whole:
-        if score_whole == 1.0:
-            return 1.0
-        if score is None:
-            return score_whole
-        return score
-    return score
-
-
-def calculateScoreHelper_whole(msg: str) -> (Optional[float], Optional[str]):
-    vs = [s.strip() for s in filterDafny_whole(msg + "```")]
-    for v in vs:
-        score, score_err = calcuate_code_score(v)
-        if score is not None and score > 0.5:
-            return score, score_err
-    err = ""
-    return -1.0, err
-
-
-def score_func_whole(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore_whole(sentence)
-    print("SCORE_FINAL")
-    print(score)
-    return score
-
-
-def filterDafny_whole(msg: str) -> List[str]:
-    return findall_code(msg, re_dafny)
-
-
-filter_code = filterDafny
-filter_code_whole = filterDafny_whole
-check_code = checkDafny

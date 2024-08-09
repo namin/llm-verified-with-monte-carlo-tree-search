@@ -1,62 +1,12 @@
-from lang_config import LANG
-
-run_tests = False
-if LANG == "Dafny":
-    from dafny import (
-        score_func,
-        score_func_whole,
-        verifier_feedback,
-        short_verifier_feedback,
-        filter_code,
-        filter_code_whole,
-        check_code,
-    )
-elif LANG == "Coq":
-    from coq import (
-        score_func,
-        score_func_whole,
-        verifier_feedback,
-        short_verifier_feedback,
-        filter_code,
-        filter_code_whole,
-        check_code,
-    )
-elif LANG == "Lean4":
-    from lean import (
-        score_func,
-        verifier_feedback,
-        filter_code,
-        check_code,
-    )
-elif LANG == "Rust":
-    from rust import (
-        score_func,
-        verifier_feedback,
-        filter_code,
-        check_code,
-    )
-elif LANG == "Scala":
-    from scala import (
-        score_func,
-        verifier_feedback,
-        filter_code,
-        check_code,
-    )
-elif LANG == "Python":
-    from python import (
-        score_func,
-        score_func_whole,
-        verifier_feedback,
-        filter_code,
-        filter_code_whole,
-        check_code,
-        run_unittests,
-    )
-
-    run_tests = True
-else:
-    assert False
-
+from scoring import (
+    run_tests,
+    score_func,
+    score_func_whole,
+    short_verifier_feedback,
+    verifier_feedback,
+    filter_code,
+    filter_code_whole,
+)
 
 def can_be_solution(
     msg: str, min_lines: int, check_func=None, check_string=None, unittests=None
