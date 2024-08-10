@@ -21,10 +21,10 @@ elif LANG == "Coq":
     )
 elif LANG == "Lean4":
     from lean import (
-        score_func,
-        verifier_feedback,
-        filter_code,
+        create_comment,
+        calculate_code_score_with_err,
         check_code,
+        re_code_lang,
     )
 elif LANG == "Rust":
     from rust import (
