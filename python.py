@@ -23,9 +23,26 @@ def find_first_index(string, char1, char2):
     else:
         return min(index1, index2)  # Return the minimum index
 
+# If the last line is not return, we should keep generating code
+def code_missing_return(v):
+    reverse_lines = v.splitlines()[::-1]
+    for line in reverse_lines:
+        line = line.strip()
+        if line.startswith('return'):
+            print('code has return')
+            return False
+        elif line == "":
+            continue
+        elif line.startswith('#'):
+            continue
+        else:
+            print('code missing return', line)
+            return True
+    print('only whitespace or comments')
+    return True # we only have whitespace or comments
+
 def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
-    # If the last line is not return, we should keep generating code
-    if v == "" or (not v.splitlines()[-1].strip().startswith('return')): 
+    if code_missing_return(v):
         return None, None
     v = v.strip()
     r = check_code(v)
