@@ -2,25 +2,12 @@ from execute import execute, livecode
 import requests
 import re
 from typing import Optional
+from collections.abc import Callable
 
-def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
-    msg = "Consider previous issue"
-    if msg in ok:
-        return None
-    _, err = calculateScoreHelper(not_ok)
-    if err:
-        err = err.strip()
-        hint = f"\n/* {msg}: {err} */\n"
-        text = ok + hint
-        return text
-    return None
+def create_comment(msg: str) -> str:
+    return f"/* {msg} */"
 
-def calculateScore(msg: str) -> Optional[float]:
-    score, _ = calculateScoreHelper(msg)
-    return score
-
-def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filter_code(msg + "```").strip()
+def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
     if v == "":
         return None, None
     r = check_code(v)
@@ -30,24 +17,13 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     print(log)
     first = log[log.rindex("ex.scala:") + 9 :]
     num_line_first = int(first[0 : first.index(":")])
-    if filter_code(msg).strip() != v and num_line_first >= v.count("\n"):
+    if code_maybe_incomplete(num_line_first):
         return None, None
     else:
         err = log
         return -1.0, err
 
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore(sentence)
-    print("SCORE")
-    print(score)
-    return score
-
-def filter_code(msg: str) -> str:
-    m = re.findall("```([Ss]cala)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
-    r = "\n".join([x[1] for x in m])
-    return r
+re_code_lang = "```([Ss]cala)?(.*?)```"
 
 def check_code(v: str) -> dict:
     return execute("scalac --color never -explain", "scala", v)
