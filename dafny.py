@@ -4,7 +4,7 @@ from typing import Optional, Tuple, List
 from collections.abc import Callable
 
 def create_comment(msg: str) -> str:
-    return f"\n/* {msg} */\n"
+    return f"/* {msg} */"
 
 def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
     if v == "":
