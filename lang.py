@@ -6,6 +6,7 @@ from scoring import (
     verifier_feedback,
     filter_code,
     filter_code_whole,
+    run_unittests,
 )
 
 def can_be_solution(
