@@ -8,7 +8,7 @@ if LANG == "Dafny":
         create_comment,
         calculate_code_score_with_err,
         check_code,
-        re_code_lang
+        re_code_lang,
     )
 elif LANG == "Coq":
     from coq import (
@@ -43,17 +43,18 @@ elif LANG == "Scala":
     )
 elif LANG == "Python":
     from python import (
-        score_func,
-        score_func_whole,
-        verifier_feedback,
-        filter_code,
-        filter_code_whole,
+        create_comment,
+        calculate_code_score_with_err,
         check_code,
+        re_code_lang,
         run_unittests,
     )
     run_tests = True
 else:
     assert False
+if not run_tests:
+    def run_unittests(v: str, unittest=None):
+        return 0
 
 def findall_code(msg, re_code):
     m = re.findall(re_code, msg, re.MULTILINE | re.DOTALL)
@@ -63,33 +64,37 @@ def filter_code(msg: str) -> str:
     r = "\n".join(findall_code(msg, re_code_lang))
     return r
 
+def code_of_msg(msg: str) -> str:
+    return filter_code(msg + "```").strip()
+
 def make_code_is_incomplete(msg, v):
     return
 
-def calculate_score_with_err(msg: str) -> (Optional[float], Optional[str]):
-    v = filter_code(msg + "```").strip()
+def calculate_score_with_err(msg: str) -> (Optional[float], Optional[str], Optional[str]):
+    v = code_of_msg(msg)
     code_maybe_incomplete = lambda num_line_first: filter_code(msg).strip() != v and num_line_first >= v.count("\n")
-    return calculate_code_score_with_err(v, code_maybe_incomplete)
+    score, err = calculate_code_score_with_err(v, code_maybe_incomplete)
+    return score, err, v
 
-def calculate_score(msg: str) -> Optional[float]:
-    score, _ = calculate_score_with_err(msg)
-    return score
+def calculate_score(msg: str) -> (Optional[float], Optional[str]):
+    score, _, v = calculate_score_with_err(msg)
+    return score, v
 
 def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
-    _, err = calculate_score_with_err(not_ok)
+    _, err, _ = calculate_score_with_err(not_ok)
     if err:
         err = err.strip()
         return (None, err)
     return None
 
 def create_hint(msg: str, err: str) -> str:
-    return create_comment(f"{msg}: {err}")
+    return '\n'+create_comment(f"{msg}: {err}")+'\n'
 
 def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
     msg = "Consider previous issue"
     if msg in ok:
         return None
-    _, err = calculate_score_with_err(not_ok)
+    _, err, _ = calculate_score_with_err(not_ok)
     if err:
         err = err.strip()
         hint = create_hint(msg, err)
@@ -97,13 +102,33 @@ def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
         return text
     return None
 
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculate_score(sentence)
-    print("SCORE")
+def score_unittest(v: str, score: float, unittest: str) -> Optional[float]:
+    print("Preliminary SCORE")
     print(score)
-    return score
+    tscore = run_unittests(v, unittest)
+    if tscore != 0:
+        print("Unittest tscore ", tscore, "FAILED. Lowering score.")
+        print("NEW SCORE")
+        print("-1.0")
+        return -1.0
+    else:
+        print("Unittest succeeded, tscore = ", tscore, "and score remains", score)
+        return score
+
+def amend_score(v: str, score: float, unittest: Optional[str] = None) -> Optional[float]:
+    if unittest is None or score != 1.0:
+        print("SCORE")
+        print(score)
+        return score
+    else:
+        assert v is not None
+        return score_unittest(v, score, unittest)
+
+def score_func(msg: str, unittest: Optional[str] = None) -> Optional[float]:
+    print("TEXT")
+    print(msg)
+    score, v = calculate_score(msg)
+    return amend_score(v, score, unittest)
 
 ### Functions to work specifically with text output from run_whole.py
 
@@ -113,35 +138,43 @@ def filter_code_whole(msg: str) -> list[str]:
 def code_is_complete(x):
     return False # code_maybe_incomplete is False
 
-def calculate_score_with_err_whole(msg: str) -> (Optional[float], Optional[str]):
+def calculate_score_with_err_whole(msg: str) -> (Optional[float], Optional[str], Optional[str]):
     vs = [s.strip() for s in filter_code_whole(msg + "```")]
     for v in vs:
         score, score_err = calculate_code_score_with_err(v, code_is_complete)
         if score is not None and score > 0.5:
-            return score, score_err
+            return score, score_err, v
     err = ""
-    return -1.0, err
+    return -1.0, err, None
 
-def calculate_score_whole(msg: str) -> Optional[float]:
-    score_whole, _ = calculate_score_with_err_whole(msg)
-    score, _ = calculate_score_with_err(msg)
+# favor the best score (possibly with code along)
+# between the two scoring methods:
+# - whole scores each chunck of code separately
+# - default scores the concatenation of all chunks together
+def best_of_scores(score, v, score_whole, v_whole):
+    if score == 1.0:
+        return 1.0, v
+    elif score_whole == 1.0:
+        return 1.0, v_whole
+    elif score is None:
+        return score_whole, None
+    else:
+        return score, None
+
+def calculate_score_whole(msg: str, unittest: Optional[str] = None) -> Optional[float]:
+    score_whole, _, v_whole = calculate_score_with_err_whole(msg)
+    score, v = calculate_score(msg)
     print("SCORE")
     print(score)
     print("SCORE_WHOLE")
     print(score_whole)
-    # always return the better of the two scores
-    if score_whole:
-        if score_whole == 1.0:
-            return 1.0
-        if score is None:
-            return score_whole
-        return score
-    return score
+    final_score, final_code = best_of_scores(score, v, score_whole, v_whole)
+    return amend_score(final_code, final_score, unittest)
 
-def score_func_whole(sentence: str) -> Optional[float]:
+def score_func_whole(msg: str) -> Optional[float]:
     print("TEXT")
-    print(sentence)
-    score = calculate_score_whole(sentence)
+    print(msg)
+    score = calculate_score_whole(msg)
     print("SCORE_FINAL")
     print(score)
     return score
