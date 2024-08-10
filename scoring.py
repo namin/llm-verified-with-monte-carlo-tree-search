@@ -12,13 +12,12 @@ if LANG == "Dafny":
     )
 elif LANG == "Coq":
     from coq import (
-        score_func,
-        score_func_whole,
+        create_comment,
+        calculate_code_score_with_err,
+        check_code,
+        re_code_lang,
         verifier_feedback,
         short_verifier_feedback,
-        filter_code,
-        filter_code_whole,
-        check_code,
     )
 elif LANG == "Lean4":
     from lean import (
@@ -72,7 +71,7 @@ def make_code_is_incomplete(msg, v):
 
 def calculate_score_with_err(msg: str) -> (Optional[float], Optional[str], Optional[str]):
     v = code_of_msg(msg)
-    code_maybe_incomplete = lambda num_line_first: filter_code(msg).strip() != v and num_line_first >= v.count("\n")
+    code_maybe_incomplete = lambda num_line_first: filter_code(msg).strip() != v and (num_line_first is None or num_line_first >= v.count("\n"))
     score, err = calculate_code_score_with_err(v, code_maybe_incomplete)
     return score, err, v
 
@@ -80,27 +79,29 @@ def calculate_score(msg: str) -> (Optional[float], Optional[str]):
     score, _, v = calculate_score_with_err(msg)
     return score, v
 
-def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
-    _, err, _ = calculate_score_with_err(not_ok)
-    if err:
-        err = err.strip()
-        return (None, err)
-    return None
-
 def create_hint(msg: str, err: str) -> str:
     return '\n'+create_comment(f"{msg}: {err}")+'\n'
 
-def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
-    msg = "Consider previous issue"
-    if msg in ok:
+if 'short_verifier_feedback' not in globals():
+    def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
+        _, err, _ = calculate_score_with_err(not_ok)
+        if err:
+            err = err.strip()
+            return (None, err)
         return None
-    _, err, _ = calculate_score_with_err(not_ok)
-    if err:
-        err = err.strip()
-        hint = create_hint(msg, err)
-        text = ok + hint
-        return text
-    return None
+
+if 'verifier_feedback' not in globals():
+    def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
+        msg = "Consider previous issue"
+        if msg in ok:
+            return None
+        _, err, _ = calculate_score_with_err(not_ok)
+        if err:
+            err = err.strip()
+            hint = create_hint(msg, err)
+            text = ok + hint
+            return text
+        return None
 
 def score_unittest(v: str, score: float, unittest: str) -> Optional[float]:
     print("Preliminary SCORE")

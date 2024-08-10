@@ -5,9 +5,13 @@ import io
 from alectryon.serapi import annotate
 import re
 from typing import Optional, Tuple
+from collections.abc import Callable
+
+def create_comment(msg: str) -> str:
+    return f"(* {msg} *)"
 
 def give_context(v: str) -> (str, str):
-    r = checkCoq(v, giveDetails=True)
+    r = checkCoq(v, give_details=True)
     return ((r["details"] or ""), r["out"])
 
 def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
@@ -15,18 +19,15 @@ def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:
         not_ok_first = not_ok[0 : not_ok.index(".", len(ok))]
     except ValueError:
         return None
-    r = checkDetails(not_ok_first)
-    #details = r["details"]
-    #if not details:
-    #    return None
-    v = filterCoq(not_ok + "```")
-    r = checkCoq(v)
+    r = check_details(not_ok_first)
+    v = filter_code(not_ok + "```")
+    r = check_code(v)
     log = r["log"]
     try:
         err = log[log.index(":")+1 :].strip()
     except ValueError:
         return None
-    left = leftAfterError(v, log)
+    left = left_after_error(v, log)
     rest = not_ok[len(ok.strip()) : len(not_ok)-len(left)].strip()
     if rest:
         return (rest, err)
@@ -37,37 +38,36 @@ def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
         not_ok_first = not_ok[0 : not_ok.index(".", len(ok))]
     except ValueError:
         return None
-    r = checkDetails(not_ok_first)
+    r = check_details(not_ok_first)
     details = r["details"]
     if details and details not in ok:
         print("DETAILS")
         print(details)
         text = ok
         text += "\n(* " + details + " *)\n"
-        v = filterCoq(not_ok + "```")
-        r = checkCoq(v)
+        v = filter_code(not_ok + "```")
+        r = check_code(v)
         log = r["log"]
         err = log[log.index(":")+1 :].strip()
-        left = leftAfterError(v, log)
+        left = left_after_error(v, log)
         rest = not_ok[len(ok.strip()) : len(not_ok)-len(left)].strip()
         if rest:
             text += f"(* DO NOT:\n{rest}\nbecause of:\n{err} *)"
         return text
     return None
 
-
-def checkDetails(msg: str) -> dict:
-    v = filterCoq(msg + "```")
-    r = checkCoq(v, giveDetails=True)
+def check_details(msg: str) -> dict:
+    v = filter_code(msg + "```")
+    r = check_code(v, give_details=True)
     return r
 
-def leftAfterError(v: str, log: str) -> str:
+def left_after_error(v: str, log: str) -> str:
     try:
-        return leftAfterErrorHelper(v, log)
+        return left_after_error_helper(v, log)
     except ValueError:
         return ''
 
-def leftAfterErrorHelper(v: str, log: str) -> str:
+def left_after_error_helper(v: str, log: str) -> str:
     start_line = log[log.index("line ") + len("line ") :]
     num_line = int(start_line[0 : start_line.index(",")])
     end_char = start_line[0 : start_line.index(":")]
@@ -80,22 +80,17 @@ def leftAfterErrorHelper(v: str, log: str) -> str:
     left = left[char_index + 1 :]
     return left
 
-
-def calculateScore(msg: str) -> Optional[float]:
-    return calculateScoreHelper(msg)[0]
-
-def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filterCoq(msg + "```")
+def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[Optional[int]],bool]) -> (Optional[float], Optional[str]):
     if v == "":
         return None, v
-    r = checkCoq(v)
+    r = check_code(v)
     if r["status"] == 0:
         return 1.0, v
     log = r["log"]
     print(log)
-    left = leftAfterError(v, log)
+    left = left_after_error(v, log)
     v0 = v[:len(v)-len(left)]
-    if filterCoq(msg) == v:
+    if code_maybe_incomplete(None):
         return -1.0, v0
     if "There are pending proofs" in log:
         return 1.0, v
@@ -109,34 +104,13 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
     else:
         return -1.0, v0
 
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore(sentence)
-    print("SCORE")
-    print(score)
-    return score
-
-score_func_whole = score_func
-
-def score_func_code(sentence: str) -> (Optional[float], Optional[str]):
-    print("TEXT")
-    print(sentence)
-    score, v = calculateScoreHelper(sentence)
-    print("SCORE")
-    print(score)
-    return score, v
-
-def filterCoq(msg: str) -> str:
-    m = re.findall("```([Cc]oq)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
-    r = "\n".join([x[1] for x in m])
-    return r
+re_code_lang = "```([Cc]oq)?(.*?)```"
 
 
-def checkCoq(v: str, giveDetails: bool = False) -> dict:
+def check_code(v: str, give_details: bool = False) -> dict:
     if livecode:
         r = requests.post(
-            f"https://coq{'c' if giveDetails else ''}.livecode.ch/check", data={"v": v}
+            f"https://coq{'c' if give_details else ''}.livecode.ch/check", data={"v": v}
         )
         r.raise_for_status()
         return r.json()
@@ -148,7 +122,7 @@ def checkCoq(v: str, giveDetails: bool = False) -> dict:
 
     details = ""
     context = ""
-    if giveDetails and log != "":
+    if give_details and log != "":
         f = io.StringIO()
         with redirect_stderr(f):
             r = annotate([v])
@@ -164,14 +138,6 @@ def checkCoq(v: str, giveDetails: bool = False) -> dict:
         "details": details,
         "context": context,
     }
-
-# def give_context(v):
-#     details = None
-#     r = annotate([v])
-#     gs = [x for x in r[0] if hasattr(x, "goals") and x.goals != []]
-#     if gs != []:
-#         details = pretty_goals(gs[-1].goals)
-#     return details
 
 def pretty_goals(goals):
     return "\n".join([pretty_goal(goal) for goal in goals])
@@ -221,7 +187,3 @@ def lemma_args(g):
 def new_conclusion(goal, code):
     conclusion = goal.conclusion.split(",")[-1].strip() # TODO: a bit crude?
     return conclusion not in code
-
-filter_code = filterCoq
-filter_code_whole = filterCoq
-check_code = checkCoq
