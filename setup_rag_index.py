@@ -11,8 +11,13 @@ def load_documents_from_directories(directories):
         print(directory, " has been successfully indexed!")
     return all_documents
 
-# List of directories to index: 
-directories = ["devin_chunked_dafny_manual", "qa"]
+# List of directories to index:
+# - devin_chunked_dafny_manual
+#   from https://github.com/metareflection/devin_chunked_dafny_manual
+# - dafny_qa
+#   from https://github.com/shenniger/dafny-llm-examples
+#   cp dafny-llm-examples/data_prep/snippets/qa.* dafny_qa/
+directories = ["devin_chunked_dafny_manual", "dafny_qa"]
 
 # Set up embedding model settings
 settings_embed()
