@@ -59,7 +59,6 @@ def setup_llm():
         device_map="auto", #gpu, cpu, auto
     )
 
-
 def augment(prompt, code):
     setup_llm()
     query_engine = index.as_query_engine()
@@ -68,8 +67,19 @@ def augment(prompt, code):
     cleaned_response = response_str.replace("```", "")
     return cleaned_response
 
+# TODO: like the rest of this RAG setup, this is Dafny-specific
+def query_keywords(query):
+    if "ADT" in query:
+        return ["`match`", "`datatype`", "`case`"]
+    else:
+        return []
+
 def retrieve(prompt, code):
-    query = prompt + "\n Code so far: ```dafny\n" + code + "\n```"
+    query = prompt + "\nCode so far:\n```dafny\n" + code + "\n```\n"
+    keywords = query_keywords(query)
+    if keywords:
+        query += "\nKeywords: "+", ".join(keywords)
+    print("QUERY [[", query, "]]")
     nodes = retriever.retrieve(query)
     #print("Retrieving Nodes [[\n", nodes, "\n]]")
     texts = [node.text for node in nodes]
