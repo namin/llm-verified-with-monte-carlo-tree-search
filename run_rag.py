@@ -55,8 +55,13 @@ class FocusNode:
 
     def text(self):
         return f"""
+CONTEXT
 {self.hint}
+
+INSTRUCTIONS
 {self.instructions}
+
+CODE
 ```dafny
 {self.code}
 """
@@ -98,7 +103,7 @@ def child_finder(node, montecarlo):
         node.update_win_value(-1)
     else:
         hint = rag(index, node.state.instructions, node.state.code)
-        print('HINT is [[\n', hint, '\n]]')
+        #print('HINT is [[\n', hint, '\n]]')
         new_state = node.state.update(text, hint)
         child = Node(new_state)
         if node.is_widen_node:
