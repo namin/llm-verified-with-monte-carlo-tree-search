@@ -18,7 +18,7 @@
     - run ```python setup_rag_index.py ```
 
 
-- run ```python run_intermediate_expansion_rag.py --problem_name PROBLEM_NAME --lang 'LANG'```
+- run ```python run_rag.py --problem_name PROBLEM_NAME --language LANG```
 
-    - For instance, for the problem ```problem_opt0``` in ```default_prompts.py``` in Dafny, we can run  ```python run_intermediate_expansion_rag.py --problem_name problem_opt0 --lang 'Dafny'```
+    - For instance, for the problem ```problem_opt0``` in ```default_prompts.py``` in Dafny, we can run  ```python run_rag.py --problem_name problem_opt0 --language Dafny```
 
