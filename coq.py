@@ -3,7 +3,6 @@ import requests
 from contextlib import redirect_stderr
 import io
 from alectryon.serapi import annotate
-import re
 from typing import Optional, Tuple
 from collections.abc import Callable
 

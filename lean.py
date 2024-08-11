@@ -1,4 +1,3 @@
-import re
 from pySagredo.proofsearch import ProofSearch
 import pexpect
 from typing import Optional

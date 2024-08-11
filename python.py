@@ -1,6 +1,5 @@
 from execute import execute, livecode
 import requests
-import re
 from typing import Optional
 from collections.abc import Callable
 

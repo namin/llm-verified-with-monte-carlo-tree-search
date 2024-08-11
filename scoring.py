@@ -1,5 +1,4 @@
 from lang_config import LANG
-import re
 from typing import Optional, Tuple, List
 
 run_tests = False
