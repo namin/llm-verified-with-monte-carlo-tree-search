@@ -65,7 +65,8 @@ class FocusNode:
 {self.hint}
 {self.instructions}
 ```dafny
-{self.code}"""
+{self.code}
+"""
 
 
 def generate_complete(focus, montecarlo, current_completion_depth = 1):
