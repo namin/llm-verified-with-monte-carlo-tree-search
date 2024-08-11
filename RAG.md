@@ -2,7 +2,7 @@
 
 - install LlamaIndex
 
-    - ```pip install llama-index-core llama-index-embeddings-huggingface llama-index-llms-huggingface```
+    - ```pip install llama-index-core llama-index-embeddings-huggingface llama-index-llms-huggingface llama-index-readers-file```
 
 - install other necessary libraries if not already installed
 
