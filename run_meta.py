@@ -131,7 +131,7 @@ def generate_complete(focus, montecarlo):
 
 
 def child_finder(node, montecarlo):
-    if limit_depth(node):
+    if limit_depth(node, lambda x: x.text()):
         return
 
     (text, score, code) = generate_complete(node.state, montecarlo)
