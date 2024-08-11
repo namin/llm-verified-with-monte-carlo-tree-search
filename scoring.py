@@ -55,13 +55,8 @@ if not run_tests:
     def run_unittests(v: str, unittest=None):
         return 0
 
-def findall_code(msg, re_code):
-    m = re.findall(re_code, msg, re.MULTILINE | re.DOTALL)
-    return [x[1] for x in m]
-
-def filter_code(msg: str) -> str:
-    r = "\n".join(findall_code(msg, re_code_lang))
-    return r
+from common_lang import make_filter_code
+filter_code = make_filter_code(re_code_lang)
 
 def code_of_msg(msg: str) -> str:
     return filter_code(msg + "```").strip()

@@ -7,6 +7,10 @@ import re
 from typing import Optional, Tuple
 from collections.abc import Callable
 
+re_code_lang = "```([Cc]oq)?(.*?)```"
+from common_lang import make_filter_code
+filter_code = make_filter_code(re_code_lang)
+
 def create_comment(msg: str) -> str:
     return f"(* {msg} *)"
 
@@ -103,9 +107,6 @@ def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[Optio
             return None, v
     else:
         return -1.0, v0
-
-re_code_lang = "```([Cc]oq)?(.*?)```"
-
 
 def check_code(v: str, give_details: bool = False) -> dict:
     if livecode:
