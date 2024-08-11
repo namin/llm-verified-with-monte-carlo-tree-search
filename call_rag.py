@@ -12,7 +12,6 @@ def load_storage():
     index = load_index_from_storage(storage_context)
     return index
 index = load_storage()
-retriever = index.as_retriever(similarity_top_k=5)
 
 def messages_to_prompt(messages):
     prompt = ""
@@ -79,10 +78,13 @@ def retrieve(prompt, code):
     keywords = query_keywords(query)
     if keywords:
         query += "\nKeywords: "+", ".join(keywords)
+        keywords_retriever = index.as_retriever(similarity_top_k=2)
+        keywords_nodes = keywords_retriever.retrieve(" ".join(keywords))
     print("QUERY [[", query, "]]")
-    nodes = retriever.retrieve(query)
+    retriever = index.as_retriever(similarity_top_k=2)
+    nodes = retriever.retrieve(query) + keywords_nodes
     print("Retrieving Nodes [[\n", nodes, "\n]]")
-    texts = ["\nFrom "+node.metadata['file_name']+"\n"+node.text+"\n" for node in nodes]
+    texts = list(set(["\nFrom "+node.metadata['file_name']+"\n"+node.text+"\n" for node in nodes]))
     text = "\n".join(texts)
     #print("Retrieving [[\n", text, "\n]]")
     return text
