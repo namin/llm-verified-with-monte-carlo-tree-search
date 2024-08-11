@@ -1,6 +1,7 @@
 from scoring import (
     run_tests,
     score_func,
+    score_func_code,
     score_func_whole,
     short_verifier_feedback,
     verifier_feedback,

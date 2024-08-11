@@ -125,12 +125,19 @@ def amend_score(v: str, score: float, unittest: Optional[str] = None) -> Optiona
         assert v is not None
         return score_unittest(v, score, unittest)
 
-def score_func(msg: str, unittest: Optional[str] = None) -> Optional[float]:
+def score_func(msg: str, unittest: Optional[str] = None, ret_code: bool = False) -> (Optional[float] | Tuple[Optional[float], str]):
     print("TEXT")
     print(msg)
     score, v = calculate_score(msg)
-    return amend_score(v, score, unittest)
+    score = amend_score(v, score, unittest)
+    if ret_code:
+        return score, v
+    else:
+        return score
 
+def score_func_code(msg: str, unittest: Optional[str] = None) -> Tuple[Optional[float], str]:
+    return score_func(msg, unittest, ret_code = True)
+    
 ### Functions to work specifically with text output from run_whole.py
 
 def filter_code_whole(msg: str) -> list[str]:

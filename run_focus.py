@@ -16,7 +16,8 @@ from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
 from lang import score_func as uncached_score_func
-from coq import give_context, short_verifier_feedback
+from coq import give_context
+from lang import short_verifier_feedback
 
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth

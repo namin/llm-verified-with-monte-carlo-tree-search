@@ -11,7 +11,7 @@ def create_comment(msg: str) -> str:
     return f"(* {msg} *)"
 
 def give_context(v: str) -> (str, str):
-    r = checkCoq(v, give_details=True)
+    r = check_code(v, give_details=True)
     return ((r["details"] or ""), r["out"])
 
 def short_verifier_feedback(ok: str, not_ok: str) -> Optional[Tuple[str,str]]:

@@ -13,7 +13,7 @@ from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
 from coq import give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
-from coq import score_func_code as uncached_score_func_code
+from lang import score_func_code as uncached_score_func_code
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_cache import score_first, create_score_predicate, create_cached_func
