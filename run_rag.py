@@ -49,12 +49,15 @@ class FocusNode:
     def text(self):
         return f"""
 CONTEXT
+
 {self.hint}
 
 INSTRUCTIONS
+
 {self.instructions}
 
 CODE
+
 ```dafny
 {self.code}
 """
