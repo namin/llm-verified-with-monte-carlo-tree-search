@@ -31,11 +31,9 @@ node_dups_counter = 0
 # RAG modified def main
 from call_rag import augment
 from llama_index.core import StorageContext, load_index_from_storage
-from settings_rag import settings_embed
+import settings_rag
 
 def load_storage():
-    # embed model
-    settings_embed()
     # rebuild storage context
     storage_context = StorageContext.from_defaults(persist_dir="./storage")
     # load index

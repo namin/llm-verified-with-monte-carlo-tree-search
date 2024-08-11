@@ -1,5 +1,5 @@
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
-from settings_rag import settings_embed
+import settings_rag
 
 # Function to load documents from multiple directories
 def load_documents_from_directories(directories):
@@ -18,9 +18,6 @@ def load_documents_from_directories(directories):
 #   from https://github.com/shenniger/dafny-llm-examples
 #   cp dafny-llm-examples/data_prep/snippets/qa.* dafny_qa/
 directories = ["devin_chunked_dafny_manual", "dafny_qa"]
-
-# Set up embedding model settings
-settings_embed()
 
 # Load documents from the specified directories
 documents = load_documents_from_directories(directories)

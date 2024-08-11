@@ -3,7 +3,7 @@ from llama_index.llms.huggingface import HuggingFaceLLM
 import torch
 from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
-from settings_rag import settings_embed
+import settings_rag
 
 def messages_to_prompt(messages):
     prompt = ""
@@ -46,8 +46,6 @@ Settings.llm = HuggingFaceLLM(
 
 
 def augment(index, prompt, code):
-  # bge-base embedding model
-    settings_embed()
     query_engine = index.as_query_engine()
     response = query_engine.query("Hint for what the next line should be in the given in-progress solution: " + code + " to answer the problem: " + prompt + "Put response in the format of '### Hint: '.")
     response_str = str(response)
