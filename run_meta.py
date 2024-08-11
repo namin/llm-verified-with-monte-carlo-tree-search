@@ -179,12 +179,12 @@ def main(mins_timeout = None, prompt = prompt):
         prompt_code = """From Hammer Require Import Tactics.
 From Hammer Require Import Hammer.
 
-From Coq Require Import Arith.Arith.
+Require Import Coq.Arith.Arith.
 Require Import Coq.Strings.String.
 
 """ + prompt_code
     else:
-        prompt_code = """From Coq Require Import Arith.Arith.
+        prompt_code = """Require Import Coq.Arith.Arith.
 Require Import Lia.
 """ + prompt_code
     montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)), mins_timeout)

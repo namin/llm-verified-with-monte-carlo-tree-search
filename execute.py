@@ -1,9 +1,9 @@
 import hashlib
 import os
 
-from cmdline import args
+#from cmdline import args
 
-livecode = args.livecode
+livecode = False#args.livecode
 
 # Only set to True for lightweight testing.
 # livecode = False
