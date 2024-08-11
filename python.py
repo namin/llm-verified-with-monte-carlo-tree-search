@@ -23,7 +23,8 @@ def find_first_index(string, char1, char2):
     else:
         return min(index1, index2)  # Return the minimum index
 
-# If the last line is not return, we should keep generating code
+# If the last line is not return, we should keep generating code.
+# Note: this is too approximative, and we don't use it atm.
 def code_missing_return(v):
     reverse_lines = v.splitlines()[::-1]
     for line in reverse_lines:
@@ -41,15 +42,19 @@ def code_missing_return(v):
     print('only whitespace or comments')
     return True # we only have whitespace or comments
 
+def last_line_indented(v):
+    line = v.splitlines()[-1]
+    return line.startswith('\t') or line.startswith(' ')
+
 def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
-    if code_missing_return(v):
+    if v == '' or last_line_indented(v):
         return None, None
     v = v.strip()
     r = check_code(v)
     if r["status"] == 0:
         return 1.0, None
     log = r["log"]
-    print(log)
+    print("LOG: [[\n", log, "\n]]")
     marker = "ex.py\", line "
     first = log[log.rindex(marker) + len(marker):]
     num_line_first = int(first[0 : find_first_index(first, '\n', ',')])
