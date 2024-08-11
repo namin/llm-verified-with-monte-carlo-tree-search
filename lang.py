@@ -8,6 +8,7 @@ from scoring import (
     filter_code,
     filter_code_whole,
     run_unittests,
+    code_of_msg,
 )
 
 def can_be_solution(
