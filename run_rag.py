@@ -4,7 +4,7 @@ from montecarlo.montecarlo import MonteCarlo
 from lang import can_be_solution, filter_code
 
 from lang import score_func as uncached_score_func
-from dafny import short_verifier_feedback
+from lang import short_verifier_feedback
 
 from common_interactive import diffprompt
 
