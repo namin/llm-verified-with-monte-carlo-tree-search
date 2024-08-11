@@ -39,7 +39,7 @@ def load_storage():
     # load index
     index = load_index_from_storage(storage_context)
     return index
-
+index = load_storage()
 
 class FocusNode:
     def __init__(self, instructions, code, hint):
@@ -98,13 +98,13 @@ def child_finder(node, montecarlo):
 
     text, depth = generate_complete(node.state, montecarlo) 
 
-    index = load_storage()
-    hint = augment(index, node.state.instructions, node.state.code)
     gen_stat = common_wandb.compute_gen_stat(pre_gen_time, pre_gen_toks, text, depth)
 
     if text is None:
         node.update_win_value(-1)
     else:
+        hint = augment(index, node.state.instructions, node.state.code)
+        print('HINT is [[\n', hint, '\n]]')
         parts = text.split("```dafny", 1)
         code = parts[1] if len(parts) > 1 else ""
         clean_code = code.replace("```", "")
