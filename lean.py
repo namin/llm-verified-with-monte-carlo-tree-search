@@ -2,34 +2,19 @@ import re
 from pySagredo.proofsearch import ProofSearch
 import pexpect
 from typing import Optional
+from collections.abc import Callable
 
-def verifier_feedback(ok: str, not_ok: str) -> Optional[str]:
-    msg = "Consider previous issue"
-    if msg in ok:
-        return None
-    _, err = calculateScoreHelper(not_ok)
-    if err:
-        err = err.strip()
-        hint = f"\n/- {msg}: {err} -/\n"
-        text = ok + hint
-        return text
-    return None
+def create_comment(msg: str) -> str:
+    return f"/- {msg} -/"
 
-
-def calculateScore(msg: str) -> Optional[float]:
-    score, _ = calculateScoreHelper(msg)
-    return score
-
-
-def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
-    v = filterLean(msg + "```").strip()
+def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],bool]) -> (Optional[float], Optional[str]):
     if v == "":
         return None, None
     # hack around the tokenizer not tokenizing '\n\n' as one id
     # if v.endswith('\n') and not v.endswith('\n\n'):
     #     if msg.count('```') % 2 == 1:
     #         return None, None
-    r = checkLean(v)
+    r = check_code(v)
     if r["status"] == 0:
         return 1.0, None
     critical_error = -1.0, r["error"]
@@ -38,31 +23,16 @@ def calculateScoreHelper(msg: str) -> (Optional[float], Optional[str]):
         return critical_error
     elif "tactic 'rewrite' failed" in r["error"]:
         return critical_error
-    if filterLean(msg).strip() != v:
+    if code_maybe_incomplete(None):
         if r["num_line_first"] >= v.count("\n"):
             return tmp_error
         if "missing cases" in r["error"]:
             return tmp_error
     return critical_error
 
+re_code_lang = "```([Ll]ean4?)?(.*?)```"
 
-def score_func(sentence: str) -> Optional[float]:
-    print("TEXT")
-    print(sentence)
-    score = calculateScore(sentence)
-    print("SCORE")
-    print(score)
-    return score
-
-
-def filterLean(msg: str) -> str:
-    m = re.findall("```([Ll]ean4?)?(.*?)```", msg, re.MULTILINE | re.DOTALL)
-    r = "\n".join([x[1] for x in m])
-    # r = r.replace('\n#eval', '\n--#eval') # skip evaluations
-    return r
-
-
-def getErrorMessage(out: str):
+def get_error_message(out: str):
     if "messages" in out:
         for m in out["messages"]:
             if m["severity"] == "error":
@@ -70,14 +40,14 @@ def getErrorMessage(out: str):
     return None
 
 
-def checkLean(lean_code_block: str) -> dict:
+def check_code(lean_code_block: str) -> dict:
     proofsearch = ProofSearch(path_to_repl="repl")
     try:
         out = proofsearch.run_code(lean_code_block.strip(), verbose=True)
     except pexpect.exceptions.EOF:
         return {"status": 1, "num_first_line": 0, "error": ""}
     if out:  # failed due to timeout
-        error_message = getErrorMessage(out)
+        error_message = get_error_message(out)
         if error_message:
             return {
                 "status": 1,
@@ -94,9 +64,6 @@ def checkLean(lean_code_block: str) -> dict:
         }
 
 
-filter_code = filterLean
-check_code = checkLean
-
 if __name__ == "__main__":
     lean = f"""```lean
 import Mathlib
@@ -112,4 +79,5 @@ theorem factorial_pos : ∀ n : Nat, 0 < factorial n
 #eval factorial 5
 ```
 """
-    print(calculateScoreHelper(lean))
+    from scoring import score_func
+    score_func(lean)
