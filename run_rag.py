@@ -25,18 +25,11 @@ import time
 
 import common_wandb
 
+from call_rag import retrieve as rag # there's also the original augment
+
 from cmdline import args
 
 node_dups_counter = 0
-from call_rag import retrieve as rag # there's also the original augment
-from llama_index.core import StorageContext, load_index_from_storage
-import settings_rag
-
-def load_storage():
-    storage_context = StorageContext.from_defaults(persist_dir="./storage")
-    index = load_index_from_storage(storage_context)
-    return index
-index = load_storage()
 
 def clean(x):
     x = x.replace("```dafny", "")
@@ -102,7 +95,7 @@ def child_finder(node, montecarlo):
     if text is None:
         node.update_win_value(-1)
     else:
-        hint = rag(index, node.state.instructions, node.state.code)
+        hint = rag(node.state.instructions, node.state.code)
         #print('HINT is [[\n', hint, '\n]]')
         new_state = node.state.update(text, hint)
         child = Node(new_state)
@@ -139,7 +132,7 @@ def child_finder(node, montecarlo):
 
 def main(mins_timeout = None, prompt = prompt):
     initial_code = code_of_msg(prompt)
-    initial_hint = rag(index, prompt, initial_code)
+    initial_hint = rag(prompt, initial_code)
     initial_state = FocusNode(prompt, initial_code, initial_hint)
     montecarlo = MonteCarlo(Node(initial_state), mins_timeout)
     widen = Node(initial_state)

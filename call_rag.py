@@ -4,7 +4,15 @@ from llama_index.llms.huggingface import HuggingFaceLLM
 import torch
 from transformers import BitsAndBytesConfig
 from llama_index.core.prompts import PromptTemplate
+from llama_index.core import StorageContext, load_index_from_storage
 import settings_rag
+
+def load_storage():
+    storage_context = StorageContext.from_defaults(persist_dir="./storage")
+    index = load_index_from_storage(storage_context)
+    return index
+index = load_storage()
+retriever = index.as_retriever()
 
 def messages_to_prompt(messages):
     prompt = ""
@@ -52,7 +60,7 @@ def setup_llm():
     )
 
 
-def augment(index, prompt, code):
+def augment(prompt, code):
     setup_llm()
     query_engine = index.as_query_engine()
     response = query_engine.query("Hint for what the next line should be in the given in-progress solution: " + code + " to answer the problem: " + prompt + "Put response in the format of '### Hint: '.")
@@ -60,8 +68,7 @@ def augment(index, prompt, code):
     cleaned_response = response_str.replace("```", "")
     return cleaned_response
 
-def retrieve(index, prompt, code):
-    retriever = index.as_retriever()
+def retrieve(prompt, code):
     query = prompt + "\n Code so far: ```dafny\n" + code + "\n```"
     nodes = retriever.retrieve(query)
     #print("Retrieving Nodes [[\n", nodes, "\n]]")
