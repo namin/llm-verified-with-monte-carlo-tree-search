@@ -153,30 +153,30 @@ def calculate_score_with_err_whole(msg: str) -> (Optional[float], Optional[str],
 # between the two scoring methods:
 # - whole scores each chunck of code separately
 # - default scores the concatenation of all chunks together
-def best_of_scores(score, v, score_whole, v_whole):
+def best_of_scores(score, err, v, score_whole, err_whole, v_whole):
     if score == 1.0:
-        return 1.0, v
+        return 1.0, err, v
     elif score_whole == 1.0:
-        return 1.0, v_whole
+        return 1.0, err_whole, v_whole
     elif score is None:
-        return score_whole, None
+        return score_whole, err_whole, None
     else:
-        return score, None
+        return score, err, None
 
-def calculate_score_whole(msg: str, unittest: Optional[str] = None) -> Optional[float]:
-    score_whole, _, v_whole = calculate_score_with_err_whole(msg)
-    score, v = calculate_score(msg)
+def calculate_score_err_whole(msg: str, unittest: Optional[str] = None) -> Tuple[Optional[float], Optional[str]]:
+    score_whole, err_whole, v_whole = calculate_score_with_err_whole(msg)
+    score, err, v = calculate_score(msg)
     print("SCORE")
     print(score)
     print("SCORE_WHOLE")
     print(score_whole)
-    final_score, final_code = best_of_scores(score, v, score_whole, v_whole)
-    return amend_score(final_code, final_score, unittest)
+    final_score, final_err, final_code = best_of_scores(score, err, v, score_whole, err_whole, v_whole)
+    return amend_score(final_code, final_score, unittest), final_err
 
 def score_func_whole(msg: str) -> Optional[float]:
     print("TEXT")
     print(msg)
-    score = calculate_score_whole(msg)
+    score, _ = calculate_score_err_whole(msg)
     print("SCORE_FINAL")
     print(score)
     return score

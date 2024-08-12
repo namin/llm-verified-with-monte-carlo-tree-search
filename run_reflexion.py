@@ -3,7 +3,7 @@ from cmdline import args
 from lang import can_be_solution_whole
 from lang import filter_code
 from prompts import prompt, min_lines, check_func, check_string
-from dafny import calculateScoreHelper_whole
+from scoring import calculate_score_err_whole
 from reflection import reflect_llama31 as reflect # TODO: dynamically choose
 import llm
 from common import limit_tokens
@@ -38,7 +38,7 @@ def trial(prompt, trial_id=0):
     init_time = time.time()
 
     text = llm.generate_full(prompt, max_new_tokens=1000)
-    score, err = calculateScoreHelper_whole(text)
+    score, err = calculate_score_err_whole(text)
     is_solution = (
         score is not None
         and score > 0
