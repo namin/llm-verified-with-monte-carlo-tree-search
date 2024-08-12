@@ -31,8 +31,7 @@ def buildPrompt(prompt, text=None, err=None):
     if r:
         prompt += "\nTURN:\n"
         prompt += r
-        prompt += "\n"
-    prompt += "\nCODE:\n"
+    prompt += "\n\nCODE:\n"
     prompt += "\n\n```dafny\n"
     return prompt
 
