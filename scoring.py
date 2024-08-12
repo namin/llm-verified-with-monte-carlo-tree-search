@@ -165,7 +165,7 @@ def best_of_scores(score, err, v, score_whole, err_whole, v_whole):
 
 def calculate_score_err_whole(msg: str, unittest: Optional[str] = None) -> Tuple[Optional[float], Optional[str]]:
     score_whole, err_whole, v_whole = calculate_score_with_err_whole(msg)
-    score, err, v = calculate_score(msg)
+    score, err, v = calculate_score_with_err(msg)
     print("SCORE")
     print(score)
     print("SCORE_WHOLE")
