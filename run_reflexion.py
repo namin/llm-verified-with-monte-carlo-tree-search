@@ -21,7 +21,7 @@ if args.use_wandb:
     )
 
 
-def buildPrompt(prompt, text=None, err=None):
+def buildPrompt(prompt, initial_code, text=None, err=None):
     if text is not None:
         r = reflect(code_of_msg(text), None, err)
     else:
@@ -32,11 +32,11 @@ def buildPrompt(prompt, text=None, err=None):
         prompt += "\nTURN:\n"
         prompt += r
     prompt += "\n\nCODE:\n"
-    prompt += "\n\n```dafny\n"
+    prompt += "\n\n```dafny\n" + initial_code
     return prompt
 
-def trial(prompt, trial_id=0):
-    print("PROMPT: [[\n", prompt, "\n]]")
+def trial(prompt, initial_code, trial_id=0):
+    #print("PROMPT: [[\n", prompt, "\n]]")
     stats = {"trial_id": trial_id}
     init_n_tokens = llm.token_counter
     init_time = time.time()
@@ -60,20 +60,28 @@ def trial(prompt, trial_id=0):
         print("DONE")
         return True, text, stats
     else:
-        return False, buildPrompt(prompt, text, err), stats
+        return False, buildPrompt(prompt, initial_code, text, err), stats
 
 
 def main(prompt=prompt):
-    prompt = prompt.replace(f"```{LANG.lower()}", "")
+    code_tag = f"```{LANG.lower()}\n"
+    if code_tag in prompt:
+        parts = prompt.split(code_tag)
+        assert len(parts)==2
+        prompt = parts[0]
+        initial_code = parts[1]
+        assert "```" not in parts[1]
+    else:
+        initial_code = ""
     prompt += "\nOnly provide the code; do not provide any explanation or commentary.\n"
-    prompt = buildPrompt(prompt)
+    prompt = buildPrompt(prompt, initial_code)
     init_time = time.time()
 
     done = False
     trials = 0
     while not done:
         trials += 1
-        solved, prompt, stats = trial(prompt, trial_id=trials)
+        solved, prompt, stats = trial(prompt, initial_code, trial_id=trials)
         if args.use_wandb:
             wandb.log(stats)
         print("Token counter: ", llm.token_counter, ", Trial: ", trials)
