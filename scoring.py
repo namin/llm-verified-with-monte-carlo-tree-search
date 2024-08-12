@@ -54,7 +54,7 @@ if not run_tests:
     def run_unittests(v: str, unittest=None):
         return 0
 
-from common_lang import make_filter_code
+from common_lang import make_filter_code, findall_code
 filter_code = make_filter_code(re_code_lang)
 
 def code_of_msg(msg: str) -> str:
