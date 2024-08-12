@@ -21,6 +21,7 @@ def find_assistant(prompt):
     r = prompt[start_index+len(tag):end_index]
     r = r.replace("<|start_header_id|>user<|end_header_id|>", "")
     r = r.replace("<|start_header_id|>assistant<|end_header_id|>", "")
+    #print("r is [[\n", r, "\n]]")
     return r
     
 def diffprompt_llama3(prompt, results):

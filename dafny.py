@@ -15,7 +15,7 @@ def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],
     if r["status"] == 0:
         return 1.0, None
     log = r["out"]
-    print(log)
+    #print(log)
     try:
         first = log[log.index("ex.dfy(") + 7 :]
     except ValueError:

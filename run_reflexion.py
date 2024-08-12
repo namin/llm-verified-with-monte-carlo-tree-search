@@ -35,7 +35,6 @@ def buildPrompt(prompt, text=None, err=None):
     prompt += "\n\n```dafny\n"
     return prompt
 
-
 def trial(prompt, trial_id=0):
     print("PROMPT: [[\n", prompt, "\n]]")
     stats = {"trial_id": trial_id}
@@ -65,7 +64,9 @@ def trial(prompt, trial_id=0):
 
 
 def main(prompt=prompt):
-    prompt = buildPrompt(prompt.replace(f"```{LANG.lower()}", ""))
+    prompt = prompt.replace(f"```{LANG.lower()}", "")
+    prompt += "\nOnly provide the code; do not provide any explanation or commentary.\n"
+    prompt = buildPrompt(prompt)
     init_time = time.time()
 
     done = False
