@@ -7,6 +7,7 @@ from scoring import calculate_score_err_whole
 from reflection import reflect_llama31 as reflect # TODO: dynamically choose
 import llm
 from common import limit_tokens
+from lang_config import LANG
 
 import wandb
 
@@ -20,19 +21,23 @@ if args.use_wandb:
     )
 
 
-def buildPrompt(prompt, text, err):
-    r = reflect(filter_code(text), None, err)
+def buildPrompt(prompt, text=None, err=None):
+    if text is not None:
+        r = reflect(filter_code(text), None, err)
+    else:
+        r = None
     if "CODE" in prompt:
         prompt = prompt.split("CODE")[0]
-    prompt += "\nTURN:\n"
-    prompt += r
+    if r:
+        prompt += "\nTURN:\n"
+        prompt += r
     prompt += "\nCODE:\n"
     prompt += "\n\n```dafny\n"
     return prompt
 
 
 def trial(prompt, trial_id=0):
-    print("PROMPT:", prompt)
+    print("PROMPT: [[\n", prompt, "\n]]")
     stats = {"trial_id": trial_id}
     init_n_tokens = llm.token_counter
     init_time = time.time()
@@ -60,7 +65,7 @@ def trial(prompt, trial_id=0):
 
 
 def main(prompt=prompt):
-    prompt = prompt.replace("```dafny", "")
+    prompt = buildPrompt(prompt.replace(f"```{LANG.lower()}", ""))
     init_time = time.time()
 
     done = False
