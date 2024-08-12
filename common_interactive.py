@@ -1,10 +1,12 @@
+from cmdline import args
+
 def strip_instructions(prompt):
     try:
         return prompt[prompt.index('[/INST]'):]
     except ValueError:
         return prompt
 
-def diffprompt(prompt, results):
+def diffprompt_default(prompt, results):
     n = len(strip_instructions(prompt))
     return [strip_instructions(r)[n:] for r in results]
 
@@ -16,12 +18,22 @@ def find_assistant(prompt):
     except ValueError:
         print("Warning: discarding a result because cannot parse "+prompt)
         return "(no answer)"
-    return prompt[start_index+len(tag):end_index]
+    r = prompt[start_index+len(tag):end_index]
+    r = r.replace("<|start_header_id|>user<|end_header_id|>", "")
+    r = r.replace("<|start_header_id|>assistant<|end_header_id|>", "")
+    return r
     
-def diffprompt_llama31(prompt, results):
-    print("PROMPTS:"+prompt)
-    print("RESULTS:"+str(results))
+def diffprompt_llama3(prompt, results):
     return [find_assistant(r) for r in results]
+
+def choose_diffprompt(model_name):
+    x = model_name.lower()
+    if "llama" in x and "3" in x:
+        return diffprompt_llama3
+    else:
+        return diffprompt_default
+
+diffprompt = choose_diffprompt(args.base_model_name)
 
 def ask_keep(prompt, texts):
     i = 0
@@ -33,3 +45,4 @@ def ask_keep(prompt, texts):
         return int(inp)
     except ValueError:
         return inp
+

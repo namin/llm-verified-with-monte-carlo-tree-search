@@ -1,12 +1,13 @@
 import time
 from cmdline import args
 from lang import can_be_solution_whole
-from lang import filter_code
+from lang import code_of_msg
 from prompts import prompt, min_lines, check_func, check_string
-from dafny import calculateScoreHelper_whole
-from reflection import reflect_llama31 as reflect # TODO: dynamically choose
+from scoring import calculate_score_err_whole
+from reflection import reflect
 import llm
 from common import limit_tokens
+from lang_config import LANG
 
 import wandb
 
@@ -20,25 +21,29 @@ if args.use_wandb:
     )
 
 
-def buildPrompt(prompt, text, err):
-    r = reflect(filter_code(text), None, err)
+def buildPrompt(prompt, text=None, err=None):
+    if text is not None:
+        r = reflect(code_of_msg(text), None, err)
+    else:
+        r = None
     if "CODE" in prompt:
         prompt = prompt.split("CODE")[0]
-    prompt += "\nTURN:\n"
-    prompt += r
-    prompt += "\nCODE:\n"
+    if r:
+        prompt += "\nTURN:\n"
+        prompt += r
+    prompt += "\n\nCODE:\n"
     prompt += "\n\n```dafny\n"
     return prompt
 
 
 def trial(prompt, trial_id=0):
-    print("PROMPT:", prompt)
+    print("PROMPT: [[\n", prompt, "\n]]")
     stats = {"trial_id": trial_id}
     init_n_tokens = llm.token_counter
     init_time = time.time()
 
     text = llm.generate_full(prompt, max_new_tokens=1000)
-    score, err = calculateScoreHelper_whole(text)
+    score, err = calculate_score_err_whole(text)
     is_solution = (
         score is not None
         and score > 0
@@ -60,7 +65,7 @@ def trial(prompt, trial_id=0):
 
 
 def main(prompt=prompt):
-    prompt = prompt.replace("```dafny", "")
+    prompt = buildPrompt(prompt.replace(f"```{LANG.lower()}", ""))
     init_time = time.time()
 
     done = False
