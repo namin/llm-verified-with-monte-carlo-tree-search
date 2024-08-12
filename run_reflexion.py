@@ -1,10 +1,10 @@
 import time
 from cmdline import args
 from lang import can_be_solution_whole
-from lang import filter_code
+from lang import code_of_msg
 from prompts import prompt, min_lines, check_func, check_string
 from scoring import calculate_score_err_whole
-from reflection import reflect_llama31 as reflect # TODO: dynamically choose
+from reflection import reflect
 import llm
 from common import limit_tokens
 from lang_config import LANG
@@ -23,7 +23,7 @@ if args.use_wandb:
 
 def buildPrompt(prompt, text=None, err=None):
     if text is not None:
-        r = reflect(filter_code(text), None, err)
+        r = reflect(code_of_msg(text), None, err)
     else:
         r = None
     if "CODE" in prompt:
