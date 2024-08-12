@@ -73,18 +73,16 @@ def query_keywords(query):
     else:
         return []
 
+retriever = index.as_retriever(similarity_top_k=2)
 def retrieve(prompt, code):
     query = prompt + "\nCode so far:\n```dafny\n" + code + "\n```\n"
     keywords = query_keywords(query)
     nodes = []
     if keywords:
         query += "\nKeywords: "+", ".join(keywords)
-        keywords_retriever = index.as_retriever(similarity_top_k=2)
-        keywords_nodes = keywords_retriever.retrieve(" ".join(keywords))
-        nodes += keywords_nodes
+        nodes += retriever.retrieve(" ".join(keywords))
     #print("QUERY [[", query, "]]")
-    if not keywords_nodes:
-        retriever = index.as_retriever(similarity_top_k=2)
+    if not nodes:
         nodes += retriever.retrieve(query)
     #print("Retrieving Nodes [[\n", nodes, "\n]]")
     texts = list(set(["\nFrom "+node.metadata['file_name']+"\n"+node.text+"\n" for node in nodes]))

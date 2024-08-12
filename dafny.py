@@ -28,7 +28,7 @@ def calculate_code_score_with_err(v: str, code_maybe_incomplete: Callable[[int],
         err = first[first.index(":") :]
         try:
             err = err[: err.index("ex.dfy")]
-            if err.endswith(" in"):
+            if err.endswith(" in "):
                 err = err[:-3]
         except ValueError:
             pass
