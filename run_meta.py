@@ -13,7 +13,7 @@ from lang_config import LANG
 assert LANG=='Coq'
 from lang import can_be_solution, filter_code
 from coq import give_context, extract_lemma, lemma_statement, lemma_args, new_conclusion
-from coq import score_func_code as uncached_score_func_code
+from lang import score_func_code as uncached_score_func_code
 from prompts import prompt, expansion_count, min_lines, check_func
 from common import limit_depth, max_completion_depth
 from common_cache import score_first, create_score_predicate, create_cached_func
@@ -131,7 +131,7 @@ def generate_complete(focus, montecarlo):
 
 
 def child_finder(node, montecarlo):
-    if limit_depth(node):
+    if limit_depth(node, lambda x: x.text()):
         return
 
     (text, score, code) = generate_complete(node.state, montecarlo)
@@ -179,12 +179,12 @@ def main(mins_timeout = None, prompt = prompt):
         prompt_code = """From Hammer Require Import Tactics.
 From Hammer Require Import Hammer.
 
-From Coq Require Import Arith.Arith.
+Require Import Coq.Arith.Arith.
 Require Import Coq.Strings.String.
 
 """ + prompt_code
     else:
-        prompt_code = """From Coq Require Import Arith.Arith.
+        prompt_code = """Require Import Coq.Arith.Arith.
 Require Import Lia.
 """ + prompt_code
     montecarlo = MonteCarlo(Node(FocusNode(prompt_instructions, prompt_code, [], 0)), mins_timeout)

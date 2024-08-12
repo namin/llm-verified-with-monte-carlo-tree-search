@@ -1,7 +1,7 @@
 weird = "lemma broken() ensures 1 == 0 {}"
 works = "lemma works() ensures 0 == 0 {}"
 
-from dafny import checkDafny
+from dafny import check_code as checkDafny
 if checkDafny(weird)["status"] == 0:
     print("Your verifier is accepting INCORRECT CODE. This causes results that are silently wrong! Try recompiling z3.")
 else:

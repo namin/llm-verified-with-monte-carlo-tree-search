@@ -1,8 +1,6 @@
 from dataclasses import dataclass, field, asdict
 from transformers import HfArgumentParser, set_seed
 
-# fmt: off
-
 @dataclass
 class CommonArguments:
     diversity: bool = field(default=False, metadata={"help": "Diversity flag for `common_diversity.py"})
@@ -51,10 +49,17 @@ class CommonArguments:
     def dict(self):
         return {k: str(v) for k,v in asdict(self).items()}
 
-
+import sys
+import dataclasses
 def get_args():
     parser = HfArgumentParser(CommonArguments)
-    args = parser.parse_args_into_dataclasses()[0]
+    if sys.argv == [""]:
+        # a hack to populate REPL with default arguments
+        args = [dtype(**{field.name : field.default  for field in dataclasses.fields(dtype)}) for dtype in parser.dataclass_types]
+        args = (*args,)
+    else:
+        args = parser.parse_args_into_dataclasses()
+    args = args[0]
     return args
 
 args = get_args()

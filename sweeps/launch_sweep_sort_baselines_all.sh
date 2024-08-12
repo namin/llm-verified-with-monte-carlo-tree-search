@@ -5,10 +5,10 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-node=2
 #SBATCH --cpus-per-task=16
-#SBATCH --time=1:00:00
+#SBATCH --time=2:30:00
 #SBATCH --mem=250GB		
 #SBATCH --partition=gpu_requeue
-#SBATCH --array=0-399%20
+#SBATCH --array=0-299%40
 
 cd ~/llm-verified-with-monte-carlo-tree-search
 
@@ -17,7 +17,7 @@ cd ~/llm-verified-with-monte-carlo-tree-search
 # Custom environment
 source ~/.bashrc
 conda deactivate
-conda activate verify
+conda activate llm-verified
 
 export PYTHONPATH=.:${PYTHONPATH}
 
@@ -35,14 +35,14 @@ export token_limit=20000
 # export run_number=$[$SLURM_ARRAY_TASK_ID]
 
 # Sweep across problems
-export run_number=$[$SLURM_ARRAY_TASK_ID/4] # 100 runs per hyperparameter
-export script=$[$SLURM_ARRAY_TASK_ID%4] # 100 runs per hyperparameter
+export run_number=$[$SLURM_ARRAY_TASK_ID/3] # 100 runs per hyperparameter
+export script=$[$SLURM_ARRAY_TASK_ID%3] # 100 runs per hyperparameter
 
-export script_names=(run_timing.py run_reflexion.py run_rollout_no_widen.py run_whole.py)
+export script_names=(run_reflexion.py run_rollout_no_widen.py run_whole.py)
 # export problem_names=(problem_unzip problem_days problem_food problem_max_and_lists)
-# TODO: change this to the new script
 
-export problem_here=problem_insertion_sort_dafny_check
+
+export problem_here=problem_insertion_sort_dafny_full_spec_check
 export script_here=${script_names[$script]}
 
 export language=Dafny
@@ -54,7 +54,7 @@ export remove_hints=False
 
 export WANDB_USERNAME=seas
 export WANDB_PROJECT=vmcts
-export WANDB_GROUP=vmcts-sorting
+export WANDB_GROUP=vmcts-sorting-final
 export WANDB_NAME=$script_here/$run_number
 
 SEED=$run_number

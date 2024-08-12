@@ -2,17 +2,11 @@ import hashlib
 import os
 
 from cmdline import args
-
 livecode = args.livecode
-
 # Only set to True for lightweight testing.
-# livecode = False
-
 if livecode:
     print("WARNING: livecode is True. Be gentle!")
 
-
-# todo: variable names and types
 def execute(cmd, ext, v, use_sandbox=False):
     HOME = os.environ["HOME"]
     TMP_DIR = f"{HOME}/tmp/llm-verified/{ext}/"
