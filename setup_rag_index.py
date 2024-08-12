@@ -17,6 +17,9 @@ def load_documents_from_directories(directories):
 # - dafny_qa
 #   from https://github.com/shenniger/dafny-llm-examples
 #   cp dafny-llm-examples/data_prep/snippets/qa.* dafny_qa/
+#   cd dafny_qa
+#   for f in *; do mv $f $f.md; done
+#   cd ..
 directories = ["devin_chunked_dafny_manual", "dafny_qa"]
 
 # Load documents from the specified directories
