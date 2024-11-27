@@ -1,3 +1,5 @@
+[![arXiv](https://img.shields.io/badge/arXiv-2402.08147-pink.svg)](https://arxiv.org/abs/2402.08147)
+
 # LLM verified with Monte Carlo Tree Search
 
 This prototype synthesizes verified code with an LLM.
