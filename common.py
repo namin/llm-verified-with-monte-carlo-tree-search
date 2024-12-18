@@ -20,7 +20,7 @@ def count_depth(node, f=lambda x: x):
 
 # Prevents models from attempting to expand children past the EOS token
 def string_contains_eos(node, f=lambda x: x):
-    return llm.eos_token in f(node.state)
+    return llm.eos_token and llm.eos_token in f(node.state)
 
 
 def limit_depth(node, f=lambda x: x):

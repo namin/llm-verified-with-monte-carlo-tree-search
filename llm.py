@@ -26,8 +26,8 @@ if MODEL_HOST == "openai":
         return generate(prompt, 1)[0]
 
     # TODO
-    eos_token = "\n"
-    bos_token = "\n"
+    eos_token = None
+    bos_token = None
 
 elif MODEL_HOST == "huggingface":
     import torch

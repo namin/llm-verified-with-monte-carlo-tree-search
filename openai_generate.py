@@ -25,6 +25,7 @@ def generate(prompt: str, num: int = 1, model: str = OPENAI_MODEL) -> List[str]:
                     "content": prompt,
                 }
             ],
+            stop=["\n"],
             model=model,
             top_p=0.9,
             temperature=0.8,
