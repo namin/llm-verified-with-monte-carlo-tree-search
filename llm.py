@@ -25,6 +25,10 @@ if MODEL_HOST == "openai":
             print("WARN: Using OpenAI model, which does not support token limit.")
         return generate(prompt, 1)[0]
 
+    # TODO
+    eos_token = "\n"
+    bos_token = "\n"
+
 elif MODEL_HOST == "huggingface":
     import torch
     import huggingface_generate
