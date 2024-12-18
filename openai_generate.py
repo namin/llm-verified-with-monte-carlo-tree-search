@@ -5,7 +5,7 @@ from tenacity import (
     wait_random_exponential,
 )
 from openai import OpenAI
-from model_config import OPENAI_MODEL
+from model_config import OPENAI_MODEL, OPENAI_API_KEY, OPENAI_BASE_URL
 from typing import List
 
 memory = Memory("cache/openai", verbose=0)
@@ -16,7 +16,8 @@ memory = Memory("cache/openai", verbose=0)
 def generate(prompt: str, num: int = 1, model: str = OPENAI_MODEL) -> List[str]:
     prompt = prompt.replace("### ", "")
     try:
-        client = OpenAI()
+        client = OpenAI(base_url=OPENAI_BASE_URL,
+                        api_key=OPENAI_API_KEY)
         chat_completion = client.chat.completions.create(
             messages=[
                 {

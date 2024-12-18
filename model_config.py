@@ -5,7 +5,10 @@ MODEL_HOST = args.model_host
 # MODEL_HOST = "openai"
 
 # Pick an OpenAI model:
-OPENAI_MODEL = "gpt-4"
+OPENAI_BASE_URL = "http://localhost:11434/v1/"
+OPENAI_API_KEY = "ollama"
+OPENAI_MODEL = "qwen2"
+# OPENAI_MODEL = "gpt-4"
 
 # Pick a base model hosted on HuggingFace:
 BASE_MODEL_NAME = args.base_model_name
