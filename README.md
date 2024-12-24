@@ -42,6 +42,8 @@ cd ~/singularity
 singularity pull docker://namin/llm-verified
 ```
 
+(If you want to use the docker alternative) Download the Docker image: `docker pull namin/llm-verified`. Use the command line `--docker_sandbox`.
+
 (If you want to use Dafny) Install Dafny: Download a binary [here](https://github.com/dafny-lang/dafny/releases/latest).
 
 Please confirm that Dafny verification works before experimenting, for example by using the `okdafny.py` script we provide.  We have sometimes run into issues where z3 was not set up correctly, and Dafny skipped the verification process without returning an error code. Should you run into these problems, compile z3 from source and place the executable into your PATH.

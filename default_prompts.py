@@ -1,6 +1,8 @@
 from lang_config import LANG, ALL_LANGS
 from cmdline import args
-   
+
+do_code_begin = args.model_host == 'huggingface' # TODO: quick hack
+
 if LANG == "Dafny":
     proof_marker = "ensures"
     cheat_marker = "{:axiom}"
@@ -1949,8 +1951,9 @@ elif LANG != "Lean4":
     code_begin = f"""
 ```{LANG.lower()}
 """
-    if prompt.count("```") % 2 == 0:
-        prompt += code_begin
+    if do_code_begin:
+        if prompt.count("```") % 2 == 0:
+            prompt += code_begin
 
 elif LANG == "Lean4":
     prompt += """

@@ -21,17 +21,22 @@ def generate(prompt: str, num: int = 1, model: str = OPENAI_MODEL) -> List[str]:
         chat_completion = client.chat.completions.create(
             messages=[
                 {
+                    "role": "system",
+                    "content": "You will be provided with instructions and the start of code in quotes. Your goal is to complete the code just one chunk at a time. Do not repeat all the code but assume the user code is part of the answer."
+                },
+                {
                     "role": "user",
                     "content": prompt,
                 }
             ],
-            stop=["\n"],
+            stop=["\n\n"], # TODO: generalize?
             model=model,
             top_p=0.9,
             temperature=0.8,
             max_tokens=1000,
         )
-        return [prompt + "\n" + chat_completion.choices[0].message.content]
+        resp = chat_completion.choices[0].message.content
+        return [prompt + resp]
     except Exception as e:
         print(f"OpenAI API error: {e}")
         raise e

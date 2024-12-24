@@ -5,6 +5,7 @@ from transformers import HfArgumentParser, set_seed
 class CommonArguments:
     diversity: bool = field(default=False, metadata={"help": "Diversity flag for `common_diversity.py"})
     max_completion_depth: int = field(default=30, metadata={"help": "Limit for the depth of the mcts"})
+    docker_sandbox: bool = field(default=False, metadata={"help": "Use docker (instead of singularity) for sandboxx"})
     livecode: bool = field(default=False, metadata={"help": "Use livecode API checker or local compiler"})
     language: str = field(default="Dafny", metadata={"help": "Choose language from 'Dafny', 'Coq', 'Lean4', 'Rust', 'Scala'"})
     model_host: str = field(default="huggingface", metadata={"help": "Choose between 'huggingface' or 'openai'"})
