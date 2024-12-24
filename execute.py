@@ -37,7 +37,7 @@ def execute(cmd, ext, v, use_sandbox=False):
                 pre_llm_command = "singularity exec --no-mount=/n --no-mount=/net --no-mount=/scratch --no-mount=/cvmfs ~/singularity/llm-verified_latest.sif"
                 runcmd = "SINGULARITY_HOME=/ timeout 10 %s %s %s >%s 2>%s" % (pre_llm_command, cmd, fn, outfn, errfn)
 
-        print("RUN CMD:", runcmd)
+        #print("RUN CMD:", runcmd)
         status = os.system(runcmd)
 
         f = open(outfn, "r")
