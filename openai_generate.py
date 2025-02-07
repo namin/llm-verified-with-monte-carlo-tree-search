@@ -29,13 +29,13 @@ def generate(prompt: str, num: int = 1, model: str = OPENAI_MODEL) -> List[str]:
                     "content": prompt,
                 }
             ],
-            stop=["\n\n"], # TODO: generalize?
+            stop=["\n"], # TODO: generalize?
             model=model,
             top_p=0.9,
             temperature=0.8,
             max_tokens=1000,
         )
-        resp = chat_completion.choices[0].message.content
+        resp = chat_completion.choices[0].message.content + "\n"
         return [prompt + resp]
     except Exception as e:
         print(f"OpenAI API error: {e}")
