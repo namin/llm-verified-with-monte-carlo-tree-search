@@ -11,18 +11,23 @@ def increment_token_counter(new_tokens):
     token_counter += new_tokens
     print("Current token count = ", token_counter)
 
+if MODEL_HOST == "openai" or MODEL_HOST == "mlx":
 
-if MODEL_HOST == "openai":
-    import openai_generate
+    if MODEL_HOST == "openai":
+        import openai_generate as host_generate
+    elif MODEL_HOST == "mlx":
+        import mlx_generate as host_generate
+    else:
+        assert False
 
     def generate(prompt: str, num: int) -> List[str]:
         if args.token_limit is not None:
-            print("WARN: Using OpenAI model, which does not support token limit.")
-        return openai_generate.generate(prompt, num)
+            print("WARN: model does not support token limit.")
+        return host_generate.generate(prompt, num)
 
     def generate_full(prompt: str) -> str:
         if args.token_limit is not None:
-            print("WARN: Using OpenAI model, which does not support token limit.")
+            print("WARN: model does not support token limit.")
         return generate(prompt, 1)[0]
 
     # TODO

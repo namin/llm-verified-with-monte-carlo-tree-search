@@ -8,7 +8,7 @@ class CommonArguments:
     docker_sandbox: bool = field(default=False, metadata={"help": "Use docker (instead of singularity) for sandboxx"})
     livecode: bool = field(default=False, metadata={"help": "Use livecode API checker or local compiler"})
     language: str = field(default="Dafny", metadata={"help": "Choose language from 'Dafny', 'Coq', 'Lean4', 'Rust', 'Scala'"})
-    model_host: str = field(default="huggingface", metadata={"help": "Choose between 'huggingface' or 'openai'"})
+    model_host: str = field(default="huggingface", metadata={"help": "Choose between 'huggingface' or 'openai' or 'mlx'"})
     base_model_name: str = field(default="Phind/Phind-CodeLlama-34B-v2", metadata={"help": "LLM name"})
     peft_model_path: str = field(default=None, metadata={"help": "Provide an optional checkpoint on top of the base model"})
     ppo_model_path: str = field(default=None, metadata={"help": "Pick an entire PPO model "})
