@@ -14,7 +14,7 @@ Note that the linked solution is optimal for the problem.
 
 By using this technique, weaker models that might not even know the generated language all that well can compete with stronger models.
 
-[Draft](https://arxiv.org/abs/2402.08147)
+[Draft](https://arxiv.org/abs/2402.08147) (Outstanding Paper Award at Math-AI workshop co-located with NeurIPS 2024)
 
 ## Running
 
