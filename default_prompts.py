@@ -861,7 +861,7 @@ ensures eval(optimize(e), env) == eval(e, env)
 )
 
 problem_opt0_opt = (f"""### Spec: In {LANG}, write an ADT for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
-{'''### Hint: This is the definiton of the `optimal` predicate:
+{'''### Hint: This is the definition of the `optimal` predicate:
 predicate optimal(e: Expr) {
   match e
   case Add(Const(0), _) => false
@@ -897,7 +897,7 @@ lemma OptimizerOptimal(e: Expr)
 )
 
 problem_opt0_opt_dafny_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
-{'''### Hint: This is the definiton of the `optimal` predicate:
+{'''### Hint: This is the definition of the `optimal` predicate:
 predicate optimal(e: Expr) {
   match e
   case Add(Const(0), _) => false
@@ -1052,7 +1052,7 @@ Require Import Coq.Sorting.Sorted.
 )
 
 problem_opt0_opt_coq_check = (f"""### Spec: In {LANG}, write an ADT `Expr` for arithmetic expressions comprising constants, variables and binary addition. Then write a predicate `optimal` that holds on an expression if it has no additions by 0. Then write an optimizer `optimize` that removes all additions by 0. Then write a lemma `OptimizerOptimal` that ensures `optimal(optimize(e))` for all expressions `e`.
-{'''### Hint: This is the definiton of the `optimal` predicate:
+{'''### Hint: This is the definition of the `optimal` predicate:
 predicate optimal(e: Expr) {
   match e
   case Add(Const(0), _) => false
